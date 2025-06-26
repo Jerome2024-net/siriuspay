@@ -1,0 +1,1658 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Sirius - The first progressive super app with autonomous financial infrastructure">
+    <title>Sirius - The Future of Financial Inclusion</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --viewport-height: 100vh;
+            --vh: 1vh;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #000;
+            color: white;
+            overflow-x: hidden;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at center, #1a1a2e 0%, #000 70%);
+            z-index: -2;
+        }
+
+        .container {
+            max-width: 900px;
+            padding: 2rem;
+            text-align: center;
+            position: relative;
+            z-index: 10;
+        }
+
+        /* Background Animation */
+        .animation-container {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 800px;
+            height: 800px;
+            z-index: 1;
+            opacity: 0.15;
+        }
+
+        .circle {
+            position: absolute;
+            border: 1px solid #fff;
+            border-radius: 50%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            animation: ripple 4s ease-out infinite;
+        }
+
+        .circle:nth-child(1) { animation-delay: 0s; }
+        .circle:nth-child(2) { animation-delay: 0.5s; }
+        .circle:nth-child(3) { animation-delay: 1s; }
+        .circle:nth-child(4) { animation-delay: 1.5s; }
+        .circle:nth-child(5) { animation-delay: 2s; }
+
+        @keyframes ripple {
+            0% {
+                width: 0;
+                height: 0;
+                opacity: 1;
+            }
+            100% {
+                width: 800px;
+                height: 800px;
+                opacity: 0;
+            }
+        }
+
+        .sirens-coin {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 120px;
+            height: 120px;
+            z-index: 5;
+            animation: float-coin 4s ease-in-out infinite;
+        }
+
+        .coin-container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            animation: rotate-coin 8s linear infinite;
+        }
+
+        .coin-face {
+            position: absolute;
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #ffd700 0%, #ffed4e 50%, #ffc107 100%);
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            font-weight: 900;
+            color: #1a1a1a;
+            box-shadow: 0 0 30px rgba(255, 215, 0, 0.5);
+        }
+
+        @keyframes float-coin {
+            0%, 100% { transform: translate(-50%, -50%); }
+            50% { transform: translate(-50%, -60%); }
+        }
+
+        @keyframes rotate-coin {
+            0% { transform: rotateY(0deg); }
+            100% { transform: rotateY(360deg); }
+        }
+
+        /* Typography */
+        .logo {
+            font-size: 2.5rem;
+            font-weight: 800;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 4rem;
+            opacity: 0;
+            animation: fadeInUp 1s ease 0.2s forwards;
+        }
+
+        .hero-title {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 2rem;
+            opacity: 0;
+            animation: fadeInUp 1s ease 0.4s forwards;
+            background: linear-gradient(45deg, #fff, #667eea, #fff);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-subtitle {
+            font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+            line-height: 1.6;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 3rem;
+            font-weight: 400;
+            opacity: 0;
+            animation: fadeInUp 1s ease 0.6s forwards;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Impact Counter */
+        .impact-counter {
+            margin: 4rem 0;
+            padding: 3rem 2rem;
+            background: rgba(0, 0, 0, 0.6);
+            border-radius: 25px;
+            border: 1px solid rgba(255, 107, 107, 0.4);
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+            opacity: 0;
+            animation: fadeInUp 1s ease 0.8s forwards;
+        }
+
+        .impact-counter::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, 
+                rgba(255, 107, 107, 0.1) 0%, 
+                rgba(78, 205, 196, 0.1) 50%, 
+                rgba(255, 107, 107, 0.1) 100%);
+            background-size: 200% 200%;
+            animation: impactShimmer 4s ease-in-out infinite;
+            z-index: -1;
+        }
+
+        @keyframes impactShimmer {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .counter-number {
+            font-size: clamp(2.8rem, 5.5vw, 4.5rem);
+            font-weight: 900;
+            background: linear-gradient(45deg, #ff6b6b 0%, #4ecdc4 50%, #ff6b6b 100%);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            display: block;
+            margin-bottom: 1rem;
+            font-variant-numeric: tabular-nums;
+            animation: counterGlow 3s ease-in-out infinite, numberShimmer 4s ease-in-out infinite;
+            text-align: center;
+        }
+
+        @keyframes counterGlow {
+            0%, 100% {
+                filter: brightness(1) drop-shadow(0 0 10px rgba(255, 107, 107, 0.3));
+                transform: scale(1);
+            }
+            50% {
+                filter: brightness(1.2) drop-shadow(0 0 20px rgba(255, 107, 107, 0.5));
+                transform: scale(1.02);
+            }
+        }
+
+        @keyframes numberShimmer {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .counter-label {
+            font-size: clamp(1.2rem, 2.5vw, 1.6rem);
+            color: rgba(255, 255, 255, 0.95);
+            font-weight: 700;
+            margin-bottom: 1rem;
+            text-align: center;
+            animation: labelPulse 2s ease-in-out infinite;
+            line-height: 1.3;
+        }
+
+        @keyframes labelPulse {
+            0%, 100% { opacity: 0.95; }
+            50% { opacity: 1; color: #fff; }
+        }
+
+        .counter-subtitle {
+            font-size: clamp(1rem, 2vw, 1.3rem);
+            color: rgba(255, 255, 255, 0.8);
+            font-weight: 500;
+            text-align: center;
+            animation: subtitleFloat 3s ease-in-out infinite;
+        }
+
+        @keyframes subtitleFloat {
+            0%, 100% { 
+                transform: translateY(0); 
+                opacity: 0.8; 
+            }
+            50% { 
+                transform: translateY(-2px); 
+                opacity: 1; 
+                color: #4ecdc4;
+            }
+        }
+
+        /* Sirens Simulation */
+        .sirens-simulation {
+            margin: 4rem 0;
+            padding: 3rem 2rem;
+            background: rgba(0, 0, 0, 0.6);
+            border-radius: 25px;
+            border: 1px solid rgba(255, 215, 0, 0.4);
+            backdrop-filter: blur(10px);
+            opacity: 0;
+            animation: fadeInUp 1s ease 1.4s forwards;
+        }
+
+        .simulation-title {
+            font-size: clamp(1.5rem, 4vw, 2rem);
+            font-weight: 700;
+            color: #ffd700;
+            margin-bottom: 3rem;
+            text-align: center;
+        }
+
+        .flow-container {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            align-items: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .flow-step {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            padding: 1.5rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .flow-step::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #4ecdc4, transparent);
+            animation: flowScan 3s linear infinite;
+        }
+
+        @keyframes flowScan {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        .flow-input, .flow-output {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .flow-arrow {
+            font-size: 2rem;
+            color: #4ecdc4;
+            animation: arrowPulse 2s ease-in-out infinite;
+        }
+
+        @keyframes arrowPulse {
+            0%, 100% { transform: scale(1); opacity: 0.7; }
+            50% { transform: scale(1.2); opacity: 1; }
+        }
+
+        .token-visual {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(45deg, #ffd700, #ff8c00);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 900;
+            color: #1a1a1a;
+            animation: tokenSpin 3s linear infinite;
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+        }
+
+        @keyframes tokenSpin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .frequency-visual {
+            display: flex;
+            align-items: center;
+            gap: 3px;
+            height: 50px;
+        }
+
+        .freq-wave {
+            width: 4px;
+            background: linear-gradient(to top, #4ecdc4, #00d4aa);
+            border-radius: 2px;
+            animation: waveMotion 1.5s ease-in-out infinite;
+        }
+
+        .freq-wave:nth-child(1) { height: 20px; animation-delay: 0s; }
+        .freq-wave:nth-child(2) { height: 35px; animation-delay: 0.1s; }
+        .freq-wave:nth-child(3) { height: 45px; animation-delay: 0.2s; }
+        .freq-wave:nth-child(4) { height: 30px; animation-delay: 0.3s; }
+        .freq-wave:nth-child(5) { height: 40px; animation-delay: 0.4s; }
+        .freq-wave:nth-child(6) { height: 25px; animation-delay: 0.5s; }
+
+        @keyframes waveMotion {
+            0%, 100% { transform: scaleY(1); opacity: 0.7; }
+            50% { transform: scaleY(1.5); opacity: 1; }
+        }
+
+        .electrical-visual {
+            position: relative;
+            width: 80px;
+            height: 50px;
+        }
+
+        .lightning-bolt {
+            position: absolute;
+            font-size: 2rem;
+            color: #ffd700;
+            animation: lightningFlash 1s ease-in-out infinite;
+        }
+
+        .lightning-bolt:nth-child(1) {
+            top: 0;
+            left: 0;
+            animation-delay: 0s;
+        }
+
+        .lightning-bolt:nth-child(2) {
+            top: 0;
+            right: 0;
+            animation-delay: 0.3s;
+        }
+
+        .lightning-bolt:nth-child(3) {
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            animation-delay: 0.6s;
+        }
+
+        @keyframes lightningFlash {
+            0%, 70%, 100% { opacity: 0; transform: scale(1); }
+            75%, 95% { opacity: 1; transform: scale(1.2); }
+        }
+
+        .value-visual {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .dollar-symbol {
+            font-size: 2rem;
+            color: #4ecdc4;
+            animation: dollarGlow 2s ease-in-out infinite;
+        }
+
+        @keyframes dollarGlow {
+            0%, 100% { 
+                text-shadow: 0 0 10px rgba(78, 205, 196, 0.5);
+                transform: scale(1);
+            }
+            50% { 
+                text-shadow: 0 0 20px rgba(78, 205, 196, 0.8);
+                transform: scale(1.1);
+            }
+        }
+
+        .flow-label {
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.8);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .flow-value {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #ffd700;
+            font-variant-numeric: tabular-nums;
+        }
+
+        .flow-unit {
+            font-size: 0.9em;
+            opacity: 0.8;
+            font-weight: 400;
+        }
+
+        .process-line {
+            width: 100%;
+            height: 3px;
+            background: rgba(78, 205, 196, 0.2);
+            border-radius: 1.5px;
+            position: relative;
+            margin: 1rem 0;
+            overflow: hidden;
+        }
+
+        .process-line::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 50%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, #4ecdc4, transparent);
+            animation: processFlow 3s ease-in-out infinite;
+        }
+
+        @keyframes processFlow {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        .live-formula {
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin-top: 2rem;
+            text-align: center;
+        }
+
+        .formula-text {
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.9);
+            font-weight: 500;
+        }
+
+        .formula-variable {
+            color: #4ecdc4;
+            font-weight: 700;
+            animation: variableUpdate 2s ease-in-out infinite;
+        }
+
+        @keyframes variableUpdate {
+            0%, 90%, 100% { opacity: 0.9; }
+            95% { opacity: 1; color: #ffd700; }
+        }
+
+        /* CTA Section */
+        .cta-section {
+            margin-top: 2rem;
+            opacity: 0;
+            animation: fadeInUp 1s ease 1s forwards;
+        }
+
+        .cta-title {
+            font-size: clamp(1.8rem, 3.5vw, 2.5rem);
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .cta-description {
+            font-size: clamp(1rem, 2vw, 1.2rem);
+            line-height: 1.6;
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 3rem;
+            font-weight: 300;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-button {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            padding: 1.2rem 3rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-block;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, #764ba2, #667eea);
+            transition: left 0.3s ease;
+        }
+
+        .cta-button:hover::before {
+            left: 0;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.4);
+        }
+
+        .cta-button span {
+            position: relative;
+            z-index: 1;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Footer */
+        .footer {
+            margin-top: 6rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            opacity: 0;
+            animation: fadeInUp 1s ease 1.6s forwards;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .founder-info {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.6);
+            font-weight: 500;
+        }
+
+        .copyright {
+            font-size: 0.8rem;
+            color: rgba(255, 255, 255, 0.4);
+            font-weight: 400;
+        }
+
+        /* Onboarding Modal */
+        .onboarding-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(20px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.4s ease;
+        }
+
+        .onboarding-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .onboarding-container {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            border-radius: 24px;
+            max-width: 900px;
+            width: 95%;
+            max-height: 90vh;
+            overflow: hidden;
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6);
+            transform: scale(0.8) translateY(50px);
+            transition: all 0.4s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .onboarding-overlay.active .onboarding-container {
+            transform: scale(1) translateY(0);
+        }
+
+        .onboarding-step {
+            display: none;
+        }
+
+        .onboarding-step.active {
+            display: block;
+        }
+
+        .onboarding-header {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            padding: 1.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .onboarding-header h2 {
+            margin: 0;
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .onboarding-close {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.8rem;
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .onboarding-close:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .onboarding-content {
+            padding: 2rem;
+            color: white;
+            max-height: calc(90vh - 100px);
+            overflow-y: auto;
+        }
+
+        .onboarding-subtitle {
+            text-align: center;
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+
+        .welcome-animation {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .welcome-sirens {
+            font-size: 4rem;
+            animation: welcomePulse 2s ease-in-out infinite;
+            filter: drop-shadow(0 0 20px rgba(78, 205, 196, 0.6));
+        }
+
+        @keyframes welcomePulse {
+            0%, 100% { transform: scale(1); opacity: 0.8; }
+            50% { transform: scale(1.1); opacity: 1; }
+        }
+
+        /* Investor Form Styles */
+        .investor-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group label {
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 0.5rem;
+            font-size: 0.95rem;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            padding: 1rem;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.05);
+            color: white;
+            font-family: inherit;
+        }
+
+        .form-group input::placeholder,
+        .form-group textarea::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #4ecdc4;
+            background: rgba(255, 255, 255, 0.1);
+            box-shadow: 0 0 0 3px rgba(78, 205, 196, 0.2);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .checkbox-group {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 1rem;
+            margin-top: 0.5rem;
+        }
+
+        .checkbox-label {
+            display: flex;
+            align-items: center;
+            font-weight: 500;
+            color: rgba(255, 255, 255, 0.8);
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .checkbox-label:hover {
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .checkbox-label input[type="checkbox"] {
+            margin-right: 0.5rem;
+            width: 18px;
+            height: 18px;
+            accent-color: #4ecdc4;
+        }
+
+        .form-actions {
+            margin-top: 2rem;
+        }
+
+        .form-button {
+            width: 100%;
+            padding: 1.2rem 2rem;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .form-button.primary {
+            background: linear-gradient(45deg, #4ecdc4, #44a08d);
+            color: white;
+        }
+
+        .form-button.primary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, #44a08d, #4ecdc4);
+            transition: left 0.3s ease;
+        }
+
+        .form-button.primary:hover::before {
+            left: 0;
+        }
+
+        .form-button.primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(78, 205, 196, 0.3);
+        }
+
+        .form-button span {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Success Styles */
+        .success-content {
+            text-align: center;
+            padding: 3rem 2rem;
+        }
+
+        .success-animation {
+            margin-bottom: 2rem;
+        }
+
+        .success-icon {
+            font-size: 4rem;
+            animation: successBounce 2s ease-in-out infinite;
+            filter: drop-shadow(0 0 20px rgba(255, 215, 0, 0.6));
+        }
+
+        .success-sirens {
+            font-size: 2rem;
+            margin-top: 1rem;
+            animation: successFloat 3s ease-in-out infinite;
+        }
+
+        @keyframes successBounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        @keyframes successFloat {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            33% { transform: translateY(-5px) rotate(5deg); }
+            66% { transform: translateY(5px) rotate(-5deg); }
+        }
+
+        .success-content h2 {
+            color: white;
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, #4ecdc4, #ffd700);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .success-content p {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 2rem;
+        }
+
+        .next-steps {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            text-align: left;
+        }
+
+        .next-steps h3 {
+            color: #4ecdc4;
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+        }
+
+        .next-steps ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .next-steps li {
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 0.8rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .next-steps li::before {
+            content: '✨';
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+
+        .success-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+        }
+
+        .success-button {
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .success-button.primary {
+            background: linear-gradient(45deg, #4ecdc4, #44a08d);
+            color: white;
+        }
+
+        .success-button.secondary {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .success-button:hover {
+            transform: translateY(-2px);
+        }
+
+        .success-button.primary:hover {
+            box-shadow: 0 8px 25px rgba(78, 205, 196, 0.3);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                padding: 1.5rem 1rem;
+            }
+
+            .flow-step {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+
+            .flow-arrow {
+                transform: rotate(90deg);
+                font-size: 1.5rem;
+            }
+
+            .token-visual {
+                width: 50px;
+                height: 50px;
+                font-size: 1.2rem;
+            }
+
+            .user-type-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .onboarding-container {
+                width: 98%;
+                border-radius: 16px;
+            }
+
+            .animation-container {
+                width: 500px;
+                height: 500px;
+                opacity: 0.1;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 1rem 0.8rem;
+            }
+
+            .logo {
+                font-size: 1.8rem;
+                margin-bottom: 2.5rem;
+            }
+
+            .onboarding-container {
+                width: 100%;
+                height: 100vh;
+                border-radius: 0;
+            }
+
+            .onboarding-content {
+                padding: 1rem;
+            }
+
+            .animation-container {
+                width: 350px;
+                height: 350px;
+                opacity: 0.08;
+            }
+
+            .footer {
+                margin-top: 4rem;
+            }
+
+            .footer-content {
+                gap: 0.3rem;
+            }
+
+            .founder-info {
+                font-size: 0.8rem;
+            }
+
+            .copyright {
+                font-size: 0.75rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Background Animation -->
+    <div class="animation-container">
+        <div class="circle"></div>
+        <div class="circle"></div>
+        <div class="circle"></div>
+        <div class="circle"></div>
+        <div class="circle"></div>
+        
+        <div class="sirens-coin">
+            <div class="coin-container">
+                <div class="coin-face">S</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="container">
+        <div class="logo">Sirius</div>
+        
+        <h1 class="hero-title">The Future of Financial Inclusion</h1>
+        
+        <p class="hero-subtitle">
+            Building the first progressive super app with autonomous financial infrastructure for global inclusion. 
+            Powered by Sirens, our revolutionary crystalline stablecoin where each token's crystal structure converts vibrational frequencies into electrical energy.
+        </p>
+
+        <!-- Impact Counter -->
+        <div class="impact-counter">
+            <div class="counter-number" id="counterNumber">1,700,000,000</div>
+            <div class="counter-label">People worldwide excluded from financial services</div>
+            <div class="counter-subtitle">🇧🇯 Based in Cotonou, Benin • Building for the World 🌍</div>
+        </div>
+
+        <!-- Sirens Flow Simulation -->
+        <div class="sirens-simulation">
+            <div class="simulation-title">⚡ Live Sirens Flow ⚡</div>
+            
+            <div class="flow-container">
+                <!-- Token Input -->
+                <div class="flow-step">
+                    <div class="flow-input">
+                        <div class="token-visual">S</div>
+                        <div>
+                            <div class="flow-label">Crystalline Token Input</div>
+                            <div class="flow-value">1 <span class="flow-unit">SIRENS</span></div>
+                        </div>
+                    </div>
+                    <div class="flow-arrow">→</div>
+                    <div class="flow-output">
+                        <div>
+                            <div class="flow-label">Vibrational Output</div>
+                            <div class="flow-value" id="tokenFreq">440 <span class="flow-unit">Hz</span></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="process-line"></div>
+
+                <!-- Frequency Accumulation -->
+                <div class="flow-step">
+                    <div class="flow-input">
+                        <div class="frequency-visual">
+                            <div class="freq-wave"></div>
+                            <div class="freq-wave"></div>
+                            <div class="freq-wave"></div>
+                            <div class="freq-wave"></div>
+                            <div class="freq-wave"></div>
+                            <div class="freq-wave"></div>
+                        </div>
+                        <div>
+                            <div class="flow-label">Cumulative Crystal Resonance</div>
+                            <div class="flow-value" id="cumulativeFreq">1,320 <span class="flow-unit">Hz</span></div>
+                        </div>
+                    </div>
+                    <div class="flow-arrow">⚡</div>
+                    <div class="flow-output">
+                        <div>
+                            <div class="flow-label">Electrical Generation</div>
+                            <div class="flow-value" id="electricalOutput">0.132 <span class="flow-unit">kWh</span></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="process-line"></div>
+
+                <!-- Value Conversion -->
+                <div class="flow-step">
+                    <div class="flow-input">
+                        <div class="electrical-visual">
+                            <div class="lightning-bolt">⚡</div>
+                            <div class="lightning-bolt">⚡</div>
+                            <div class="lightning-bolt">⚡</div>
+                        </div>
+                        <div>
+                            <div class="flow-label">Electrical Output</div>
+                            <div class="flow-value" id="electricalValue">0.132 <span class="flow-unit">kWh</span></div>
+                        </div>
+                    </div>
+                    <div class="flow-arrow">💰</div>
+                    <div class="flow-output">
+                        <div>
+                            <div class="flow-label">Real-Time Value</div>
+                            <div class="flow-value" id="realtimePrice">$0.0396 <span class="flow-unit">USD</span></div>
+                        </div>
+                        <div class="value-visual">
+                            <div class="dollar-symbol">$</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Formula -->
+                <div class="live-formula">
+                    <div class="formula-text">
+                        💎 <strong>Crystalline Conversion:</strong> 
+                        <span class="formula-variable" id="liveFormulaCumulative">1,320</span> Hz × 
+                        <span class="formula-variable">0.0001</span> kWh/Hz × 
+                        $<span class="formula-variable" id="liveFormulaPrice">0.30</span>/kWh = 
+                        $<span class="formula-variable" id="liveFormulaResult">0.0396</span> USD
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="cta-section">
+            <h2 class="cta-title">Join the Global Finance Revolution</h2>
+            <p class="cta-description">
+                We're building the first autonomous financial infrastructure with breakthrough crystalline technology for worldwide access. 
+                Join the founding investors creating the future of universal financial inclusion for 1.7 billion unbanked people globally.
+            </p>
+            <button class="cta-button" id="ctaButton">
+                <span>🚀 Join Our Vision</span>
+            </button>
+        </div>
+        
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="footer-content">
+                <div class="founder-info">Founded by Jerome Djogbenou</div>
+                <div class="copyright">© 2025 Sirius. All rights reserved.</div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Investor Onboarding Modal -->
+    <div class="onboarding-overlay" id="onboardingOverlay">
+        <div class="onboarding-container">
+            <!-- Step 1: Investor Form -->
+            <div class="onboarding-step active" id="step1">
+                <div class="onboarding-header">
+                    <h2>💰 Investor Access</h2>
+                    <button class="onboarding-close" id="onboardingClose">&times;</button>
+                </div>
+                <div class="onboarding-content">
+                    <div class="welcome-animation">
+                        <div class="welcome-sirens">💎</div>
+                    </div>
+                    <p class="onboarding-subtitle">Join the founding investors of the world's first crystalline cryptocurrency. Get exclusive access to our investment opportunity.</p>
+                    
+                    <form class="investor-form" id="investorForm">
+                        <div class="form-group">
+                            <label for="fullName">Full Name *</label>
+                            <input type="text" id="fullName" name="fullName" required placeholder="John Smith">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="company">Fund/Company *</label>
+                            <input type="text" id="company" name="company" required placeholder="Acme Ventures">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="email">Email Address *</label>
+                            <input type="email" id="email" name="email" required placeholder="john@acmeventures.com">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="investmentSize">Investment Interest</label>
+                            <select id="investmentSize" name="investmentSize">
+                                <option value="">Select range</option>
+                                <option value="under-100k">Under $100K</option>
+                                <option value="100k-500k">$100K - $500K</option>
+                                <option value="500k-1m">$500K - $1M</option>
+                                <option value="1m-5m">$1M - $5M</option>
+                                <option value="over-5m">Over $5M</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="timeline">Investment Timeline</label>
+                            <select id="timeline" name="timeline">
+                                <option value="">Select timeline</option>
+                                <option value="immediate">Immediate (0-3 months)</option>
+                                <option value="short">Short-term (3-6 months)</option>
+                                <option value="medium">Medium-term (6-12 months)</option>
+                                <option value="long">Long-term (12+ months)</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="focus">Investment Focus</label>
+                            <div class="checkbox-group">
+                                <label class="checkbox-label">
+                                    <input type="checkbox" name="focus" value="fintech"> Fintech
+                                </label>
+                                <label class="checkbox-label">
+                                    <input type="checkbox" name="focus" value="blockchain"> Blockchain
+                                </label>
+                                <label class="checkbox-label">
+                                    <input type="checkbox" name="focus" value="africa"> Africa Markets
+                                </label>
+                                <label class="checkbox-label">
+                                    <input type="checkbox" name="focus" value="defi"> DeFi/Crypto
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="message">Additional Information</label>
+                            <textarea id="message" name="message" placeholder="Tell us about your investment focus, portfolio, or any specific questions about Sirens..."></textarea>
+                        </div>
+                        
+                        <div class="form-actions">
+                            <button type="submit" class="form-button primary">
+                                <span>🚀 Get Investor Access</span>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Step 2: Success -->
+            <div class="onboarding-step" id="step2">
+                <div class="onboarding-content success-content">
+                    <div class="success-animation">
+                        <div class="success-icon">✨</div>
+                        <div class="success-sirens">💎⚡💎</div>
+                    </div>
+                    <h2>Welcome aboard, Investor!</h2>
+                    <p>Thank you for your interest in Sirens. Our team will contact you within 24 hours with detailed investment materials.</p>
+                    
+                    <div class="next-steps">
+                        <h3>What happens next:</h3>
+                        <ul>
+                            <li>Receive our comprehensive pitch deck and financial projections</li>
+                            <li>Schedule a 1-on-1 call with our founding team</li>
+                            <li>Get access to our private investor portal</li>
+                            <li>Review technical documentation and roadmap</li>
+                            <li>Discuss investment terms and opportunities</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="success-actions">
+                        <button class="success-button primary" id="viewPitchDeck">View Pitch Deck</button>
+                        <button class="success-button secondary" id="contactTeam">Contact Team</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Sirens Flow Simulation
+        class SirensFlowSimulation {
+            constructor() {
+                this.tokenFreq = 440;
+                this.cumulativeFreq = 1320;
+                this.electricalOutput = 0.132;
+                this.realtimePrice = 0.0396;
+                this.init();
+            }
+            
+            init() {
+                this.setupElements();
+                this.startSimulation();
+            }
+            
+            setupElements() {
+                this.tokenFreqEl = document.getElementById('tokenFreq');
+                this.cumulativeFreqEl = document.getElementById('cumulativeFreq');
+                this.electricalOutputEl = document.getElementById('electricalOutput');
+                this.electricalValueEl = document.getElementById('electricalValue');
+                this.realtimePriceEl = document.getElementById('realtimePrice');
+                this.liveFormulaCumulativeEl = document.getElementById('liveFormulaCumulative');
+                this.liveFormulaPriceEl = document.getElementById('liveFormulaPrice');
+                this.liveFormulaResultEl = document.getElementById('liveFormulaResult');
+            }
+            
+            startSimulation() {
+                setInterval(() => this.updateFlow(), 3000);
+                setInterval(() => this.updateTokenFrequency(), 500);
+            }
+            
+            updateTokenFrequency() {
+                const baseFreq = 440;
+                const variation = Math.sin(Date.now() / 2000) * 15 + Math.random() * 8 - 4;
+                this.tokenFreq = Math.round((baseFreq + variation) * 100) / 100;
+                
+                if (this.tokenFreqEl) {
+                    this.animateValue(this.tokenFreqEl, this.tokenFreq, 'Hz');
+                }
+            }
+            
+            updateFlow() {
+                this.cumulativeFreq += Math.round((Math.random() * 25 + 10) * 100) / 100;
+                this.electricalOutput = Math.round(this.cumulativeFreq * 0.0001 * 1000) / 1000;
+                
+                const pricePerKwh = 0.30 + (Math.random() * 0.08 - 0.04);
+                this.realtimePrice = Math.round(this.electricalOutput * pricePerKwh * 10000) / 10000;
+                
+                this.animateValue(this.cumulativeFreqEl, this.cumulativeFreq, 'Hz');
+                this.animateValue(this.electricalOutputEl, this.electricalOutput, 'kWh');
+                this.animateValue(this.electricalValueEl, this.electricalOutput, 'kWh');
+                this.animateValue(this.realtimePriceEl, this.realtimePrice, 'USD', '$');
+                
+                if (this.liveFormulaCumulativeEl) {
+                    this.liveFormulaCumulativeEl.textContent = this.cumulativeFreq.toLocaleString();
+                }
+                if (this.liveFormulaPriceEl) {
+                    this.liveFormulaPriceEl.textContent = pricePerKwh.toFixed(2);
+                }
+                if (this.liveFormulaResultEl) {
+                    this.liveFormulaResultEl.textContent = this.realtimePrice.toFixed(4);
+                }
+            }
+            
+            animateValue(element, targetValue, unit, prefix = '') {
+                if (!element) return;
+                
+                const currentText = element.textContent || '0';
+                const currentValue = parseFloat(currentText.replace(/[^\d.-]/g, '')) || 0;
+                const increment = (targetValue - currentValue) / 15;
+                let current = currentValue;
+                
+                const animate = () => {
+                    current += increment;
+                    if ((increment > 0 && current >= targetValue) || (increment < 0 && current <= targetValue)) {
+                        current = targetValue;
+                    }
+                    
+                    const displayValue = current.toFixed(targetValue < 1 ? 4 : (targetValue < 100 ? 2 : 0));
+                    element.innerHTML = `${prefix}${displayValue} <span class="flow-unit">${unit}</span>`;
+                    
+                    if (current !== targetValue) {
+                        requestAnimationFrame(animate);
+                    }
+                };
+                
+                animate();
+            }
+        }
+
+        // Counter Animation
+        function animateCounter() {
+            const counter = document.getElementById('counterNumber');
+            if (!counter) return;
+            
+            const target = 1700000000;
+            const duration = 3000;
+            let startTime = null;
+            
+            function easeOutQuart(t) {
+                return 1 - Math.pow(1 - t, 4);
+            }
+            
+            function updateCounter(timestamp) {
+                if (!startTime) startTime = timestamp;
+                const progress = (timestamp - startTime) / duration;
+                
+                if (progress < 1) {
+                    const easedProgress = easeOutQuart(progress);
+                    const current = target * easedProgress;
+                    counter.textContent = Math.floor(current).toLocaleString();
+                    requestAnimationFrame(updateCounter);
+                } else {
+                    counter.textContent = target.toLocaleString();
+                }
+            }
+            
+            requestAnimationFrame(updateCounter);
+        }
+
+        // Investor Onboarding System
+        class InvestorOnboarding {
+            constructor() {
+                this.currentStep = 1;
+                this.investorData = {};
+                this.init();
+            }
+            
+            init() {
+                this.setupEventListeners();
+            }
+            
+            setupEventListeners() {
+                const ctaButton = document.getElementById('ctaButton');
+                const overlay = document.getElementById('onboardingOverlay');
+                const closeBtn = document.getElementById('onboardingClose');
+                const form = document.getElementById('investorForm');
+                const viewPitchDeck = document.getElementById('viewPitchDeck');
+                const contactTeam = document.getElementById('contactTeam');
+                
+                if (ctaButton) {
+                    ctaButton.addEventListener('click', () => {
+                        overlay.classList.add('active');
+                        document.body.style.overflow = 'hidden';
+                    });
+                }
+                
+                if (closeBtn) {
+                    closeBtn.addEventListener('click', () => {
+                        this.closeOnboarding();
+                    });
+                }
+                
+                if (form) {
+                    form.addEventListener('submit', (e) => {
+                        e.preventDefault();
+                        this.handleFormSubmission();
+                    });
+                }
+                
+                if (viewPitchDeck) {
+                    viewPitchDeck.addEventListener('click', () => {
+                        this.closeOnboarding();
+                        window.open('https://pitch.sirius.com', '_blank');
+                    });
+                }
+                
+                if (contactTeam) {
+                    contactTeam.addEventListener('click', () => {
+                        this.closeOnboarding();
+                        window.open('mailto:investors@sirius.com?subject=Investment Inquiry - Sirius&body=Hello, I am interested in learning more about investment opportunities with Sirius.', '_blank');
+                    });
+                }
+                
+                // Close on outside click
+                overlay.addEventListener('click', (e) => {
+                    if (e.target === overlay) {
+                        this.closeOnboarding();
+                    }
+                });
+                
+                // Close on Escape key
+                document.addEventListener('keydown', (e) => {
+                    if (e.key === 'Escape') {
+                        this.closeOnboarding();
+                    }
+                });
+            }
+            
+            closeOnboarding() {
+                document.getElementById('onboardingOverlay').classList.remove('active');
+                document.body.style.overflow = 'auto';
+                this.reset();
+            }
+            
+            goToStep(stepNumber) {
+                // Hide all steps
+                document.querySelectorAll('.onboarding-step').forEach(step => {
+                    step.classList.remove('active');
+                });
+                
+                // Show target step
+                document.getElementById(`step${stepNumber}`).classList.add('active');
+                this.currentStep = stepNumber;
+            }
+            
+            handleFormSubmission() {
+                const form = document.getElementById('investorForm');
+                const formData = new FormData(form);
+                
+                // Get focus areas
+                const focusAreas = Array.from(document.querySelectorAll('input[name="focus"]:checked'))
+                    .map(checkbox => checkbox.value);
+                
+                // Collect form data
+                this.investorData = {
+                    timestamp: new Date().toISOString(),
+                    fullName: formData.get('fullName'),
+                    company: formData.get('company'),
+                    email: formData.get('email'),
+                    investmentSize: formData.get('investmentSize'),
+                    timeline: formData.get('timeline'),
+                    focus: focusAreas,
+                    message: formData.get('message')
+                };
+                
+                // Validate required fields
+                if (!this.investorData.fullName || !this.investorData.company || !this.investorData.email) {
+                    alert('Please fill in all required fields.');
+                    return;
+                }
+                
+                // Submit data
+                this.submitInvestorData().then(() => {
+                    this.goToStep(2);
+                });
+            }
+            
+            async submitInvestorData() {
+                const submitBtn = document.querySelector('.form-button.primary');
+                const originalText = submitBtn.innerHTML;
+                
+                // Show loading state
+                submitBtn.innerHTML = '<span>Submitting...</span>';
+                submitBtn.disabled = true;
+                
+                try {
+                    // Simulate API call
+                    await new Promise(resolve => setTimeout(resolve, 2000));
+                    
+                    // Log data (in real app, send to backend)
+                    console.log('Investor data submitted:', this.investorData);
+                    
+                    // Here you would typically send to your backend:
+                    // await fetch('/api/investors', {
+                    //     method: 'POST',
+                    //     headers: { 'Content-Type': 'application/json' },
+                    //     body: JSON.stringify(this.investorData)
+                    // });
+                    
+                } catch (error) {
+                    console.error('Submission error:', error);
+                    alert('There was an error submitting your information. Please try again.');
+                } finally {
+                    // Reset button
+                    submitBtn.innerHTML = originalText;
+                    submitBtn.disabled = false;
+                }
+            }
+            
+            reset() {
+                this.currentStep = 1;
+                this.investorData = {};
+                
+                // Reset form
+                const form = document.getElementById('investorForm');
+                if (form) {
+                    form.reset();
+                }
+                
+                // Reset to step 1
+                this.goToStep(1);
+            }
+        }
+
+        // Initialize everything
+        document.addEventListener('DOMContentLoaded', () => {
+            setTimeout(() => animateCounter(), 2000);
+            setTimeout(() => new SirensFlowSimulation(), 1500);
+            new InvestorOnboarding();
+        });
+
+        // Viewport handling
+        function handleViewportChange() {
+            const vh = window.innerHeight * 0.01;
+            document.documentElement.style.setProperty('--vh', `${vh}px`);
+        }
+
+        window.addEventListener('resize', handleViewportChange);
+        window.addEventListener('orientationchange', () => {
+            setTimeout(handleViewportChange, 100);
+        });
+
+        handleViewportChange();
+    </script>
+</body>
+</html>
