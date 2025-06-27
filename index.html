@@ -17,6 +17,8 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            max-width: 100%;
+            word-wrap: break-word;
         }
 
         body {
@@ -31,6 +33,8 @@
             position: relative;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
+            word-wrap: break-word;
+            hyphens: auto;
         }
 
         body::before {
@@ -50,6 +54,9 @@
             text-align: center;
             position: relative;
             z-index: 10;
+            width: 100%;
+            word-wrap: break-word;
+            hyphens: auto;
         }
 
         /* Background Animation */
@@ -1008,6 +1015,66 @@
         @media (max-width: 768px) {
             .container {
                 padding: 1.5rem 1rem;
+                max-width: 100%;
+            }
+
+            .hero-title {
+                font-size: 2.2rem;
+                line-height: 1.2;
+                margin-bottom: 1rem;
+                word-wrap: break-word;
+                hyphens: auto;
+            }
+
+            .hero-subtitle {
+                font-size: 1rem;
+                line-height: 1.5;
+                margin-bottom: 2rem;
+                word-wrap: break-word;
+                hyphens: auto;
+            }
+
+            .impact-counter {
+                padding: 1.5rem;
+                margin: 2rem 0;
+            }
+
+            .counter-number {
+                font-size: 2rem;
+                line-height: 1.1;
+            }
+
+            .counter-label {
+                font-size: 0.9rem;
+                line-height: 1.4;
+                word-wrap: break-word;
+            }
+
+            .counter-subtitle {
+                font-size: 0.8rem;
+                line-height: 1.3;
+                word-wrap: break-word;
+            }
+
+            .simulation-title {
+                font-size: 1.3rem;
+                margin-bottom: 1.5rem;
+                word-wrap: break-word;
+            }
+
+            .cta-title {
+                font-size: 1.8rem;
+                line-height: 1.2;
+                margin-bottom: 1rem;
+                word-wrap: break-word;
+            }
+
+            .cta-description {
+                font-size: 0.95rem;
+                line-height: 1.5;
+                margin-bottom: 1.5rem;
+                word-wrap: break-word;
+                hyphens: auto;
             }
 
             .flow-step {
@@ -1019,6 +1086,23 @@
             .flow-arrow {
                 transform: rotate(90deg);
                 font-size: 1.5rem;
+            }
+
+            .flow-label {
+                font-size: 0.9rem;
+                word-wrap: break-word;
+            }
+
+            .flow-value {
+                font-size: 1.1rem;
+                word-wrap: break-word;
+            }
+
+            .live-formula {
+                font-size: 0.85rem;
+                line-height: 1.4;
+                word-wrap: break-word;
+                hyphens: auto;
             }
 
             .token-visual {
@@ -1034,6 +1118,7 @@
             .onboarding-container {
                 width: 98%;
                 border-radius: 16px;
+                max-width: 100%;
             }
 
             .animation-container {
@@ -1046,21 +1131,141 @@
         @media (max-width: 480px) {
             .container {
                 padding: 1rem 0.8rem;
+                max-width: 100%;
+                word-wrap: break-word;
             }
 
             .logo {
                 font-size: 1.8rem;
                 margin-bottom: 2.5rem;
+                word-wrap: break-word;
+            }
+
+            .hero-title {
+                font-size: 1.8rem;
+                line-height: 1.1;
+                margin-bottom: 1rem;
+                word-wrap: break-word;
+                hyphens: auto;
+                text-align: center;
+            }
+
+            .hero-subtitle {
+                font-size: 0.9rem;
+                line-height: 1.4;
+                margin-bottom: 1.5rem;
+                word-wrap: break-word;
+                hyphens: auto;
+                text-align: center;
+            }
+
+            .impact-counter {
+                padding: 1rem;
+                margin: 1.5rem 0;
+            }
+
+            .counter-number {
+                font-size: 1.5rem;
+                line-height: 1;
+                word-wrap: break-word;
+            }
+
+            .counter-label {
+                font-size: 0.8rem;
+                line-height: 1.3;
+                word-wrap: break-word;
+                text-align: center;
+            }
+
+            .counter-subtitle {
+                font-size: 0.7rem;
+                line-height: 1.2;
+                word-wrap: break-word;
+                text-align: center;
+                margin-top: 0.5rem;
+            }
+
+            .simulation-title {
+                font-size: 1.1rem;
+                margin-bottom: 1rem;
+                word-wrap: break-word;
+                text-align: center;
+            }
+
+            .cta-title {
+                font-size: 1.5rem;
+                line-height: 1.1;
+                margin-bottom: 0.8rem;
+                word-wrap: break-word;
+                text-align: center;
+            }
+
+            .cta-description {
+                font-size: 0.85rem;
+                line-height: 1.4;
+                margin-bottom: 1.2rem;
+                word-wrap: break-word;
+                hyphens: auto;
+                text-align: center;
+            }
+
+            .cta-button {
+                font-size: 0.9rem;
+                padding: 0.8rem 1.5rem;
+                word-wrap: break-word;
+            }
+
+            .flow-container {
+                gap: 1rem;
+            }
+
+            .flow-step {
+                padding: 0.8rem;
+            }
+
+            .flow-label {
+                font-size: 0.8rem;
+                word-wrap: break-word;
+                text-align: center;
+            }
+
+            .flow-value {
+                font-size: 1rem;
+                word-wrap: break-word;
+                text-align: center;
+            }
+
+            .live-formula {
+                font-size: 0.75rem;
+                line-height: 1.3;
+                word-wrap: break-word;
+                hyphens: auto;
+                text-align: center;
+                padding: 0.8rem;
+            }
+
+            .formula-text {
+                word-wrap: break-word;
+                hyphens: auto;
             }
 
             .onboarding-container {
                 width: 100%;
                 height: 100vh;
                 border-radius: 0;
+                max-width: 100%;
             }
 
             .onboarding-content {
                 padding: 1rem;
+                word-wrap: break-word;
+            }
+
+            .onboarding-subtitle {
+                font-size: 0.85rem;
+                line-height: 1.4;
+                word-wrap: break-word;
+                hyphens: auto;
             }
 
             .animation-container {
@@ -1068,6 +1273,68 @@
                 height: 350px;
                 opacity: 0.08;
             }
+
+            /* Ensure no horizontal overflow */
+            * {
+                max-width: 100%;
+                box-sizing: border-box;
+            }
+
+            body {
+                overflow-x: hidden;
+            }
+        }
+
+        @media (max-width: 360px) {
+            .container {
+                padding: 0.8rem 0.5rem;
+            }
+
+            .hero-title {
+                font-size: 1.6rem;
+                line-height: 1;
+                word-wrap: break-word;
+                hyphens: auto;
+            }
+
+            .hero-subtitle {
+                font-size: 0.8rem;
+                line-height: 1.3;
+                word-wrap: break-word;
+                hyphens: auto;
+            }
+
+            .counter-number {
+                font-size: 1.3rem;
+            }
+
+            .counter-label {
+                font-size: 0.75rem;
+                word-wrap: break-word;
+            }
+
+            .counter-subtitle {
+                font-size: 0.65rem;
+                word-wrap: break-word;
+            }
+
+            .cta-title {
+                font-size: 1.3rem;
+                word-wrap: break-word;
+            }
+
+            .cta-description {
+                font-size: 0.8rem;
+                word-wrap: break-word;
+                hyphens: auto;
+            }
+
+            .live-formula {
+                font-size: 0.7rem;
+                word-wrap: break-word;
+                hyphens: auto;
+            }
+        }
 
             .footer {
                 margin-top: 4rem;
