@@ -6,8 +6,7 @@
     <meta name="description" content="Sirius - The first progressive super app with autonomous financial infrastructure">
     <title>Sirius - The Future of Financial Inclusion</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <style>
         :root {
             --viewport-height: 100vh;
@@ -1348,6 +1347,12 @@
         </div>
     </div>
 
+    <!-- Audio Controls -->
+    <div class="audio-controls">
+        <button class="audio-btn" id="playPauseBtn">▶️</button>
+        <input type="range" class="volume-slider" id="volumeSlider" min="0" max="1" step="0.01" value="0.5">
+    </div>
+
     <script>
         // Sirens Flow Simulation
         class SirensFlowSimulation {
@@ -1634,11 +1639,85 @@
             }
         }
 
+        // Audio Player
+        class AudioPlayer {
+            constructor() {
+                this.audioContext = null;
+                this.masterGain = null;
+                this.isPlaying = false;
+                this.init();
+            }
+            
+            async init() {
+                // Create audio context
+                this.audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                
+                // Create master gain node
+                this.masterGain = this.audioContext.createGain();
+                this.masterGain.connect(this.audioContext.destination);
+                
+                // Load and decode audio data
+                const response = await fetch('ambient-sound.mp3');
+                const arrayBuffer = await response.arrayBuffer();
+                this.audioBuffer = await this.audioContext.decodeAudioData(arrayBuffer);
+                
+                // Create source node
+                this.sourceNode = this.audioContext.createBufferSource();
+                this.sourceNode.buffer = this.audioBuffer;
+                this.sourceNode.loop = true;
+                this.sourceNode.connect(this.masterGain);
+                
+                // Set initial volume
+                this.setVolume(0.5);
+            }
+            
+            play() {
+                if (!this.isPlaying) {
+                    this.sourceNode.start(0);
+                    this.isPlaying = true;
+                }
+            }
+            
+            pause() {
+                if (this.isPlaying) {
+                    this.sourceNode.stop(0);
+                    this.isPlaying = false;
+                }
+            }
+            
+            setVolume(value) {
+                const volume = Math.max(0, Math.min(value, 1));
+                this.masterGain.gain.setValueAtTime(volume, this.audioContext.currentTime);
+            }
+        }
+
         // Initialize everything
         document.addEventListener('DOMContentLoaded', () => {
             setTimeout(() => animateCounter(), 2000);
             setTimeout(() => new SirensFlowSimulation(), 1500);
             new InvestorOnboarding(); // ERREUR CORRIGÉE : SimpleOnboarding -> InvestorOnboarding
+
+            // Initialize audio player
+            const audioPlayer = new AudioPlayer();
+
+            // Play/pause button
+            const playPauseBtn = document.getElementById('playPauseBtn');
+            playPauseBtn.addEventListener('click', () => {
+                if (audioPlayer.isPlaying) {
+                    audioPlayer.pause();
+                    playPauseBtn.textContent = '▶️';
+                } else {
+                    audioPlayer.play();
+                    playPauseBtn.textContent = '⏸️';
+                }
+            });
+
+            // Volume slider
+            const volumeSlider = document.getElementById('volumeSlider');
+            volumeSlider.addEventListener('input', (e) => {
+                const volume = parseFloat(e.target.value);
+                audioPlayer.setVolume(volume);
+            });
         });
 
         // Viewport handling
@@ -1653,6 +1732,184 @@
         });
 
         handleViewportChange();
+    </script>
+
+    <!-- Ambient Evolutionary Audio System -->
+    <script>
+        class AmbientAudioSystem {
+            constructor() {
+                this.audioContext = null;
+                this.isInitialized = false;
+                this.oscillators = [];
+                this.gainNodes = [];
+                this.filterNodes = [];
+                this.masterGain = null;
+                this.time = 0;
+                this.evolutionSpeed = 0.0002;
+                this.baseVolume = 0.08;
+                this.isActive = false;
+                
+                // Frequency bases for cosmic/ethereal sounds
+                this.frequencies = [
+                    { base: 55, drift: 3 },    // Deep sub bass
+                    { base: 110, drift: 5 },   // Low ambient
+                    { base: 220, drift: 8 },   // Mid ambient
+                    { base: 440, drift: 12 },  // Harmonic layer
+                    { base: 880, drift: 15 }   // High sparkle
+                ];
+                
+                this.init();
+            }
+            
+            async init() {
+                try {
+                    // Wait for user interaction before starting audio
+                    document.addEventListener('click', () => this.startAudio(), { once: true });
+                    document.addEventListener('touchstart', () => this.startAudio(), { once: true });
+                    document.addEventListener('keydown', () => this.startAudio(), { once: true });
+                    
+                    // Also start on any scroll or mouse movement after a delay
+                    let interactionTimeout;
+                    const startOnInteraction = () => {
+                        clearTimeout(interactionTimeout);
+                        interactionTimeout = setTimeout(() => this.startAudio(), 2000);
+                    };
+                    
+                    document.addEventListener('scroll', startOnInteraction, { passive: true });
+                    document.addEventListener('mousemove', startOnInteraction, { passive: true });
+                    
+                } catch (error) {
+                    console.log('Audio initialization waiting for user interaction');
+                }
+            }
+            
+            async startAudio() {
+                if (this.isActive) return;
+                
+                try {
+                    this.audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                    await this.audioContext.resume();
+                    
+                    this.createAudioNodes();
+                    this.startEvolution();
+                    this.isActive = true;
+                    
+                } catch (error) {
+                    console.log('Audio context not available');
+                }
+            }
+            
+            createAudioNodes() {
+                // Master gain control
+                this.masterGain = this.audioContext.createGain();
+                this.masterGain.gain.setValueAtTime(this.baseVolume, this.audioContext.currentTime);
+                this.masterGain.connect(this.audioContext.destination);
+                
+                // Create oscillators for each frequency layer
+                this.frequencies.forEach((freq, index) => {
+                    const oscillator = this.audioContext.createOscillator();
+                    const gainNode = this.audioContext.createGain();
+                    const filterNode = this.audioContext.createBiquadFilter();
+                    
+                    // Configure oscillator
+                    oscillator.type = index < 2 ? 'sine' : 'triangle';
+                    oscillator.frequency.setValueAtTime(freq.base, this.audioContext.currentTime);
+                    
+                    // Configure filter for atmospheric effect
+                    filterNode.type = 'lowpass';
+                    filterNode.frequency.setValueAtTime(freq.base * 4, this.audioContext.currentTime);
+                    filterNode.Q.setValueAtTime(0.5, this.audioContext.currentTime);
+                    
+                    // Configure gain with subtle initial volume
+                    const initialGain = (1 / (index + 1)) * 0.3;
+                    gainNode.gain.setValueAtTime(initialGain, this.audioContext.currentTime);
+                    
+                    // Connect the audio graph
+                    oscillator.connect(filterNode);
+                    filterNode.connect(gainNode);
+                    gainNode.connect(this.masterGain);
+                    
+                    // Store references
+                    this.oscillators.push(oscillator);
+                    this.gainNodes.push(gainNode);
+                    this.filterNodes.push(filterNode);
+                    
+                    // Start the oscillator
+                    oscillator.start();
+                });
+            }
+            
+            startEvolution() {
+                const evolve = () => {
+                    if (!this.isActive || !this.audioContext) return;
+                    
+                    this.time += this.evolutionSpeed;
+                    
+                    this.oscillators.forEach((osc, index) => {
+                        const freq = this.frequencies[index];
+                        const currentTime = this.audioContext.currentTime;
+                        
+                        // Evolving frequency with subtle drift
+                        const freqVariation = Math.sin(this.time + index * 1.7) * freq.drift;
+                        const newFreq = freq.base + freqVariation;
+                        osc.frequency.exponentialRampToValueAtTime(newFreq, currentTime + 0.1);
+                        
+                        // Evolving volume with breathing pattern
+                        const gainVariation = Math.sin(this.time * 0.5 + index * 0.8) * 0.1 + 0.3;
+                        const baseGain = (1 / (index + 1)) * gainVariation;
+                        this.gainNodes[index].gain.exponentialRampToValueAtTime(baseGain, currentTime + 0.1);
+                        
+                        // Evolving filter cutoff for atmospheric movement
+                        const filterVariation = Math.sin(this.time * 0.3 + index * 1.2) * freq.base * 2;
+                        const newCutoff = Math.max(freq.base * 2, freq.base * 4 + filterVariation);
+                        this.filterNodes[index].frequency.exponentialRampToValueAtTime(newCutoff, currentTime + 0.1);
+                    });
+                    
+                    // Subtle master volume evolution
+                    const masterVariation = Math.sin(this.time * 0.1) * 0.02 + this.baseVolume;
+                    this.masterGain.gain.exponentialRampToValueAtTime(masterVariation, this.audioContext.currentTime + 0.1);
+                    
+                    // Continue evolution
+                    requestAnimationFrame(evolve);
+                };
+                
+                evolve();
+            }
+            
+            // React to page interactions for subtle changes
+            onInteraction(intensity = 1) {
+                if (!this.isActive) return;
+                
+                // Temporary boost in evolution speed and brightness
+                this.evolutionSpeed = Math.min(0.001, this.evolutionSpeed * (1 + intensity * 0.5));
+                
+                // Fade back to normal speed
+                setTimeout(() => {
+                    this.evolutionSpeed = 0.0002;
+                }, 3000);
+            }
+        }
+        
+        // Initialize the ambient audio system
+        const ambientAudio = new AmbientAudioSystem();
+        
+        // Connect to page interactions for audio evolution
+        document.addEventListener('click', () => ambientAudio.onInteraction(0.3), { passive: true });
+        document.addEventListener('scroll', () => ambientAudio.onInteraction(0.1), { passive: true });
+        
+        // React to form interactions
+        document.addEventListener('focus', (e) => {
+            if (e.target.matches('input, textarea, select')) {
+                ambientAudio.onInteraction(0.2);
+            }
+        }, true);
+        
+        // React to button hovers for subtle audio feedback
+        document.addEventListener('mouseenter', (e) => {
+            if (e.target.matches('button, .cta-button, .nav-link')) {
+                ambientAudio.onInteraction(0.1);
+            }
+        }, true);
     </script>
 </body>
 </html>
