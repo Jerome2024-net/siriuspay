@@ -1739,17 +1739,16 @@
                 this.filterNodes = [];
                 this.masterGain = null;
                 this.time = 0;
-                this.evolutionSpeed = 0.0002;
-                this.baseVolume = 0.08;
+                this.evolutionSpeed = 0.00005;
+                this.baseVolume = 0.015;
                 this.isActive = false;
+                this.panners = [];
                 
-                // Frequency bases for cosmic/ethereal sounds
+                // Frequency bases for very subtle cosmic/ethereal sounds
                 this.frequencies = [
-                    { base: 55, drift: 3 },    // Deep sub bass
-                    { base: 110, drift: 5 },   // Low ambient
-                    { base: 220, drift: 8 },   // Mid ambient
-                    { base: 440, drift: 12 },  // Harmonic layer
-                    { base: 880, drift: 15 }   // High sparkle
+                    { base: 40, drift: 1 },    // Ultra deep sub bass
+                    { base: 80, drift: 2 },    // Deep ambient
+                    { base: 160, drift: 3 }    // Subtle mid layer
                 ];
                 
                 this.init();
@@ -1799,34 +1798,40 @@
                 this.masterGain.gain.setValueAtTime(this.baseVolume, this.audioContext.currentTime);
                 this.masterGain.connect(this.audioContext.destination);
                 
-                // Create oscillators for each frequency layer
+                // Create oscillators for each frequency layer with spatial rotation
                 this.frequencies.forEach((freq, index) => {
                     const oscillator = this.audioContext.createOscillator();
                     const gainNode = this.audioContext.createGain();
                     const filterNode = this.audioContext.createBiquadFilter();
+                    const pannerNode = this.audioContext.createStereoPanner();
                     
-                    // Configure oscillator
-                    oscillator.type = index < 2 ? 'sine' : 'triangle';
+                    // Configure oscillator for very subtle ambient sound
+                    oscillator.type = 'sine';
                     oscillator.frequency.setValueAtTime(freq.base, this.audioContext.currentTime);
                     
-                    // Configure filter for atmospheric effect
+                    // Configure filter for ultra-smooth atmospheric effect
                     filterNode.type = 'lowpass';
-                    filterNode.frequency.setValueAtTime(freq.base * 4, this.audioContext.currentTime);
-                    filterNode.Q.setValueAtTime(0.5, this.audioContext.currentTime);
+                    filterNode.frequency.setValueAtTime(freq.base * 8, this.audioContext.currentTime);
+                    filterNode.Q.setValueAtTime(0.2, this.audioContext.currentTime);
                     
-                    // Configure gain with subtle initial volume
-                    const initialGain = (1 / (index + 1)) * 0.3;
+                    // Configure gain with very subtle initial volume
+                    const initialGain = (1 / (index + 1)) * 0.05;
                     gainNode.gain.setValueAtTime(initialGain, this.audioContext.currentTime);
                     
-                    // Connect the audio graph
+                    // Configure spatial panning for rotation effect
+                    pannerNode.pan.setValueAtTime(0, this.audioContext.currentTime);
+                    
+                    // Connect the audio graph with spatial rotation
                     oscillator.connect(filterNode);
                     filterNode.connect(gainNode);
-                    gainNode.connect(this.masterGain);
+                    gainNode.connect(pannerNode);
+                    pannerNode.connect(this.masterGain);
                     
                     // Store references
                     this.oscillators.push(oscillator);
                     this.gainNodes.push(gainNode);
                     this.filterNodes.push(filterNode);
+                    this.panners.push(pannerNode);
                     
                     // Start the oscillator
                     oscillator.start();
@@ -1843,25 +1848,30 @@
                         const freq = this.frequencies[index];
                         const currentTime = this.audioContext.currentTime;
                         
-                        // Evolving frequency with subtle drift
-                        const freqVariation = Math.sin(this.time + index * 1.7) * freq.drift;
+                        // Ultra-subtle frequency drift
+                        const freqVariation = Math.sin(this.time + index * 2.3) * freq.drift * 0.3;
                         const newFreq = freq.base + freqVariation;
-                        osc.frequency.exponentialRampToValueAtTime(newFreq, currentTime + 0.1);
+                        osc.frequency.exponentialRampToValueAtTime(Math.max(20, newFreq), currentTime + 0.5);
                         
-                        // Evolving volume with breathing pattern
-                        const gainVariation = Math.sin(this.time * 0.5 + index * 0.8) * 0.1 + 0.3;
+                        // Very subtle volume breathing
+                        const gainVariation = Math.sin(this.time * 0.2 + index * 1.1) * 0.02 + 0.05;
                         const baseGain = (1 / (index + 1)) * gainVariation;
-                        this.gainNodes[index].gain.exponentialRampToValueAtTime(baseGain, currentTime + 0.1);
+                        this.gainNodes[index].gain.exponentialRampToValueAtTime(Math.max(0.001, baseGain), currentTime + 0.5);
                         
-                        // Evolving filter cutoff for atmospheric movement
-                        const filterVariation = Math.sin(this.time * 0.3 + index * 1.2) * freq.base * 2;
-                        const newCutoff = Math.max(freq.base * 2, freq.base * 4 + filterVariation);
-                        this.filterNodes[index].frequency.exponentialRampToValueAtTime(newCutoff, currentTime + 0.1);
+                        // Subtle filter movement for atmosphere
+                        const filterVariation = Math.sin(this.time * 0.15 + index * 0.7) * freq.base;
+                        const newCutoff = Math.max(freq.base * 3, freq.base * 8 + filterVariation);
+                        this.filterNodes[index].frequency.exponentialRampToValueAtTime(newCutoff, currentTime + 0.5);
+                        
+                        // Spatial rotation effect - each layer rotates at different speeds
+                        const rotationSpeed = 0.1 + (index * 0.05);
+                        const panPosition = Math.sin(this.time * rotationSpeed + index * 2.1) * 0.3;
+                        this.panners[index].pan.linearRampToValueAtTime(panPosition, currentTime + 0.5);
                     });
                     
-                    // Subtle master volume evolution
-                    const masterVariation = Math.sin(this.time * 0.1) * 0.02 + this.baseVolume;
-                    this.masterGain.gain.exponentialRampToValueAtTime(masterVariation, this.audioContext.currentTime + 0.1);
+                    // Ultra-subtle master volume breathing
+                    const masterVariation = Math.sin(this.time * 0.05) * 0.005 + this.baseVolume;
+                    this.masterGain.gain.exponentialRampToValueAtTime(Math.max(0.001, masterVariation), this.audioContext.currentTime + 0.5);
                     
                     // Continue evolution
                     requestAnimationFrame(evolve);
@@ -1870,38 +1880,38 @@
                 evolve();
             }
             
-            // React to page interactions for subtle changes
+            // React to page interactions for very subtle changes
             onInteraction(intensity = 1) {
                 if (!this.isActive) return;
                 
-                // Temporary boost in evolution speed and brightness
-                this.evolutionSpeed = Math.min(0.001, this.evolutionSpeed * (1 + intensity * 0.5));
+                // Very minimal boost in evolution speed
+                this.evolutionSpeed = Math.min(0.0002, this.evolutionSpeed * (1 + intensity * 0.2));
                 
-                // Fade back to normal speed
+                // Fade back to normal speed quickly
                 setTimeout(() => {
-                    this.evolutionSpeed = 0.0002;
-                }, 3000);
+                    this.evolutionSpeed = 0.00005;
+                }, 1000);
             }
         }
         
         // Initialize the ambient audio system
         const ambientAudio = new AmbientAudioSystem();
         
-        // Connect to page interactions for audio evolution
-        document.addEventListener('click', () => ambientAudio.onInteraction(0.3), { passive: true });
-        document.addEventListener('scroll', () => ambientAudio.onInteraction(0.1), { passive: true });
+        // Connect to page interactions for very subtle audio evolution
+        document.addEventListener('click', () => ambientAudio.onInteraction(0.1), { passive: true });
+        document.addEventListener('scroll', () => ambientAudio.onInteraction(0.05), { passive: true });
         
-        // React to form interactions
+        // React to form interactions with minimal response
         document.addEventListener('focus', (e) => {
             if (e.target.matches('input, textarea, select')) {
-                ambientAudio.onInteraction(0.2);
+                ambientAudio.onInteraction(0.08);
             }
         }, true);
         
-        // React to button hovers for subtle audio feedback
+        // React to button hovers with ultra-subtle audio feedback
         document.addEventListener('mouseenter', (e) => {
             if (e.target.matches('button, .cta-button, .nav-link')) {
-                ambientAudio.onInteraction(0.1);
+                ambientAudio.onInteraction(0.03);
             }
         }, true);
     </script>
