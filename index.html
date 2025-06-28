@@ -1150,6 +1150,32 @@
             }
         }
 
+        @keyframes tokenPricePulse {
+            0%, 100% { 
+                transform: scale(1); 
+                box-shadow: 0 4px 15px rgba(78, 205, 196, 0.1); 
+            }
+            50% { 
+                transform: scale(1.02); 
+                box-shadow: 0 6px 20px rgba(78, 205, 196, 0.2); 
+            }
+        }
+
+        .live-token-price::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .live-token-price.price-updated::before {
+            left: 100%;
+        }
+
         .result-value {
             font-size: 1.4rem;
             font-weight: 700;
@@ -1728,6 +1754,56 @@
                 <div class="calculator-input">
                     <label for="investAmount">Investment Amount (USD):</label>
                     <input type="number" id="investAmount" placeholder="100" min="1" max="1000000" value="100">
+                    
+                    <!-- Live Token Price Display -->
+                    <div id="currentTokenPrice" class="live-token-price" style="
+                        background: linear-gradient(135deg, rgba(78, 205, 196, 0.15), rgba(68, 160, 141, 0.1));
+                        border: 2px solid rgba(78, 205, 196, 0.4);
+                        border-radius: 12px;
+                        padding: 1rem;
+                        margin: 1.5rem 0;
+                        text-align: center;
+                        color: #4ecdc4;
+                        font-weight: 600;
+                        box-shadow: 0 4px 15px rgba(78, 205, 196, 0.1);
+                        animation: tokenPricePulse 3s ease-in-out infinite;
+                    ">
+                        <div style="display: flex; align-items: center; justify-content: center; gap: 0.5rem; margin-bottom: 0.5rem;">
+                            <span style="font-size: 1.2em;">📈</span>
+                            <strong style="color: white;">Live SIRENS Token</strong>
+                            <span style="color: #ffd700; font-size: 0.8em; padding: 0.2rem 0.5rem; background: rgba(0,0,0,0.3); border-radius: 4px;">
+                                EVOLVING
+                            </span>
+                        </div>
+                        <div style="font-size: 1.3em; color: white; margin-bottom: 0.3rem;">
+                            $0.5500
+                        </div>
+                        <div style="display: flex; justify-content: space-between; align-items: center; font-size: 0.9em;">
+                            <span style="color: #4ecdc4;">
+                                +0.00% Total
+                            </span>
+                            <span style="color: rgba(255,255,255,0.7);">
+                                Evolution 1.00x
+                            </span>
+                        </div>
+                    </div>
+                    
+                    <!-- Crystal Resonance Status -->
+                    <div id="evolutionStatus" style="
+                        background: rgba(0, 0, 0, 0.3);
+                        border-left: 4px solid #4ecdc4;
+                        padding: 0.8rem;
+                        margin: 1rem 0;
+                        border-radius: 0 8px 8px 0;
+                        font-size: 0.9em;
+                        color: rgba(255, 255, 255, 0.9);
+                    ">
+                        <strong>🔮 Crystal Resonance Status</strong><br>
+                        <small>
+                            Accumulated Energy: 0.0k units • Evolution Cycle: 0<br>
+                            Multiplier: 1.00x • Next Evolution: 1000 units
+                        </small>
+                    </div>
                 </div>
                 
                 <div class="calculator-results">
@@ -2860,60 +2936,11 @@
             }
             
             updateTokenPriceDisplay() {
-                // Add/update token price display element
+                // Find the existing token price display element
                 let priceDisplay = document.getElementById('currentTokenPrice');
                 if (!priceDisplay) {
-                    priceDisplay = document.createElement('div');
-                    priceDisplay.id = 'currentTokenPrice';
-                    priceDisplay.className = 'live-token-price';
-                    priceDisplay.style.cssText = `
-                        background: linear-gradient(135deg, rgba(78, 205, 196, 0.15), rgba(68, 160, 141, 0.1));
-                        border: 2px solid rgba(78, 205, 196, 0.4);
-                        border-radius: 12px;
-                        padding: 1rem;
-                        margin: 1.5rem 0;
-                        text-align: center;
-                        color: #4ecdc4;
-                        font-weight: 600;
-                        box-shadow: 0 4px 15px rgba(78, 205, 196, 0.1);
-                        transition: all 0.3s ease;
-                        position: relative;
-                        overflow: hidden;
-                    `;
-                    
-                    // Add pulsing animation for active price
-                    const pulseKeyframes = `
-                        @keyframes tokenPricePulse {
-                            0%, 100% { transform: scale(1); box-shadow: 0 4px 15px rgba(78, 205, 196, 0.1); }
-                            50% { transform: scale(1.02); box-shadow: 0 6px 20px rgba(78, 205, 196, 0.2); }
-                        }
-                    `;
-                    
-                    if (!document.querySelector('#tokenPriceStyle')) {
-                        const styleEl = document.createElement('style');
-                        styleEl.id = 'tokenPriceStyle';
-                        styleEl.textContent = pulseKeyframes + `
-                            .live-token-price {
-                                animation: tokenPricePulse 3s ease-in-out infinite;
-                            }
-                            .live-token-price::before {
-                                content: '';
-                                position: absolute;
-                                top: 0;
-                                left: -100%;
-                                width: 100%;
-                                height: 100%;
-                                background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
-                                transition: left 0.5s ease;
-                            }
-                            .live-token-price.price-updated::before {
-                                left: 100%;
-                            }
-                        `;
-                        document.head.appendChild(styleEl);
-                    }
-                    
-                    this.investAmountEl?.parentNode?.appendChild(priceDisplay);
+                    console.warn('Token price display element not found');
+                    return;
                 }
                 
                 const priceChange = ((this.currentTokenPrice / this.baseTokenPrice) - 1) * 100;
@@ -3025,18 +3052,8 @@
             updateEvolutionStatus() {
                 let statusEl = document.getElementById('evolutionStatus');
                 if (!statusEl) {
-                    statusEl = document.createElement('div');
-                    statusEl.id = 'evolutionStatus';
-                    statusEl.style.cssText = `
-                        background: rgba(0, 0, 0, 0.3);
-                        border-left: 4px solid #4ecdc4;
-                        padding: 0.8rem;
-                        margin: 1rem 0;
-                        border-radius: 0 8px 8px 0;
-                        font-size: 0.9em;
-                        color: rgba(255, 255, 255, 0.9);
-                    `;
-                    this.investAmountEl?.parentNode?.appendChild(statusEl);
+                    console.warn('Evolution status element not found');
+                    return;
                 }
                 
                 const resonanceLevel = (this.resonanceAccumulation / 1000).toFixed(1);
