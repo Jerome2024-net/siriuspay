@@ -100,6 +100,26 @@
             }
         }
 
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+            50% {
+                transform: scale(1.05);
+                opacity: 0.8;
+            }
+        }
+
+        @keyframes frequencyGlow {
+            0%, 100% {
+                text-shadow: 0 0 5px currentColor;
+            }
+            50% {
+                text-shadow: 0 0 15px currentColor, 0 0 25px currentColor;
+            }
+        }
+
         .sirens-coin {
             position: absolute;
             top: 50%;
@@ -479,6 +499,12 @@
             font-weight: 700;
             color: #ffd700;
             font-variant-numeric: tabular-nums;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+        }
+
+        .flow-value.evolving {
+            animation: frequencyGlow 2s ease-in-out infinite;
         }
 
         .flow-unit {
@@ -1613,7 +1639,7 @@
     </div>
 
     <script>
-        // Sirens Crystalline Vibratory Token System - Revolutionary Cumulative Frequency Technology
+        // Sirens Crystalline Vibratory Token System - OPTIMIZED Real-Time Simulation
         class SirensFlowSimulation {
             constructor() {
                 // Sirens Token = Crystalline Vibratory Unit
@@ -1621,100 +1647,271 @@
                 this.currentTokenFreq = 440; // Current oscillation frequency (Hz)
                 this.maxFrequencyThreshold = 880; // Maximum frequency before cumulative evolution
                 this.evolutionCycles = 0; // Number of frequency evolution cycles
-                this.cumulativeFreq = 440; // Accumulated frequency from all previous cycles
-                this.totalAccumulatedFreq = 1320; // Total cumulative frequency
+                this.cumulativeFreq = 440; // Accumulated frequency from current cycle
+                this.totalAccumulatedFreq = 1320; // Total cumulative frequency across all cycles
+                this.lastEvolutionTime = Date.now(); // Track evolution timing
                 
-                // Realistic piezoelectric conversion for crystalline vibrations
+                // Enhanced crystalline parameters
                 this.crystallinePiezoEfficiency = 0.0000003; // kWh per Hz (crystal resonance efficiency)
+                this.resonanceAmplifier = 1.0; // Increases with evolution cycles
+                this.stabilityFactor = 0.95; // Natural oscillation stability
                 
-                // Real-world electricity pricing
+                // Real-world electricity pricing with premium
                 this.baseElectricityPrice = 0.15; // USD per kWh (global average)
+                this.crystallinePremium = 1.08; // 8% premium for crystalline energy
                 
-                this.electricalOutput = 0.000396; // Current electrical generation
-                this.realtimePrice = 0.0000594; // Current value in USD
+                // Current values
+                this.electricalOutput = 0.000396;
+                this.realtimePrice = 0.0000594;
+                
+                // Animation states
+                this.isAnimating = false;
+                this.animationQueue = [];
+                this.lastUpdateTime = Date.now();
                 
                 this.init();
             }
             
             init() {
                 this.setupElements();
-                this.startCrystallineEvolution();
+                this.startOptimizedSimulation();
+                this.initializeVisualEffects();
             }
             
             setupElements() {
-                this.tokenFreqEl = document.getElementById('tokenFreq');
-                this.cumulativeFreqEl = document.getElementById('cumulativeFreq');
-                this.electricalOutputEl = document.getElementById('electricalOutput');
-                this.electricalValueEl = document.getElementById('electricalValue');
-                this.realtimePriceEl = document.getElementById('realtimePrice');
-                this.liveFormulaCumulativeEl = document.getElementById('liveFormulaCumulative');
-                this.liveFormulaPriceEl = document.getElementById('liveFormulaPrice');
-                this.liveFormulaResultEl = document.getElementById('liveFormulaResult');
+                this.elements = {
+                    tokenFreq: document.getElementById('tokenFreq'),
+                    cumulativeFreq: document.getElementById('cumulativeFreq'),
+                    electricalOutput: document.getElementById('electricalOutput'),
+                    electricalValue: document.getElementById('electricalValue'),
+                    realtimePrice: document.getElementById('realtimePrice'),
+                    liveFormulaCumulative: document.getElementById('liveFormulaCumulative'),
+                    liveFormulaPrice: document.getElementById('liveFormulaPrice'),
+                    liveFormulaResult: document.getElementById('liveFormulaResult')
+                };
             }
             
-            startCrystallineEvolution() {
-                // Token frequency evolution cycle
-                setInterval(() => this.evolveCrystallineFrequency(), 2500);
-                // Real-time oscillation display
-                setInterval(() => this.updateCurrentOscillation(), 400);
-            }
-            
-            updateCurrentOscillation() {
-                // Crystalline token natural oscillation around current frequency
-                const baseFreq = this.currentTokenFreq;
-                const crystalOscillation = Math.sin(Date.now() / 1500) * 5 + Math.random() * 3 - 1.5;
-                const displayFreq = Math.round((baseFreq + crystalOscillation) * 100) / 100;
+            startOptimizedSimulation() {
+                // High-frequency oscillation display (smooth visual updates)
+                setInterval(() => this.updateCrystallineOscillation(), 200);
                 
-                if (this.tokenFreqEl) {
-                    this.animateValue(this.tokenFreqEl, displayFreq, 'Hz');
-                }
+                // Medium-frequency evolution (realistic progression)
+                setInterval(() => this.progressFrequencyEvolution(), 1800);
+                
+                // Low-frequency major evolution (cumulative breakthroughs)
+                setInterval(() => this.triggerEvolutionCycle(), 8000);
+                
+                // Real-time value updates
+                setInterval(() => this.updateFinancialMetrics(), 1000);
             }
             
-            evolveCrystallineFrequency() {
-                // Sirens Token Evolutionary Process:
-                // 1. Token oscillates and approaches maximum frequency
-                this.currentTokenFreq += Math.round((Math.random() * 15 + 8) * 100) / 100;
+            updateCrystallineOscillation() {
+                // Enhanced natural crystalline oscillation with realistic physics
+                const timeNow = Date.now();
+                const timeDelta = (timeNow - this.lastUpdateTime) / 1000;
+                this.lastUpdateTime = timeNow;
                 
-                // 2. When reaching maximum threshold, cumulative evolution occurs
+                // Multiple harmonic oscillations for realistic crystal behavior
+                const baseWave = Math.sin(timeNow / 1200) * 3;
+                const harmonicWave = Math.sin(timeNow / 800) * 1.5;
+                const microVibration = Math.sin(timeNow / 300) * 0.8;
+                const randomNoise = (Math.random() - 0.5) * 1.2;
+                
+                const totalOscillation = baseWave + harmonicWave + microVibration + randomNoise;
+                const displayFreq = Math.round((this.currentTokenFreq + totalOscillation) * 100) / 100;
+                
+                // Smooth animation with enhanced visual feedback
+                this.smoothUpdateElement(this.elements.tokenFreq, displayFreq, 'Hz', {
+                    color: this.getFrequencyColor(displayFreq),
+                    glow: this.calculateGlowIntensity(displayFreq)
+                });
+            }
+            
+            progressFrequencyEvolution() {
+                // Realistic frequency progression with acceleration near threshold
+                const progressToThreshold = this.currentTokenFreq / this.maxFrequencyThreshold;
+                const accelerationFactor = Math.pow(progressToThreshold, 1.5); // Exponential acceleration
+                
+                const baseIncrease = 3 + (Math.random() * 4);
+                const acceleratedIncrease = baseIncrease * (1 + accelerationFactor * 2);
+                const finalIncrease = Math.round(acceleratedIncrease * 100) / 100;
+                
+                this.currentTokenFreq += finalIncrease;
+                this.cumulativeFreq += finalIncrease;
+                
+                // Visual feedback for progression
+                this.addProgressionEffect();
+                
+                // Check for evolution threshold
                 if (this.currentTokenFreq >= this.maxFrequencyThreshold) {
-                    // Add previous frequencies to cumulative total
-                    this.cumulativeFreq += this.currentTokenFreq;
-                    this.totalAccumulatedFreq += this.currentTokenFreq;
-                    this.evolutionCycles++;
+                    this.prepareForEvolution();
+                }
+            }
+            
+            triggerEvolutionCycle() {
+                if (this.currentTokenFreq >= this.maxFrequencyThreshold * 0.9) {
+                    this.executeEvolutionCycle();
+                }
+            }
+            
+            executeEvolutionCycle() {
+                // Major evolution event - cumulative frequency breakthrough
+                this.evolutionCycles++;
+                
+                // Add current cycle to total accumulation
+                this.totalAccumulatedFreq += this.cumulativeFreq;
+                
+                // Calculate new base frequency with exponential growth
+                const evolutionBonus = this.evolutionCycles * 45;
+                this.currentTokenFreq = 440 + evolutionBonus;
+                this.maxFrequencyThreshold = this.currentTokenFreq * 2.2; // Dynamic threshold
+                this.cumulativeFreq = this.currentTokenFreq; // Reset current cycle
+                
+                // Enhance resonance amplifier
+                this.resonanceAmplifier = 1 + (this.evolutionCycles * 0.15);
+                
+                // Visual evolution effect
+                this.triggerEvolutionAnimation();
+                
+                console.log(`🔮 SIRENS Evolution Cycle ${this.evolutionCycles}:`);
+                console.log(`   New Base: ${this.currentTokenFreq} Hz`);
+                console.log(`   Total Accumulated: ${this.totalAccumulatedFreq} Hz`);
+                console.log(`   Resonance Amplifier: ${this.resonanceAmplifier.toFixed(2)}x`);
+            }
+            
+            updateFinancialMetrics() {
+                // Enhanced electrical output calculation with resonance amplification
+                const baseOutput = this.totalAccumulatedFreq * this.crystallinePiezoEfficiency;
+                this.electricalOutput = Math.round(baseOutput * this.resonanceAmplifier * 1000000) / 1000000;
+                
+                // Dynamic pricing with market conditions and crystalline premium
+                const timeVariation = Math.sin(Date.now() / 60000) * 0.005; // 5-minute cycles
+                const marketVolatility = (Math.random() - 0.5) * 0.008; // ±0.4% volatility
+                const premiumMultiplier = this.crystallinePremium + (this.evolutionCycles * 0.01); // Evolution bonus
+                
+                const currentPrice = this.baseElectricityPrice * premiumMultiplier * (1 + timeVariation + marketVolatility);
+                this.realtimePrice = Math.round(this.electricalOutput * currentPrice * 1000000) / 1000000;
+                
+                // Smooth updates with enhanced animations
+                this.smoothUpdateElement(this.elements.cumulativeFreq, this.totalAccumulatedFreq, 'Hz');
+                this.smoothUpdateElement(this.elements.electricalOutput, this.electricalOutput, 'kWh');
+                this.smoothUpdateElement(this.elements.electricalValue, this.electricalOutput, 'kWh');
+                this.smoothUpdateElement(this.elements.realtimePrice, this.realtimePrice, 'USD', '$');
+                
+                // Update formula display
+                this.updateFormulaDisplay(currentPrice);
+            }
+            
+            smoothUpdateElement(element, targetValue, unit, effects = {}) {
+                if (!element) return;
+                
+                const currentText = element.textContent || '0';
+                const currentValue = parseFloat(currentText.replace(/[^\d.-]/g, '')) || 0;
+                
+                // Enhanced smooth animation
+                const steps = 20;
+                const increment = (targetValue - currentValue) / steps;
+                let current = currentValue;
+                let step = 0;
+                
+                const animate = () => {
+                    if (step >= steps) {
+                        current = targetValue;
+                    } else {
+                        current += increment;
+                        step++;
+                    }
                     
-                    // Token starts new oscillation cycle with evolved base frequency
-                    this.currentTokenFreq = 440 + (this.evolutionCycles * 55); // New base frequency
-                    this.maxFrequencyThreshold = this.currentTokenFreq * 2; // New threshold
+                    const precision = targetValue < 0.001 ? 6 : (targetValue < 1 ? 4 : 2);
+                    const displayValue = current.toFixed(precision);
+                    const prefix = unit === 'USD' ? '$' : '';
                     
-                    console.log(`🔮 Sirens Evolution Cycle ${this.evolutionCycles}: New base frequency ${this.currentTokenFreq} Hz`);
+                    element.innerHTML = `${prefix}${displayValue} <span class="flow-unit">${unit}</span>`;
+                    
+                    // Apply visual effects
+                    if (effects.color) {
+                        element.style.color = effects.color;
+                    }
+                    if (effects.glow) {
+                        element.style.textShadow = `0 0 ${effects.glow}px currentColor`;
+                    }
+                    
+                    if (step < steps) {
+                        requestAnimationFrame(animate);
+                    }
+                };
+                
+                animate();
+            }
+            
+            getFrequencyColor(freq) {
+                // Dynamic color based on frequency intensity
+                const intensity = Math.min(freq / 1000, 1);
+                const hue = 180 + (intensity * 60); // Cyan to yellow spectrum
+                return `hsl(${hue}, 70%, 70%)`;
+            }
+            
+            calculateGlowIntensity(freq) {
+                // Dynamic glow based on frequency
+                return Math.min(freq / 200, 15);
+            }
+            
+            addProgressionEffect() {
+                // Visual feedback for frequency progression
+                const progressElements = document.querySelectorAll('.flow-value');
+                progressElements.forEach(el => {
+                    el.style.transform = 'scale(1.02)';
+                    setTimeout(() => {
+                        el.style.transform = 'scale(1)';
+                    }, 200);
+                });
+            }
+            
+            triggerEvolutionAnimation() {
+                // Major visual effect for evolution cycles
+                const container = document.querySelector('.sirens-simulation');
+                if (container) {
+                    container.style.boxShadow = '0 0 30px rgba(78, 205, 196, 0.8)';
+                    setTimeout(() => {
+                        container.style.boxShadow = '';
+                    }, 1000);
                 }
-                
-                // 3. Calculate electrical generation from total accumulated frequency
-                this.electricalOutput = Math.round(this.totalAccumulatedFreq * this.crystallinePiezoEfficiency * 1000000) / 1000000;
-                
-                // 4. Real-time market pricing with crystalline energy premium
-                const marketVolatility = (Math.random() * 0.02 - 0.01); // ±1% market variation
-                const crystallinePremium = 1.05; // 5% premium for crystalline energy
-                const currentElectricityPrice = this.baseElectricityPrice * crystallinePremium * (1 + marketVolatility);
-                
-                // 5. Calculate real-time value
-                this.realtimePrice = Math.round(this.electricalOutput * currentElectricityPrice * 1000000) / 1000000;
-                
-                // Update display elements
-                this.animateValue(this.cumulativeFreqEl, this.totalAccumulatedFreq, 'Hz');
-                this.animateValue(this.electricalOutputEl, this.electricalOutput, 'kWh');
-                this.animateValue(this.electricalValueEl, this.electricalOutput, 'kWh');
-                this.animateValue(this.realtimePriceEl, this.realtimePrice, 'USD', '$');
-                
-                // Update live formula with evolutionary crystalline values
-                if (this.liveFormulaCumulativeEl) {
-                    this.liveFormulaCumulativeEl.textContent = this.totalAccumulatedFreq.toLocaleString();
+            }
+            
+            updateFormulaDisplay(currentPrice) {
+                if (this.elements.liveFormulaCumulative) {
+                    this.elements.liveFormulaCumulative.textContent = this.totalAccumulatedFreq.toLocaleString();
                 }
-                if (this.liveFormulaPriceEl) {
-                    this.liveFormulaPriceEl.textContent = currentElectricityPrice.toFixed(3);
+                if (this.elements.liveFormulaPrice) {
+                    this.elements.liveFormulaPrice.textContent = currentPrice.toFixed(3);
                 }
-                if (this.liveFormulaResultEl) {
-                    this.liveFormulaResultEl.textContent = this.realtimePrice.toFixed(6);
+                if (this.elements.liveFormulaResult) {
+                    this.elements.liveFormulaResult.textContent = this.realtimePrice.toFixed(6);
+                }
+            }
+            
+            initializeVisualEffects() {
+                // Add smooth transitions to all elements
+                const styleSheet = document.createElement('style');
+                styleSheet.textContent = `
+                    .flow-value {
+                        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+                    }
+                    .sirens-simulation {
+                        transition: box-shadow 0.5s ease;
+                    }
+                    .formula-variable {
+                        transition: color 0.3s ease;
+                    }
+                `;
+                document.head.appendChild(styleSheet);
+            }
+            
+            prepareForEvolution() {
+                // Prepare visual indicators for upcoming evolution
+                const tokenElement = this.elements.tokenFreq;
+                if (tokenElement) {
+                    tokenElement.style.animation = 'pulse 0.5s infinite';
                 }
             }
             
