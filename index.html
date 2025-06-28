@@ -1037,7 +1037,182 @@
             box-shadow: 0 8px 25px rgba(78, 205, 196, 0.3);
         }
 
-        /* Responsive Design */
+        /* Investment Calculator Styles */
+        .investment-calculator {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(78, 205, 196, 0.3);
+            border-radius: 20px;
+            padding: 2rem;
+            margin: 2rem 0;
+            backdrop-filter: blur(10px);
+        }
+
+        .investment-calculator h3 {
+            color: #4ecdc4;
+            margin-bottom: 0.5rem;
+            font-size: 1.5rem;
+        }
+
+        .calculator-subtitle {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .calculator-input {
+            margin-bottom: 2rem;
+        }
+
+        .calculator-input label {
+            display: block;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .calculator-input input {
+            width: 200px;
+            padding: 0.8rem;
+            border: 2px solid rgba(78, 205, 196, 0.3);
+            border-radius: 10px;
+            background: rgba(0, 0, 0, 0.3);
+            color: white;
+            font-size: 1.1rem;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .calculator-input input:focus {
+            outline: none;
+            border-color: #4ecdc4;
+            box-shadow: 0 0 15px rgba(78, 205, 196, 0.3);
+        }
+
+        .result-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .result-item {
+            background: rgba(78, 205, 196, 0.1);
+            border: 1px solid rgba(78, 205, 196, 0.2);
+            border-radius: 12px;
+            padding: 1rem;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .result-item:hover {
+            background: rgba(78, 205, 196, 0.15);
+            transform: translateY(-2px);
+        }
+
+        .result-item.evolution {
+            background: rgba(255, 215, 0, 0.1);
+            border-color: rgba(255, 215, 0, 0.3);
+        }
+
+        .result-value {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #4ecdc4;
+            margin-bottom: 0.3rem;
+        }
+
+        .evolution .result-value {
+            color: #ffd700;
+        }
+
+        .result-label {
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.2;
+        }
+
+        .evolution-timeline {
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .evolution-timeline h4 {
+            color: #ffd700;
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .timeline-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .timeline-item:last-child {
+            border-bottom: none;
+        }
+
+        .timeline-year {
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.9);
+            width: 80px;
+        }
+
+        .timeline-value {
+            font-weight: 700;
+            color: #4ecdc4;
+            font-size: 1.1rem;
+        }
+
+        .timeline-growth {
+            color: #ffd700;
+            font-size: 0.9rem;
+        }
+
+        .market-basis {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            padding: 1rem;
+            border-left: 3px solid #4ecdc4;
+        }
+
+        .market-basis small {
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.4;
+        }
+
+        @media (max-width: 768px) {
+            .investment-calculator {
+                padding: 1.5rem;
+            }
+
+            .result-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 0.8rem;
+            }
+
+            .timeline-item {
+                flex-direction: column;
+                text-align: center;
+                gap: 0.3rem;
+            }
+
+            .calculator-input input {
+                width: 100%;
+                max-width: 250px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .result-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
         @media (max-width: 768px) {
             .container {
                 padding: 1.5rem 1rem;
@@ -1508,6 +1683,74 @@
             <p class="cta-description">
                 Pioneering a revolutionary banking model with crystalline technology. Join founding investors creating universal banking access for 1.7 billion unbanked people.
             </p>
+            
+            <!-- Investment Calculator -->
+            <div class="investment-calculator">
+                <h3>💰 SIRENS Investment Calculator</h3>
+                <p class="calculator-subtitle">Based on Global Electricity Market Prices ($0.15/kWh average)</p>
+                
+                <div class="calculator-input">
+                    <label for="investAmount">Investment Amount (USD):</label>
+                    <input type="number" id="investAmount" placeholder="100" min="1" max="1000000" value="100">
+                </div>
+                
+                <div class="calculator-results">
+                    <div class="result-grid">
+                        <div class="result-item">
+                            <div class="result-value" id="tokensReceived">182</div>
+                            <div class="result-label">SIRENS Tokens</div>
+                        </div>
+                        <div class="result-item">
+                            <div class="result-value" id="dailyGeneration">0.0728</div>
+                            <div class="result-label">kWh/day Generated</div>
+                        </div>
+                        <div class="result-item">
+                            <div class="result-value" id="dailyIncome">$0.0109</div>
+                            <div class="result-label">Daily Passive Income</div>
+                        </div>
+                        <div class="result-item">
+                            <div class="result-value" id="annualIncome">$3.98</div>
+                            <div class="result-label">Annual Energy Income</div>
+                        </div>
+                        <div class="result-item">
+                            <div class="result-value" id="roiPercentage">3.98%</div>
+                            <div class="result-label">Base APY (Energy Only)</div>
+                        </div>
+                        <div class="result-item evolution">
+                            <div class="result-value" id="evolutionBonus">+60%</div>
+                            <div class="result-label">3-Year Evolution Bonus</div>
+                        </div>
+                    </div>
+                    
+                    <div class="evolution-timeline">
+                        <h4>🔮 Cumulative Evolution Timeline</h4>
+                        <div class="timeline-item">
+                            <span class="timeline-year">Year 1:</span>
+                            <span class="timeline-value" id="year1Income">$4.58/year</span>
+                            <span class="timeline-growth">(+15% generation)</span>
+                        </div>
+                        <div class="timeline-item">
+                            <span class="timeline-year">Year 2:</span>
+                            <span class="timeline-value" id="year2Income">$5.37/year</span>
+                            <span class="timeline-growth">(+35% generation)</span>
+                        </div>
+                        <div class="timeline-item">
+                            <span class="timeline-year">Year 3:</span>
+                            <span class="timeline-value" id="year3Income">$6.37/year</span>
+                            <span class="timeline-growth">(+60% generation)</span>
+                        </div>
+                    </div>
+                    
+                    <div class="market-basis">
+                        <small>
+                            💡 <strong>Market-Based Pricing:</strong> 
+                            SIRENS token price ($0.55) derived from global electricity rates. 
+                            1 SIRENS = 0.0004 kWh/day × $0.15/kWh × 365 days × 25x tech multiplier
+                        </small>
+                    </div>
+                </div>
+            </div>
+            
             <button class="cta-button" id="ctaButton">
                 <span>🏦 Revolutionary Banking</span>
             </button>
@@ -2399,6 +2642,134 @@
         
         // Initialize the ambient audio system
         const ambientAudio = new AmbientAudioSystem();
+        
+        // SIRENS Investment Calculator - Based on Global Electricity Market
+        class SirensInvestmentCalculator {
+            constructor() {
+                // Market-based pricing constants
+                this.globalElectricityPrice = 0.15; // USD per kWh (global average)
+                this.energyPerToken = 0.0004; // kWh per day per token
+                this.techMultiplier = 25; // Innovation premium multiplier
+                this.tokenPrice = 0.55; // USD per SIRENS token (market-derived)
+                
+                // Evolution bonuses (cumulative frequency growth)
+                this.evolutionBonuses = {
+                    year1: 1.15, // +15%
+                    year2: 1.35, // +35%
+                    year3: 1.60  // +60%
+                };
+                
+                this.init();
+            }
+            
+            init() {
+                this.setupElements();
+                this.bindEvents();
+                this.calculateInitial();
+            }
+            
+            setupElements() {
+                this.investAmountEl = document.getElementById('investAmount');
+                this.tokensReceivedEl = document.getElementById('tokensReceived');
+                this.dailyGenerationEl = document.getElementById('dailyGeneration');
+                this.dailyIncomeEl = document.getElementById('dailyIncome');
+                this.annualIncomeEl = document.getElementById('annualIncome');
+                this.roiPercentageEl = document.getElementById('roiPercentage');
+                this.evolutionBonusEl = document.getElementById('evolutionBonus');
+                this.year1IncomeEl = document.getElementById('year1Income');
+                this.year2IncomeEl = document.getElementById('year2Income');
+                this.year3IncomeEl = document.getElementById('year3Income');
+            }
+            
+            bindEvents() {
+                if (this.investAmountEl) {
+                    this.investAmountEl.addEventListener('input', () => this.calculate());
+                    this.investAmountEl.addEventListener('change', () => this.calculate());
+                }
+            }
+            
+            calculateInitial() {
+                // Calculate with default $100 investment
+                this.calculate(100);
+            }
+            
+            calculate(customAmount = null) {
+                const investmentAmount = customAmount || parseFloat(this.investAmountEl?.value) || 100;
+                
+                // Core calculations based on electricity market
+                const tokensReceived = Math.floor(investmentAmount / this.tokenPrice);
+                const dailyEnergyGeneration = tokensReceived * this.energyPerToken;
+                const dailyIncome = dailyEnergyGeneration * this.globalElectricityPrice;
+                const annualIncome = dailyIncome * 365;
+                const roiPercentage = (annualIncome / investmentAmount) * 100;
+                
+                // Evolution timeline calculations
+                const year1Income = annualIncome * this.evolutionBonuses.year1;
+                const year2Income = annualIncome * this.evolutionBonuses.year2;
+                const year3Income = annualIncome * this.evolutionBonuses.year3;
+                
+                // Update display with animations
+                this.animateValue(this.tokensReceivedEl, tokensReceived, '', '');
+                this.animateValue(this.dailyGenerationEl, dailyEnergyGeneration, '', '', 4);
+                this.animateValue(this.dailyIncomeEl, dailyIncome, '$', '', 4);
+                this.animateValue(this.annualIncomeEl, annualIncome, '$', '', 2);
+                this.animateValue(this.roiPercentageEl, roiPercentage, '', '%', 2);
+                
+                // Evolution timeline
+                this.animateValue(this.year1IncomeEl, year1Income, '$', '/year', 2);
+                this.animateValue(this.year2IncomeEl, year2Income, '$', '/year', 2);
+                this.animateValue(this.year3IncomeEl, year3Income, '$', '/year', 2);
+                
+                // Add visual feedback for large investments
+                if (investmentAmount >= 10000) {
+                    this.highlightResults('high-investment');
+                } else if (investmentAmount >= 1000) {
+                    this.highlightResults('medium-investment');
+                } else {
+                    this.highlightResults('standard-investment');
+                }
+            }
+            
+            animateValue(element, targetValue, prefix = '', suffix = '', decimals = 0) {
+                if (!element) return;
+                
+                const startValue = parseFloat(element.textContent.replace(/[^0-9.-]/g, '')) || 0;
+                const increment = (targetValue - startValue) / 20;
+                let current = startValue;
+                let steps = 0;
+                
+                const animate = () => {
+                    if (steps >= 20) {
+                        current = targetValue;
+                    } else {
+                        current += increment;
+                        steps++;
+                    }
+                    
+                    const displayValue = current.toFixed(decimals);
+                    element.textContent = `${prefix}${displayValue}${suffix}`;
+                    
+                    if (steps < 20) {
+                        requestAnimationFrame(animate);
+                    }
+                };
+                
+                animate();
+            }
+            
+            highlightResults(level) {
+                const resultItems = document.querySelectorAll('.result-item');
+                resultItems.forEach(item => {
+                    item.classList.remove('high-investment', 'medium-investment', 'standard-investment');
+                    item.classList.add(level);
+                });
+            }
+        }
+        
+        // Initialize calculator when DOM is ready
+        document.addEventListener('DOMContentLoaded', () => {
+            new SirensInvestmentCalculator();
+        });
         
         // Connect to page interactions for very subtle audio evolution
         document.addEventListener('click', () => ambientAudio.onInteraction(0.1), { passive: true });
