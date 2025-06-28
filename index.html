@@ -1114,6 +1114,42 @@
             border-color: rgba(255, 215, 0, 0.3);
         }
 
+        /* Evolution level styles */
+        .result-item.base-evolution {
+            background: rgba(78, 205, 196, 0.1);
+            border-color: rgba(78, 205, 196, 0.2);
+        }
+
+        .result-item.medium-evolution {
+            background: rgba(255, 215, 0, 0.15);
+            border-color: rgba(255, 215, 0, 0.4);
+            box-shadow: 0 0 10px rgba(255, 215, 0, 0.1);
+        }
+
+        .result-item.high-evolution {
+            background: rgba(0, 255, 136, 0.15);
+            border-color: rgba(0, 255, 136, 0.4);
+            box-shadow: 0 0 15px rgba(0, 255, 136, 0.2);
+        }
+
+        .result-item.rapid-evolution {
+            background: linear-gradient(135deg, rgba(0, 255, 136, 0.2), rgba(255, 215, 0, 0.2));
+            border-color: rgba(0, 255, 136, 0.6);
+            box-shadow: 0 0 20px rgba(0, 255, 136, 0.3);
+            animation: rapidEvolutionPulse 2s ease-in-out infinite;
+        }
+
+        @keyframes rapidEvolutionPulse {
+            0%, 100% { 
+                transform: scale(1);
+                box-shadow: 0 0 20px rgba(0, 255, 136, 0.3);
+            }
+            50% { 
+                transform: scale(1.02);
+                box-shadow: 0 0 25px rgba(0, 255, 136, 0.5);
+            }
+        }
+
         .result-value {
             font-size: 1.4rem;
             font-weight: 700;
@@ -2643,29 +2679,27 @@
         // Initialize the ambient audio system
         const ambientAudio = new AmbientAudioSystem();
         
-        // SIRENS Investment Calculator - NON-LINEAR Crystalline Evolution Model
+        // SIRENS Investment Calculator - REAL-TIME EVOLVING TOKEN VALUE
         class SirensInvestmentCalculator {
             constructor() {
-                // Market-based pricing constants
+                // Real-time oscillating token parameters
                 this.globalElectricityPrice = 0.15; // USD per kWh (global average)
                 this.baseEnergyPerToken = 0.0004; // kWh per day per token (initial)
-                this.techMultiplier = 25; // Innovation premium multiplier
-                this.tokenPrice = 0.55; // USD per SIRENS token (market-derived)
                 
-                // NON-LINEAR Crystalline Evolution Parameters
-                this.evolutionCoefficient = 1.75; // Exponential growth factor
-                this.resonanceAcceleration = 0.25; // Cumulative frequency acceleration
-                this.crystalMaturityFactor = 2.5; // Long-term maturity multiplier
+                // TOKEN VALUE IS EVOLVING IN REAL-TIME - NOT FIXED!
+                this.baseTokenPrice = 0.55; // Initial price at launch (USD)
+                this.currentTokenPrice = 0.55; // Current oscillating price
+                this.priceVolatility = 0.08; // ±8% real-time oscillation
+                this.evolutionMultiplier = 1.0; // Grows with cumulative resonance
                 
-                // Evolution curve (exponential, not linear)
-                this.evolutionCurve = {
-                    month3: 1.08,   // +8% after 3 months
-                    month6: 1.22,   // +22% after 6 months  
-                    year1: 1.45,    // +45% after 1 year (exponential acceleration)
-                    year2: 2.15,    // +115% after 2 years (crystalline maturity)
-                    year3: 3.40,    // +240% after 3 years (full resonance)
-                    year5: 7.20     // +620% after 5 years (compound evolution)
-                };
+                // Real-time crystalline resonance parameters
+                this.resonanceAccumulation = 0; // Cumulative frequency over time
+                this.crystalMaturity = 1.0; // Crystal maturity factor (grows over time)
+                this.oscillationCycles = 0; // Number of completed oscillation cycles
+                
+                // Price evolution tracking
+                this.priceHistory = [];
+                this.lastPriceUpdate = Date.now();
                 
                 this.init();
             }
@@ -2673,6 +2707,7 @@
             init() {
                 this.setupElements();
                 this.bindEvents();
+                this.startRealTimeEvolution();
                 this.calculateInitial();
             }
             
@@ -2696,89 +2731,272 @@
                 }
             }
             
-            calculateInitial() {
-                // Calculate with default $100 investment
-                this.calculate(100);
+            startRealTimeEvolution() {
+                // Real-time token price evolution based on crystalline oscillations
+                setInterval(() => this.evolveTokenPrice(), 2000); // Every 2 seconds
+                setInterval(() => this.updateCrystallineResonance(), 1000); // Every second
+                setInterval(() => this.calculate(), 3000); // Recalculate values every 3 seconds
             }
             
-            calculateEvolutiveEnergy(baseEnergy, timeMultiplier) {
-                // Non-linear crystalline evolution formula
-                // Energy(t) = BaseEnergy × (1 + evolution_coefficient × log(1 + resonance × t))^crystalMaturity
-                const resonanceEffect = this.resonanceAcceleration * Math.log(1 + timeMultiplier);
-                const evolutionFactor = Math.pow(1 + this.evolutionCoefficient * resonanceEffect, this.crystalMaturityFactor);
-                return baseEnergy * evolutionFactor * timeMultiplier;
+            evolveTokenPrice() {
+                const timeNow = Date.now();
+                const timeDelta = (timeNow - this.lastPriceUpdate) / 1000;
+                this.lastPriceUpdate = timeNow;
+                
+                // Real-time crystalline oscillation affecting token price
+                const oscillationPhase = Math.sin(timeNow / 5000) * this.priceVolatility; // 5-second cycles
+                const resonanceBoost = Math.log(1 + this.resonanceAccumulation / 1000) * 0.1; // Cumulative effect
+                const maturityFactor = Math.pow(this.crystalMaturity, 0.3); // Crystal maturity impact
+                
+                // Calculate new evolving price
+                this.currentTokenPrice = this.baseTokenPrice * maturityFactor * (1 + oscillationPhase + resonanceBoost);
+                
+                // Update evolution multiplier based on accumulated resonance
+                this.evolutionMultiplier = 1 + (this.resonanceAccumulation / 10000);
+                
+                // Track price history for growth calculation
+                this.priceHistory.push(this.currentTokenPrice);
+                if (this.priceHistory.length > 100) {
+                    this.priceHistory.shift(); // Keep last 100 data points
+                }
+                
+                // Visual indication of price movement
+                this.indicatePriceMovement();
+            }
+            
+            updateCrystallineResonance() {
+                // Simulate cumulative crystalline resonance growth
+                const resonanceIncrement = 5 + (Math.random() * 10); // 5-15 Hz per second
+                this.resonanceAccumulation += resonanceIncrement;
+                
+                // Crystal maturity grows slowly over time
+                this.crystalMaturity += 0.0001; // Slow but continuous growth
+                
+                // Completed oscillation cycles
+                if (this.resonanceAccumulation % 1000 < 15) {
+                    this.oscillationCycles++;
+                }
+            }
+            
+            calculateInitial() {
+                this.calculate(100);
             }
             
             calculate(customAmount = null) {
                 const investmentAmount = customAmount || parseFloat(this.investAmountEl?.value) || 100;
                 
-                // Core calculations based on crystalline oscillations
-                const tokensReceived = Math.floor(investmentAmount / this.tokenPrice);
-                const baseDailyEnergy = tokensReceived * this.baseEnergyPerToken;
+                // DYNAMIC CALCULATION - Token value changes in real-time!
+                const tokensReceived = investmentAmount / this.currentTokenPrice;
                 
-                // Initial values (Day 1)
-                const initialDailyIncome = baseDailyEnergy * this.globalElectricityPrice;
-                const initialAnnualIncome = initialDailyIncome * 365;
-                const initialROI = (initialAnnualIncome / investmentAmount) * 100;
+                // Energy generation evolves with token evolution
+                const currentEnergyPerToken = this.baseEnergyPerToken * this.evolutionMultiplier;
+                const totalDailyEnergy = tokensReceived * currentEnergyPerToken;
                 
-                // NON-LINEAR Evolution calculations using crystalline physics
-                const year1Energy = this.calculateEvolutiveEnergy(baseDailyEnergy, this.evolutionCurve.year1);
-                const year2Energy = this.calculateEvolutiveEnergy(baseDailyEnergy, this.evolutionCurve.year2);
-                const year3Energy = this.calculateEvolutiveEnergy(baseDailyEnergy, this.evolutionCurve.year3);
+                // Financial calculations with evolving values
+                const dailyIncome = totalDailyEnergy * this.globalElectricityPrice;
+                const annualIncome = dailyIncome * 365;
+                const currentROI = (annualIncome / investmentAmount) * 100;
                 
-                // Financial projections with exponential growth
-                const year1Income = year1Energy * this.globalElectricityPrice * 365;
-                const year2Income = year2Energy * this.globalElectricityPrice * 365;
-                const year3Income = year3Energy * this.globalElectricityPrice * 365;
+                // Future projections with compound evolution
+                const futureEvolution1Year = this.evolutionMultiplier * 1.5; // Projected growth
+                const futureEvolution2Year = this.evolutionMultiplier * 2.8;
+                const futureEvolution3Year = this.evolutionMultiplier * 5.2;
                 
-                // Calculate actual evolution percentages
-                const year1EvolutionPercent = ((year1Income / initialAnnualIncome) - 1) * 100;
-                const year2EvolutionPercent = ((year2Income / initialAnnualIncome) - 1) * 100;
-                const year3EvolutionPercent = ((year3Income / initialAnnualIncome) - 1) * 100;
+                const year1Income = dailyIncome * 365 * futureEvolution1Year;
+                const year2Income = dailyIncome * 365 * futureEvolution2Year;  
+                const year3Income = dailyIncome * 365 * futureEvolution3Year;
                 
-                // Update display with animations
-                this.animateValue(this.tokensReceivedEl, tokensReceived, '', '');
-                this.animateValue(this.dailyGenerationEl, baseDailyEnergy, '', '', 4);
-                this.animateValue(this.dailyIncomeEl, initialDailyIncome, '$', '', 4);
-                this.animateValue(this.annualIncomeEl, initialAnnualIncome, '$', '', 2);
-                this.animateValue(this.roiPercentageEl, initialROI, '', '%', 2);
-                this.animateValue(this.evolutionBonusEl, year3EvolutionPercent, '+', '%', 0);
+                // Calculate growth percentages
+                const currentGrowth = ((this.currentTokenPrice / this.baseTokenPrice) - 1) * 100;
+                const year3Growth = (futureEvolution3Year - 1) * 100;
                 
-                // Non-linear evolution timeline
+                // Show dynamic token reception based on current price
+                const tokenInfo = document.getElementById('tokensReceivedInfo');
+                if (tokensReceived !== this.lastTokensReceived) {
+                    this.animateValue(this.tokensReceivedEl, tokensReceived, '', '', 2);
+                    
+                    // Add dynamic note about token quantity evolution
+                    if (tokenInfo) {
+                        const priceEvolution = this.currentTokenPrice / this.baseTokenPrice;
+                        const tokenBonus = priceEvolution < 1 ? 'MORE tokens (price below launch!)' : 
+                                          priceEvolution > 1.5 ? 'FEWER tokens (premium price)' : 
+                                          'standard allocation';
+                        
+                        tokenInfo.innerHTML = `<small style="color: rgba(255,255,255,0.7);">
+                            ${tokenBonus} • Price: $${this.currentTokenPrice.toFixed(4)}
+                        </small>`;
+                    }
+                    this.lastTokensReceived = tokensReceived;
+                }
+                
+                // Update all other values with evolution indicators
+                this.animateValue(this.dailyGenerationEl, totalDailyEnergy, '', '', 6);
+                this.animateValue(this.dailyIncomeEl, dailyIncome, '$', '', 6);
+                this.animateValue(this.annualIncomeEl, annualIncome, '$', '', 2);
+                this.animateValue(this.roiPercentageEl, currentROI, '', '%', 2);
+                this.animateValue(this.evolutionBonusEl, year3Growth, '+', '%', 0);
+                
+                // Real-time evolving projections with growth indicators
                 this.animateValue(this.year1IncomeEl, year1Income, '$', '/year', 2);
                 this.animateValue(this.year2IncomeEl, year2Income, '$', '/year', 2);
                 this.animateValue(this.year3IncomeEl, year3Income, '$', '/year', 2);
                 
-                // Update evolution percentages in timeline
-                this.updateEvolutionPercentages(year1EvolutionPercent, year2EvolutionPercent, year3EvolutionPercent);
+                // Update current token price display
+                this.updateTokenPriceDisplay();
                 
-                // Add visual feedback for crystalline growth levels
-                if (year3Income > initialAnnualIncome * 5) {
-                    this.highlightResults('exponential-growth');
-                } else if (year3Income > initialAnnualIncome * 3) {
+                // Enhanced highlighting based on evolution level and price movement
+                if (this.evolutionMultiplier > 2.5) {
+                    this.highlightResults('rapid-evolution');
+                } else if (this.evolutionMultiplier > 1.8) {
                     this.highlightResults('high-evolution');
+                } else if (this.evolutionMultiplier > 1.3) {
+                    this.highlightResults('medium-evolution');
                 } else {
-                    this.highlightResults('standard-evolution');
+                    this.highlightResults('base-evolution');
                 }
+                
+                // Show real-time evolution status
+                this.updateEvolutionStatus();
             }
             
-            updateEvolutionPercentages(year1Pct, year2Pct, year3Pct) {
-                const growthElements = document.querySelectorAll('.timeline-growth');
-                if (growthElements[0]) growthElements[0].textContent = `(+${year1Pct.toFixed(0)}% exponential)`;
-                if (growthElements[1]) growthElements[1].textContent = `(+${year2Pct.toFixed(0)}% crystalline)`;
-                if (growthElements[2]) growthElements[2].textContent = `(+${year3Pct.toFixed(0)}% resonance)`;
+            updateTokenPriceDisplay() {
+                // Add/update token price display element
+                let priceDisplay = document.getElementById('currentTokenPrice');
+                if (!priceDisplay) {
+                    priceDisplay = document.createElement('div');
+                    priceDisplay.id = 'currentTokenPrice';
+                    priceDisplay.className = 'live-token-price';
+                    priceDisplay.style.cssText = `
+                        background: linear-gradient(135deg, rgba(78, 205, 196, 0.15), rgba(68, 160, 141, 0.1));
+                        border: 2px solid rgba(78, 205, 196, 0.4);
+                        border-radius: 12px;
+                        padding: 1rem;
+                        margin: 1.5rem 0;
+                        text-align: center;
+                        color: #4ecdc4;
+                        font-weight: 600;
+                        box-shadow: 0 4px 15px rgba(78, 205, 196, 0.1);
+                        transition: all 0.3s ease;
+                        position: relative;
+                        overflow: hidden;
+                    `;
+                    
+                    // Add pulsing animation for active price
+                    const pulseKeyframes = `
+                        @keyframes tokenPricePulse {
+                            0%, 100% { transform: scale(1); box-shadow: 0 4px 15px rgba(78, 205, 196, 0.1); }
+                            50% { transform: scale(1.02); box-shadow: 0 6px 20px rgba(78, 205, 196, 0.2); }
+                        }
+                    `;
+                    
+                    if (!document.querySelector('#tokenPriceStyle')) {
+                        const styleEl = document.createElement('style');
+                        styleEl.id = 'tokenPriceStyle';
+                        styleEl.textContent = pulseKeyframes + `
+                            .live-token-price {
+                                animation: tokenPricePulse 3s ease-in-out infinite;
+                            }
+                            .live-token-price::before {
+                                content: '';
+                                position: absolute;
+                                top: 0;
+                                left: -100%;
+                                width: 100%;
+                                height: 100%;
+                                background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+                                transition: left 0.5s ease;
+                            }
+                            .live-token-price.price-updated::before {
+                                left: 100%;
+                            }
+                        `;
+                        document.head.appendChild(styleEl);
+                    }
+                    
+                    this.investAmountEl?.parentNode?.appendChild(priceDisplay);
+                }
+                
+                const priceChange = ((this.currentTokenPrice / this.baseTokenPrice) - 1) * 100;
+                const changeIcon = priceChange > 5 ? '🚀' : priceChange > 0 ? '📈' : priceChange < 0 ? '📉' : '⚖️';
+                const changeColor = priceChange > 5 ? '#00ff88' : priceChange > 0 ? '#4ecdc4' : priceChange < 0 ? '#ff6b6b' : '#ffd700';
+                
+                // Check if price moved significantly for special effects
+                const recentMovement = this.priceHistory.length > 1 ? 
+                    ((this.currentTokenPrice / this.priceHistory[this.priceHistory.length - 2]) - 1) * 100 : 0;
+                
+                const evolutionLevel = this.evolutionMultiplier > 2.5 ? 'RAPID' : 
+                                     this.evolutionMultiplier > 1.8 ? 'ACCELERATED' : 
+                                     this.evolutionMultiplier > 1.3 ? 'EVOLVING' : 'STABILIZING';
+                
+                const evolutionColor = evolutionLevel === 'RAPID' ? '#00ff88' :
+                                      evolutionLevel === 'ACCELERATED' ? '#4ecdc4' :
+                                      evolutionLevel === 'EVOLVING' ? '#ffd700' : '#ff9800';
+                
+                priceDisplay.innerHTML = `
+                    <div style="display: flex; align-items: center; justify-content: center; gap: 0.5rem; margin-bottom: 0.5rem;">
+                        <span style="font-size: 1.2em;">${changeIcon}</span>
+                        <strong style="color: white;">Live SIRENS Token</strong>
+                        <span style="color: ${evolutionColor}; font-size: 0.8em; padding: 0.2rem 0.5rem; background: rgba(0,0,0,0.3); border-radius: 4px;">
+                            ${evolutionLevel}
+                        </span>
+                    </div>
+                    <div style="font-size: 1.3em; color: white; margin-bottom: 0.3rem;">
+                        $${this.currentTokenPrice.toFixed(4)}
+                    </div>
+                    <div style="display: flex; justify-content: space-between; align-items: center; font-size: 0.9em;">
+                        <span style="color: ${changeColor};">
+                            ${priceChange > 0 ? '+' : ''}${priceChange.toFixed(2)}% Total
+                        </span>
+                        <span style="color: rgba(255,255,255,0.7);">
+                            Evolution ${this.evolutionMultiplier.toFixed(2)}x
+                        </span>
+                    </div>
+                    ${Math.abs(recentMovement) > 0.5 ? `
+                        <div style="font-size: 0.8em; color: ${recentMovement > 0 ? '#4ecdc4' : '#ff6b6b'}; margin-top: 0.3rem;">
+                            ${recentMovement > 0 ? '↗️' : '↘️'} ${recentMovement > 0 ? '+' : ''}${recentMovement.toFixed(2)}% Last Update
+                        </div>
+                    ` : ''}
+                `;
+                
+                // Trigger visual update effect
+                priceDisplay.classList.add('price-updated');
+                setTimeout(() => priceDisplay.classList.remove('price-updated'), 500);
+            }
+            
+            indicatePriceMovement() {
+                const calculator = document.querySelector('.investment-calculator');
+                if (calculator) {
+                    if (this.priceHistory.length > 1) {
+                        const lastPrice = this.priceHistory[this.priceHistory.length - 2];
+                        const currentPrice = this.currentTokenPrice;
+                        
+                        if (currentPrice > lastPrice) {
+                            calculator.style.borderColor = 'rgba(78, 205, 196, 0.6)';
+                            calculator.style.boxShadow = '0 0 20px rgba(78, 205, 196, 0.2)';
+                        } else if (currentPrice < lastPrice) {
+                            calculator.style.borderColor = 'rgba(255, 107, 107, 0.6)';
+                            calculator.style.boxShadow = '0 0 20px rgba(255, 107, 107, 0.2)';
+                        }
+                        
+                        // Reset after 1 second
+                        setTimeout(() => {
+                            calculator.style.borderColor = 'rgba(78, 205, 196, 0.3)';
+                            calculator.style.boxShadow = '';
+                        }, 1000);
+                    }
+                }
             }
             
             animateValue(element, targetValue, prefix = '', suffix = '', decimals = 0) {
                 if (!element) return;
                 
                 const startValue = parseFloat(element.textContent.replace(/[^0-9.-]/g, '')) || 0;
-                const increment = (targetValue - startValue) / 25; // Smoother animation
+                const increment = (targetValue - startValue) / 20;
                 let current = startValue;
                 let steps = 0;
                 
                 const animate = () => {
-                    if (steps >= 25) {
+                    if (steps >= 20) {
                         current = targetValue;
                     } else {
                         current += increment;
@@ -2788,13 +3006,7 @@
                     const displayValue = current.toFixed(decimals);
                     element.textContent = `${prefix}${displayValue}${suffix}`;
                     
-                    // Add visual effect for exponential values
-                    if (targetValue > startValue * 2) {
-                        element.style.color = '#ffd700';
-                        element.style.textShadow = '0 0 10px rgba(255, 215, 0, 0.5)';
-                    }
-                    
-                    if (steps < 25) {
+                    if (steps < 20) {
                         requestAnimationFrame(animate);
                     }
                 };
@@ -2805,14 +3017,39 @@
             highlightResults(level) {
                 const resultItems = document.querySelectorAll('.result-item');
                 resultItems.forEach(item => {
-                    item.classList.remove('exponential-growth', 'high-evolution', 'standard-evolution');
+                    item.classList.remove('rapid-evolution', 'high-evolution', 'medium-evolution', 'base-evolution');
                     item.classList.add(level);
-                    
-                    if (level === 'exponential-growth') {
-                        item.style.borderColor = '#ffd700';
-                        item.style.boxShadow = '0 0 15px rgba(255, 215, 0, 0.3)';
-                    }
                 });
+            }
+            
+            updateEvolutionStatus() {
+                let statusEl = document.getElementById('evolutionStatus');
+                if (!statusEl) {
+                    statusEl = document.createElement('div');
+                    statusEl.id = 'evolutionStatus';
+                    statusEl.style.cssText = `
+                        background: rgba(0, 0, 0, 0.3);
+                        border-left: 4px solid #4ecdc4;
+                        padding: 0.8rem;
+                        margin: 1rem 0;
+                        border-radius: 0 8px 8px 0;
+                        font-size: 0.9em;
+                        color: rgba(255, 255, 255, 0.9);
+                    `;
+                    this.investAmountEl?.parentNode?.appendChild(statusEl);
+                }
+                
+                const resonanceLevel = (this.resonanceAccumulation / 1000).toFixed(1);
+                const evolutionPhase = this.oscillationCycles;
+                const nextEvolution = ((this.oscillationCycles + 1) * 1000) - this.resonanceAccumulation;
+                
+                statusEl.innerHTML = `
+                    <strong>🔮 Crystal Resonance Status</strong><br>
+                    <small>
+                        Accumulated Energy: ${resonanceLevel}k units • Evolution Cycle: ${evolutionPhase}<br>
+                        Multiplier: ${this.evolutionMultiplier.toFixed(2)}x • Next Evolution: ${nextEvolution} units
+                    </small>
+                `;
             }
         }
         
