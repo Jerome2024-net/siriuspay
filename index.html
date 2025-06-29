@@ -1298,9 +1298,6 @@
                     `🌟 SIRENS Quantum Leap Cycle ${this.evolutionCycles}: ${Math.round(this.currentTokenFreq)} Hz - Reality Shift Detected!`
                 ];
                 console.log(evolutionMessages[this.evolutionCycles % evolutionMessages.length]);
-                
-                // Show evolution notification
-                this.showEvolutionNotification();
             }
             
             triggerEvolutionEffects() {
@@ -1331,51 +1328,6 @@
                 if (title) {
                     title.style.animation = 'pulse 0.5s ease-in-out 3';
                 }
-            }
-            
-            showEvolutionNotification() {
-                // Create evolution notification
-                const notification = document.createElement('div');
-                notification.style.cssText = `
-                    position: fixed;
-                    top: 50%;
-                    left: 50%;
-                    transform: translate(-50%, -50%) scale(0);
-                    background: linear-gradient(45deg, rgba(0, 255, 255, 0.95), rgba(0, 0, 0, 0.9));
-                    color: white;
-                    padding: 2rem 3rem;
-                    border: 2px solid rgba(0, 255, 255, 0.5);
-                    box-shadow: 0 0 40px rgba(0, 255, 255, 0.5);
-                    z-index: 10000;
-                    font-family: 'Courier New', monospace;
-                    font-size: 1.2rem;
-                    letter-spacing: 2px;
-                    text-align: center;
-                    transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-                    border-radius: 0;
-                `;
-                notification.innerHTML = `
-                    <div style="font-size: 2rem; margin-bottom: 1rem;">⚡🔮⚡</div>
-                    <div style="font-weight: bold; text-transform: uppercase;">SIRENS EVOLUTION</div>
-                    <div style="font-size: 0.9rem; margin-top: 0.5rem;">Cycle ${this.evolutionCycles} Complete</div>
-                    <div style="font-size: 0.8rem; margin-top: 0.5rem; opacity: 0.8;">${Math.round(this.currentTokenFreq)} Hz Achieved</div>
-                `;
-                
-                document.body.appendChild(notification);
-                
-                // Animate in
-                setTimeout(() => {
-                    notification.style.transform = 'translate(-50%, -50%) scale(1)';
-                }, 10);
-                
-                // Animate out and remove
-                setTimeout(() => {
-                    notification.style.transform = 'translate(-50%, -50%) scale(0)';
-                    notification.style.opacity = '0';
-                    setTimeout(() => {
-                        document.body.removeChild(notification);
-                    }, 500);
-                }, 2500);
             }
             
             updateMetrics() {
