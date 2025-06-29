@@ -451,7 +451,7 @@
         .flow-arrow {
             font-size: 1.5rem;
             color: #00ffff;
-            animation: arrowPulse 3s ease-in-out infinite;
+            animation: arrowPulse 1.5s ease-in-out infinite;
         }
 
         @keyframes arrowPulse {
@@ -460,8 +460,8 @@
                 filter: drop-shadow(0 0 8px #00ffff);
             }
             50% { 
-                transform: scale(1.1);
-                filter: drop-shadow(0 0 15px #00ffff);
+                transform: scale(1.2);
+                filter: drop-shadow(0 0 20px #00ffff);
             }
         }
 
@@ -1191,46 +1191,66 @@
             }
             
             startSimulation() {
-                // Oscillation updates (smooth visual)
-                setInterval(() => this.updateOscillation(), 200);
+                // Oscillation updates (much faster for dynamic feel)
+                setInterval(() => this.updateOscillation(), 100);
                 
-                // Evolution progression
-                setInterval(() => this.progressEvolution(), 1800);
+                // Evolution progression (faster)
+                setInterval(() => this.progressEvolution(), 800);
                 
-                // Major evolution cycles
-                setInterval(() => this.triggerEvolution(), 8000);
+                // Major evolution cycles (more frequent)
+                setInterval(() => this.triggerEvolution(), 4000);
                 
-                // Financial metrics updates
-                setInterval(() => this.updateMetrics(), 1000);
+                // Financial metrics updates (faster)
+                setInterval(() => this.updateMetrics(), 300);
+                
+                // Add rapid micro-updates for extra dynamism
+                setInterval(() => this.microUpdates(), 150);
             }
             
             updateOscillation() {
                 const timeNow = Date.now();
                 
-                // Natural crystalline oscillation
-                const baseWave = Math.sin(timeNow / 1200) * 3;
-                const harmonicWave = Math.sin(timeNow / 800) * 1.5;
-                const microVibration = Math.sin(timeNow / 300) * 0.8;
-                const randomNoise = (Math.random() - 0.5) * 1.2;
+                // More aggressive crystalline oscillation
+                const baseWave = Math.sin(timeNow / 600) * 8;
+                const harmonicWave = Math.sin(timeNow / 400) * 4;
+                const microVibration = Math.sin(timeNow / 150) * 2;
+                const chaosNoise = (Math.random() - 0.5) * 6;
+                const pulseWave = Math.sin(timeNow / 300) * Math.sin(timeNow / 100) * 3;
                 
-                const totalOscillation = baseWave + harmonicWave + microVibration + randomNoise;
+                const totalOscillation = baseWave + harmonicWave + microVibration + chaosNoise + pulseWave;
                 const displayFreq = Math.round((this.currentTokenFreq + totalOscillation) * 100) / 100;
                 
                 this.animateValue(this.elements.tokenFreq, displayFreq, 'Hz');
             }
             
-            progressEvolution() {
-                // Frequency progression with acceleration near threshold
-                const progressToThreshold = this.currentTokenFreq / this.maxFrequencyThreshold;
-                const accelerationFactor = Math.pow(progressToThreshold, 1.5);
+            microUpdates() {
+                // Add micro-fluctuations to make everything feel more alive
+                const microTimeVariation = Math.sin(Date.now() / 200) * 0.02;
+                const microVolatility = (Math.random() - 0.5) * 0.05;
                 
-                const baseIncrease = 3 + (Math.random() * 4);
-                const acceleratedIncrease = baseIncrease * (1 + accelerationFactor * 2);
+                // Slightly adjust cumulative frequency display
+                const cumulativeVariation = this.totalAccumulatedFreq * (1 + microTimeVariation + microVolatility);
+                this.animateValue(this.elements.cumulativeFreq, Math.round(cumulativeVariation), 'Hz');
+                
+                // Add micro-fluctuations to electrical output
+                const electricalVariation = this.electricalOutput * (1 + microTimeVariation * 2);
+                this.animateValue(this.elements.electricalOutput, Math.round(electricalVariation * 1000000) / 1000000, 'kWh');
+            }
+            
+            progressEvolution() {
+                // Much faster frequency progression with more volatility
+                const progressToThreshold = this.currentTokenFreq / this.maxFrequencyThreshold;
+                const accelerationFactor = Math.pow(progressToThreshold, 1.2);
+                
+                const baseIncrease = 8 + (Math.random() * 12); // Increased base rate
+                const volatilityBoost = Math.sin(Date.now() / 500) * 5; // Add sine wave boost
+                const acceleratedIncrease = baseIncrease * (1 + accelerationFactor * 3) + volatilityBoost;
                 const finalIncrease = Math.round(acceleratedIncrease * 100) / 100;
                 
                 this.currentTokenFreq += finalIncrease;
                 this.cumulativeFreq += finalIncrease;
                 
+                // More frequent threshold checks
                 if (this.currentTokenFreq >= this.maxFrequencyThreshold) {
                     this.prepareEvolution();
                 }
@@ -1262,19 +1282,22 @@
             }
             
             updateMetrics() {
-                // Electrical output calculation
+                // More dynamic electrical output calculation
                 const baseOutput = this.totalAccumulatedFreq * this.crystallinePiezoEfficiency;
-                this.electricalOutput = Math.round(baseOutput * this.resonanceAmplifier * 1000000) / 1000000;
+                const resonanceBoost = Math.sin(Date.now() / 1000) * 0.3 + 1; // Oscillating boost
+                const chaosMultiplier = 1 + (Math.random() - 0.5) * 0.4; // Random chaos
+                this.electricalOutput = Math.round(baseOutput * this.resonanceAmplifier * resonanceBoost * chaosMultiplier * 1000000) / 1000000;
                 
-                // Dynamic pricing
-                const timeVariation = Math.sin(Date.now() / 60000) * 0.005;
-                const marketVolatility = (Math.random() - 0.5) * 0.008;
-                const premiumMultiplier = this.crystallinePremium + (this.evolutionCycles * 0.01);
+                // Much more volatile pricing
+                const timeVariation = Math.sin(Date.now() / 15000) * 0.015; // Faster oscillation
+                const marketVolatility = (Math.random() - 0.5) * 0.025; // More volatility
+                const trendShift = Math.sin(Date.now() / 8000) * 0.012; // Medium-term trend
+                const premiumMultiplier = this.crystallinePremium + (this.evolutionCycles * 0.02);
                 
-                const currentPrice = this.baseElectricityPrice * premiumMultiplier * (1 + timeVariation + marketVolatility);
+                const currentPrice = this.baseElectricityPrice * premiumMultiplier * (1 + timeVariation + marketVolatility + trendShift);
                 this.realtimePrice = Math.round(this.electricalOutput * currentPrice * 1000000) / 1000000;
                 
-                // Update displays
+                // Update displays with faster animation
                 this.animateValue(this.elements.cumulativeFreq, this.totalAccumulatedFreq, 'Hz');
                 this.animateValue(this.elements.electricalOutput, this.electricalOutput, 'kWh');
                 this.animateValue(this.elements.realtimePrice, this.realtimePrice, 'USD', '$');
@@ -1288,7 +1311,7 @@
                 
                 const currentText = element.textContent || '0';
                 const currentValue = parseFloat(currentText.replace(/[^\d.-]/g, '')) || 0;
-                const increment = (targetValue - currentValue) / 15;
+                const increment = (targetValue - currentValue) / 8; // Faster animation
                 let current = currentValue;
                 
                 const animate = () => {
