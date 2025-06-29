@@ -535,48 +535,7 @@
             margin-right: auto;
         }
 
-        .cta-button {
-            background: linear-gradient(45deg, #00ffff, #ffffff);
-            border: 2px solid #00ffff;
-            padding: 1rem 2rem;
-            font-size: 1.1rem;
-            font-weight: 600;
-            color: #000000;
-            border-radius: 0;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            font-family: 'Courier New', monospace;
-            box-shadow: 
-                0 0 15px rgba(0, 255, 255, 0.2),
-                inset 0 0 15px rgba(0, 255, 255, 0.05);
-        }
 
-        .cta-button::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(45deg, #ffffff, #00ffff);
-            transition: left 0.3s ease;
-        }
-
-        .cta-button:hover::before {
-            left: 0;
-        }
-
-        .cta-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 
-                0 10px 20px rgba(0, 255, 255, 0.3),
-                0 0 30px rgba(0, 255, 255, 0.2);
-            color: #000000;
-        }
 
         /* Footer */
         .footer {
@@ -1065,10 +1024,6 @@
             <p class="cta-description">
                 Pioneering a revolutionary banking model with crystalline technology. Join founding investors creating universal banking access for 1.7 billion unbanked people.
             </p>
-            
-            <button class="cta-button" id="ctaButton">
-                <span>🏦 Revolutionary Banking</span>
-            </button>
         </div>
         
         <!-- Footer -->
@@ -1365,17 +1320,9 @@
             }
             
             setupEventListeners() {
-                const ctaButton = document.getElementById('ctaButton');
                 const overlay = document.getElementById('onboardingOverlay');
                 const closeBtn = document.getElementById('onboardingClose');
                 const form = document.getElementById('investorForm');
-                
-                if (ctaButton) {
-                    ctaButton.addEventListener('click', () => {
-                        overlay.classList.add('active');
-                        document.body.style.overflow = 'hidden';
-                    });
-                }
                 
                 if (closeBtn) {
                     closeBtn.addEventListener('click', () => {
