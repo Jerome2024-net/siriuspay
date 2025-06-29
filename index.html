@@ -3,326 +3,232 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Sirius - Reinventing Banking for Everyone with autonomous financial infrastructure powered by crystalline stablecoin technology">
-    <title>Sirius - Reinventing Banking for Everyone</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <title>Sirius - Revolutionary Banking for Everyone</title>
+    <meta name="description" content="Sirius is reinventing banking with autonomous financial infrastructure powered by SIRENS crystalline cryptocurrency technology.">
+    
     <style>
-        :root {
-            --viewport-height: 100vh;
-            --vh: 1vh;
-        }
-
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            max-width: 100%;
-            word-wrap: break-word;
+        }
+
+        :root {
+            --vh: 1vh;
         }
 
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: #000;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0c1445 0%, #1a1a2e 50%, #16213e 100%);
             color: white;
             overflow-x: hidden;
+            line-height: 1.6;
             min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-            word-wrap: break-word;
-            hyphens: auto;
-        }
-
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle at center, #1a1a2e 0%, #000 70%);
-            z-index: -2;
         }
 
         .container {
-            max-width: 900px;
+            max-width: 1200px;
+            margin: 0 auto;
             padding: 2rem;
-            text-align: center;
             position: relative;
             z-index: 10;
-            width: 100%;
-            word-wrap: break-word;
-            hyphens: auto;
         }
 
         /* Background Animation */
         .animation-container {
             position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 800px;
-            height: 800px;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            pointer-events: none;
             z-index: 1;
-            opacity: 0.15;
         }
 
         .circle {
             position: absolute;
-            border: 1px solid #fff;
             border-radius: 50%;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            animation: ripple 4s ease-out infinite;
+            background: rgba(78, 205, 196, 0.1);
+            animation: float 6s ease-in-out infinite;
         }
 
-        .circle:nth-child(1) { animation-delay: 0s; }
-        .circle:nth-child(2) { animation-delay: 0.5s; }
-        .circle:nth-child(3) { animation-delay: 1s; }
-        .circle:nth-child(4) { animation-delay: 1.5s; }
-        .circle:nth-child(5) { animation-delay: 2s; }
-
-        @keyframes ripple {
-            0% {
-                width: 0;
-                height: 0;
-                opacity: 1;
-            }
-            100% {
-                width: 800px;
-                height: 800px;
-                opacity: 0;
-            }
+        .circle:nth-child(1) {
+            width: 80px;
+            height: 80px;
+            top: 20%;
+            left: 10%;
+            animation-delay: 0s;
         }
 
-        @keyframes pulse {
-            0%, 100% {
-                transform: scale(1);
-                opacity: 1;
-            }
-            50% {
-                transform: scale(1.05);
-                opacity: 0.8;
-            }
-        }
-
-        @keyframes frequencyGlow {
-            0%, 100% {
-                text-shadow: 0 0 5px currentColor;
-            }
-            50% {
-                text-shadow: 0 0 15px currentColor, 0 0 25px currentColor;
-            }
-        }
-
-        .sirens-coin {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
+        .circle:nth-child(2) {
             width: 120px;
             height: 120px;
-            z-index: 5;
-            animation: float-coin 4s ease-in-out infinite;
+            top: 60%;
+            right: 15%;
+            animation-delay: 1s;
+        }
+
+        .circle:nth-child(3) {
+            width: 60px;
+            height: 60px;
+            bottom: 20%;
+            left: 20%;
+            animation-delay: 2s;
+        }
+
+        .circle:nth-child(4) {
+            width: 100px;
+            height: 100px;
+            top: 40%;
+            right: 40%;
+            animation-delay: 3s;
+        }
+
+        .circle:nth-child(5) {
+            width: 140px;
+            height: 140px;
+            bottom: 30%;
+            right: 20%;
+            animation-delay: 4s;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px) rotate(0deg);
+                opacity: 0.3;
+            }
+            50% {
+                transform: translateY(-20px) rotate(180deg);
+                opacity: 0.6;
+            }
+        }
+
+        /* SIRENS Coin Animation */
+        .sirens-coin {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 2;
+            pointer-events: none;
         }
 
         .coin-container {
-            position: relative;
-            width: 100%;
-            height: 100%;
-            animation: rotate-coin 8s linear infinite;
+            width: 120px;
+            height: 120px;
+            perspective: 1000px;
+            animation: coinFloat 8s ease-in-out infinite;
         }
 
         .coin-face {
-            position: absolute;
-            width: 120px;
-            height: 120px;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, #4ecdc4, #44a08d);
             border-radius: 50%;
-            background: linear-gradient(135deg, #ffd700 0%, #ffed4e 50%, #ffc107 100%);
-            border: 3px solid rgba(255, 255, 255, 0.3);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 2rem;
-            font-weight: 900;
-            color: #1a1a1a;
-            box-shadow: 0 0 30px rgba(255, 215, 0, 0.5);
+            font-size: 3rem;
+            font-weight: bold;
+            color: white;
+            box-shadow: 0 0 30px rgba(78, 205, 196, 0.5);
+            animation: coinSpin 4s linear infinite;
         }
 
-        @keyframes float-coin {
-            0%, 100% { transform: translate(-50%, -50%); }
-            50% { transform: translate(-50%, -60%); }
+        @keyframes coinFloat {
+            0%, 100% {
+                transform: translate(-50%, -50%) translateY(0px);
+            }
+            50% {
+                transform: translate(-50%, -50%) translateY(-30px);
+            }
         }
 
-        @keyframes rotate-coin {
-            0% { transform: rotateY(0deg); }
-            100% { transform: rotateY(360deg); }
+        @keyframes coinSpin {
+            from {
+                transform: rotateY(0deg);
+            }
+            to {
+                transform: rotateY(360deg);
+            }
         }
 
-        /* Typography */
+        /* Header */
         .logo {
             font-size: 2.5rem;
-            font-weight: 800;
-            background: linear-gradient(45deg, #667eea, #764ba2);
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 2rem;
+            background: linear-gradient(45deg, #4ecdc4, #44a08d);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            margin-bottom: 4rem;
-            opacity: 0;
-            animation: fadeInUp 1s ease 0.2s forwards;
         }
 
+        /* Hero Section */
         .hero-title {
-            font-size: clamp(2.5rem, 5vw, 4rem);
-            font-weight: 800;
-            line-height: 1.1;
-            margin-bottom: 2rem;
-            opacity: 0;
-            animation: fadeInUp 1s ease 0.4s forwards;
-            background: linear-gradient(45deg, #fff, #667eea, #fff);
-            background-size: 200% auto;
+            font-size: 3.5rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(45deg, #ffffff, #4ecdc4);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
 
         .hero-subtitle {
-            font-size: clamp(1.1rem, 2.5vw, 1.4rem);
-            line-height: 1.6;
+            font-size: 1.2rem;
+            text-align: center;
             color: rgba(255, 255, 255, 0.8);
             margin-bottom: 3rem;
-            font-weight: 400;
-            opacity: 0;
-            animation: fadeInUp 1s ease 0.6s forwards;
-            max-width: 700px;
+            max-width: 800px;
             margin-left: auto;
             margin-right: auto;
         }
 
         /* Impact Counter */
         .impact-counter {
-            margin: 4rem 0;
-            padding: 3rem 2rem;
-            background: rgba(0, 0, 0, 0.6);
-            border-radius: 25px;
-            border: 1px solid rgba(255, 107, 107, 0.4);
-            backdrop-filter: blur(10px);
-            position: relative;
-            overflow: hidden;
-            opacity: 0;
-            animation: fadeInUp 1s ease 0.8s forwards;
-        }
-
-        .impact-counter::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(135deg, 
-                rgba(255, 107, 107, 0.1) 0%, 
-                rgba(78, 205, 196, 0.1) 50%, 
-                rgba(255, 107, 107, 0.1) 100%);
-            background-size: 200% 200%;
-            animation: impactShimmer 4s ease-in-out infinite;
-            z-index: -1;
-        }
-
-        @keyframes impactShimmer {
-            0%, 100% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
+            text-align: center;
+            padding: 2rem;
+            background: rgba(78, 205, 196, 0.1);
+            border-radius: 20px;
+            margin: 3rem 0;
+            border: 1px solid rgba(78, 205, 196, 0.2);
         }
 
         .counter-number {
-            font-size: clamp(2.8rem, 5.5vw, 4.5rem);
-            font-weight: 900;
-            background: linear-gradient(45deg, #ff6b6b 0%, #4ecdc4 50%, #ff6b6b 100%);
-            background-size: 200% auto;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            display: block;
-            margin-bottom: 1rem;
-            font-variant-numeric: tabular-nums;
-            animation: counterGlow 3s ease-in-out infinite, numberShimmer 4s ease-in-out infinite;
-            text-align: center;
-        }
-
-        @keyframes counterGlow {
-            0%, 100% {
-                filter: brightness(1) drop-shadow(0 0 10px rgba(255, 107, 107, 0.3));
-                transform: scale(1);
-            }
-            50% {
-                filter: brightness(1.2) drop-shadow(0 0 20px rgba(255, 107, 107, 0.5));
-                transform: scale(1.02);
-            }
-        }
-
-        @keyframes numberShimmer {
-            0%, 100% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
+            font-size: 3rem;
+            font-weight: 700;
+            color: #4ecdc4;
+            margin-bottom: 0.5rem;
         }
 
         .counter-label {
-            font-size: clamp(1.2rem, 2.5vw, 1.6rem);
-            color: rgba(255, 255, 255, 0.95);
-            font-weight: 700;
-            margin-bottom: 1rem;
-            text-align: center;
-            animation: labelPulse 2s ease-in-out infinite;
-            line-height: 1.3;
-        }
-
-        @keyframes labelPulse {
-            0%, 100% { opacity: 0.95; }
-            50% { opacity: 1; color: #fff; }
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 0.5rem;
         }
 
         .counter-subtitle {
-            font-size: clamp(1rem, 2vw, 1.3rem);
-            color: rgba(255, 255, 255, 0.8);
-            font-weight: 500;
-            text-align: center;
-            animation: subtitleFloat 3s ease-in-out infinite;
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.7);
         }
 
-        @keyframes subtitleFloat {
-            0%, 100% { 
-                transform: translateY(0); 
-                opacity: 0.8; 
-            }
-            50% { 
-                transform: translateY(-2px); 
-                opacity: 1; 
-                color: #4ecdc4;
-            }
-        }
-
-        /* Sirens Simulation */
+        /* SIRENS Flow Simulation */
         .sirens-simulation {
-            margin: 4rem 0;
-            padding: 3rem 2rem;
-            background: rgba(0, 0, 0, 0.6);
-            border-radius: 25px;
-            border: 1px solid rgba(255, 215, 0, 0.4);
-            backdrop-filter: blur(10px);
-            opacity: 0;
-            animation: fadeInUp 1s ease 1.4s forwards;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 20px;
+            padding: 2rem;
+            margin: 3rem 0;
+            border: 1px solid rgba(78, 205, 196, 0.3);
         }
 
         .simulation-title {
-            font-size: clamp(1.5rem, 4vw, 2rem);
-            font-weight: 700;
-            color: #ffd700;
-            margin-bottom: 3rem;
             text-align: center;
+            font-size: 1.5rem;
+            color: #4ecdc4;
+            margin-bottom: 2rem;
         }
 
         .flow-container {
@@ -330,283 +236,95 @@
             flex-direction: column;
             gap: 2rem;
             align-items: center;
-            max-width: 800px;
-            margin: 0 auto;
         }
 
         .flow-step {
             display: flex;
             align-items: center;
-            justify-content: space-between;
-            width: 100%;
+            gap: 1rem;
+            background: rgba(78, 205, 196, 0.1);
             padding: 1.5rem;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
             border-radius: 15px;
-            backdrop-filter: blur(10px);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .flow-step::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
             width: 100%;
-            height: 2px;
-            background: linear-gradient(90deg, transparent, #4ecdc4, transparent);
-            animation: flowScan 3s linear infinite;
-        }
-
-        @keyframes flowScan {
-            0% { left: -100%; }
-            100% { left: 100%; }
+            max-width: 600px;
         }
 
         .flow-input, .flow-output {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-
-        .flow-arrow {
-            font-size: 2rem;
-            color: #4ecdc4;
-            animation: arrowPulse 2s ease-in-out infinite;
-        }
-
-        @keyframes arrowPulse {
-            0%, 100% { transform: scale(1); opacity: 0.7; }
-            50% { transform: scale(1.2); opacity: 1; }
-        }
-
-        .token-visual {
-            width: 60px;
-            height: 60px;
-            background: linear-gradient(45deg, #ffd700, #ff8c00);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            font-weight: 900;
-            color: #1a1a1a;
-            animation: tokenSpin 3s linear infinite;
-            box-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
-        }
-
-        @keyframes tokenSpin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        .frequency-visual {
-            display: flex;
-            align-items: center;
-            gap: 3px;
-            height: 50px;
-        }
-
-        .freq-wave {
-            width: 4px;
-            background: linear-gradient(to top, #4ecdc4, #00d4aa);
-            border-radius: 2px;
-            animation: waveMotion 1.5s ease-in-out infinite;
-        }
-
-        .freq-wave:nth-child(1) { height: 20px; animation-delay: 0s; }
-        .freq-wave:nth-child(2) { height: 35px; animation-delay: 0.1s; }
-        .freq-wave:nth-child(3) { height: 45px; animation-delay: 0.2s; }
-        .freq-wave:nth-child(4) { height: 30px; animation-delay: 0.3s; }
-        .freq-wave:nth-child(5) { height: 40px; animation-delay: 0.4s; }
-        .freq-wave:nth-child(6) { height: 25px; animation-delay: 0.5s; }
-
-        @keyframes waveMotion {
-            0%, 100% { transform: scaleY(1); opacity: 0.7; }
-            50% { transform: scaleY(1.5); opacity: 1; }
-        }
-
-        .electrical-visual {
-            position: relative;
-            width: 80px;
-            height: 50px;
-        }
-
-        .lightning-bolt {
-            position: absolute;
-            font-size: 2rem;
-            color: #ffd700;
-            animation: lightningFlash 1s ease-in-out infinite;
-        }
-
-        .lightning-bolt:nth-child(1) {
-            top: 0;
-            left: 0;
-            animation-delay: 0s;
-        }
-
-        .lightning-bolt:nth-child(2) {
-            top: 0;
-            right: 0;
-            animation-delay: 0.3s;
-        }
-
-        .lightning-bolt:nth-child(3) {
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            animation-delay: 0.6s;
-        }
-
-        @keyframes lightningFlash {
-            0%, 70%, 100% { opacity: 0; transform: scale(1); }
-            75%, 95% { opacity: 1; transform: scale(1.2); }
-        }
-
-        .value-visual {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-
-        .dollar-symbol {
-            font-size: 2rem;
-            color: #4ecdc4;
-            animation: dollarGlow 2s ease-in-out infinite;
-        }
-
-        @keyframes dollarGlow {
-            0%, 100% { 
-                text-shadow: 0 0 10px rgba(78, 205, 196, 0.5);
-                transform: scale(1);
-            }
-            50% { 
-                text-shadow: 0 0 20px rgba(78, 205, 196, 0.8);
-                transform: scale(1.1);
-            }
+            flex: 1;
+            text-align: center;
         }
 
         .flow-label {
-            font-size: 1rem;
-            color: rgba(255, 255, 255, 0.8);
-            font-weight: 600;
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.7);
             margin-bottom: 0.5rem;
         }
 
         .flow-value {
-            font-size: 1.3rem;
-            font-weight: 700;
-            color: #ffd700;
-            font-variant-numeric: tabular-nums;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
-        }
-
-        .flow-value.evolving {
-            animation: frequencyGlow 2s ease-in-out infinite;
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: #4ecdc4;
         }
 
         .flow-unit {
-            font-size: 0.9em;
-            opacity: 0.8;
-            font-weight: 400;
+            font-size: 0.8rem;
+            color: rgba(255, 255, 255, 0.6);
         }
 
-        .process-line {
-            width: 100%;
-            height: 3px;
-            background: rgba(78, 205, 196, 0.2);
-            border-radius: 1.5px;
-            position: relative;
-            margin: 1rem 0;
-            overflow: hidden;
-        }
-
-        .process-line::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 50%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, #4ecdc4, transparent);
-            animation: processFlow 3s ease-in-out infinite;
-        }
-
-        @keyframes processFlow {
-            0% { left: -100%; }
-            100% { left: 100%; }
+        .flow-arrow {
+            font-size: 1.5rem;
+            color: #ffd700;
         }
 
         .live-formula {
             background: rgba(0, 0, 0, 0.4);
-            border: 1px solid rgba(255, 215, 0, 0.3);
-            border-radius: 15px;
-            padding: 1.5rem;
-            margin-top: 2rem;
+            padding: 1rem;
+            border-radius: 10px;
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.8);
             text-align: center;
-        }
-
-        .formula-text {
-            font-size: 1.1rem;
-            color: rgba(255, 255, 255, 0.9);
-            font-weight: 500;
+            margin-top: 1rem;
         }
 
         .formula-variable {
             color: #4ecdc4;
-            font-weight: 700;
-            animation: variableUpdate 2s ease-in-out infinite;
-        }
-
-        @keyframes variableUpdate {
-            0%, 90%, 100% { opacity: 0.9; }
-            95% { opacity: 1; color: #ffd700; }
+            font-weight: 600;
         }
 
         /* CTA Section */
         .cta-section {
-            margin-top: 2rem;
-            opacity: 0;
-            animation: fadeInUp 1s ease 1s forwards;
+            text-align: center;
+            margin: 4rem 0;
         }
 
         .cta-title {
-            font-size: clamp(1.8rem, 3.5vw, 2.5rem);
+            font-size: 2.5rem;
             font-weight: 700;
-            margin-bottom: 1.5rem;
-            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            margin-bottom: 1rem;
+            color: #4ecdc4;
         }
 
         .cta-description {
-            font-size: clamp(1rem, 2vw, 1.2rem);
-            line-height: 1.6;
-            color: rgba(255, 255, 255, 0.7);
-            margin-bottom: 3rem;
-            font-weight: 300;
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 2rem;
             max-width: 600px;
             margin-left: auto;
             margin-right: auto;
         }
 
         .cta-button {
-            background: linear-gradient(45deg, #667eea, #764ba2);
-            color: white;
-            padding: 1.2rem 3rem;
+            background: linear-gradient(45deg, #4ecdc4, #44a08d);
             border: none;
-            border-radius: 50px;
+            padding: 1rem 2rem;
             font-size: 1.1rem;
             font-weight: 600;
+            color: white;
+            border-radius: 50px;
             cursor: pointer;
             transition: all 0.3s ease;
-            display: inline-block;
             position: relative;
             overflow: hidden;
-            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
         }
 
         .cta-button::before {
@@ -616,7 +334,7 @@
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(45deg, #764ba2, #667eea);
+            background: linear-gradient(45deg, #44a08d, #4ecdc4);
             transition: left 0.3s ease;
         }
 
@@ -624,34 +342,22 @@
             left: 0;
         }
 
-        .cta-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.4);
-        }
-
         .cta-button span {
             position: relative;
             z-index: 1;
         }
 
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(78, 205, 196, 0.3);
         }
 
         /* Footer */
         .footer {
-            margin-top: 6rem;
-            padding-top: 2rem;
+            text-align: center;
+            padding: 2rem 0;
             border-top: 1px solid rgba(255, 255, 255, 0.1);
-            opacity: 0;
-            animation: fadeInUp 1s ease 1.6s forwards;
+            margin-top: 4rem;
         }
 
         .footer-content {
@@ -664,14 +370,12 @@
 
         .founder-info {
             font-size: 0.9rem;
-            color: rgba(255, 255, 255, 0.6);
-            font-weight: 500;
+            color: rgba(255, 255, 255, 0.7);
         }
 
         .copyright {
             font-size: 0.8rem;
-            color: rgba(255, 255, 255, 0.4);
-            font-weight: 400;
+            color: rgba(255, 255, 255, 0.5);
         }
 
         /* Onboarding Modal */
@@ -681,15 +385,14 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.95);
-            backdrop-filter: blur(20px);
+            background: rgba(0, 0, 0, 0.8);
             display: flex;
             align-items: center;
             justify-content: center;
-            z-index: 10000;
+            z-index: 1000;
             opacity: 0;
             visibility: hidden;
-            transition: all 0.4s ease;
+            transition: all 0.3s ease;
         }
 
         .onboarding-overlay.active {
@@ -698,75 +401,41 @@
         }
 
         .onboarding-container {
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-            border-radius: 24px;
-            max-width: 900px;
-            width: 95%;
-            max-height: 90vh;
-            overflow: hidden;
-            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6);
-            transform: scale(0.8) translateY(50px);
-            transition: all 0.4s ease;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .onboarding-overlay.active .onboarding-container {
-            transform: scale(1) translateY(0);
-        }
-
-        .onboarding-step {
-            display: none;
-        }
-
-        .onboarding-step.active {
-            display: block;
+            background: linear-gradient(135deg, #1a1a2e, #16213e);
+            border-radius: 20px;
+            padding: 2rem;
+            max-width: 500px;
+            width: 90%;
+            position: relative;
+            border: 1px solid rgba(78, 205, 196, 0.3);
         }
 
         .onboarding-header {
-            background: linear-gradient(45deg, #667eea, #764ba2);
-            color: white;
-            padding: 1.5rem 2rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            margin-bottom: 2rem;
         }
 
         .onboarding-header h2 {
-            margin: 0;
+            color: #4ecdc4;
             font-size: 1.5rem;
-            font-weight: 700;
         }
 
         .onboarding-close {
             background: none;
             border: none;
-            color: white;
-            font-size: 1.8rem;
+            font-size: 1.5rem;
+            color: rgba(255, 255, 255, 0.7);
             cursor: pointer;
-            padding: 0.5rem;
-            border-radius: 50%;
-            transition: all 0.3s ease;
-            width: 40px;
-            height: 40px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            transition: color 0.3s ease;
         }
 
         .onboarding-close:hover {
-            background: rgba(255, 255, 255, 0.2);
+            color: #4ecdc4;
         }
 
-        .onboarding-content {
-            padding: 2rem;
-            color: white;
-            max-height: calc(90vh - 100px);
-            overflow-y: auto;
-        }
-
-        .onboarding-subtitle {
-            text-align: center;
-            font-size: 1.1rem;
+        .onboarding-content p {
             color: rgba(255, 255, 255, 0.8);
             margin-bottom: 2rem;
             line-height: 1.6;
@@ -778,21 +447,23 @@
         }
 
         .welcome-sirens {
-            font-size: 4rem;
-            animation: welcomePulse 2s ease-in-out infinite;
-            filter: drop-shadow(0 0 20px rgba(78, 205, 196, 0.6));
+            font-size: 3rem;
+            animation: pulse 2s ease-in-out infinite;
         }
 
-        @keyframes welcomePulse {
-            0%, 100% { transform: scale(1); opacity: 0.8; }
-            50% { transform: scale(1.1); opacity: 1; }
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.1);
+            }
         }
 
-        /* Investor Form Styles */
         .investor-form {
             display: flex;
             flex-direction: column;
-            gap: 1.5rem;
+            gap: 1rem;
         }
 
         .form-group {
@@ -804,20 +475,18 @@
             font-weight: 600;
             color: rgba(255, 255, 255, 0.9);
             margin-bottom: 0.5rem;
-            font-size: 0.95rem;
         }
 
         .form-group input,
         .form-group select,
         .form-group textarea {
-            padding: 1rem;
-            border: 2px solid rgba(255, 255, 255, 0.1);
-            border-radius: 12px;
+            padding: 0.8rem;
+            border: 1px solid rgba(78, 205, 196, 0.3);
+            border-radius: 8px;
+            background: rgba(0, 0, 0, 0.3);
+            color: white;
             font-size: 1rem;
             transition: all 0.3s ease;
-            background: rgba(255, 255, 255, 0.05);
-            color: white;
-            font-family: inherit;
         }
 
         .form-group input::placeholder,
@@ -830,59 +499,17 @@
         .form-group textarea:focus {
             outline: none;
             border-color: #4ecdc4;
-            background: rgba(255, 255, 255, 0.1);
-            box-shadow: 0 0 0 3px rgba(78, 205, 196, 0.2);
-        }
-
-        .form-group textarea {
-            resize: vertical;
-            min-height: 100px;
-        }
-
-        .checkbox-group {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-            gap: 1rem;
-            margin-top: 0.5rem;
-        }
-
-        .checkbox-label {
-            display: flex;
-            align-items: center;
-            font-weight: 500;
-            color: rgba(255, 255, 255, 0.8);
-            cursor: pointer;
-            padding: 0.5rem;
-            border-radius: 8px;
-            transition: all 0.3s ease;
-        }
-
-        .checkbox-label:hover {
-            background: rgba(255, 255, 255, 0.05);
-        }
-
-        .checkbox-label input[type="checkbox"] {
-            margin-right: 0.5rem;
-            width: 18px;
-            height: 18px;
-            accent-color: #4ecdc4;
-        }
-
-        .form-actions {
-            margin-top: 2rem;
+            box-shadow: 0 0 10px rgba(78, 205, 196, 0.3);
         }
 
         .form-button {
-            width: 100%;
-            padding: 1.2rem 2rem;
+            padding: 1rem;
             border: none;
-            border-radius: 12px;
-            font-size: 1.1rem;
+            border-radius: 8px;
+            font-size: 1rem;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
         }
 
         .form-button.primary {
@@ -890,703 +517,41 @@
             color: white;
         }
 
-        .form-button.primary::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(45deg, #44a08d, #4ecdc4);
-            transition: left 0.3s ease;
-        }
-
-        .form-button.primary:hover::before {
-            left: 0;
-        }
-
         .form-button.primary:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(78, 205, 196, 0.3);
+            box-shadow: 0 5px 15px rgba(78, 205, 196, 0.3);
         }
 
-        .form-button span {
-            position: relative;
-            z-index: 1;
-        }
-
-        /* Success Styles */
-        .success-content {
-            text-align: center;
-            padding: 3rem 2rem;
-        }
-
-        .success-animation {
-            margin-bottom: 2rem;
-        }
-
-        .success-icon {
-            font-size: 4rem;
-            animation: successBounce 2s ease-in-out infinite;
-            filter: drop-shadow(0 0 20px rgba(255, 215, 0, 0.6));
-        }
-
-        .success-sirens {
-            font-size: 2rem;
-            margin-top: 1rem;
-            animation: successFloat 3s ease-in-out infinite;
-        }
-
-        @keyframes successBounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
-        }
-
-        @keyframes successFloat {
-            0%, 100% { transform: translateY(0) rotate(0deg); }
-            33% { transform: translateY(-5px) rotate(5deg); }
-            66% { transform: translateY(5px) rotate(-5deg); }
-        }
-
-        .success-content h2 {
-            color: white;
-            font-size: 2rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-            background: linear-gradient(45deg, #4ecdc4, #ffd700);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .success-content p {
-            color: rgba(255, 255, 255, 0.8);
-            font-size: 1.1rem;
-            line-height: 1.6;
-            margin-bottom: 2rem;
-        }
-
-        .next-steps {
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 16px;
-            padding: 2rem;
-            margin-bottom: 2rem;
-            text-align: left;
-        }
-
-        .next-steps h3 {
-            color: #4ecdc4;
-            font-size: 1.2rem;
-            margin-bottom: 1rem;
-        }
-
-        .next-steps ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-
-        .next-steps li {
-            color: rgba(255, 255, 255, 0.8);
-            margin-bottom: 0.8rem;
-            padding-left: 1.5rem;
-            position: relative;
-        }
-
-        .next-steps li::before {
-            content: '✨';
-            position: absolute;
-            left: 0;
-            top: 0;
-        }
-
-        .success-actions {
-            display: flex;
-            gap: 1rem;
-            justify-content: center;
-        }
-
-        .success-button {
-            padding: 1rem 2rem;
-            border: none;
-            border-radius: 12px;
-            font-size: 1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .success-button.primary {
-            background: linear-gradient(45deg, #4ecdc4, #44a08d);
-            color: white;
-        }
-
-        .success-button.secondary {
-            background: rgba(255, 255, 255, 0.1);
-            color: white;
-            border: 2px solid rgba(255, 255, 255, 0.2);
-        }
-
-        .success-button:hover {
-            transform: translateY(-2px);
-        }
-
-        .success-button.primary:hover {
-            box-shadow: 0 8px 25px rgba(78, 205, 196, 0.3);
-        }
-
-        /* Investment Calculator Styles */
-        .investment-calculator {
-            background: rgba(255, 255, 255, 0.02);
-            border: 1px solid rgba(78, 205, 196, 0.3);
-            border-radius: 20px;
-            padding: 2rem;
-            margin: 2rem 0;
-            backdrop-filter: blur(10px);
-        }
-
-        .investment-calculator h3 {
-            color: #4ecdc4;
-            margin-bottom: 0.5rem;
-            font-size: 1.5rem;
-        }
-
-        .calculator-subtitle {
-            color: rgba(255, 255, 255, 0.7);
-            font-size: 0.9rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .calculator-input {
-            margin-bottom: 2rem;
-        }
-
-        .calculator-input label {
-            display: block;
-            color: rgba(255, 255, 255, 0.9);
-            margin-bottom: 0.5rem;
-            font-weight: 600;
-        }
-
-        .calculator-input input {
-            width: 200px;
-            padding: 0.8rem;
-            border: 2px solid rgba(78, 205, 196, 0.3);
-            border-radius: 10px;
-            background: rgba(0, 0, 0, 0.3);
-            color: white;
-            font-size: 1.1rem;
-            text-align: center;
-            transition: all 0.3s ease;
-        }
-
-        .calculator-input input:focus {
-            outline: none;
-            border-color: #4ecdc4;
-            box-shadow: 0 0 15px rgba(78, 205, 196, 0.3);
-        }
-
-        .result-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-            gap: 1rem;
-            margin-bottom: 2rem;
-        }
-
-        .result-item {
-            background: rgba(78, 205, 196, 0.1);
-            border: 1px solid rgba(78, 205, 196, 0.2);
-            border-radius: 12px;
-            padding: 1rem;
-            text-align: center;
-            transition: all 0.3s ease;
-        }
-
-        .result-item:hover {
-            background: rgba(78, 205, 196, 0.15);
-            transform: translateY(-2px);
-        }
-
-        .result-item.evolution {
-            background: rgba(255, 215, 0, 0.1);
-            border-color: rgba(255, 215, 0, 0.3);
-        }
-
-        /* Evolution level styles */
-        .result-item.base-evolution {
-            background: rgba(78, 205, 196, 0.1);
-            border-color: rgba(78, 205, 196, 0.2);
-        }
-
-        .result-item.medium-evolution {
-            background: rgba(255, 215, 0, 0.15);
-            border-color: rgba(255, 215, 0, 0.4);
-            box-shadow: 0 0 10px rgba(255, 215, 0, 0.1);
-        }
-
-        .result-item.high-evolution {
-            background: rgba(0, 255, 136, 0.15);
-            border-color: rgba(0, 255, 136, 0.4);
-            box-shadow: 0 0 15px rgba(0, 255, 136, 0.2);
-        }
-
-        .result-item.rapid-evolution {
-            background: linear-gradient(135deg, rgba(0, 255, 136, 0.2), rgba(255, 215, 0, 0.2));
-            border-color: rgba(0, 255, 136, 0.6);
-            box-shadow: 0 0 20px rgba(0, 255, 136, 0.3);
-            animation: rapidEvolutionPulse 2s ease-in-out infinite;
-        }
-
-        @keyframes rapidEvolutionPulse {
-            0%, 100% { 
-                transform: scale(1);
-                box-shadow: 0 0 20px rgba(0, 255, 136, 0.3);
-            }
-            50% { 
-                transform: scale(1.02);
-                box-shadow: 0 0 25px rgba(0, 255, 136, 0.5);
-            }
-        }
-
-        .result-value {
-            font-size: 1.4rem;
-            font-weight: 700;
-            color: #4ecdc4;
-            margin-bottom: 0.3rem;
-        }
-
-        .evolution .result-value {
-            color: #ffd700;
-        }
-
-        .result-label {
-            font-size: 0.85rem;
-            color: rgba(255, 255, 255, 0.8);
-            line-height: 1.2;
-        }
-
-        .evolution-timeline {
-            background: rgba(0, 0, 0, 0.2);
-            border-radius: 12px;
-            padding: 1.5rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .evolution-timeline h4 {
-            color: #ffd700;
-            margin-bottom: 1rem;
-            font-size: 1.1rem;
-        }
-
-        .timeline-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0.5rem 0;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .timeline-item:last-child {
-            border-bottom: none;
-        }
-
-        .timeline-year {
-            font-weight: 600;
-            color: rgba(255, 255, 255, 0.9);
-            width: 80px;
-        }
-
-        .timeline-value {
-            font-weight: 700;
-            color: #4ecdc4;
-            font-size: 1.1rem;
-        }
-
-        .timeline-growth {
-            color: #ffd700;
-            font-size: 0.9rem;
-        }
-
-        .market-basis {
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 8px;
-            padding: 1rem;
-            border-left: 3px solid #4ecdc4;
-        }
-
-        .market-basis small {
-            color: rgba(255, 255, 255, 0.8);
-            line-height: 1.4;
-        }
-
-        @media (max-width: 768px) {
-            .investment-calculator {
-                padding: 1.5rem;
-            }
-
-            .result-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 0.8rem;
-            }
-
-            .timeline-item {
-                flex-direction: column;
-                text-align: center;
-                gap: 0.3rem;
-            }
-
-            .calculator-input input {
-                width: 100%;
-                max-width: 250px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .result-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
+        /* Responsive Design */
         @media (max-width: 768px) {
             .container {
-                padding: 1.5rem 1rem;
-                max-width: 100%;
+                padding: 1rem;
             }
 
             .hero-title {
-                font-size: 2.2rem;
-                line-height: 1.2;
-                margin-bottom: 1rem;
-                word-wrap: break-word;
-                hyphens: auto;
+                font-size: 2.5rem;
             }
 
             .hero-subtitle {
                 font-size: 1rem;
-                line-height: 1.5;
-                margin-bottom: 2rem;
-                word-wrap: break-word;
-                hyphens: auto;
-            }
-
-            .impact-counter {
-                padding: 1.5rem;
-                margin: 2rem 0;
             }
 
             .counter-number {
                 font-size: 2rem;
-                line-height: 1.1;
-            }
-
-            .counter-label {
-                font-size: 0.9rem;
-                line-height: 1.4;
-                word-wrap: break-word;
-            }
-
-            .counter-subtitle {
-                font-size: 0.8rem;
-                line-height: 1.3;
-                word-wrap: break-word;
-            }
-
-            .simulation-title {
-                font-size: 1.3rem;
-                margin-bottom: 1.5rem;
-                word-wrap: break-word;
-            }
-
-            .cta-title {
-                font-size: 1.8rem;
-                line-height: 1.2;
-                margin-bottom: 1rem;
-                word-wrap: break-word;
-            }
-
-            .cta-description {
-                font-size: 0.95rem;
-                line-height: 1.5;
-                margin-bottom: 1.5rem;
-                word-wrap: break-word;
-                hyphens: auto;
             }
 
             .flow-step {
                 flex-direction: column;
-                gap: 1rem;
                 text-align: center;
             }
 
             .flow-arrow {
                 transform: rotate(90deg);
-                font-size: 1.5rem;
-            }
-
-            .flow-label {
-                font-size: 0.9rem;
-                word-wrap: break-word;
-            }
-
-            .flow-value {
-                font-size: 1.1rem;
-                word-wrap: break-word;
-            }
-
-            .live-formula {
-                font-size: 0.85rem;
-                line-height: 1.4;
-                word-wrap: break-word;
-                hyphens: auto;
-            }
-
-            .token-visual {
-                width: 50px;
-                height: 50px;
-                font-size: 1.2rem;
-            }
-
-            .user-type-grid {
-                grid-template-columns: 1fr;
             }
 
             .onboarding-container {
-                width: 98%;
-                border-radius: 16px;
-                max-width: 100%;
-            }
-
-            .animation-container {
-                width: 500px;
-                height: 500px;
-                opacity: 0.1;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .container {
-                padding: 1rem 0.8rem;
-                max-width: 100%;
-                word-wrap: break-word;
-            }
-
-            .logo {
-                font-size: 1.8rem;
-                margin-bottom: 2.5rem;
-                word-wrap: break-word;
-            }
-
-            .hero-title {
-                font-size: 1.8rem;
-                line-height: 1.1;
-                margin-bottom: 1rem;
-                word-wrap: break-word;
-                hyphens: auto;
-                text-align: center;
-            }
-
-            .hero-subtitle {
-                font-size: 0.9rem;
-                line-height: 1.4;
-                margin-bottom: 1.5rem;
-                word-wrap: break-word;
-                hyphens: auto;
-                text-align: center;
-            }
-
-            .impact-counter {
-                padding: 1rem;
-                margin: 1.5rem 0;
-            }
-
-            .counter-number {
-                font-size: 1.5rem;
-                line-height: 1;
-                word-wrap: break-word;
-            }
-
-            .counter-label {
-                font-size: 0.8rem;
-                line-height: 1.3;
-                word-wrap: break-word;
-                text-align: center;
-            }
-
-            .counter-subtitle {
-                font-size: 0.7rem;
-                line-height: 1.2;
-                word-wrap: break-word;
-                text-align: center;
-                margin-top: 0.5rem;
-            }
-
-            .simulation-title {
-                font-size: 1.1rem;
-                margin-bottom: 1rem;
-                word-wrap: break-word;
-                text-align: center;
-            }
-
-            .cta-title {
-                font-size: 1.5rem;
-                line-height: 1.1;
-                margin-bottom: 0.8rem;
-                word-wrap: break-word;
-                text-align: center;
-            }
-
-            .cta-description {
-                font-size: 0.85rem;
-                line-height: 1.4;
-                margin-bottom: 1.2rem;
-                word-wrap: break-word;
-                hyphens: auto;
-                text-align: center;
-            }
-
-            .cta-button {
-                font-size: 0.9rem;
-                padding: 0.8rem 1.5rem;
-                word-wrap: break-word;
-            }
-
-            .flow-container {
-                gap: 1rem;
-            }
-
-            .flow-step {
-                padding: 0.8rem;
-            }
-
-            .flow-label {
-                font-size: 0.8rem;
-                word-wrap: break-word;
-                text-align: center;
-            }
-
-            .flow-value {
-                font-size: 1rem;
-                word-wrap: break-word;
-                text-align: center;
-            }
-
-            .live-formula {
-                font-size: 0.75rem;
-                line-height: 1.3;
-                word-wrap: break-word;
-                hyphens: auto;
-                text-align: center;
-                padding: 0.8rem;
-            }
-
-            .formula-text {
-                word-wrap: break-word;
-                hyphens: auto;
-            }
-
-            .onboarding-container {
-                width: 100%;
-                height: 100vh;
-                border-radius: 0;
-                max-width: 100%;
-            }
-
-            .onboarding-content {
-                padding: 1rem;
-                word-wrap: break-word;
-            }
-
-            .onboarding-subtitle {
-                font-size: 0.85rem;
-                line-height: 1.4;
-                word-wrap: break-word;
-                hyphens: auto;
-            }
-
-            .animation-container {
-                width: 350px;
-                height: 350px;
-                opacity: 0.08;
-            }
-
-            /* Ensure no horizontal overflow */
-            * {
-                max-width: 100%;
-                box-sizing: border-box;
-            }
-
-            body {
-                overflow-x: hidden;
-            }
-        }
-
-        @media (max-width: 360px) {
-            .container {
-                padding: 0.8rem 0.5rem;
-            }
-
-            .hero-title {
-                font-size: 1.6rem;
-                line-height: 1;
-                word-wrap: break-word;
-                hyphens: auto;
-            }
-
-            .hero-subtitle {
-                font-size: 0.8rem;
-                line-height: 1.3;
-                word-wrap: break-word;
-                hyphens: auto;
-            }
-
-            .counter-number {
-                font-size: 1.3rem;
-            }
-
-            .counter-label {
-                font-size: 0.75rem;
-                word-wrap: break-word;
-            }
-
-            .counter-subtitle {
-                font-size: 0.65rem;
-                word-wrap: break-word;
-            }
-
-            .cta-title {
-                font-size: 1.3rem;
-                word-wrap: break-word;
-            }
-
-            .cta-description {
-                font-size: 0.8rem;
-                word-wrap: break-word;
-                hyphens: auto;
-            }
-
-            .live-formula {
-                font-size: 0.7rem;
-                word-wrap: break-word;
-                hyphens: auto;
-            }
-        }
-
-            .footer {
-                margin-top: 4rem;
-            }
-
-            .footer-content {
-                gap: 0.3rem;
-            }
-
-            .founder-info {
-                font-size: 0.8rem;
-            }
-
-            .copyright {
-                font-size: 0.75rem;
+                margin: 1rem;
+                padding: 1.5rem;
             }
         }
     </style>
@@ -1614,7 +579,7 @@
         <h1 class="hero-title">Reinventing Banking for Everyone</h1>
         
         <p class="hero-subtitle">
-            Creating a new banking model with autonomous financial infrastructure. Powered by Sirens, our crystalline stablecoin that converts vibrations into electrical energy.
+            Creating a new banking model with autonomous financial infrastructure. Powered by SIRENS, our crystalline cryptocurrency that converts vibrations into electrical energy in real-time.
         </p>
 
         <!-- Impact Counter -->
@@ -1624,178 +589,56 @@
             <div class="counter-subtitle">🇧🇯 Disrupting from Cotonou, Benin • Transforming Banking Globally 🌍</div>
         </div>
 
-        <!-- Sirens Flow Simulation -->
+        <!-- SIRENS Flow Simulation -->
         <div class="sirens-simulation">
-            <div class="simulation-title">⚡ Live Sirens Flow ⚡</div>
+            <div class="simulation-title">⚡ Live SIRENS Flow ⚡</div>
             
             <div class="flow-container">
-                <!-- Token Input -->
+                <!-- Token Vibration -->
                 <div class="flow-step">
                     <div class="flow-input">
-                        <div class="token-visual">S</div>
-                        <div>
-                            <div class="flow-label">Crystalline Vibratory Unit</div>
-                            <div class="flow-value">1 <span class="flow-unit">SIRENS TOKEN</span></div>
-                        </div>
-                    </div>
-                    <div class="flow-arrow">→</div>
-                    <div class="flow-output">
-                        <div>
-                            <div class="flow-label">Current Oscillation</div>
-                            <div class="flow-value" id="tokenFreq">440 <span class="flow-unit">Hz</span></div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="process-line"></div>
-
-                <!-- Frequency Accumulation -->
-                <div class="flow-step">
-                    <div class="flow-input">
-                        <div class="frequency-visual">
-                            <div class="freq-wave"></div>
-                            <div class="freq-wave"></div>
-                            <div class="freq-wave"></div>
-                            <div class="freq-wave"></div>
-                            <div class="freq-wave"></div>
-                            <div class="freq-wave"></div>
-                        </div>
-                        <div>
-                            <div class="flow-label">Evolutionary Cumulative Frequency</div>
-                            <div class="flow-value" id="cumulativeFreq">1,320 <span class="flow-unit">Hz</span></div>
-                        </div>
+                        <div class="flow-label">Crystalline Token Frequency</div>
+                        <div class="flow-value" id="tokenFreq">440.00 <span class="flow-unit">Hz</span></div>
                     </div>
                     <div class="flow-arrow">⚡</div>
                     <div class="flow-output">
-                        <div>
-                            <div class="flow-label">Electrical Generation</div>
-                            <div class="flow-value" id="electricalOutput">0.000396 <span class="flow-unit">kWh</span></div>
-                        </div>
+                        <div class="flow-label">Cumulative Resonance</div>
+                        <div class="flow-value" id="cumulativeFreq">1,320 <span class="flow-unit">Hz</span></div>
                     </div>
                 </div>
 
-                <div class="process-line"></div>
-
-                <!-- Value Conversion -->
+                <!-- Energy Conversion -->
                 <div class="flow-step">
                     <div class="flow-input">
-                        <div class="electrical-visual">
-                            <div class="lightning-bolt">⚡</div>
-                            <div class="lightning-bolt">⚡</div>
-                            <div class="lightning-bolt">⚡</div>
-                        </div>
-                        <div>
-                            <div class="flow-label">Electrical Output</div>
-                            <div class="flow-value" id="electricalValue">0.000396 <span class="flow-unit">kWh</span></div>
-                        </div>
+                        <div class="flow-label">Electrical Generation</div>
+                        <div class="flow-value" id="electricalOutput">0.000396 <span class="flow-unit">kWh</span></div>
                     </div>
                     <div class="flow-arrow">💰</div>
                     <div class="flow-output">
-                        <div>
-                            <div class="flow-label">Real-Time Value</div>
-                            <div class="flow-value" id="realtimePrice">$0.0000594 <span class="flow-unit">USD</span></div>
-                        </div>
-                        <div class="value-visual">
-                            <div class="dollar-symbol">$</div>
-                        </div>
+                        <div class="flow-label">Real-time Value</div>
+                        <div class="flow-value" id="realtimePrice">$0.0000594 <span class="flow-unit">USD</span></div>
                     </div>
                 </div>
 
-                <!-- Formula -->
+                <!-- Formula Display -->
                 <div class="live-formula">
                     <div class="formula-text">
-                        � <strong>Sirens Evolution Formula:</strong> 
+                        🔮 <strong>SIRENS Evolution Formula:</strong> 
                         <span class="formula-variable" id="liveFormulaCumulative">1,320</span> Hz (Cumulative) × 
-                        <span class="formula-variable">0.0000003</span> kWh/Hz × 
+                        <span class="formula-variable">0.0000009</span> kWh/Hz × 
                         $<span class="formula-variable" id="liveFormulaPrice">0.150</span>/kWh = 
-                        $<span class="formula-variable" id="liveFormulaResult">0.000059</span> USD
+                        $<span class="formula-variable" id="liveFormulaResult">0.0000594</span> USD
                     </div>
                 </div>
             </div>
         </div>
 
+        <!-- CTA Section -->
         <div class="cta-section">
             <h2 class="cta-title">Join the Banking Revolution</h2>
             <p class="cta-description">
                 Pioneering a revolutionary banking model with crystalline technology. Join founding investors creating universal banking access for 1.7 billion unbanked people.
             </p>
-            
-            <!-- Investment Calculator -->
-            <div class="investment-calculator">
-                <h3>💰 SIRENS Investment Calculator</h3>
-                <p class="calculator-subtitle">
-                    🔮 <strong>1 SIRENS = 1 Vibratory Token Unit</strong><br>
-                    Token price dynamically calculated from global electricity market ($0.15/kWh)<br>
-                    <small>No token limits - purchase any amount based on your investment</small>
-                </p>
-                
-                <!-- Synchronization Status -->
-                <div id="syncStatus" style="background: rgba(255, 152, 0, 0.1); border: 1px solid rgba(255, 152, 0, 0.3); border-radius: 6px; padding: 0.5rem; margin-bottom: 1rem; font-size: 0.85em; color: rgba(255, 255, 255, 0.8); text-align: center;">
-                    🔄 Connecting to Live SIRENS Flow...
-                </div>
-                
-                <div class="calculator-input">
-                    <label for="investAmount">Investment Amount (USD):</label>
-                    <input type="number" id="investAmount" placeholder="100" min="1" max="1000000" value="100">
-                </div>
-                
-                <div class="calculator-results">
-                    <div class="result-grid">
-                        <div class="result-item">
-                            <div class="result-value" id="tokensReceived">182</div>
-                            <div class="result-label">SIRENS Tokens</div>
-                        </div>
-                        <div class="result-item">
-                            <div class="result-value" id="dailyGeneration">0.0728</div>
-                            <div class="result-label">kWh/day Generated</div>
-                        </div>
-                        <div class="result-item">
-                            <div class="result-value" id="dailyIncome">$0.0109</div>
-                            <div class="result-label">Daily Passive Income</div>
-                        </div>
-                        <div class="result-item">
-                            <div class="result-value" id="annualIncome">$3.98</div>
-                            <div class="result-label">Annual Energy Income</div>
-                        </div>
-                        <div class="result-item">
-                            <div class="result-value" id="roiPercentage">3.98%</div>
-                            <div class="result-label">Base APY (Energy Only)</div>
-                        </div>
-                        <div class="result-item evolution">
-                            <div class="result-value" id="evolutionBonus">+240%</div>
-                            <div class="result-label">3-Year Exponential Growth</div>
-                        </div>
-                    </div>
-                    
-                    <div class="evolution-timeline">
-                        <h4>🔮 Non-Linear Crystalline Evolution</h4>
-                        <div class="timeline-item">
-                            <span class="timeline-year">Year 1:</span>
-                            <span class="timeline-value" id="year1Income">$5.78/year</span>
-                            <span class="timeline-growth">(+45% exponential)</span>
-                        </div>
-                        <div class="timeline-item">
-                            <span class="timeline-year">Year 2:</span>
-                            <span class="timeline-value" id="year2Income">$8.56/year</span>
-                            <span class="timeline-growth">(+115% crystalline)</span>
-                        </div>
-                        <div class="timeline-item">
-                            <span class="timeline-year">Year 3:</span>
-                            <span class="timeline-value" id="year3Income">$13.53/year</span>
-                            <span class="timeline-growth">(+240% resonance)</span>
-                        </div>
-                    </div>
-                    
-                    <div class="market-basis">
-                        <small>
-                            💡 <strong>Electricity-Based Token Pricing:</strong> 
-                            Each SIRENS token represents a vibratory crystalline unit that generates electricity. 
-                            Token price = Electricity Generation Potential × Global Market Rate ($0.15/kWh) × Evolution Factor.
-                            No token limits - unlimited purchase based on investment amount.
-                        </small>
-                    </div>
-                </div>
-            </div>
             
             <button class="cta-button" id="ctaButton">
                 <span>🏦 Revolutionary Banking</span>
@@ -1814,138 +657,73 @@
     <!-- Investor Onboarding Modal -->
     <div class="onboarding-overlay" id="onboardingOverlay">
         <div class="onboarding-container">
-            <!-- Step 1: Investor Form -->
-            <div class="onboarding-step active" id="step1">
-                <div class="onboarding-header">
-                    <h2>🏦 Banking Revolution Access</h2>
-                    <button class="onboarding-close" id="onboardingClose">&times;</button>
-                </div>
-                <div class="onboarding-content">
-                    <div class="welcome-animation">
-                        <div class="welcome-sirens">💎</div>
-                    </div>
-                    <p class="onboarding-subtitle">Pioneer the new banking model with Sirius. Join exclusive investors backing the world's first autonomous banking infrastructure powered by crystalline cryptocurrency technology.</p>
-                    
-                    <form class="investor-form" id="investorForm">
-                        <div class="form-group">
-                            <label for="fullName">Full Name *</label>
-                            <input type="text" id="fullName" name="fullName" required placeholder="John Smith">
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="company">Fund/Company *</label>
-                            <input type="text" id="company" name="company" required placeholder="Acme Ventures">
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="email">Email Address *</label>
-                            <input type="email" id="email" name="email" required placeholder="john@acmeventures.com">
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="investmentSize">Investment Interest</label>
-                            <select id="investmentSize" name="investmentSize">
-                                <option value="">Select range</option>
-                                <option value="under-100k">Under $100K</option>
-                                <option value="100k-500k">$100K - $500K</option>
-                                <option value="500k-1m">$500K - $1M</option>
-                                <option value="1m-5m">$1M - $5M</option>
-                                <option value="over-5m">Over $5M</option>
-                            </select>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="timeline">Investment Timeline</label>
-                            <select id="timeline" name="timeline">
-                                <option value="">Select timeline</option>
-                                <option value="immediate">Immediate (0-3 months)</option>
-                                <option value="short">Short-term (3-6 months)</option>
-                                <option value="medium">Medium-term (6-12 months)</option>
-                                <option value="long">Long-term (12+ months)</option>
-                            </select>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="focus">Investment Focus</label>
-                            <div class="checkbox-group">
-                                <label class="checkbox-label">
-                                    <input type="checkbox" name="focus" value="fintech"> Fintech
-                                </label>
-                                <label class="checkbox-label">
-                                    <input type="checkbox" name="focus" value="blockchain"> Blockchain
-                                </label>
-                                <label class="checkbox-label">
-                                    <input type="checkbox" name="focus" value="africa"> Africa Markets
-                                </label>
-                                <label class="checkbox-label">
-                                    <input type="checkbox" name="focus" value="defi"> DeFi/Crypto
-                                </label>
-                            </div>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="message">Additional Information</label>
-                            <textarea id="message" name="message" placeholder="Tell us about your investment focus, portfolio, or any specific questions about Sirens..."></textarea>
-                        </div>
-                        
-                        <div class="form-actions">
-                            <button type="submit" class="form-button primary">
-                                <span>🚀 Get Investor Access</span>
-                            </button>
-                        </div>
-                    </form>
-                </div>
+            <div class="onboarding-header">
+                <h2>🏦 Banking Revolution Access</h2>
+                <button class="onboarding-close" id="onboardingClose">&times;</button>
             </div>
-
-            <!-- Step 2: Success -->
-            <div class="onboarding-step" id="step2">
-                <div class="onboarding-content success-content">
-                    <div class="success-animation">
-                        <div class="success-icon">✨</div>
-                        <div class="success-sirens">💎⚡💎</div>
-                    </div>
-                    <h2>Welcome aboard, Investor!</h2>
-                    <p>Thank you for your interest in Sirens. Our team will contact you within 24 hours with detailed investment materials.</p>
-                    
-                    <div class="next-steps">
-                        <h3>What happens next:</h3>
-                        <ul>
-                            <li>Receive our comprehensive pitch deck and financial projections</li>
-                            <li>Schedule a 1-on-1 call with our founding team</li>
-                            <li>Get access to our private investor portal</li>
-                            <li>Review technical documentation and roadmap</li>
-                            <li>Discuss investment terms and opportunities</li>
-                        </ul>
-                    </div>
-                    
-                    <div class="success-actions">
-                        <button class="success-button primary" id="viewPitchDeck">View Pitch Deck</button>
-                        <button class="success-button secondary" id="contactTeam">Contact Team</button>
-                    </div>
+            <div class="onboarding-content">
+                <div class="welcome-animation">
+                    <div class="welcome-sirens">💎</div>
                 </div>
+                <p>Pioneer the new banking model with Sirius. Join exclusive investors backing the world's first autonomous banking infrastructure powered by crystalline cryptocurrency technology.</p>
+                
+                <form class="investor-form" id="investorForm">
+                    <div class="form-group">
+                        <label for="fullName">Full Name *</label>
+                        <input type="text" id="fullName" name="fullName" required placeholder="John Smith">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="company">Fund/Company *</label>
+                        <input type="text" id="company" name="company" required placeholder="Acme Ventures">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email">Email Address *</label>
+                        <input type="email" id="email" name="email" required placeholder="john@acmeventures.com">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="investmentSize">Investment Interest</label>
+                        <select id="investmentSize" name="investmentSize">
+                            <option value="100k-500k">$100K - $500K</option>
+                            <option value="500k-1m">$500K - $1M</option>
+                            <option value="1m-5m">$1M - $5M</option>
+                            <option value="5m+">$5M+</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="message">Message (Optional)</label>
+                        <textarea id="message" name="message" placeholder="Tell us about your investment focus and timeline..."></textarea>
+                    </div>
+                    
+                    <button type="submit" class="form-button primary">
+                        🚀 Access Banking Revolution
+                    </button>
+                </form>
             </div>
         </div>
     </div>
 
     <script>
-        // Sirens Crystalline Vibratory Token System - OPTIMIZED Real-Time Simulation
+        // SIRENS Crystalline Vibratory Token System - Live Simulation
         class SirensFlowSimulation {
             constructor() {
-                // Sirens Token = Crystalline Vibratory Unit
-                // 1 SIRENS = 1 TOKEN with evolutionary cumulative frequency
+                // SIRENS Token = Crystalline Vibratory Unit
                 this.currentTokenFreq = 440; // Current oscillation frequency (Hz)
-                this.maxFrequencyThreshold = 880; // Maximum frequency before cumulative evolution
+                this.maxFrequencyThreshold = 880; // Maximum frequency before evolution
                 this.evolutionCycles = 0; // Number of frequency evolution cycles
                 this.cumulativeFreq = 440; // Accumulated frequency from current cycle
                 this.totalAccumulatedFreq = 1320; // Total cumulative frequency across all cycles
                 this.lastEvolutionTime = Date.now(); // Track evolution timing
                 
-                // Enhanced crystalline parameters
-                this.crystallinePiezoEfficiency = 0.0000009; // kWh per Hz (crystal resonance efficiency) - UPDATED FOR SYNC
+                // Crystalline parameters
+                this.crystallinePiezoEfficiency = 0.0000009; // kWh per Hz (crystal resonance efficiency)
                 this.resonanceAmplifier = 1.0; // Increases with evolution cycles
                 this.stabilityFactor = 0.95; // Natural oscillation stability
                 
-                // Real-world electricity pricing with premium
+                // Real-world electricity pricing
                 this.baseElectricityPrice = 0.15; // USD per kWh (global average)
                 this.crystallinePremium = 1.08; // 8% premium for crystalline energy
                 
@@ -1953,22 +731,15 @@
                 this.electricalOutput = 0.000396;
                 this.realtimePrice = 0.0000594;
                 
-                // Animation states
-                this.isAnimating = false;
-                this.animationQueue = [];
-                this.lastUpdateTime = Date.now();
-                
-                // Expose globally for calculator synchronization
+                // Expose globally
                 window.sirensFlowSimulator = this;
-                console.log('🔮 Live SIRENS Flow Simulator initialized and exposed globally');
                 
                 this.init();
             }
             
             init() {
                 this.setupElements();
-                this.startOptimizedSimulation();
-                this.initializeVisualEffects();
+                this.startSimulation();
             }
             
             setupElements() {
@@ -1976,7 +747,6 @@
                     tokenFreq: document.getElementById('tokenFreq'),
                     cumulativeFreq: document.getElementById('cumulativeFreq'),
                     electricalOutput: document.getElementById('electricalOutput'),
-                    electricalValue: document.getElementById('electricalValue'),
                     realtimePrice: document.getElementById('realtimePrice'),
                     liveFormulaCumulative: document.getElementById('liveFormulaCumulative'),
                     liveFormulaPrice: document.getElementById('liveFormulaPrice'),
@@ -1984,27 +754,24 @@
                 };
             }
             
-            startOptimizedSimulation() {
-                // High-frequency oscillation display (smooth visual updates)
-                setInterval(() => this.updateCrystallineOscillation(), 200);
+            startSimulation() {
+                // Oscillation updates (smooth visual)
+                setInterval(() => this.updateOscillation(), 200);
                 
-                // Medium-frequency evolution (realistic progression)
-                setInterval(() => this.progressFrequencyEvolution(), 1800);
+                // Evolution progression
+                setInterval(() => this.progressEvolution(), 1800);
                 
-                // Low-frequency major evolution (cumulative breakthroughs)
-                setInterval(() => this.triggerEvolutionCycle(), 8000);
+                // Major evolution cycles
+                setInterval(() => this.triggerEvolution(), 8000);
                 
-                // Real-time value updates
-                setInterval(() => this.updateFinancialMetrics(), 1000);
+                // Financial metrics updates
+                setInterval(() => this.updateMetrics(), 1000);
             }
             
-            updateCrystallineOscillation() {
-                // Enhanced natural crystalline oscillation with realistic physics
+            updateOscillation() {
                 const timeNow = Date.now();
-                const timeDelta = (timeNow - this.lastUpdateTime) / 1000;
-                this.lastUpdateTime = timeNow;
                 
-                // Multiple harmonic oscillations for realistic crystal behavior
+                // Natural crystalline oscillation
                 const baseWave = Math.sin(timeNow / 1200) * 3;
                 const harmonicWave = Math.sin(timeNow / 800) * 1.5;
                 const microVibration = Math.sin(timeNow / 300) * 0.8;
@@ -2013,17 +780,13 @@
                 const totalOscillation = baseWave + harmonicWave + microVibration + randomNoise;
                 const displayFreq = Math.round((this.currentTokenFreq + totalOscillation) * 100) / 100;
                 
-                // Smooth animation with enhanced visual feedback
-                this.smoothUpdateElement(this.elements.tokenFreq, displayFreq, 'Hz', {
-                    color: this.getFrequencyColor(displayFreq),
-                    glow: this.calculateGlowIntensity(displayFreq)
-                });
+                this.animateValue(this.elements.tokenFreq, displayFreq, 'Hz');
             }
             
-            progressFrequencyEvolution() {
-                // Realistic frequency progression with acceleration near threshold
+            progressEvolution() {
+                // Frequency progression with acceleration near threshold
                 const progressToThreshold = this.currentTokenFreq / this.maxFrequencyThreshold;
-                const accelerationFactor = Math.pow(progressToThreshold, 1.5); // Exponential acceleration
+                const accelerationFactor = Math.pow(progressToThreshold, 1.5);
                 
                 const baseIncrease = 3 + (Math.random() * 4);
                 const acceleratedIncrease = baseIncrease * (1 + accelerationFactor * 2);
@@ -2032,180 +795,56 @@
                 this.currentTokenFreq += finalIncrease;
                 this.cumulativeFreq += finalIncrease;
                 
-                // Visual feedback for progression
-                this.addProgressionEffect();
-                
-                // Check for evolution threshold
                 if (this.currentTokenFreq >= this.maxFrequencyThreshold) {
-                    this.prepareForEvolution();
+                    this.prepareEvolution();
                 }
             }
             
-            triggerEvolutionCycle() {
+            triggerEvolution() {
                 if (this.currentTokenFreq >= this.maxFrequencyThreshold * 0.9) {
-                    this.executeEvolutionCycle();
+                    this.executeEvolution();
                 }
             }
             
-            executeEvolutionCycle() {
-                // Major evolution event - cumulative frequency breakthrough
+            executeEvolution() {
+                // Major evolution event
                 this.evolutionCycles++;
                 
                 // Add current cycle to total accumulation
                 this.totalAccumulatedFreq += this.cumulativeFreq;
                 
-                // Calculate new base frequency with exponential growth
+                // Calculate new base frequency
                 const evolutionBonus = this.evolutionCycles * 45;
                 this.currentTokenFreq = 440 + evolutionBonus;
-                this.maxFrequencyThreshold = this.currentTokenFreq * 2.2; // Dynamic threshold
-                this.cumulativeFreq = this.currentTokenFreq; // Reset current cycle
+                this.maxFrequencyThreshold = this.currentTokenFreq * 2.2;
+                this.cumulativeFreq = this.currentTokenFreq;
                 
                 // Enhance resonance amplifier
                 this.resonanceAmplifier = 1 + (this.evolutionCycles * 0.15);
                 
-                // Visual evolution effect
-                this.triggerEvolutionAnimation();
-                
-                console.log(`🔮 SIRENS Evolution Cycle ${this.evolutionCycles}:`);
-                console.log(`   New Base: ${this.currentTokenFreq} Hz`);
-                console.log(`   Total Accumulated: ${this.totalAccumulatedFreq} Hz`);
-                console.log(`   Resonance Amplifier: ${this.resonanceAmplifier.toFixed(2)}x`);
+                console.log(`🔮 SIRENS Evolution Cycle ${this.evolutionCycles}: ${this.currentTokenFreq} Hz`);
             }
             
-            updateFinancialMetrics() {
-                // Enhanced electrical output calculation with resonance amplification
+            updateMetrics() {
+                // Electrical output calculation
                 const baseOutput = this.totalAccumulatedFreq * this.crystallinePiezoEfficiency;
                 this.electricalOutput = Math.round(baseOutput * this.resonanceAmplifier * 1000000) / 1000000;
                 
-                // Dynamic pricing with market conditions and crystalline premium
-                const timeVariation = Math.sin(Date.now() / 60000) * 0.005; // 5-minute cycles
-                const marketVolatility = (Math.random() - 0.5) * 0.008; // ±0.4% volatility
-                const premiumMultiplier = this.crystallinePremium + (this.evolutionCycles * 0.01); // Evolution bonus
+                // Dynamic pricing
+                const timeVariation = Math.sin(Date.now() / 60000) * 0.005;
+                const marketVolatility = (Math.random() - 0.5) * 0.008;
+                const premiumMultiplier = this.crystallinePremium + (this.evolutionCycles * 0.01);
                 
                 const currentPrice = this.baseElectricityPrice * premiumMultiplier * (1 + timeVariation + marketVolatility);
                 this.realtimePrice = Math.round(this.electricalOutput * currentPrice * 1000000) / 1000000;
                 
-                // Smooth updates with enhanced animations
-                this.smoothUpdateElement(this.elements.cumulativeFreq, this.totalAccumulatedFreq, 'Hz');
-                this.smoothUpdateElement(this.elements.electricalOutput, this.electricalOutput, 'kWh');
-                this.smoothUpdateElement(this.elements.electricalValue, this.electricalOutput, 'kWh');
-                this.smoothUpdateElement(this.elements.realtimePrice, this.realtimePrice, 'USD', '$');
+                // Update displays
+                this.animateValue(this.elements.cumulativeFreq, this.totalAccumulatedFreq, 'Hz');
+                this.animateValue(this.elements.electricalOutput, this.electricalOutput, 'kWh');
+                this.animateValue(this.elements.realtimePrice, this.realtimePrice, 'USD', '$');
                 
-                // Update formula display
-                this.updateFormulaDisplay(currentPrice);
-            }
-            
-            smoothUpdateElement(element, targetValue, unit, effects = {}) {
-                if (!element) return;
-                
-                const currentText = element.textContent || '0';
-                const currentValue = parseFloat(currentText.replace(/[^\d.-]/g, '')) || 0;
-                
-                // Enhanced smooth animation
-                const steps = 20;
-                const increment = (targetValue - currentValue) / steps;
-                let current = currentValue;
-                let step = 0;
-                
-                const animate = () => {
-                    if (step >= steps) {
-                        current = targetValue;
-                    } else {
-                        current += increment;
-                        step++;
-                    }
-                    
-                    const precision = targetValue < 0.001 ? 6 : (targetValue < 1 ? 4 : 2);
-                    const displayValue = current.toFixed(precision);
-                    const prefix = unit === 'USD' ? '$' : '';
-                    
-                    element.innerHTML = `${prefix}${displayValue} <span class="flow-unit">${unit}</span>`;
-                    
-                    // Apply visual effects
-                    if (effects.color) {
-                        element.style.color = effects.color;
-                    }
-                    if (effects.glow) {
-                        element.style.textShadow = `0 0 ${effects.glow}px currentColor`;
-                    }
-                    
-                    if (step < steps) {
-                        requestAnimationFrame(animate);
-                    }
-                };
-                
-                animate();
-            }
-            
-            getFrequencyColor(freq) {
-                // Dynamic color based on frequency intensity
-                const intensity = Math.min(freq / 1000, 1);
-                const hue = 180 + (intensity * 60); // Cyan to yellow spectrum
-                return `hsl(${hue}, 70%, 70%)`;
-            }
-            
-            calculateGlowIntensity(freq) {
-                // Dynamic glow based on frequency
-                return Math.min(freq / 200, 15);
-            }
-            
-            addProgressionEffect() {
-                // Visual feedback for frequency progression
-                const progressElements = document.querySelectorAll('.flow-value');
-                progressElements.forEach(el => {
-                    el.style.transform = 'scale(1.02)';
-                    setTimeout(() => {
-                        el.style.transform = 'scale(1)';
-                    }, 200);
-                });
-            }
-            
-            triggerEvolutionAnimation() {
-                // Major visual effect for evolution cycles
-                const container = document.querySelector('.sirens-simulation');
-                if (container) {
-                    container.style.boxShadow = '0 0 30px rgba(78, 205, 196, 0.8)';
-                    setTimeout(() => {
-                        container.style.boxShadow = '';
-                    }, 1000);
-                }
-            }
-            
-            updateFormulaDisplay(currentPrice) {
-                if (this.elements.liveFormulaCumulative) {
-                    this.elements.liveFormulaCumulative.textContent = this.totalAccumulatedFreq.toLocaleString();
-                }
-                if (this.elements.liveFormulaPrice) {
-                    this.elements.liveFormulaPrice.textContent = currentPrice.toFixed(3);
-                }
-                if (this.elements.liveFormulaResult) {
-                    this.elements.liveFormulaResult.textContent = this.realtimePrice.toFixed(6);
-                }
-            }
-            
-            initializeVisualEffects() {
-                // Add smooth transitions to all elements
-                const styleSheet = document.createElement('style');
-                styleSheet.textContent = `
-                    .flow-value {
-                        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-                    }
-                    .sirens-simulation {
-                        transition: box-shadow 0.5s ease;
-                    }
-                    .formula-variable {
-                        transition: color 0.3s ease;
-                    }
-                `;
-                document.head.appendChild(styleSheet);
-            }
-            
-            prepareForEvolution() {
-                // Prepare visual indicators for upcoming evolution
-                const tokenElement = this.elements.tokenFreq;
-                if (tokenElement) {
-                    tokenElement.style.animation = 'pulse 0.5s infinite';
-                }
+                // Update formula
+                this.updateFormula(currentPrice);
             }
             
             animateValue(element, targetValue, unit, prefix = '') {
@@ -2222,7 +861,8 @@
                         current = targetValue;
                     }
                     
-                    const displayValue = current.toFixed(targetValue < 1 ? 4 : (targetValue < 100 ? 2 : 0));
+                    const precision = targetValue < 0.001 ? 6 : (targetValue < 1 ? 4 : 2);
+                    const displayValue = current.toFixed(precision);
                     element.innerHTML = `${prefix}${displayValue} <span class="flow-unit">${unit}</span>`;
                     
                     if (current !== targetValue) {
@@ -2231,6 +871,29 @@
                 };
                 
                 animate();
+            }
+            
+            updateFormula(currentPrice) {
+                if (this.elements.liveFormulaCumulative) {
+                    this.elements.liveFormulaCumulative.textContent = this.totalAccumulatedFreq.toLocaleString();
+                }
+                if (this.elements.liveFormulaPrice) {
+                    this.elements.liveFormulaPrice.textContent = currentPrice.toFixed(3);
+                }
+                if (this.elements.liveFormulaResult) {
+                    this.elements.liveFormulaResult.textContent = this.realtimePrice.toFixed(6);
+                }
+            }
+            
+            prepareEvolution() {
+                // Visual indicator for upcoming evolution
+                const container = document.querySelector('.sirens-simulation');
+                if (container) {
+                    container.style.boxShadow = '0 0 20px rgba(78, 205, 196, 0.5)';
+                    setTimeout(() => {
+                        container.style.boxShadow = '';
+                    }, 500);
+                }
             }
         }
 
@@ -2264,10 +927,9 @@
             requestAnimationFrame(updateCounter);
         }
 
-        // Investor Onboarding System
+        // Investor Onboarding
         class InvestorOnboarding {
             constructor() {
-                this.currentStep = 1;
                 this.investorData = {};
                 this.init();
             }
@@ -2281,8 +943,6 @@
                 const overlay = document.getElementById('onboardingOverlay');
                 const closeBtn = document.getElementById('onboardingClose');
                 const form = document.getElementById('investorForm');
-                const viewPitchDeck = document.getElementById('viewPitchDeck');
-                const contactTeam = document.getElementById('contactTeam');
                 
                 if (ctaButton) {
                     ctaButton.addEventListener('click', () => {
@@ -2300,21 +960,7 @@
                 if (form) {
                     form.addEventListener('submit', (e) => {
                         e.preventDefault();
-                        this.handleFormSubmission();
-                    });
-                }
-                
-                if (viewPitchDeck) {
-                    viewPitchDeck.addEventListener('click', () => {
-                        this.closeOnboarding();
-                        window.open('https://pitch.sirius.com', '_blank');
-                    });
-                }
-                
-                if (contactTeam) {
-                    contactTeam.addEventListener('click', () => {
-                        this.closeOnboarding();
-                        window.open('mailto:investors@sirius.com?subject=Investment Inquiry - Sirius&body=Hello, I am interested in learning more about investment opportunities with Sirius.', '_blank');
+                        this.handleSubmission();
                     });
                 }
                 
@@ -2336,37 +982,18 @@
             closeOnboarding() {
                 document.getElementById('onboardingOverlay').classList.remove('active');
                 document.body.style.overflow = 'auto';
-                this.reset();
             }
             
-            goToStep(stepNumber) {
-                // Hide all steps
-                document.querySelectorAll('.onboarding-step').forEach(step => {
-                    step.classList.remove('active');
-                });
-                
-                // Show target step
-                document.getElementById(`step${stepNumber}`).classList.add('active');
-                this.currentStep = stepNumber;
-            }
-            
-            handleFormSubmission() {
+            async handleSubmission() {
                 const form = document.getElementById('investorForm');
                 const formData = new FormData(form);
                 
-                // Get focus areas
-                const focusAreas = Array.from(document.querySelectorAll('input[name="focus"]:checked'))
-                    .map(checkbox => checkbox.value);
-                
-                // Collect form data
                 this.investorData = {
                     timestamp: new Date().toISOString(),
                     fullName: formData.get('fullName'),
                     company: formData.get('company'),
                     email: formData.get('email'),
                     investmentSize: formData.get('investmentSize'),
-                    timeline: formData.get('timeline'),
-                    focus: focusAreas,
                     message: formData.get('message')
                 };
                 
@@ -2376,139 +1003,32 @@
                     return;
                 }
                 
-                // Submit data
-                this.submitInvestorData().then(() => {
-                    this.goToStep(2);
-                });
-            }
-            
-            async submitInvestorData() {
-                const submitBtn = document.querySelector('.form-button.primary');
+                const submitBtn = form.querySelector('.form-button.primary');
                 const originalText = submitBtn.innerHTML;
                 
                 // Show loading state
-                submitBtn.innerHTML = '<span>Submitting...</span>';
+                submitBtn.innerHTML = 'Submitting...';
                 submitBtn.disabled = true;
                 
                 try {
                     // Simulate API call
                     await new Promise(resolve => setTimeout(resolve, 2000));
                     
-                    // Log data (in real app, send to backend)
                     console.log('Investor data submitted:', this.investorData);
                     
-                    // Here you would typically send to your backend:
-                    // await fetch('/api/investors', {
-                    //     method: 'POST',
-                    //     headers: { 'Content-Type': 'application/json' },
-                    //     body: JSON.stringify(this.investorData)
-                    // });
+                    alert('Thank you! We will contact you within 24 hours with detailed investment materials.');
+                    this.closeOnboarding();
+                    form.reset();
                     
                 } catch (error) {
                     console.error('Submission error:', error);
                     alert('There was an error submitting your information. Please try again.');
                 } finally {
-                    // Reset button
                     submitBtn.innerHTML = originalText;
                     submitBtn.disabled = false;
                 }
             }
-            
-            reset() {
-                this.currentStep = 1;
-                this.investorData = {};
-                
-                // Reset form
-                const form = document.getElementById('investorForm');
-                if (form) {
-                    form.reset();
-                }
-                
-                // Reset to step 1
-                this.goToStep(1);
-            }
         }
-
-        // Audio Player
-        class AudioPlayer {
-            constructor() {
-                this.audioContext = null;
-                this.masterGain = null;
-                this.isPlaying = false;
-                this.init();
-            }
-            
-            async init() {
-                // Create audio context
-                this.audioContext = new (window.AudioContext || window.webkitAudioContext)();
-                
-                // Create master gain node
-                this.masterGain = this.audioContext.createGain();
-                this.masterGain.connect(this.audioContext.destination);
-                
-                // Load and decode audio data
-                const response = await fetch('ambient-sound.mp3');
-                const arrayBuffer = await response.arrayBuffer();
-                this.audioBuffer = await this.audioContext.decodeAudioData(arrayBuffer);
-                
-                // Create source node
-                this.sourceNode = this.audioContext.createBufferSource();
-                this.sourceNode.buffer = this.audioBuffer;
-                this.sourceNode.loop = true;
-                this.sourceNode.connect(this.masterGain);
-                
-                // Set initial volume
-                this.setVolume(0.5);
-            }
-            
-            play() {
-                if (!this.isPlaying) {
-                    this.sourceNode.start(0);
-                    this.isPlaying = true;
-                }
-            }
-            
-            pause() {
-                if (this.isPlaying) {
-                    this.sourceNode.stop(0);
-                    this.isPlaying = false;
-                }
-            }
-            
-            setVolume(value) {
-                const volume = Math.max(0, Math.min(value, 1));
-                this.masterGain.gain.setValueAtTime(volume, this.audioContext.currentTime);
-            }
-        }
-
-        // Initialize everything
-        document.addEventListener('DOMContentLoaded', () => {
-            setTimeout(() => animateCounter(), 2000);
-            setTimeout(() => new SirensFlowSimulation(), 1500);
-            new InvestorOnboarding(); // ERREUR CORRIGÉE : SimpleOnboarding -> InvestorOnboarding
-
-            // Initialize audio player
-            const audioPlayer = new AudioPlayer();
-
-            // Play/pause button
-            const playPauseBtn = document.getElementById('playPauseBtn');
-            playPauseBtn.addEventListener('click', () => {
-                if (audioPlayer.isPlaying) {
-                    audioPlayer.pause();
-                    playPauseBtn.textContent = '▶️';
-                } else {
-                    audioPlayer.play();
-                    playPauseBtn.textContent = '⏸️';
-                }
-            });
-
-            // Volume slider
-            const volumeSlider = document.getElementById('volumeSlider');
-            volumeSlider.addEventListener('input', (e) => {
-                const volume = parseFloat(e.target.value);
-                audioPlayer.setVolume(volume);
-            });
-        });
 
         // Viewport handling
         function handleViewportChange() {
@@ -2516,717 +1036,18 @@
             document.documentElement.style.setProperty('--vh', `${vh}px`);
         }
 
+        // Initialize everything
+        document.addEventListener('DOMContentLoaded', () => {
+            setTimeout(() => animateCounter(), 2000);
+            setTimeout(() => new SirensFlowSimulation(), 1500);
+            new InvestorOnboarding();
+            handleViewportChange();
+        });
+
         window.addEventListener('resize', handleViewportChange);
         window.addEventListener('orientationchange', () => {
             setTimeout(handleViewportChange, 100);
         });
-
-        handleViewportChange();
-    </script>
-
-    <!-- Ambient Evolutionary Audio System -->
-    <script>
-        class AmbientAudioSystem {
-            constructor() {
-                this.audioContext = null;
-                this.isInitialized = false;
-                this.oscillators = [];
-                this.gainNodes = [];
-                this.filterNodes = [];
-                this.masterGain = null;
-                this.time = 0;
-                this.evolutionSpeed = 0.00005;
-                this.baseVolume = 0.015;
-                this.isActive = false;
-                this.panners = [];
-                
-                // Frequency bases for very subtle cosmic/ethereal sounds
-                this.frequencies = [
-                    { base: 40, drift: 1 },    // Ultra deep sub bass
-                    { base: 80, drift: 2 },    // Deep ambient
-                    { base: 160, drift: 3 }    // Subtle mid layer
-                ];
-                
-                this.init();
-            }
-            
-            async init() {
-                try {
-                    // Wait for user interaction before starting audio
-                    document.addEventListener('click', () => this.startAudio(), { once: true });
-                    document.addEventListener('touchstart', () => this.startAudio(), { once: true });
-                    document.addEventListener('keydown', () => this.startAudio(), { once: true });
-                    
-                    // Also start on any scroll or mouse movement after a delay
-                    let interactionTimeout;
-                    const startOnInteraction = () => {
-                        clearTimeout(interactionTimeout);
-                        interactionTimeout = setTimeout(() => this.startAudio(), 2000);
-                    };
-                    
-                    document.addEventListener('scroll', startOnInteraction, { passive: true });
-                    document.addEventListener('mousemove', startOnInteraction, { passive: true });
-                    
-                } catch (error) {
-                    console.log('Audio initialization waiting for user interaction');
-                }
-            }
-            
-            async startAudio() {
-                if (this.isActive) return;
-                
-                try {
-                    this.audioContext = new (window.AudioContext || window.webkitAudioContext)();
-                    await this.audioContext.resume();
-                    
-                    this.createAudioNodes();
-                    this.startEvolution();
-                    this.isActive = true;
-                    
-                } catch (error) {
-                    console.log('Audio context not available');
-                }
-            }
-            
-            createAudioNodes() {
-                // Master gain control
-                this.masterGain = this.audioContext.createGain();
-                this.masterGain.gain.setValueAtTime(this.baseVolume, this.audioContext.currentTime);
-                this.masterGain.connect(this.audioContext.destination);
-                
-                // Create oscillators for each frequency layer with spatial rotation
-                this.frequencies.forEach((freq, index) => {
-                    const oscillator = this.audioContext.createOscillator();
-                    const gainNode = this.audioContext.createGain();
-                    const filterNode = this.audioContext.createBiquadFilter();
-                    const pannerNode = this.audioContext.createStereoPanner();
-                    
-                    // Configure oscillator for very subtle ambient sound
-                    oscillator.type = 'sine';
-                    oscillator.frequency.setValueAtTime(freq.base, this.audioContext.currentTime);
-                    
-                    // Configure filter for ultra-smooth atmospheric effect
-                    filterNode.type = 'lowpass';
-                    filterNode.frequency.setValueAtTime(freq.base * 8, this.audioContext.currentTime);
-                    filterNode.Q.setValueAtTime(0.2, this.audioContext.currentTime);
-                    
-                    // Configure gain with very subtle initial volume
-                    const initialGain = (1 / (index + 1)) * 0.05;
-                    gainNode.gain.setValueAtTime(initialGain, this.audioContext.currentTime);
-                    
-                    // Configure spatial panning for rotation effect
-                    pannerNode.pan.setValueAtTime(0, this.audioContext.currentTime);
-                    
-                    // Connect the audio graph with spatial rotation
-                    oscillator.connect(filterNode);
-                    filterNode.connect(gainNode);
-                    gainNode.connect(pannerNode);
-                    pannerNode.connect(this.masterGain);
-                    
-                    // Store references
-                    this.oscillators.push(oscillator);
-                    this.gainNodes.push(gainNode);
-                    this.filterNodes.push(filterNode);
-                    this.panners.push(pannerNode);
-                    
-                    // Start the oscillator
-                    oscillator.start();
-                });
-            }
-            
-            startEvolution() {
-                const evolve = () => {
-                    if (!this.isActive || !this.audioContext) return;
-                    
-                    this.time += this.evolutionSpeed;
-                    
-                    this.oscillators.forEach((osc, index) => {
-                        const freq = this.frequencies[index];
-                        const currentTime = this.audioContext.currentTime;
-                        
-                        // Ultra-subtle frequency drift
-                        const freqVariation = Math.sin(this.time + index * 2.3) * freq.drift * 0.3;
-                        const newFreq = freq.base + freqVariation;
-                        osc.frequency.exponentialRampToValueAtTime(Math.max(20, newFreq), currentTime + 0.5);
-                        
-                        // Very subtle volume breathing
-                        const gainVariation = Math.sin(this.time * 0.2 + index * 1.1) * 0.02 + 0.05;
-                        const baseGain = (1 / (index + 1)) * gainVariation;
-                        this.gainNodes[index].gain.exponentialRampToValueAtTime(Math.max(0.001, baseGain), currentTime + 0.5);
-                        
-                        // Subtle filter movement for atmosphere
-                        const filterVariation = Math.sin(this.time * 0.15 + index * 0.7) * freq.base;
-                        const newCutoff = Math.max(freq.base * 3, freq.base * 8 + filterVariation);
-                        this.filterNodes[index].frequency.exponentialRampToValueAtTime(newCutoff, currentTime + 0.5);
-                        
-                        // Spatial rotation effect - each layer rotates at different speeds
-                        const rotationSpeed = 0.1 + (index * 0.05);
-                        const panPosition = Math.sin(this.time * rotationSpeed + index * 2.1) * 0.3;
-                        this.panners[index].pan.linearRampToValueAtTime(panPosition, currentTime + 0.5);
-                    });
-                    
-                    // Ultra-subtle master volume breathing
-                    const masterVariation = Math.sin(this.time * 0.05) * 0.005 + this.baseVolume;
-                    this.masterGain.gain.exponentialRampToValueAtTime(Math.max(0.001, masterVariation), this.audioContext.currentTime + 0.5);
-                    
-                    // Continue evolution
-                    requestAnimationFrame(evolve);
-                };
-                
-                evolve();
-            }
-            
-            // React to page interactions for very subtle changes
-            onInteraction(intensity = 1) {
-                if (!this.isActive) return;
-                
-                // Very minimal boost in evolution speed
-                this.evolutionSpeed = Math.min(0.0002, this.evolutionSpeed * (1 + intensity * 0.2));
-                
-                // Fade back to normal speed quickly
-                setTimeout(() => {
-                    this.evolutionSpeed = 0.00005;
-                }, 1000);
-            }
-        }
-        
-        // Initialize the ambient audio system
-        const ambientAudio = new AmbientAudioSystem();
-        
-        // SIRENS Investment Calculator - SYNCHRONIZED WITH LIVE SIRENS FLOW
-        class SirensInvestmentCalculator {
-            constructor() {
-                // SIRENS TOKEN PRICING MODEL - Based on Global Electricity Market
-                // 1 SIRENS = 1 TOKEN = 1 VIBRATORY UNIT that evolves
-                // Token price is directly linked to global electricity pricing, not arbitrary
-                this.globalElectricityPrice = 0.15; // USD per kWh (global average)
-                this.crystallinePiezoEfficiency = 0.0000009; // Same as Live Flow simulation
-                
-                // TOKEN PRICE CALCULATION - Based on electricity market value
-                // Each token represents a vibratory unit that generates electricity
-                // Base token price = potential electricity generation value over time
-                const baseElectricityGeneration = 440 * this.crystallinePiezoEfficiency * 24 * 365; // Annual kWh potential
-                const baseElectricityValue = baseElectricityGeneration * this.globalElectricityPrice; // Annual USD value
-                
-                // Token price = fraction of annual electricity potential (accessible pricing)
-                this.baseTokenPrice = baseElectricityValue * 0.1; // 10% of annual potential for accessibility
-                this.currentTokenPrice = this.baseTokenPrice; // Current oscillating price
-                this.priceVolatility = 0.08; // ±8% real-time oscillation
-                this.evolutionMultiplier = 1.0; // Grows with cumulative resonance
-                
-                // Real-time crystalline resonance parameters - SYNCED WITH LIVE FLOW
-                this.resonanceAccumulation = 0; // Cumulative frequency over time
-                this.crystalMaturity = 1.0; // Crystal maturity factor (grows over time)
-                this.oscillationCycles = 0; // Number of completed oscillation cycles
-                
-                // Price evolution tracking
-                this.priceHistory = [];
-                this.lastPriceUpdate = Date.now();
-                this.lastTokensReceived = 0;
-                
-                // Reference to Live SIRENS Flow simulator for synchronization
-                this.liveFlowSimulator = null;
-                
-                this.init();
-            }
-            
-            init() {
-                this.setupElements();
-                this.bindEvents();
-                this.connectToLiveFlow();
-                this.startRealTimeEvolution();
-                this.calculateInitial();
-            }
-            
-            connectToLiveFlow() {
-                // Wait for Live SIRENS Flow simulator to be available
-                const checkForSimulator = () => {
-                    if (window.sirensFlowSimulator) {
-                        this.liveFlowSimulator = window.sirensFlowSimulator;
-                        console.log('📊 Calculator synchronized with Live SIRENS Flow');
-                        this.syncWithLiveFlow();
-                    } else {
-                        setTimeout(checkForSimulator, 500);
-                    }
-                };
-                
-                // Initialize with connecting status
-                this.updateSyncStatus(false);
-                checkForSimulator();
-            }
-            
-            syncWithLiveFlow() {
-                if (!this.liveFlowSimulator) return;
-                
-                // Update sync status display
-                this.updateSyncStatus(true);
-                
-                // Synchronize all parameters with Live Flow
-                setInterval(() => {
-                    if (this.liveFlowSimulator) {
-                        // Use exact same values from Live Flow simulation
-                        this.resonanceAccumulation = this.liveFlowSimulator.totalAccumulatedFreq || 0;
-                        this.oscillationCycles = this.liveFlowSimulator.evolutionCycles || 0;
-                        this.evolutionMultiplier = this.liveFlowSimulator.resonanceAmplifier || 1.0;
-                        
-                        // Calculate energy per token using Live Flow's exact formula
-                        const currentFreq = this.liveFlowSimulator.currentTokenFreq || 440;
-                        const baseEnergyPerToken = currentFreq * this.crystallinePiezoEfficiency * this.evolutionMultiplier;
-                        this.baseEnergyPerToken = baseEnergyPerToken;
-                        
-                        // Update calculations with synced values
-                        this.calculate();
-                    }
-                }, 2000); // Sync every 2 seconds
-            }
-            
-            updateSyncStatus(isConnected) {
-                const syncEl = document.getElementById('syncStatus');
-                if (!syncEl) return;
-                
-                if (isConnected && this.liveFlowSimulator) {
-                    syncEl.style.background = 'rgba(78, 205, 196, 0.1)';
-                    syncEl.style.borderColor = 'rgba(78, 205, 196, 0.3)';
-                    syncEl.innerHTML = '🔗 <strong>Synchronized</strong> with Live SIRENS Flow - Real-time data active';
-                } else {
-                    syncEl.style.background = 'rgba(255, 152, 0, 0.1)';
-                    syncEl.style.borderColor = 'rgba(255, 152, 0, 0.3)';
-                    syncEl.innerHTML = '🔄 Connecting to Live SIRENS Flow...';
-                }
-            }
-            
-            setupElements() {
-                this.investAmountEl = document.getElementById('investAmount');
-                this.tokensReceivedEl = document.getElementById('tokensReceived');
-                this.dailyGenerationEl = document.getElementById('dailyGeneration');
-                this.dailyIncomeEl = document.getElementById('dailyIncome');
-                this.annualIncomeEl = document.getElementById('annualIncome');
-                this.roiPercentageEl = document.getElementById('roiPercentage');
-                this.evolutionBonusEl = document.getElementById('evolutionBonus');
-                this.year1IncomeEl = document.getElementById('year1Income');
-                this.year2IncomeEl = document.getElementById('year2Income');
-                this.year3IncomeEl = document.getElementById('year3Income');
-            }
-            
-            bindEvents() {
-                if (this.investAmountEl) {
-                    this.investAmountEl.addEventListener('input', () => this.calculate());
-                    this.investAmountEl.addEventListener('change', () => this.calculate());
-                }
-            }
-            
-            startRealTimeEvolution() {
-                // Real-time token price evolution based on crystalline oscillations
-                setInterval(() => this.evolveTokenPrice(), 2000); // Every 2 seconds
-                setInterval(() => this.updateCrystallineResonance(), 1000); // Every second
-                setInterval(() => this.calculate(), 3000); // Recalculate values every 3 seconds
-            }
-            
-            evolveTokenPrice() {
-                const timeNow = Date.now();
-                const timeDelta = (timeNow - this.lastPriceUpdate) / 1000;
-                this.lastPriceUpdate = timeNow;
-                
-                // DYNAMIC TOKEN PRICING - Based on real electricity market + crystalline evolution
-                // Get current frequency from Live Flow if available
-                const currentFreq = this.liveFlowSimulator?.currentTokenFreq || 440;
-                const resonanceAmplifier = this.liveFlowSimulator?.resonanceAmplifier || this.evolutionMultiplier;
-                
-                // Calculate current electricity generation potential per token
-                const currentElectricityGeneration = currentFreq * this.crystallinePiezoEfficiency * 24 * 365; // Annual kWh
-                const electricityValue = currentElectricityGeneration * this.globalElectricityPrice * resonanceAmplifier;
-                
-                // Token price = fraction of electricity value (for accessibility) + market oscillations
-                const basePrice = electricityValue * 0.1; // 10% of annual potential
-                const oscillationPhase = Math.sin(timeNow / 5000) * 0.05; // ±5% oscillation
-                const marketVolatility = (Math.random() - 0.5) * 0.02; // ±1% randomness
-                
-                // Calculate final evolving price
-                this.currentTokenPrice = basePrice * (1 + oscillationPhase + marketVolatility);
-                
-                // Update evolution multiplier based on accumulated resonance
-                this.evolutionMultiplier = resonanceAmplifier;
-                
-                // Track price history for growth calculation
-                this.priceHistory.push(this.currentTokenPrice);
-                if (this.priceHistory.length > 100) {
-                    this.priceHistory.shift(); // Keep last 100 data points
-                }
-                
-                // Visual indication of price movement
-                this.indicatePriceMovement();
-            }
-            
-            updateCrystallineResonance() {
-                // Simulate cumulative crystalline resonance growth
-                const resonanceIncrement = 5 + (Math.random() * 10); // 5-15 Hz per second
-                this.resonanceAccumulation += resonanceIncrement;
-                
-                // Crystal maturity grows slowly over time
-                this.crystalMaturity += 0.0001; // Slow but continuous growth
-                
-                // Completed oscillation cycles
-                if (this.resonanceAccumulation % 1000 < 15) {
-                    this.oscillationCycles++;
-                }
-            }
-            
-            calculateInitial() {
-                this.calculate(100);
-            }
-            
-            calculate(customAmount = null) {
-                const investmentAmount = customAmount || parseFloat(this.investAmountEl?.value) || 100;
-                
-                // DYNAMIC CALCULATION - Token value changes in real-time!
-                const tokensReceived = investmentAmount / this.currentTokenPrice;
-                
-                // SYNCHRONIZED ENERGY CALCULATION WITH LIVE SIRENS FLOW
-                // Use exact same formula as Live Flow simulation
-                let energyPerTokenPerDay;
-                if (this.liveFlowSimulator && this.liveFlowSimulator.electricalOutput) {
-                    // Use Live Flow's current electrical output per token
-                    energyPerTokenPerDay = this.liveFlowSimulator.electricalOutput * 24; // Convert to daily
-                } else {
-                    // Fallback calculation using synced parameters
-                    const currentFreq = this.liveFlowSimulator?.currentTokenFreq || 440;
-                    const resonanceAmp = this.liveFlowSimulator?.resonanceAmplifier || this.evolutionMultiplier;
-                    energyPerTokenPerDay = currentFreq * this.crystallinePiezoEfficiency * resonanceAmp * 24;
-                }
-                
-                const totalDailyEnergy = tokensReceived * energyPerTokenPerDay;
-                
-                // Financial calculations using LIVE FLOW pricing model
-                let electricityPrice = this.globalElectricityPrice;
-                if (this.liveFlowSimulator) {
-                    // Use same pricing logic as Live Flow
-                    const timeVariation = Math.sin(Date.now() / 60000) * 0.005;
-                    const marketVolatility = (Math.random() - 0.5) * 0.008;
-                    const premiumMultiplier = (this.liveFlowSimulator.crystallinePremium || 1.08) + (this.oscillationCycles * 0.01);
-                    electricityPrice = this.globalElectricityPrice * premiumMultiplier * (1 + timeVariation + marketVolatility);
-                }
-                
-                const dailyIncome = totalDailyEnergy * electricityPrice;
-                const annualIncome = dailyIncome * 365;
-                const currentROI = (annualIncome / investmentAmount) * 100;
-                
-                // Future projections with SYNCHRONIZED evolution multipliers
-                const currentEvolutionMultiplier = this.liveFlowSimulator?.resonanceAmplifier || this.evolutionMultiplier;
-                const futureEvolution1Year = currentEvolutionMultiplier * 1.5; // Projected growth
-                const futureEvolution2Year = currentEvolutionMultiplier * 2.8;
-                const futureEvolution3Year = currentEvolutionMultiplier * 5.2;
-                
-                const year1Income = dailyIncome * 365 * futureEvolution1Year;
-                const year2Income = dailyIncome * 365 * futureEvolution2Year;  
-                const year3Income = dailyIncome * 365 * futureEvolution3Year;
-                
-                // Calculate growth percentages
-                const currentGrowth = ((this.currentTokenPrice / this.baseTokenPrice) - 1) * 100;
-                const year3Growth = (futureEvolution3Year - 1) * 100;
-                
-                // Show dynamic token reception with Live Flow synchronization status
-                const tokenInfo = document.getElementById('tokensReceivedInfo');
-                if (tokensReceived !== this.lastTokensReceived) {
-                    this.animateValue(this.tokensReceivedEl, tokensReceived, '', '', 2);
-                    
-                    // Add synchronization status and dynamic note
-                    if (tokenInfo) {
-                        const priceEvolution = this.currentTokenPrice / this.baseTokenPrice;
-                        const tokenBonus = priceEvolution < 1 ? 'MORE tokens (price below launch!)' : 
-                                          priceEvolution > 1.5 ? 'FEWER tokens (premium price)' : 
-                                          'standard allocation';
-                        
-                        const syncStatus = this.liveFlowSimulator ? '🔗 Synced' : '⚠️ Standalone';
-                        
-                        tokenInfo.innerHTML = `<small style="color: rgba(255,255,255,0.7);">
-                            ${tokenBonus} • Price: $${this.currentTokenPrice.toFixed(4)} • ${syncStatus}
-                        </small>`;
-                    }
-                    this.lastTokensReceived = tokensReceived;
-                }
-                
-                // Update all other values with LIVE FLOW evolution indicators
-                this.animateValue(this.dailyGenerationEl, totalDailyEnergy, '', '', 6);
-                this.animateValue(this.dailyIncomeEl, dailyIncome, '$', '', 6);
-                this.animateValue(this.annualIncomeEl, annualIncome, '$', '', 2);
-                this.animateValue(this.roiPercentageEl, currentROI, '', '%', 2);
-                this.animateValue(this.evolutionBonusEl, year3Growth, '+', '%', 0);
-                
-                // Real-time evolving projections with synchronized growth indicators
-                this.animateValue(this.year1IncomeEl, year1Income, '$', '/year', 2);
-                this.animateValue(this.year2IncomeEl, year2Income, '$', '/year', 2);
-                this.animateValue(this.year3IncomeEl, year3Income, '$', '/year', 2);
-                
-                // Update current token price display
-                this.updateTokenPriceDisplay();
-                
-                // Enhanced highlighting based on Live Flow evolution level
-                const evolutionLevel = currentEvolutionMultiplier;
-                if (evolutionLevel > 2.5) {
-                    this.highlightResults('rapid-evolution');
-                } else if (evolutionLevel > 1.8) {
-                    this.highlightResults('high-evolution');
-                } else if (evolutionLevel > 1.3) {
-                    this.highlightResults('medium-evolution');
-                } else {
-                    this.highlightResults('base-evolution');
-                }
-                
-                // Show real-time evolution status synchronized with Live Flow
-                this.updateEvolutionStatus();
-            }
-            
-            updateTokenPriceDisplay() {
-                // Add/update token price display element
-                let priceDisplay = document.getElementById('currentTokenPrice');
-                if (!priceDisplay) {
-                    priceDisplay = document.createElement('div');
-                    priceDisplay.id = 'currentTokenPrice';
-                    priceDisplay.className = 'live-token-price';
-                    priceDisplay.style.cssText = `
-                        background: linear-gradient(135deg, rgba(78, 205, 196, 0.15), rgba(68, 160, 141, 0.1));
-                        border: 2px solid rgba(78, 205, 196, 0.4);
-                        border-radius: 12px;
-                        padding: 1rem;
-                        margin: 1.5rem 0;
-                        text-align: center;
-                        color: #4ecdc4;
-                        font-weight: 600;
-                        box-shadow: 0 4px 15px rgba(78, 205, 196, 0.1);
-                        transition: all 0.3s ease;
-                        position: relative;
-                        overflow: hidden;
-                    `;
-                    
-                    // Add pulsing animation for active price
-                    const pulseKeyframes = `
-                        @keyframes tokenPricePulse {
-                            0%, 100% { transform: scale(1); box-shadow: 0 4px 15px rgba(78, 205, 196, 0.1); }
-                            50% { transform: scale(1.02); box-shadow: 0 6px 20px rgba(78, 205, 196, 0.2); }
-                        }
-                    `;
-                    
-                    if (!document.querySelector('#tokenPriceStyle')) {
-                        const styleEl = document.createElement('style');
-                        styleEl.id = 'tokenPriceStyle';
-                        styleEl.textContent = pulseKeyframes + `
-                            .live-token-price {
-                                animation: tokenPricePulse 3s ease-in-out infinite;
-                            }
-                            .live-token-price::before {
-                                content: '';
-                                position: absolute;
-                                top: 0;
-                                left: -100%;
-                                width: 100%;
-                                height: 100%;
-                                background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
-                                transition: left 0.5s ease;
-                            }
-                            .live-token-price.price-updated::before {
-                                left: 100%;
-                            }
-                        `;
-                        document.head.appendChild(styleEl);
-                    }
-                    
-                    this.investAmountEl?.parentNode?.appendChild(priceDisplay);
-                }
-                
-                const priceChange = ((this.currentTokenPrice / this.baseTokenPrice) - 1) * 100;
-                const changeIcon = priceChange > 5 ? '🚀' : priceChange > 0 ? '📈' : priceChange < 0 ? '📉' : '⚖️';
-                const changeColor = priceChange > 5 ? '#00ff88' : priceChange > 0 ? '#4ecdc4' : priceChange < 0 ? '#ff6b6b' : '#ffd700';
-                
-                // Check if price moved significantly for special effects
-                const recentMovement = this.priceHistory.length > 1 ? 
-                    ((this.currentTokenPrice / this.priceHistory[this.priceHistory.length - 2]) - 1) * 100 : 0;
-                
-                const evolutionLevel = this.evolutionMultiplier > 2.5 ? 'RAPID' : 
-                                     this.evolutionMultiplier > 1.8 ? 'ACCELERATED' : 
-                                     this.evolutionMultiplier > 1.3 ? 'EVOLVING' : 'STABILIZING';
-                
-                const evolutionColor = evolutionLevel === 'RAPID' ? '#00ff88' :
-                                      evolutionLevel === 'ACCELERATED' ? '#4ecdc4' :
-                                      evolutionLevel === 'EVOLVING' ? '#ffd700' : '#ff9800';
-                
-                priceDisplay.innerHTML = `
-                    <div style="display: flex; align-items: center; justify-content: center; gap: 0.5rem; margin-bottom: 0.5rem;">
-                        <span style="font-size: 1.2em;">${changeIcon}</span>
-                        <strong style="color: white;">Live SIRENS Token Price</strong>
-                        <span style="color: ${evolutionColor}; font-size: 0.8em; padding: 0.2rem 0.5rem; background: rgba(0,0,0,0.3); border-radius: 4px;">
-                            ${evolutionLevel}
-                        </span>
-                    </div>
-                    <div style="font-size: 1.3em; color: white; margin-bottom: 0.3rem;">
-                        $${this.currentTokenPrice.toFixed(4)} USD/token
-                    </div>
-                    <div style="display: flex; justify-content: space-between; align-items: center; font-size: 0.9em;">
-                        <span style="color: ${changeColor};">
-                            ${priceChange > 0 ? '+' : ''}${priceChange.toFixed(2)}% Evolution
-                        </span>
-                        <span style="color: rgba(255,255,255,0.7);">
-                            Electricity-Based Pricing
-                        </span>
-                    </div>
-                    <div style="font-size: 0.8em; color: rgba(255,255,255,0.6); margin-top: 0.3rem; text-align: center;">
-                        💡 Price = Electricity Generation Potential × Global Market Rate
-                    </div>
-                    ${Math.abs(recentMovement) > 0.5 ? `
-                        <div style="font-size: 0.8em; color: ${recentMovement > 0 ? '#4ecdc4' : '#ff6b6b'}; margin-top: 0.3rem;">
-                            ${recentMovement > 0 ? '↗️' : '↘️'} ${recentMovement > 0 ? '+' : ''}${recentMovement.toFixed(2)}% Last Update
-                        </div>
-                    ` : ''}
-                `;
-                
-                // Trigger visual update effect
-                priceDisplay.classList.add('price-updated');
-                setTimeout(() => priceDisplay.classList.remove('price-updated'), 500);
-            }
-            
-            indicatePriceMovement() {
-                const calculator = document.querySelector('.investment-calculator');
-                if (calculator) {
-                    if (this.priceHistory.length > 1) {
-                        const lastPrice = this.priceHistory[this.priceHistory.length - 2];
-                        const currentPrice = this.currentTokenPrice;
-                        
-                        if (currentPrice > lastPrice) {
-                            calculator.style.borderColor = 'rgba(78, 205, 196, 0.6)';
-                            calculator.style.boxShadow = '0 0 20px rgba(78, 205, 196, 0.2)';
-                        } else if (currentPrice < lastPrice) {
-                            calculator.style.borderColor = 'rgba(255, 107, 107, 0.6)';
-                            calculator.style.boxShadow = '0 0 20px rgba(255, 107, 107, 0.2)';
-                        }
-                        
-                        // Reset after 1 second
-                        setTimeout(() => {
-                            calculator.style.borderColor = 'rgba(78, 205, 196, 0.3)';
-                            calculator.style.boxShadow = '';
-                        }, 1000);
-                    }
-                }
-            }
-            
-            animateValue(element, targetValue, prefix = '', suffix = '', decimals = 0) {
-                if (!element) return;
-                
-                const startValue = parseFloat(element.textContent.replace(/[^0-9.-]/g, '')) || 0;
-                const increment = (targetValue - startValue) / 20;
-                let current = startValue;
-                let steps = 0;
-                
-                const animate = () => {
-                    if (steps >= 20) {
-                        current = targetValue;
-                    } else {
-                        current += increment;
-                        steps++;
-                    }
-                    
-                    const displayValue = current.toFixed(decimals);
-                    element.textContent = `${prefix}${displayValue}${suffix}`;
-                    
-                    if (steps < 20) {
-                        requestAnimationFrame(animate);
-                    }
-                };
-                
-                animate();
-            }
-            
-            highlightResults(level) {
-                const resultItems = document.querySelectorAll('.result-item');
-                resultItems.forEach(item => {
-                    item.classList.remove('rapid-evolution', 'high-evolution', 'medium-evolution', 'base-evolution');
-                    item.classList.add(level);
-                });
-            }
-            
-            updateEvolutionStatus() {
-                let statusEl = document.getElementById('evolutionStatus');
-                if (!statusEl) {
-                    statusEl = document.createElement('div');
-                    statusEl.id = 'evolutionStatus';
-                    statusEl.style.cssText = `
-                        background: rgba(0, 0, 0, 0.3);
-                        border-left: 4px solid #4ecdc4;
-                        padding: 0.8rem;
-                        margin: 1rem 0;
-                        border-radius: 0 8px 8px 0;
-                        font-size: 0.9em;
-                        color: rgba(255, 255, 255, 0.9);
-                    `;
-                    this.investAmountEl?.parentNode?.appendChild(statusEl);
-                }
-                
-                // Use Live Flow data when available
-                if (this.liveFlowSimulator) {
-                    const resonanceLevel = (this.liveFlowSimulator.totalAccumulatedFreq / 1000).toFixed(1);
-                    const evolutionPhase = this.liveFlowSimulator.evolutionCycles;
-                    const currentFreq = this.liveFlowSimulator.currentTokenFreq;
-                    const maxThreshold = this.liveFlowSimulator.maxFrequencyThreshold;
-                    const nextEvolution = Math.max(0, maxThreshold - currentFreq);
-                    const resonanceAmp = this.liveFlowSimulator.resonanceAmplifier;
-                    
-                    statusEl.innerHTML = `
-                        <strong>🔮 Crystal Resonance Status (Live Sync)</strong><br>
-                        <small>
-                            🔗 Synchronized with Live SIRENS Flow<br>
-                            Accumulated Energy: ${resonanceLevel}k Hz • Evolution Cycle: ${evolutionPhase}<br>
-                            Current Frequency: ${currentFreq.toFixed(0)} Hz • Resonance Amplifier: ${resonanceAmp.toFixed(2)}x<br>
-                            Next Evolution: ${nextEvolution.toFixed(0)} Hz remaining
-                        </small>
-                    `;
-                    
-                    // Update border color based on Live Flow evolution state
-                    if (nextEvolution < 100) {
-                        statusEl.style.borderLeftColor = '#00ff88'; // Near evolution
-                    } else if (resonanceAmp > 1.5) {
-                        statusEl.style.borderLeftColor = '#ffd700'; // High resonance
-                    } else {
-                        statusEl.style.borderLeftColor = '#4ecdc4'; // Normal state
-                    }
-                } else {
-                    // Fallback when Live Flow not yet connected
-                    const resonanceLevel = (this.resonanceAccumulation / 1000).toFixed(1);
-                    const evolutionPhase = this.oscillationCycles;
-                    const nextEvolution = ((this.oscillationCycles + 1) * 1000) - this.resonanceAccumulation;
-                    
-                    statusEl.innerHTML = `
-                        <strong>🔮 Crystal Resonance Status (Standalone)</strong><br>
-                        <small>
-                            ⚠️ Connecting to Live SIRENS Flow...<br>
-                            Accumulated Energy: ${resonanceLevel}k units • Evolution Cycle: ${evolutionPhase}<br>
-                            Multiplier: ${this.evolutionMultiplier.toFixed(2)}x • Next Evolution: ${nextEvolution} units
-                        </small>
-                    `;
-                    statusEl.style.borderLeftColor = '#ff9800'; // Connecting state
-                }
-            }
-        }
-        
-        // Initialize calculator when DOM is ready
-        document.addEventListener('DOMContentLoaded', () => {
-            new SirensInvestmentCalculator();
-        });
-        
-        // Connect to page interactions for very subtle audio evolution
-        document.addEventListener('click', () => ambientAudio.onInteraction(0.1), { passive: true });
-        document.addEventListener('scroll', () => ambientAudio.onInteraction(0.05), { passive: true });
-        
-        // React to form interactions with minimal response
-        document.addEventListener('focus', (e) => {
-            if (e.target.matches('input, textarea, select')) {
-                ambientAudio.onInteraction(0.08);
-            }
-        }, true);
-        
-        // React to button hovers with ultra-subtle audio feedback
-        document.addEventListener('mouseenter', (e) => {
-            if (e.target.matches('button, .cta-button, .nav-link')) {
-                ambientAudio.onInteraction(0.03);
-            }
-        }, true);
     </script>
 </body>
 </html>
