@@ -1723,7 +1723,11 @@
             <!-- Investment Calculator -->
             <div class="investment-calculator">
                 <h3>💰 SIRENS Investment Calculator</h3>
-                <p class="calculator-subtitle">Based on Global Electricity Market Prices ($0.15/kWh average)</p>
+                <p class="calculator-subtitle">
+                    🔮 <strong>1 SIRENS = 1 Vibratory Token Unit</strong><br>
+                    Token price dynamically calculated from global electricity market ($0.15/kWh)<br>
+                    <small>No token limits - purchase any amount based on your investment</small>
+                </p>
                 
                 <!-- Synchronization Status -->
                 <div id="syncStatus" style="background: rgba(255, 152, 0, 0.1); border: 1px solid rgba(255, 152, 0, 0.3); border-radius: 6px; padding: 0.5rem; margin-bottom: 1rem; font-size: 0.85em; color: rgba(255, 255, 255, 0.8); text-align: center;">
@@ -1784,9 +1788,10 @@
                     
                     <div class="market-basis">
                         <small>
-                            💡 <strong>Non-Linear Crystalline Physics:</strong> 
-                            SIRENS tokens are oscillating crystalline units that evolve exponentially. 
-                            Energy(t) = BaseEnergy × (1 + 1.75 × log(1 + 0.25 × t))^2.5 × EvolutionMultiplier
+                            💡 <strong>Electricity-Based Token Pricing:</strong> 
+                            Each SIRENS token represents a vibratory crystalline unit that generates electricity. 
+                            Token price = Electricity Generation Potential × Global Market Rate ($0.15/kWh) × Evolution Factor.
+                            No token limits - unlimited purchase based on investment amount.
                         </small>
                     </div>
                 </div>
@@ -2691,13 +2696,21 @@
         // SIRENS Investment Calculator - SYNCHRONIZED WITH LIVE SIRENS FLOW
         class SirensInvestmentCalculator {
             constructor() {
-                // Synchronized with Live SIRENS Flow parameters
+                // SIRENS TOKEN PRICING MODEL - Based on Global Electricity Market
+                // 1 SIRENS = 1 TOKEN = 1 VIBRATORY UNIT that evolves
+                // Token price is directly linked to global electricity pricing, not arbitrary
                 this.globalElectricityPrice = 0.15; // USD per kWh (global average)
                 this.crystallinePiezoEfficiency = 0.0000009; // Same as Live Flow simulation
                 
-                // TOKEN VALUE IS EVOLVING IN REAL-TIME - SYNCHRONIZED WITH LIVE FLOW!
-                this.baseTokenPrice = 0.55; // Initial price at launch (USD)
-                this.currentTokenPrice = 0.55; // Current oscillating price
+                // TOKEN PRICE CALCULATION - Based on electricity market value
+                // Each token represents a vibratory unit that generates electricity
+                // Base token price = potential electricity generation value over time
+                const baseElectricityGeneration = 440 * this.crystallinePiezoEfficiency * 24 * 365; // Annual kWh potential
+                const baseElectricityValue = baseElectricityGeneration * this.globalElectricityPrice; // Annual USD value
+                
+                // Token price = fraction of annual electricity potential (accessible pricing)
+                this.baseTokenPrice = baseElectricityValue * 0.1; // 10% of annual potential for accessibility
+                this.currentTokenPrice = this.baseTokenPrice; // Current oscillating price
                 this.priceVolatility = 0.08; // ±8% real-time oscillation
                 this.evolutionMultiplier = 1.0; // Grows with cumulative resonance
                 
@@ -2814,16 +2827,25 @@
                 const timeDelta = (timeNow - this.lastPriceUpdate) / 1000;
                 this.lastPriceUpdate = timeNow;
                 
-                // Real-time crystalline oscillation affecting token price
-                const oscillationPhase = Math.sin(timeNow / 5000) * this.priceVolatility; // 5-second cycles
-                const resonanceBoost = Math.log(1 + this.resonanceAccumulation / 1000) * 0.1; // Cumulative effect
-                const maturityFactor = Math.pow(this.crystalMaturity, 0.3); // Crystal maturity impact
+                // DYNAMIC TOKEN PRICING - Based on real electricity market + crystalline evolution
+                // Get current frequency from Live Flow if available
+                const currentFreq = this.liveFlowSimulator?.currentTokenFreq || 440;
+                const resonanceAmplifier = this.liveFlowSimulator?.resonanceAmplifier || this.evolutionMultiplier;
                 
-                // Calculate new evolving price
-                this.currentTokenPrice = this.baseTokenPrice * maturityFactor * (1 + oscillationPhase + resonanceBoost);
+                // Calculate current electricity generation potential per token
+                const currentElectricityGeneration = currentFreq * this.crystallinePiezoEfficiency * 24 * 365; // Annual kWh
+                const electricityValue = currentElectricityGeneration * this.globalElectricityPrice * resonanceAmplifier;
+                
+                // Token price = fraction of electricity value (for accessibility) + market oscillations
+                const basePrice = electricityValue * 0.1; // 10% of annual potential
+                const oscillationPhase = Math.sin(timeNow / 5000) * 0.05; // ±5% oscillation
+                const marketVolatility = (Math.random() - 0.5) * 0.02; // ±1% randomness
+                
+                // Calculate final evolving price
+                this.currentTokenPrice = basePrice * (1 + oscillationPhase + marketVolatility);
                 
                 // Update evolution multiplier based on accumulated resonance
-                this.evolutionMultiplier = 1 + (this.resonanceAccumulation / 10000);
+                this.evolutionMultiplier = resonanceAmplifier;
                 
                 // Track price history for growth calculation
                 this.priceHistory.push(this.currentTokenPrice);
@@ -3030,21 +3052,24 @@
                 priceDisplay.innerHTML = `
                     <div style="display: flex; align-items: center; justify-content: center; gap: 0.5rem; margin-bottom: 0.5rem;">
                         <span style="font-size: 1.2em;">${changeIcon}</span>
-                        <strong style="color: white;">Live SIRENS Token</strong>
+                        <strong style="color: white;">Live SIRENS Token Price</strong>
                         <span style="color: ${evolutionColor}; font-size: 0.8em; padding: 0.2rem 0.5rem; background: rgba(0,0,0,0.3); border-radius: 4px;">
                             ${evolutionLevel}
                         </span>
                     </div>
                     <div style="font-size: 1.3em; color: white; margin-bottom: 0.3rem;">
-                        $${this.currentTokenPrice.toFixed(4)}
+                        $${this.currentTokenPrice.toFixed(4)} USD/token
                     </div>
                     <div style="display: flex; justify-content: space-between; align-items: center; font-size: 0.9em;">
                         <span style="color: ${changeColor};">
-                            ${priceChange > 0 ? '+' : ''}${priceChange.toFixed(2)}% Total
+                            ${priceChange > 0 ? '+' : ''}${priceChange.toFixed(2)}% Evolution
                         </span>
                         <span style="color: rgba(255,255,255,0.7);">
-                            Evolution ${this.evolutionMultiplier.toFixed(2)}x
+                            Electricity-Based Pricing
                         </span>
+                    </div>
+                    <div style="font-size: 0.8em; color: rgba(255,255,255,0.6); margin-top: 0.3rem; text-align: center;">
+                        💡 Price = Electricity Generation Potential × Global Market Rate
                     </div>
                     ${Math.abs(recentMovement) > 0.5 ? `
                         <div style="font-size: 0.8em; color: ${recentMovement > 0 ? '#4ecdc4' : '#ff6b6b'}; margin-top: 0.3rem;">
