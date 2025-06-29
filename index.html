@@ -1163,9 +1163,10 @@
                 this.baseElectricityPrice = 0.15; // USD per kWh (global average)
                 this.crystallinePremium = 1.08; // 8% premium for crystalline energy
                 
-                // Current values
-                this.electricalOutput = 0.000396;
-                this.realtimePrice = 0.0000594;
+                // Calculate initial coherent values
+                const initialElectrical = this.totalAccumulatedFreq * this.crystallinePiezoEfficiency * this.resonanceAmplifier;
+                this.electricalOutput = Math.round(initialElectrical * 1000000) / 1000000;
+                this.realtimePrice = Math.round(this.electricalOutput * this.baseElectricityPrice * this.crystallinePremium * 1000000) / 1000000;
                 
                 // Expose globally
                 window.sirensFlowSimulator = this;
@@ -1226,15 +1227,19 @@
             microUpdates() {
                 // Add micro-fluctuations to make everything feel more alive
                 const microTimeVariation = Math.sin(Date.now() / 200) * 0.02;
-                const microVolatility = (Math.random() - 0.5) * 0.05;
+                const microVolatility = (Math.random() - 0.5) * 0.03; // Reduced volatility for coherence
                 
                 // Slightly adjust cumulative frequency display
                 const cumulativeVariation = this.totalAccumulatedFreq * (1 + microTimeVariation + microVolatility);
                 this.animateValue(this.elements.cumulativeFreq, Math.round(cumulativeVariation), 'Hz');
                 
-                // Add micro-fluctuations to electrical output
-                const electricalVariation = this.electricalOutput * (1 + microTimeVariation * 2);
+                // Add micro-fluctuations to electrical output that remain proportional
+                const electricalVariation = this.electricalOutput * (1 + microTimeVariation);
                 this.animateValue(this.elements.electricalOutput, Math.round(electricalVariation * 1000000) / 1000000, 'kWh');
+                
+                // Ensure real-time price follows electrical output variations
+                const priceVariation = this.realtimePrice * (1 + microTimeVariation * 1.5);
+                this.animateValue(this.elements.realtimePrice, Math.round(priceVariation * 1000000) / 1000000, 'USD', '$');
             }
             
             progressEvolution() {
@@ -1263,22 +1268,114 @@
             }
             
             executeEvolution() {
-                // Major evolution event
+                // Major evolution event with spectacular effects
                 this.evolutionCycles++;
+                
+                // Trigger evolution visual effects
+                this.triggerEvolutionEffects();
                 
                 // Add current cycle to total accumulation
                 this.totalAccumulatedFreq += this.cumulativeFreq;
                 
-                // Calculate new base frequency
-                const evolutionBonus = this.evolutionCycles * 45;
-                this.currentTokenFreq = 440 + evolutionBonus;
-                this.maxFrequencyThreshold = this.currentTokenFreq * 2.2;
+                // Calculate new base frequency with exponential growth
+                const evolutionBonus = this.evolutionCycles * 75; // Increased bonus
+                const exponentialGrowth = Math.pow(1.15, this.evolutionCycles); // Exponential scaling
+                this.currentTokenFreq = (440 + evolutionBonus) * exponentialGrowth;
+                this.maxFrequencyThreshold = this.currentTokenFreq * 1.8; // Lower threshold for faster cycles
                 this.cumulativeFreq = this.currentTokenFreq;
                 
-                // Enhance resonance amplifier
-                this.resonanceAmplifier = 1 + (this.evolutionCycles * 0.15);
+                // Enhance resonance amplifier dramatically
+                this.resonanceAmplifier = 1 + (this.evolutionCycles * 0.25);
                 
-                console.log(`🔮 SIRENS Evolution Cycle ${this.evolutionCycles}: ${this.currentTokenFreq} Hz`);
+                // Force immediate update of all metrics after evolution
+                this.updateMetrics();
+                
+                // Log evolution with dynamic messaging
+                const evolutionMessages = [
+                    `🔮 SIRENS Crystalline Evolution Cycle ${this.evolutionCycles}: ${Math.round(this.currentTokenFreq)} Hz - Resonance Amplified!`,
+                    `⚡ SIRENS Energy Surge Cycle ${this.evolutionCycles}: ${Math.round(this.currentTokenFreq)} Hz - Frequency Breakthrough!`,
+                    `� SIRENS Crystal Harmony Cycle ${this.evolutionCycles}: ${Math.round(this.currentTokenFreq)} Hz - Vibrational Ascension!`,
+                    `🌟 SIRENS Quantum Leap Cycle ${this.evolutionCycles}: ${Math.round(this.currentTokenFreq)} Hz - Reality Shift Detected!`
+                ];
+                console.log(evolutionMessages[this.evolutionCycles % evolutionMessages.length]);
+                
+                // Show evolution notification
+                this.showEvolutionNotification();
+            }
+            
+            triggerEvolutionEffects() {
+                // Flash effect on the entire simulation container
+                const container = document.querySelector('.sirens-simulation');
+                if (container) {
+                    container.style.transition = 'all 0.3s ease';
+                    container.style.transform = 'scale(1.02)';
+                    container.style.boxShadow = '0 0 50px rgba(0, 255, 255, 0.8), inset 0 0 50px rgba(0, 255, 255, 0.2)';
+                    
+                    setTimeout(() => {
+                        container.style.transform = 'scale(1)';
+                        container.style.boxShadow = '';
+                    }, 500);
+                }
+                
+                // Add glitch effect to all flow values
+                const flowValues = document.querySelectorAll('.flow-value');
+                flowValues.forEach(value => {
+                    value.classList.add('glitch');
+                    setTimeout(() => {
+                        value.classList.remove('glitch');
+                    }, 1000);
+                });
+                
+                // Pulse the simulation title
+                const title = document.querySelector('.simulation-title');
+                if (title) {
+                    title.style.animation = 'pulse 0.5s ease-in-out 3';
+                }
+            }
+            
+            showEvolutionNotification() {
+                // Create evolution notification
+                const notification = document.createElement('div');
+                notification.style.cssText = `
+                    position: fixed;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%) scale(0);
+                    background: linear-gradient(45deg, rgba(0, 255, 255, 0.95), rgba(0, 0, 0, 0.9));
+                    color: white;
+                    padding: 2rem 3rem;
+                    border: 2px solid rgba(0, 255, 255, 0.5);
+                    box-shadow: 0 0 40px rgba(0, 255, 255, 0.5);
+                    z-index: 10000;
+                    font-family: 'Courier New', monospace;
+                    font-size: 1.2rem;
+                    letter-spacing: 2px;
+                    text-align: center;
+                    transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+                    border-radius: 0;
+                `;
+                notification.innerHTML = `
+                    <div style="font-size: 2rem; margin-bottom: 1rem;">⚡🔮⚡</div>
+                    <div style="font-weight: bold; text-transform: uppercase;">SIRENS EVOLUTION</div>
+                    <div style="font-size: 0.9rem; margin-top: 0.5rem;">Cycle ${this.evolutionCycles} Complete</div>
+                    <div style="font-size: 0.8rem; margin-top: 0.5rem; opacity: 0.8;">${Math.round(this.currentTokenFreq)} Hz Achieved</div>
+                `;
+                
+                document.body.appendChild(notification);
+                
+                // Animate in
+                setTimeout(() => {
+                    notification.style.transform = 'translate(-50%, -50%) scale(1)';
+                }, 10);
+                
+                // Animate out and remove
+                setTimeout(() => {
+                    notification.style.transform = 'translate(-50%, -50%) scale(0)';
+                    notification.style.opacity = '0';
+                    setTimeout(() => {
+                        document.body.removeChild(notification);
+                    }, 500);
+                }, 2500);
             }
             
             updateMetrics() {
@@ -1288,14 +1385,23 @@
                 const chaosMultiplier = 1 + (Math.random() - 0.5) * 0.4; // Random chaos
                 this.electricalOutput = Math.round(baseOutput * this.resonanceAmplifier * resonanceBoost * chaosMultiplier * 1000000) / 1000000;
                 
-                // Much more volatile pricing
-                const timeVariation = Math.sin(Date.now() / 15000) * 0.015; // Faster oscillation
-                const marketVolatility = (Math.random() - 0.5) * 0.025; // More volatility
-                const trendShift = Math.sin(Date.now() / 8000) * 0.012; // Medium-term trend
-                const premiumMultiplier = this.crystallinePremium + (this.evolutionCycles * 0.02);
+                // Fixed pricing calculation that follows progression
+                const basePrice = 0.15; // Base USD per kWh
+                const evolutionMultiplier = 1 + (this.evolutionCycles * 0.5); // Price increases with each evolution
+                const timeVariation = Math.sin(Date.now() / 15000) * 0.1; // ±10% oscillation
+                const marketVolatility = (Math.random() - 0.5) * 0.15; // ±7.5% random variation
+                const trendBoost = this.totalAccumulatedFreq / 1000; // Price increases with accumulated frequency
                 
-                const currentPrice = this.baseElectricityPrice * premiumMultiplier * (1 + timeVariation + marketVolatility + trendShift);
+                const currentPrice = basePrice * evolutionMultiplier * (1 + timeVariation + marketVolatility) * (1 + trendBoost);
+                
+                // Calculate real-time value directly from electrical output and current price
                 this.realtimePrice = Math.round(this.electricalOutput * currentPrice * 1000000) / 1000000;
+                
+                // Ensure minimum growth - real-time value should always increase over time
+                const minimumValue = (this.totalAccumulatedFreq / 10000000) * (1 + this.evolutionCycles * 0.2);
+                if (this.realtimePrice < minimumValue) {
+                    this.realtimePrice = minimumValue;
+                }
                 
                 // Update displays with faster animation
                 this.animateValue(this.elements.cumulativeFreq, this.totalAccumulatedFreq, 'Hz');
