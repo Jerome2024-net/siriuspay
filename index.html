@@ -1150,32 +1150,6 @@
             }
         }
 
-        @keyframes tokenPricePulse {
-            0%, 100% { 
-                transform: scale(1); 
-                box-shadow: 0 4px 15px rgba(78, 205, 196, 0.1); 
-            }
-            50% { 
-                transform: scale(1.02); 
-                box-shadow: 0 6px 20px rgba(78, 205, 196, 0.2); 
-            }
-        }
-
-        .live-token-price::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
-            transition: left 0.5s ease;
-        }
-
-        .live-token-price.price-updated::before {
-            left: 100%;
-        }
-
         .result-value {
             font-size: 1.4rem;
             font-weight: 700;
@@ -1751,59 +1725,14 @@
                 <h3>💰 SIRENS Investment Calculator</h3>
                 <p class="calculator-subtitle">Based on Global Electricity Market Prices ($0.15/kWh average)</p>
                 
+                <!-- Synchronization Status -->
+                <div id="syncStatus" style="background: rgba(255, 152, 0, 0.1); border: 1px solid rgba(255, 152, 0, 0.3); border-radius: 6px; padding: 0.5rem; margin-bottom: 1rem; font-size: 0.85em; color: rgba(255, 255, 255, 0.8); text-align: center;">
+                    🔄 Connecting to Live SIRENS Flow...
+                </div>
+                
                 <div class="calculator-input">
                     <label for="investAmount">Investment Amount (USD):</label>
                     <input type="number" id="investAmount" placeholder="100" min="1" max="1000000" value="100">
-                    
-                    <!-- Live Token Price Display -->
-                    <div id="currentTokenPrice" class="live-token-price" style="
-                        background: linear-gradient(135deg, rgba(78, 205, 196, 0.15), rgba(68, 160, 141, 0.1));
-                        border: 2px solid rgba(78, 205, 196, 0.4);
-                        border-radius: 12px;
-                        padding: 1rem;
-                        margin: 1.5rem 0;
-                        text-align: center;
-                        color: #4ecdc4;
-                        font-weight: 600;
-                        box-shadow: 0 4px 15px rgba(78, 205, 196, 0.1);
-                        animation: tokenPricePulse 3s ease-in-out infinite;
-                    ">
-                        <div style="display: flex; align-items: center; justify-content: center; gap: 0.5rem; margin-bottom: 0.5rem;">
-                            <span style="font-size: 1.2em;">📈</span>
-                            <strong style="color: white;">Live SIRENS Token</strong>
-                            <span style="color: #ffd700; font-size: 0.8em; padding: 0.2rem 0.5rem; background: rgba(0,0,0,0.3); border-radius: 4px;">
-                                EVOLVING
-                            </span>
-                        </div>
-                        <div style="font-size: 1.3em; color: white; margin-bottom: 0.3rem;">
-                            $0.5500
-                        </div>
-                        <div style="display: flex; justify-content: space-between; align-items: center; font-size: 0.9em;">
-                            <span style="color: #4ecdc4;">
-                                +0.00% Total
-                            </span>
-                            <span style="color: rgba(255,255,255,0.7);">
-                                Evolution 1.00x
-                            </span>
-                        </div>
-                    </div>
-                    
-                    <!-- Crystal Resonance Status -->
-                    <div id="evolutionStatus" style="
-                        background: rgba(0, 0, 0, 0.3);
-                        border-left: 4px solid #4ecdc4;
-                        padding: 0.8rem;
-                        margin: 1rem 0;
-                        border-radius: 0 8px 8px 0;
-                        font-size: 0.9em;
-                        color: rgba(255, 255, 255, 0.9);
-                    ">
-                        <strong>🔮 Crystal Resonance Status</strong><br>
-                        <small>
-                            Accumulated Energy: 0.0k units • Evolution Cycle: 0<br>
-                            Multiplier: 1.00x • Next Evolution: 1000 units
-                        </small>
-                    </div>
                 </div>
                 
                 <div class="calculator-results">
@@ -2007,7 +1936,7 @@
                 this.lastEvolutionTime = Date.now(); // Track evolution timing
                 
                 // Enhanced crystalline parameters
-                this.crystallinePiezoEfficiency = 0.0000003; // kWh per Hz (crystal resonance efficiency)
+                this.crystallinePiezoEfficiency = 0.0000009; // kWh per Hz (crystal resonance efficiency) - UPDATED FOR SYNC
                 this.resonanceAmplifier = 1.0; // Increases with evolution cycles
                 this.stabilityFactor = 0.95; // Natural oscillation stability
                 
@@ -2023,6 +1952,10 @@
                 this.isAnimating = false;
                 this.animationQueue = [];
                 this.lastUpdateTime = Date.now();
+                
+                // Expose globally for calculator synchronization
+                window.sirensFlowSimulator = this;
+                console.log('🔮 Live SIRENS Flow Simulator initialized and exposed globally');
                 
                 this.init();
             }
@@ -2755,20 +2688,20 @@
         // Initialize the ambient audio system
         const ambientAudio = new AmbientAudioSystem();
         
-        // SIRENS Investment Calculator - REAL-TIME EVOLVING TOKEN VALUE
+        // SIRENS Investment Calculator - SYNCHRONIZED WITH LIVE SIRENS FLOW
         class SirensInvestmentCalculator {
             constructor() {
-                // Real-time oscillating token parameters
+                // Synchronized with Live SIRENS Flow parameters
                 this.globalElectricityPrice = 0.15; // USD per kWh (global average)
-                this.baseEnergyPerToken = 0.0004; // kWh per day per token (initial)
+                this.crystallinePiezoEfficiency = 0.0000009; // Same as Live Flow simulation
                 
-                // TOKEN VALUE IS EVOLVING IN REAL-TIME - NOT FIXED!
+                // TOKEN VALUE IS EVOLVING IN REAL-TIME - SYNCHRONIZED WITH LIVE FLOW!
                 this.baseTokenPrice = 0.55; // Initial price at launch (USD)
                 this.currentTokenPrice = 0.55; // Current oscillating price
                 this.priceVolatility = 0.08; // ±8% real-time oscillation
                 this.evolutionMultiplier = 1.0; // Grows with cumulative resonance
                 
-                // Real-time crystalline resonance parameters
+                // Real-time crystalline resonance parameters - SYNCED WITH LIVE FLOW
                 this.resonanceAccumulation = 0; // Cumulative frequency over time
                 this.crystalMaturity = 1.0; // Crystal maturity factor (grows over time)
                 this.oscillationCycles = 0; // Number of completed oscillation cycles
@@ -2776,6 +2709,10 @@
                 // Price evolution tracking
                 this.priceHistory = [];
                 this.lastPriceUpdate = Date.now();
+                this.lastTokensReceived = 0;
+                
+                // Reference to Live SIRENS Flow simulator for synchronization
+                this.liveFlowSimulator = null;
                 
                 this.init();
             }
@@ -2783,8 +2720,66 @@
             init() {
                 this.setupElements();
                 this.bindEvents();
+                this.connectToLiveFlow();
                 this.startRealTimeEvolution();
                 this.calculateInitial();
+            }
+            
+            connectToLiveFlow() {
+                // Wait for Live SIRENS Flow simulator to be available
+                const checkForSimulator = () => {
+                    if (window.sirensFlowSimulator) {
+                        this.liveFlowSimulator = window.sirensFlowSimulator;
+                        console.log('📊 Calculator synchronized with Live SIRENS Flow');
+                        this.syncWithLiveFlow();
+                    } else {
+                        setTimeout(checkForSimulator, 500);
+                    }
+                };
+                
+                // Initialize with connecting status
+                this.updateSyncStatus(false);
+                checkForSimulator();
+            }
+            
+            syncWithLiveFlow() {
+                if (!this.liveFlowSimulator) return;
+                
+                // Update sync status display
+                this.updateSyncStatus(true);
+                
+                // Synchronize all parameters with Live Flow
+                setInterval(() => {
+                    if (this.liveFlowSimulator) {
+                        // Use exact same values from Live Flow simulation
+                        this.resonanceAccumulation = this.liveFlowSimulator.totalAccumulatedFreq || 0;
+                        this.oscillationCycles = this.liveFlowSimulator.evolutionCycles || 0;
+                        this.evolutionMultiplier = this.liveFlowSimulator.resonanceAmplifier || 1.0;
+                        
+                        // Calculate energy per token using Live Flow's exact formula
+                        const currentFreq = this.liveFlowSimulator.currentTokenFreq || 440;
+                        const baseEnergyPerToken = currentFreq * this.crystallinePiezoEfficiency * this.evolutionMultiplier;
+                        this.baseEnergyPerToken = baseEnergyPerToken;
+                        
+                        // Update calculations with synced values
+                        this.calculate();
+                    }
+                }, 2000); // Sync every 2 seconds
+            }
+            
+            updateSyncStatus(isConnected) {
+                const syncEl = document.getElementById('syncStatus');
+                if (!syncEl) return;
+                
+                if (isConnected && this.liveFlowSimulator) {
+                    syncEl.style.background = 'rgba(78, 205, 196, 0.1)';
+                    syncEl.style.borderColor = 'rgba(78, 205, 196, 0.3)';
+                    syncEl.innerHTML = '🔗 <strong>Synchronized</strong> with Live SIRENS Flow - Real-time data active';
+                } else {
+                    syncEl.style.background = 'rgba(255, 152, 0, 0.1)';
+                    syncEl.style.borderColor = 'rgba(255, 152, 0, 0.3)';
+                    syncEl.innerHTML = '🔄 Connecting to Live SIRENS Flow...';
+                }
             }
             
             setupElements() {
@@ -2864,19 +2859,40 @@
                 // DYNAMIC CALCULATION - Token value changes in real-time!
                 const tokensReceived = investmentAmount / this.currentTokenPrice;
                 
-                // Energy generation evolves with token evolution
-                const currentEnergyPerToken = this.baseEnergyPerToken * this.evolutionMultiplier;
-                const totalDailyEnergy = tokensReceived * currentEnergyPerToken;
+                // SYNCHRONIZED ENERGY CALCULATION WITH LIVE SIRENS FLOW
+                // Use exact same formula as Live Flow simulation
+                let energyPerTokenPerDay;
+                if (this.liveFlowSimulator && this.liveFlowSimulator.electricalOutput) {
+                    // Use Live Flow's current electrical output per token
+                    energyPerTokenPerDay = this.liveFlowSimulator.electricalOutput * 24; // Convert to daily
+                } else {
+                    // Fallback calculation using synced parameters
+                    const currentFreq = this.liveFlowSimulator?.currentTokenFreq || 440;
+                    const resonanceAmp = this.liveFlowSimulator?.resonanceAmplifier || this.evolutionMultiplier;
+                    energyPerTokenPerDay = currentFreq * this.crystallinePiezoEfficiency * resonanceAmp * 24;
+                }
                 
-                // Financial calculations with evolving values
-                const dailyIncome = totalDailyEnergy * this.globalElectricityPrice;
+                const totalDailyEnergy = tokensReceived * energyPerTokenPerDay;
+                
+                // Financial calculations using LIVE FLOW pricing model
+                let electricityPrice = this.globalElectricityPrice;
+                if (this.liveFlowSimulator) {
+                    // Use same pricing logic as Live Flow
+                    const timeVariation = Math.sin(Date.now() / 60000) * 0.005;
+                    const marketVolatility = (Math.random() - 0.5) * 0.008;
+                    const premiumMultiplier = (this.liveFlowSimulator.crystallinePremium || 1.08) + (this.oscillationCycles * 0.01);
+                    electricityPrice = this.globalElectricityPrice * premiumMultiplier * (1 + timeVariation + marketVolatility);
+                }
+                
+                const dailyIncome = totalDailyEnergy * electricityPrice;
                 const annualIncome = dailyIncome * 365;
                 const currentROI = (annualIncome / investmentAmount) * 100;
                 
-                // Future projections with compound evolution
-                const futureEvolution1Year = this.evolutionMultiplier * 1.5; // Projected growth
-                const futureEvolution2Year = this.evolutionMultiplier * 2.8;
-                const futureEvolution3Year = this.evolutionMultiplier * 5.2;
+                // Future projections with SYNCHRONIZED evolution multipliers
+                const currentEvolutionMultiplier = this.liveFlowSimulator?.resonanceAmplifier || this.evolutionMultiplier;
+                const futureEvolution1Year = currentEvolutionMultiplier * 1.5; // Projected growth
+                const futureEvolution2Year = currentEvolutionMultiplier * 2.8;
+                const futureEvolution3Year = currentEvolutionMultiplier * 5.2;
                 
                 const year1Income = dailyIncome * 365 * futureEvolution1Year;
                 const year2Income = dailyIncome * 365 * futureEvolution2Year;  
@@ -2886,33 +2902,35 @@
                 const currentGrowth = ((this.currentTokenPrice / this.baseTokenPrice) - 1) * 100;
                 const year3Growth = (futureEvolution3Year - 1) * 100;
                 
-                // Show dynamic token reception based on current price
+                // Show dynamic token reception with Live Flow synchronization status
                 const tokenInfo = document.getElementById('tokensReceivedInfo');
                 if (tokensReceived !== this.lastTokensReceived) {
                     this.animateValue(this.tokensReceivedEl, tokensReceived, '', '', 2);
                     
-                    // Add dynamic note about token quantity evolution
+                    // Add synchronization status and dynamic note
                     if (tokenInfo) {
                         const priceEvolution = this.currentTokenPrice / this.baseTokenPrice;
                         const tokenBonus = priceEvolution < 1 ? 'MORE tokens (price below launch!)' : 
                                           priceEvolution > 1.5 ? 'FEWER tokens (premium price)' : 
                                           'standard allocation';
                         
+                        const syncStatus = this.liveFlowSimulator ? '🔗 Synced' : '⚠️ Standalone';
+                        
                         tokenInfo.innerHTML = `<small style="color: rgba(255,255,255,0.7);">
-                            ${tokenBonus} • Price: $${this.currentTokenPrice.toFixed(4)}
+                            ${tokenBonus} • Price: $${this.currentTokenPrice.toFixed(4)} • ${syncStatus}
                         </small>`;
                     }
                     this.lastTokensReceived = tokensReceived;
                 }
                 
-                // Update all other values with evolution indicators
+                // Update all other values with LIVE FLOW evolution indicators
                 this.animateValue(this.dailyGenerationEl, totalDailyEnergy, '', '', 6);
                 this.animateValue(this.dailyIncomeEl, dailyIncome, '$', '', 6);
                 this.animateValue(this.annualIncomeEl, annualIncome, '$', '', 2);
                 this.animateValue(this.roiPercentageEl, currentROI, '', '%', 2);
                 this.animateValue(this.evolutionBonusEl, year3Growth, '+', '%', 0);
                 
-                // Real-time evolving projections with growth indicators
+                // Real-time evolving projections with synchronized growth indicators
                 this.animateValue(this.year1IncomeEl, year1Income, '$', '/year', 2);
                 this.animateValue(this.year2IncomeEl, year2Income, '$', '/year', 2);
                 this.animateValue(this.year3IncomeEl, year3Income, '$', '/year', 2);
@@ -2920,27 +2938,77 @@
                 // Update current token price display
                 this.updateTokenPriceDisplay();
                 
-                // Enhanced highlighting based on evolution level and price movement
-                if (this.evolutionMultiplier > 2.5) {
+                // Enhanced highlighting based on Live Flow evolution level
+                const evolutionLevel = currentEvolutionMultiplier;
+                if (evolutionLevel > 2.5) {
                     this.highlightResults('rapid-evolution');
-                } else if (this.evolutionMultiplier > 1.8) {
+                } else if (evolutionLevel > 1.8) {
                     this.highlightResults('high-evolution');
-                } else if (this.evolutionMultiplier > 1.3) {
+                } else if (evolutionLevel > 1.3) {
                     this.highlightResults('medium-evolution');
                 } else {
                     this.highlightResults('base-evolution');
                 }
                 
-                // Show real-time evolution status
+                // Show real-time evolution status synchronized with Live Flow
                 this.updateEvolutionStatus();
             }
             
             updateTokenPriceDisplay() {
-                // Find the existing token price display element
+                // Add/update token price display element
                 let priceDisplay = document.getElementById('currentTokenPrice');
                 if (!priceDisplay) {
-                    console.warn('Token price display element not found');
-                    return;
+                    priceDisplay = document.createElement('div');
+                    priceDisplay.id = 'currentTokenPrice';
+                    priceDisplay.className = 'live-token-price';
+                    priceDisplay.style.cssText = `
+                        background: linear-gradient(135deg, rgba(78, 205, 196, 0.15), rgba(68, 160, 141, 0.1));
+                        border: 2px solid rgba(78, 205, 196, 0.4);
+                        border-radius: 12px;
+                        padding: 1rem;
+                        margin: 1.5rem 0;
+                        text-align: center;
+                        color: #4ecdc4;
+                        font-weight: 600;
+                        box-shadow: 0 4px 15px rgba(78, 205, 196, 0.1);
+                        transition: all 0.3s ease;
+                        position: relative;
+                        overflow: hidden;
+                    `;
+                    
+                    // Add pulsing animation for active price
+                    const pulseKeyframes = `
+                        @keyframes tokenPricePulse {
+                            0%, 100% { transform: scale(1); box-shadow: 0 4px 15px rgba(78, 205, 196, 0.1); }
+                            50% { transform: scale(1.02); box-shadow: 0 6px 20px rgba(78, 205, 196, 0.2); }
+                        }
+                    `;
+                    
+                    if (!document.querySelector('#tokenPriceStyle')) {
+                        const styleEl = document.createElement('style');
+                        styleEl.id = 'tokenPriceStyle';
+                        styleEl.textContent = pulseKeyframes + `
+                            .live-token-price {
+                                animation: tokenPricePulse 3s ease-in-out infinite;
+                            }
+                            .live-token-price::before {
+                                content: '';
+                                position: absolute;
+                                top: 0;
+                                left: -100%;
+                                width: 100%;
+                                height: 100%;
+                                background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+                                transition: left 0.5s ease;
+                            }
+                            .live-token-price.price-updated::before {
+                                left: 100%;
+                            }
+                        `;
+                        document.head.appendChild(styleEl);
+                    }
+                    
+                    this.investAmountEl?.parentNode?.appendChild(priceDisplay);
                 }
                 
                 const priceChange = ((this.currentTokenPrice / this.baseTokenPrice) - 1) * 100;
@@ -3052,21 +3120,63 @@
             updateEvolutionStatus() {
                 let statusEl = document.getElementById('evolutionStatus');
                 if (!statusEl) {
-                    console.warn('Evolution status element not found');
-                    return;
+                    statusEl = document.createElement('div');
+                    statusEl.id = 'evolutionStatus';
+                    statusEl.style.cssText = `
+                        background: rgba(0, 0, 0, 0.3);
+                        border-left: 4px solid #4ecdc4;
+                        padding: 0.8rem;
+                        margin: 1rem 0;
+                        border-radius: 0 8px 8px 0;
+                        font-size: 0.9em;
+                        color: rgba(255, 255, 255, 0.9);
+                    `;
+                    this.investAmountEl?.parentNode?.appendChild(statusEl);
                 }
                 
-                const resonanceLevel = (this.resonanceAccumulation / 1000).toFixed(1);
-                const evolutionPhase = this.oscillationCycles;
-                const nextEvolution = ((this.oscillationCycles + 1) * 1000) - this.resonanceAccumulation;
-                
-                statusEl.innerHTML = `
-                    <strong>🔮 Crystal Resonance Status</strong><br>
-                    <small>
-                        Accumulated Energy: ${resonanceLevel}k units • Evolution Cycle: ${evolutionPhase}<br>
-                        Multiplier: ${this.evolutionMultiplier.toFixed(2)}x • Next Evolution: ${nextEvolution} units
-                    </small>
-                `;
+                // Use Live Flow data when available
+                if (this.liveFlowSimulator) {
+                    const resonanceLevel = (this.liveFlowSimulator.totalAccumulatedFreq / 1000).toFixed(1);
+                    const evolutionPhase = this.liveFlowSimulator.evolutionCycles;
+                    const currentFreq = this.liveFlowSimulator.currentTokenFreq;
+                    const maxThreshold = this.liveFlowSimulator.maxFrequencyThreshold;
+                    const nextEvolution = Math.max(0, maxThreshold - currentFreq);
+                    const resonanceAmp = this.liveFlowSimulator.resonanceAmplifier;
+                    
+                    statusEl.innerHTML = `
+                        <strong>🔮 Crystal Resonance Status (Live Sync)</strong><br>
+                        <small>
+                            🔗 Synchronized with Live SIRENS Flow<br>
+                            Accumulated Energy: ${resonanceLevel}k Hz • Evolution Cycle: ${evolutionPhase}<br>
+                            Current Frequency: ${currentFreq.toFixed(0)} Hz • Resonance Amplifier: ${resonanceAmp.toFixed(2)}x<br>
+                            Next Evolution: ${nextEvolution.toFixed(0)} Hz remaining
+                        </small>
+                    `;
+                    
+                    // Update border color based on Live Flow evolution state
+                    if (nextEvolution < 100) {
+                        statusEl.style.borderLeftColor = '#00ff88'; // Near evolution
+                    } else if (resonanceAmp > 1.5) {
+                        statusEl.style.borderLeftColor = '#ffd700'; // High resonance
+                    } else {
+                        statusEl.style.borderLeftColor = '#4ecdc4'; // Normal state
+                    }
+                } else {
+                    // Fallback when Live Flow not yet connected
+                    const resonanceLevel = (this.resonanceAccumulation / 1000).toFixed(1);
+                    const evolutionPhase = this.oscillationCycles;
+                    const nextEvolution = ((this.oscillationCycles + 1) * 1000) - this.resonanceAccumulation;
+                    
+                    statusEl.innerHTML = `
+                        <strong>🔮 Crystal Resonance Status (Standalone)</strong><br>
+                        <small>
+                            ⚠️ Connecting to Live SIRENS Flow...<br>
+                            Accumulated Energy: ${resonanceLevel}k units • Evolution Cycle: ${evolutionPhase}<br>
+                            Multiplier: ${this.evolutionMultiplier.toFixed(2)}x • Next Evolution: ${nextEvolution} units
+                        </small>
+                    `;
+                    statusEl.style.borderLeftColor = '#ff9800'; // Connecting state
+                }
             }
         }
         
