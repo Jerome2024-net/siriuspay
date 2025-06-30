@@ -94,6 +94,30 @@
             transform: scale(1.1);
         }
         
+        .help-btn {
+            position: absolute;
+            top: 8px;
+            right: 35px;
+            background: rgba(136, 221, 255, 0.2);
+            border: 1px solid rgba(136, 221, 255, 0.5);
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            color: #88ddff;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: bold;
+            transition: all 0.2s ease;
+        }
+        
+        .help-btn:hover {
+            background: rgba(136, 221, 255, 0.4);
+            transform: scale(1.1);
+        }
+        
         /* Nouveau design de cartes pour les métriques */
         .metric-card {
             background: linear-gradient(135deg, rgba(0, 40, 80, 0.9), rgba(0, 60, 120, 0.8));
@@ -878,7 +902,8 @@
             <p class="sirens-subtitle">Cryptomonnaie à Résonance Cristalline</p>
             <p class="sirens-description">
                 Découvrez SIRENS, la première cryptomonnaie au monde utilisant la technologie de résonance cristalline. 
-                Générez de l'énergie et des revenus passifs grâce aux oscillations harmoniques des nœuds quantiques.
+                Chaque token génère de l'énergie réelle grâce aux oscillations harmoniques des nœuds quantiques, 
+                créant un écosystème financier autonome et durable.
             </p>
             <div class="tech-highlights">
                 <span class="tech-badge">🔬 Technologie Quantique</span>
@@ -893,29 +918,30 @@
         <div id="canvas-container"></div>
         <div id="energy-display">
             <button class="toggle-btn" onclick="togglePanel()">⌄</button>
-            <div class="project-title">SIRIUS</div>
+            <button class="help-btn" onclick="showIntro()" title="Qu'est-ce que SIRENS ?">?</button>
+            <div class="project-title">SIRENS TOKEN</div>
             <div class="metrics-container">
                 <div class="energy-row">
                     <div class="metric-card">
-                        <div class="energy-label">⚡ Freq</div>
+                        <div class="energy-label">🔮 Token Freq</div>
                         <div class="energy-value"><span id="token-frequency">0.00</span> Hz</div>
                     </div>
                 </div>
                 <div class="energy-row">
                     <div class="metric-card">
-                        <div class="energy-label">📊 Cumul</div>
+                        <div class="energy-label">� Cumul</div>
                         <div class="energy-value"><span id="cumulative-frequency">0.00</span> Hz</div>
                     </div>
                 </div>
                 <div class="energy-row">
                     <div class="metric-card">
-                        <div class="energy-label">🔋 Energy</div>
+                        <div class="energy-label">⚡ Energy</div>
                         <div class="energy-value"><span id="energy-generated">0.000</span> kWh</div>
                     </div>
                 </div>
                 <div class="energy-row">
                     <div class="metric-card">
-                        <div class="energy-label">💎 Value</div>
+                        <div class="energy-label">� Market</div>
                         <div class="crystal-token">$<span id="energy-value">0.000</span></div>
                     </div>
                 </div>
@@ -1513,6 +1539,16 @@
             setTimeout(() => {
                 intro.style.display = 'none';
             }, 800);
+        }
+        
+        // Fonction pour réafficher l'intro
+        function showIntro() {
+            const intro = document.getElementById('sirens-intro');
+            const container = document.getElementById('container');
+            
+            intro.style.display = 'flex';
+            intro.classList.remove('hidden');
+            container.classList.add('intro-active');
         }
         
         // Initialiser l'intro
