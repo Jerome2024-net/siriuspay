@@ -77,6 +77,12 @@
             min-height: 20px;
         }
         
+        .metrics-container {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+        
         .energy-label {
             color: #88ffaa;
             font-weight: bold;
@@ -92,6 +98,66 @@
             color: #ffaa00;
             font-weight: bold;
             text-shadow: 0 0 5px rgba(255, 170, 0, 0.5);
+        }
+        
+        /* Animation de scroll automatique pour mobile */
+        @keyframes mobileScroll {
+            0% { 
+                transform: translateY(0px);
+            }
+            25% { 
+                transform: translateY(-15px);
+            }
+            50% { 
+                transform: translateY(-30px);
+            }
+            75% { 
+                transform: translateY(-15px);
+            }
+            100% { 
+                transform: translateY(0px);
+            }
+        }
+        
+        /* Animation alternative pour faire défiler le contenu des métriques */
+        @keyframes contentScroll {
+            0% { 
+                transform: translateY(0);
+            }
+            16.66% { 
+                transform: translateY(0);
+            }
+            33.33% { 
+                transform: translateY(-25%);
+            }
+            50% { 
+                transform: translateY(-50%);
+            }
+            66.66% { 
+                transform: translateY(-75%);
+            }
+            83.33% { 
+                transform: translateY(-50%);
+            }
+            100% { 
+                transform: translateY(0);
+            }
+        }
+        
+        /* Animation pour faire apparaître les métriques une par une */
+        @keyframes metricFadeIn {
+            0%, 75% { 
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            25%, 50% { 
+                opacity: 1;
+                transform: scale(1);
+            }
+            100% { 
+                opacity: 0;
+                transform: scale(0.8);
+            }
         }
         
 
@@ -139,16 +205,18 @@
                 transform: none;
                 min-width: auto;
                 width: 100%;
-                padding: 8px 12px;
-                font-size: 11px;
+                padding: 6px 10px;
+                font-size: 10px;
                 box-sizing: border-box;
-                margin: 8px;
-                max-height: 45vh;
+                margin: 5px;
+                max-height: 50vh;
                 overflow-y: auto;
                 display: flex;
                 flex-direction: column;
-                gap: 2px;
+                gap: 1px;
                 flex-shrink: 0;
+                /* Animation de scroll automatique pour montrer toutes les métriques */
+                animation: mobileScroll 8s infinite ease-in-out;
             }
             
             .project-title {
@@ -161,12 +229,20 @@
                 display: flex;
                 flex-direction: column;
                 text-align: center;
-                margin: 2px 0;
+                margin: 1px 0;
                 gap: 1px;
-                min-height: 25px;
+                min-height: 22px;
                 justify-content: center;
                 flex-shrink: 0;
+                /* Animation pour faire apparaître chaque métrique */
+                animation: metricFadeIn 16s infinite ease-in-out;
             }
+            
+            /* Décalage d'animation pour chaque métrique - chacune apparaît 4 secondes */
+            .energy-row:nth-child(1) { animation-delay: 0s; }
+            .energy-row:nth-child(2) { animation-delay: 4s; }
+            .energy-row:nth-child(3) { animation-delay: 8s; }
+            .energy-row:nth-child(4) { animation-delay: 12s; }
             
             .energy-label {
                 font-size: 9px;
@@ -208,14 +284,24 @@
                 left: 0;
                 right: 0;
                 width: 100%;
-                padding: 6px 8px;
-                font-size: 10px;
+                padding: 4px 6px;
+                font-size: 9px;
                 box-sizing: border-box;
-                margin: 6px;
-                max-height: 50vh;
-                overflow-y: auto;
+                margin: 3px;
+                max-height: 55vh;
+                overflow: hidden;
                 transform: none;
                 flex-shrink: 0;
+                /* Conteneur de scroll automatique */
+                animation: mobileScroll 10s infinite ease-in-out;
+            }
+            
+            /* Conteneur interne pour les métriques */
+            #energy-display .metrics-container {
+                display: flex;
+                flex-direction: column;
+                gap: 1px;
+                animation: contentScroll 15s infinite linear;
             }
             
             .project-title {
@@ -225,15 +311,23 @@
             }
             
             .energy-row {
-                margin: 2px 0;
+                margin: 1px 0;
                 display: flex;
                 flex-direction: column;
                 text-align: center;
                 gap: 1px;
-                min-height: 22px;
+                min-height: 20px;
                 flex-shrink: 0;
                 justify-content: center;
+                /* Animation pour 480px */
+                animation: metricFadeIn 20s infinite ease-in-out;
             }
+            
+            /* Décalage d'animation pour 480px - plus lent */
+            .energy-row:nth-child(1) { animation-delay: 0s; }
+            .energy-row:nth-child(2) { animation-delay: 5s; }
+            .energy-row:nth-child(3) { animation-delay: 10s; }
+            .energy-row:nth-child(4) { animation-delay: 15s; }
             
             .energy-label {
                 font-size: 8px;
@@ -271,14 +365,16 @@
                 left: 0;
                 right: 0;
                 width: 100%;
-                padding: 4px 6px;
-                font-size: 9px;
+                padding: 3px 4px;
+                font-size: 8px;
                 box-sizing: border-box;
-                margin: 4px;
-                max-height: 55vh;
-                overflow-y: auto;
+                margin: 2px;
+                max-height: 60vh;
+                overflow: hidden;
                 transform: none;
                 flex-shrink: 0;
+                /* Animation de scroll plus lente pour les très petits écrans */
+                animation: mobileScroll 12s infinite ease-in-out;
             }
             
             .project-title {
@@ -293,10 +389,18 @@
                 flex-direction: column;
                 text-align: center;
                 gap: 0px;
-                min-height: 20px;
+                min-height: 18px;
                 flex-shrink: 0;
                 justify-content: center;
+                /* Animation pour 360px - encore plus lent */
+                animation: metricFadeIn 24s infinite ease-in-out;
             }
+            
+            /* Décalage d'animation pour 360px */
+            .energy-row:nth-child(1) { animation-delay: 0s; }
+            .energy-row:nth-child(2) { animation-delay: 6s; }
+            .energy-row:nth-child(3) { animation-delay: 12s; }
+            .energy-row:nth-child(4) { animation-delay: 18s; }
             
             .energy-label {
                 font-size: 7px;
@@ -428,21 +532,23 @@
         <div id="canvas-container"></div>
         <div id="energy-display">
             <div class="project-title">S I R I U S</div>
-            <div class="energy-row">
-                <span class="energy-label">CRYSTAL TOKEN FREQUENCY:</span>
-                <span class="energy-value"><span id="token-frequency">0.00</span> Hz</span>
-            </div>
-            <div class="energy-row">
-                <span class="energy-label">CUMULATIVE TOKEN FREQUENCY:</span>
-                <span class="energy-value"><span id="cumulative-frequency">0.00</span> Hz</span>
-            </div>
-            <div class="energy-row">
-                <span class="energy-label">ELECTRICITY GENERATED:</span>
-                <span class="energy-value"><span id="energy-generated">0.000</span> kWh</span>
-            </div>
-            <div class="energy-row">
-                <span class="energy-label">CURRENT VALUE:</span>
-                <span class="crystal-token">$<span id="energy-value">0.000</span> USD</span>
+            <div class="metrics-container">
+                <div class="energy-row">
+                    <span class="energy-label">CRYSTAL TOKEN FREQUENCY:</span>
+                    <span class="energy-value"><span id="token-frequency">0.00</span> Hz</span>
+                </div>
+                <div class="energy-row">
+                    <span class="energy-label">CUMULATIVE TOKEN FREQUENCY:</span>
+                    <span class="energy-value"><span id="cumulative-frequency">0.00</span> Hz</span>
+                </div>
+                <div class="energy-row">
+                    <span class="energy-label">ELECTRICITY GENERATED:</span>
+                    <span class="energy-value"><span id="energy-generated">0.000</span> kWh</span>
+                </div>
+                <div class="energy-row">
+                    <span class="energy-label">CURRENT VALUE:</span>
+                    <span class="crystal-token">$<span id="energy-value">0.000</span> USD</span>
+                </div>
             </div>
         </div>
     </div>
