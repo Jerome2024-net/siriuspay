@@ -33,27 +33,30 @@
         }
         
         #energy-display {
-            position: relative;
-            bottom: 0;
+            position: fixed;
+            bottom: 20px;
             left: 50%;
             transform: translateX(-50%);
-            background: rgba(0, 0, 0, 0.85);
+            background: rgba(0, 0, 0, 0.9);
             color: #00ff88;
             padding: 15px 25px;
             border-radius: 12px;
             font-family: 'Courier New', monospace;
             font-size: 14px;
-            border: 2px solid rgba(0, 255, 136, 0.4);
-            box-shadow: 0 0 25px rgba(0, 255, 136, 0.3);
+            border: 2px solid rgba(0, 255, 136, 0.6);
+            box-shadow: 0 0 25px rgba(0, 255, 136, 0.4);
             min-width: 400px;
             text-align: center;
             backdrop-filter: blur(5px);
             z-index: 1000;
-            display: flex;
+            display: flex !important;
             flex-direction: column;
             justify-content: center;
             flex-shrink: 0;
             margin: 20px;
+            opacity: 1 !important;
+            visibility: visible !important;
+            animation: none !important;
         }
         
         /* Nouveau design de cartes pour les métriques */
@@ -259,7 +262,7 @@
             }
             
             .metric-card {
-                display: none; /* Masquer les cartes normales sur mobile */
+                display: none !important; /* Masquer les cartes normales sur mobile */
             }
             
             .metric-compact {
@@ -273,10 +276,9 @@
                 background: rgba(0, 30, 60, 0.8);
                 border: 1px solid rgba(0, 255, 136, 0.5);
                 border-radius: 6px;
-                /* SUPPRIMER TOUTES LES ANIMATIONS */
-                animation: none;
-                opacity: 1;
-                transform: none;
+                animation: none !important;
+                opacity: 1 !important;
+                transform: none !important;
             }
             
             .energy-label {
@@ -457,8 +459,44 @@
             }
         }
 
-        /* Écrans desktop - afficher les cartes normales */
+        /* Styles par défaut pour desktop */
+        .metric-card {
+            display: flex !important;
+            flex-direction: column;
+            background: rgba(0, 40, 80, 0.8);
+            border: 1px solid rgba(0, 255, 136, 0.5);
+            border-radius: 8px;
+            padding: 12px;
+            margin: 5px 0;
+            box-shadow: 0 0 15px rgba(0, 255, 136, 0.2);
+            backdrop-filter: blur(3px);
+            opacity: 1 !important;
+            visibility: visible !important;
+            animation: none !important;
+        }
+        
+        .metric-compact {
+            display: none !important;
+        }
+
+        /* Écrans desktop - garder la visibilité */
         @media (min-width: 769px) {
+            #energy-display {
+                display: flex !important;
+                position: fixed !important;
+                bottom: 20px !important;
+                left: 50% !important;
+                transform: translateX(-50%) !important;
+                background: rgba(0, 0, 0, 0.85) !important;
+                border: 2px solid rgba(0, 255, 136, 0.4) !important;
+                border-radius: 12px !important;
+                padding: 15px 25px !important;
+                min-width: 400px !important;
+                z-index: 1000 !important;
+                opacity: 1 !important;
+                animation: none !important;
+            }
+            
             .metric-compact {
                 display: none !important; /* Masquer les cartes mobiles sur desktop */
             }
@@ -466,11 +504,28 @@
             .metric-card {
                 display: flex !important; /* Afficher les cartes normales sur desktop */
                 animation: none !important; /* Pas d'animation sur desktop */
+                opacity: 1 !important; /* Toujours visible */
+                transform: none !important; /* Pas de transformation */
             }
             
             .energy-row {
-                display: block; /* Assurer que les rows sont visibles */
+                display: block !important; /* Assurer que les rows sont visibles */
                 margin: 5px 0;
+                opacity: 1 !important; /* Toujours visible */
+                animation: none !important; /* Pas d'animation */
+            }
+            
+            .metrics-container {
+                display: flex !important; /* Toujours visible */
+                flex-direction: column !important;
+                opacity: 1 !important;
+                animation: none !important; /* Pas d'animation */
+            }
+            
+            .project-title {
+                display: block !important; /* Toujours visible */
+                opacity: 1 !important;
+                animation: none !important; /* Pas d'animation */
             }
         }
         
