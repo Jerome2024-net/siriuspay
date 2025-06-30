@@ -1,1706 +1,653 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sirius - Revolutionary Banking for Everyone</title>
-    <meta name="description" content="Sirius is reinventing banking with autonomous financial infrastructure powered by SIRENS crystalline cryptocurrency technology.">
-    
+    <title>Nœuds Cristallins Oscillants</title>
     <style>
-        * {
+        body {
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
+            background: linear-gradient(45deg, #f0f0f0, #e6e6e6, #ffffff);
+            overflow: hidden;
+            font-family: 'Arial', sans-serif;
+            transition: background 0.5s ease;
         }
-
-        :root {
-            --vh: 1vh;
-        }
-
-        body {
-            font-family: 'Courier New', 'Lucida Console', monospace;
-            background: linear-gradient(45deg, #0a0a0a, #1a1a2e, #16213e);
-            background-size: 400% 400%;
-            animation: ambientBackground 15s ease-in-out infinite;
-            color: #00ff00;
-            overflow-x: hidden;
-            line-height: 1.6;
-            min-height: 100vh;
-            position: relative;
-        }
-
-        @keyframes ambientBackground {
-            0% {
-                background: linear-gradient(45deg, #0a0a0a, #001122, #002233);
-            }
-            25% {
-                background: linear-gradient(45deg, #0a0a0a, #001a1a, #003333);
-            }
-            50% {
-                background: linear-gradient(45deg, #0a0a0a, #110022, #220033);
-            }
-            75% {
-                background: linear-gradient(45deg, #0a0a0a, #002211, #003322);
-            }
-            100% {
-                background: linear-gradient(45deg, #0a0a0a, #001122, #002233);
-            }
-        }
-
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: 
-                repeating-linear-gradient(
-                    0deg,
-                    transparent,
-                    transparent 3px,
-                    rgba(0, 255, 255, 0.01) 3px,
-                    rgba(0, 255, 255, 0.01) 6px
-                );
-            pointer-events: none;
-            z-index: 1;
-            animation: subtleScanlines 25s linear infinite;
-            opacity: 0.3;
-        }
-
-        @keyframes subtleScanlines {
-            0% { 
-                transform: translateY(0px);
-                opacity: 0.2;
-            }
-            50% { 
-                transform: translateY(6px);
-                opacity: 0.4;
-            }
-            100% { 
-                transform: translateY(0px);
-                opacity: 0.2;
-            }
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 2rem;
-            position: relative;
-            z-index: 10;
-        }
-
-        /* Cyber Background Animation */
-        .animation-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
+        
+        #container {
+            width: 100vw;
             height: 100vh;
-            pointer-events: none;
-            z-index: 2;
-        }
-
-        .circle {
-            position: absolute;
-            border-radius: 50%;
-            background: transparent;
-            border: 1px solid rgba(0, 255, 255, 0.2);
-            box-shadow: 
-                0 0 10px rgba(0, 255, 255, 0.1),
-                inset 0 0 10px rgba(0, 255, 255, 0.05);
-            animation: ambientFloat 12s ease-in-out infinite;
-        }
-
-        @keyframes ambientFloat {
-            0%, 100% {
-                transform: translateY(0px) rotate(0deg) scale(1);
-                opacity: 0.3;
-                border-color: rgba(0, 255, 255, 0.2);
-            }
-            25% {
-                transform: translateY(-20px) rotate(90deg) scale(1.05);
-                opacity: 0.6;
-                border-color: rgba(0, 255, 255, 0.4);
-            }
-            50% {
-                transform: translateY(-40px) rotate(180deg) scale(0.95);
-                opacity: 0.2;
-                border-color: rgba(0, 255, 255, 0.1);
-            }
-            75% {
-                transform: translateY(-20px) rotate(270deg) scale(1.1);
-                opacity: 0.5;
-                border-color: rgba(0, 255, 255, 0.3);
-            }
-        }
-
-        .circle:nth-child(1) {
-            width: 100px;
-            height: 100px;
-            top: 10%;
-            left: 5%;
-            animation-delay: 0s;
-        }
-
-        .circle:nth-child(2) {
-            width: 150px;
-            height: 150px;
-            top: 60%;
-            right: 10%;
-            animation-delay: 3s;
-        }
-
-        .circle:nth-child(3) {
-            width: 80px;
-            height: 80px;
-            bottom: 20%;
-            left: 15%;
-            animation-delay: 6s;
-        }
-
-        .circle:nth-child(4) {
-            width: 120px;
-            height: 120px;
-            top: 30%;
-            right: 35%;
-            animation-delay: 9s;
-        }
-
-        .circle:nth-child(5) {
-            width: 200px;
-            height: 200px;
-            bottom: 40%;
-            right: 5%;
-            animation-delay: 12s;
-        }
-
-        /* Ambient Orbs */
-        .ambient-orb {
-            position: fixed;
-            border-radius: 50%;
-            background: radial-gradient(circle, rgba(0, 255, 255, 0.1), transparent);
-            filter: blur(2px);
-            pointer-events: none;
-            z-index: 2;
-            animation: orbFloat 20s ease-in-out infinite;
-        }
-
-        .ambient-orb:nth-child(1) {
-            width: 60px;
-            height: 60px;
-            top: 20%;
-            left: 20%;
-            animation-delay: 0s;
-        }
-
-        .ambient-orb:nth-child(2) {
-            width: 40px;
-            height: 40px;
-            top: 70%;
-            right: 30%;
-            animation-delay: 7s;
-        }
-
-        .ambient-orb:nth-child(3) {
-            width: 80px;
-            height: 80px;
-            bottom: 30%;
-            left: 60%;
-            animation-delay: 14s;
-        }
-
-        @keyframes orbFloat {
-            0%, 100% {
-                transform: translate(0, 0) scale(1);
-                opacity: 0.3;
-            }
-            33% {
-                transform: translate(30px, -30px) scale(1.2);
-                opacity: 0.6;
-            }
-            66% {
-                transform: translate(-20px, 40px) scale(0.8);
-                opacity: 0.2;
-            }
-        }
-            0%, 100% {
-                transform: translateY(0px) rotate(0deg) scale(1);
-                opacity: 0.7;
-            }
-            25% {
-                transform: translateY(-30px) rotate(90deg) scale(1.1);
-                opacity: 1;
-            }
-            50% {
-                transform: translateY(-60px) rotate(180deg) scale(0.9);
-                opacity: 0.5;
-            }
-            75% {
-                transform: translateY(-30px) rotate(270deg) scale(1.2);
-                opacity: 0.8;
-            }
-        }
-
-        /* SIRENS Coin Animation - REMOVED */
-
-        /* Header */
-        .logo {
-            font-size: 2.5rem;
-            font-weight: 700;
-            text-align: center;
-            margin-bottom: 2rem;
-            background: linear-gradient(45deg, #00ffff, #ffffff);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            text-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
             position: relative;
         }
-
-        /* Hero Section */
-        .hero-title {
-            font-size: 3.5rem;
-            font-weight: 700;
-            text-align: center;
-            margin-bottom: 1.5rem;
-            background: linear-gradient(45deg, #ffffff, #00ffff);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            text-shadow: 0 0 30px rgba(0, 255, 255, 0.2);
-            position: relative;
-        }
-
-        .hero-title::after {
-            content: '';
+        
+        #energy-display {
             position: absolute;
-            bottom: -10px;
+            bottom: 20px;
             left: 50%;
             transform: translateX(-50%);
-            width: 200px;
-            height: 2px;
-            background: linear-gradient(90deg, transparent, #00ffff, transparent);
-            box-shadow: 0 0 15px #00ffff;
-        }
-
-        .hero-subtitle {
-            font-size: 1.2rem;
-            text-align: center;
-            color: rgba(255, 255, 255, 0.8);
-            margin-bottom: 3rem;
-            max-width: 800px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        /* Impact Counter */
-        .impact-counter {
-            text-align: center;
-            padding: 2rem;
-            background: 
-                linear-gradient(135deg, rgba(0, 255, 255, 0.1), rgba(255, 0, 128, 0.05)),
-                repeating-linear-gradient(
-                    0deg,
-                    transparent,
-                    transparent 25px,
-                    rgba(0, 255, 255, 0.02) 25px,
-                    rgba(0, 255, 255, 0.02) 27px
-                );
-            border-radius: 0;
-            margin: 3rem 0;
-            border: 2px solid rgba(0, 255, 255, 0.2);
-            box-shadow: 
-                0 0 25px rgba(0, 255, 255, 0.2),
-                inset 0 0 25px rgba(0, 255, 255, 0.05);
-        }
-
-        .counter-number {
-            font-size: 3rem;
-            font-weight: 700;
-            background: linear-gradient(45deg, #00ffff, #ffffff);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 0.5rem;
-            text-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
-        }
-
-        .counter-label {
-            font-size: 1.1rem;
-            color: rgba(255, 255, 255, 0.9);
-            margin-bottom: 0.5rem;
-        }
-
-        .counter-subtitle {
-            font-size: 0.9rem;
-            color: rgba(255, 255, 255, 0.7);
-        }
-
-        /* SIRENS Flow Simulation */
-        .sirens-simulation {
-            background: 
-                linear-gradient(135deg, rgba(0, 0, 0, 0.8), rgba(0, 20, 40, 0.6)),
-                repeating-linear-gradient(
-                    45deg,
-                    transparent,
-                    transparent 20px,
-                    rgba(0, 255, 255, 0.02) 20px,
-                    rgba(0, 255, 255, 0.02) 22px
-                );
-            border-radius: 0;
-            padding: 2rem;
-            margin: 3rem 0;
-            border: 2px solid rgba(0, 255, 255, 0.3);
-            box-shadow: 
-                0 0 30px rgba(0, 255, 255, 0.2),
-                inset 0 0 30px rgba(0, 255, 255, 0.05);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .sirens-simulation::before {
-            content: '';
-            position: absolute;
-            top: -2px;
-            left: -2px;
-            right: -2px;
-            bottom: -2px;
-            background: linear-gradient(45deg, #00ffff, #ffffff);
-            z-index: -1;
-            border-radius: 0;
-            animation: borderGlow 6s linear infinite;
-        }
-
-        @keyframes borderGlow {
-            0% { opacity: 0.3; }
-            50% { opacity: 0.6; }
-            100% { opacity: 0.3; }
-        }
-
-        .simulation-title {
-            text-align: center;
-            font-size: 1.5rem;
-            background: linear-gradient(45deg, #00ffff, #ffffff);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 2rem;
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            text-shadow: 0 0 15px rgba(0, 255, 255, 0.3);
-        }
-
-        .flow-container {
-            display: flex;
-            flex-direction: column;
-            gap: 2rem;
-            align-items: center;
-        }
-
-        .flow-step {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            background: 
-                linear-gradient(135deg, rgba(0, 255, 255, 0.08), rgba(0, 0, 0, 0.3)),
-                repeating-linear-gradient(
-                    90deg,
-                    transparent,
-                    transparent 15px,
-                    rgba(0, 255, 255, 0.02) 15px,
-                    rgba(0, 255, 255, 0.02) 17px
-                );
-            padding: 1.5rem;
-            border-radius: 0;
-            width: 100%;
-            max-width: 600px;
-            border: 1px solid rgba(0, 255, 255, 0.2);
-            box-shadow: 
-                0 0 10px rgba(0, 255, 255, 0.1),
-                inset 0 0 10px rgba(0, 255, 255, 0.02);
-        }
-
-        .flow-input, .flow-output {
-            flex: 1;
-            text-align: center;
-        }
-
-        .flow-label {
-            font-size: 0.9rem;
-            color: rgba(255, 255, 255, 0.7);
-            margin-bottom: 0.5rem;
-        }
-
-        .flow-value {
-            font-size: 1.4rem;
-            font-weight: 600;
-            background: linear-gradient(45deg, #00ffff, #ffffff);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            text-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
-        }
-
-        .flow-unit {
-            font-size: 0.8rem;
-            color: rgba(255, 255, 255, 0.6);
-        }
-
-        .flow-arrow {
-            font-size: 1.5rem;
-            color: #00ffff;
-            animation: arrowPulse 1.5s ease-in-out infinite;
-        }
-
-        @keyframes arrowPulse {
-            0%, 100% { 
-                transform: scale(1);
-                filter: drop-shadow(0 0 8px #00ffff);
-            }
-            50% { 
-                transform: scale(1.2);
-                filter: drop-shadow(0 0 20px #00ffff);
-            }
-        }
-
-        .live-formula {
-            background: 
-                linear-gradient(135deg, rgba(0, 0, 0, 0.8), rgba(0, 20, 40, 0.6)),
-                repeating-linear-gradient(
-                    45deg,
-                    transparent,
-                    transparent 15px,
-                    rgba(0, 255, 0, 0.02) 15px,
-                    rgba(0, 255, 0, 0.02) 17px
-                );
-            padding: 1rem;
-            border-radius: 0;
-            font-size: 0.9rem;
-            color: rgba(255, 255, 255, 0.8);
-            text-align: center;
-            margin-top: 1rem;
-            border: 1px solid rgba(0, 255, 0, 0.3);
-            box-shadow: 
-                0 0 20px rgba(0, 255, 0, 0.1),
-                inset 0 0 20px rgba(0, 255, 0, 0.02);
-        }
-
-        .formula-variable {
-            background: linear-gradient(45deg, #00ffff, #ffffff);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            font-weight: 600;
-            text-shadow: 0 0 8px rgba(0, 255, 255, 0.3);
-        }
-
-        /* CTA Section */
-        .cta-section {
-            text-align: center;
-            margin: 4rem 0;
-            position: relative;
-        }
-
-        .cta-section::before {
-            content: '';
-            position: absolute;
-            top: -50px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 300px;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, #00ffff, transparent);
-            box-shadow: 0 0 20px #00ffff;
-        }
-
-        .cta-title {
-            font-size: 2.5rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-            background: linear-gradient(45deg, #00ffff, #ffffff);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            text-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
-        }
-
-        .cta-description {
-            font-size: 1.1rem;
-            color: rgba(255, 255, 255, 0.8);
-            margin-bottom: 2rem;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .contact-button {
-            background: linear-gradient(45deg, #00ffff, #ffffff);
-            border: 2px solid #00ffff;
-            padding: 1rem 2rem;
-            font-size: 1.1rem;
-            font-weight: 600;
-            color: #000000;
-            border-radius: 0;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            font-family: 'Courier New', monospace;
-            box-shadow: 
-                0 0 15px rgba(0, 255, 255, 0.2),
-                inset 0 0 15px rgba(0, 255, 255, 0.05);
-            text-decoration: none;
-            display: inline-block;
-        }
-
-        .contact-button::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(45deg, #ffffff, #00ffff);
-            transition: left 0.3s ease;
-            z-index: 1;
-        }
-
-        .contact-button:hover::before {
-            left: 0;
-        }
-
-        .contact-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 
-                0 10px 20px rgba(0, 255, 255, 0.3),
-                0 0 30px rgba(0, 255, 255, 0.2);
-            color: #000000;
-        }
-
-        .contact-button span {
-            position: relative;
-            z-index: 2;
-        }
-
-
-
-        /* Footer */
-        .footer {
-            text-align: center;
-            padding: 2rem 0;
-            border-top: 1px solid rgba(0, 255, 255, 0.2);
-            margin-top: 4rem;
-            position: relative;
-        }
-
-        .footer::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, #00ffff, transparent);
-            box-shadow: 0 0 10px #00ffff;
-        }
-
-        .footer-content {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            gap: 0.5rem;
-        }
-
-        .founder-info {
-            font-size: 0.9rem;
-            color: rgba(0, 255, 255, 0.8);
-            text-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
-        }
-
-        .copyright {
-            font-size: 0.8rem;
-            color: rgba(255, 255, 255, 0.5);
-        }
-
-        /* Onboarding Modal */
-        .onboarding-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
             background: rgba(0, 0, 0, 0.8);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 1000;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.3s ease;
+            color: #00ff88;
+            padding: 15px 25px;
+            border-radius: 10px;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            border: 2px solid rgba(0, 255, 136, 0.3);
+            box-shadow: 0 0 20px rgba(0, 255, 136, 0.2);
+            min-width: 400px;
+            text-align: center;
         }
-
-        .onboarding-overlay.active {
-            opacity: 1;
-            visibility: visible;
+        
+        .project-title {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 18px;
+            font-weight: bold;
+            text-shadow: 
+                0 0 10px rgba(255, 255, 255, 0.8),
+                0 0 20px rgba(255, 255, 255, 0.6),
+                0 0 30px rgba(255, 255, 255, 0.4);
+            margin-bottom: 10px;
+            letter-spacing: 3px;
+            opacity: 0.8;
         }
-
-        .onboarding-container {
-            background: 
-                linear-gradient(135deg, rgba(0, 0, 0, 0.95), rgba(0, 20, 40, 0.9)),
-                repeating-linear-gradient(
-                    45deg,
-                    transparent,
-                    transparent 15px,
-                    rgba(0, 255, 255, 0.02) 15px,
-                    rgba(0, 255, 255, 0.02) 17px
-                );
-            border-radius: 0;
-            padding: 2rem;
-            max-width: 500px;
-            width: 90%;
-            position: relative;
-            border: 2px solid rgba(0, 255, 255, 0.3);
-            box-shadow: 
-                0 0 40px rgba(0, 255, 255, 0.3),
-                inset 0 0 40px rgba(0, 255, 255, 0.05);
-        }
-
-        .onboarding-container::before {
-            content: '';
-            position: absolute;
-            top: -2px;
-            left: -2px;
-            right: -2px;
-            bottom: -2px;
-            background: linear-gradient(45deg, #00ffff, #ffffff);
-            z-index: -1;
-            border-radius: 0;
-            animation: borderGlow 6s linear infinite;
-        }
-
-        .onboarding-header {
+        
+        .energy-row {
             display: flex;
             justify-content: space-between;
+            margin: 5px 0;
             align-items: center;
-            margin-bottom: 2rem;
         }
-
-        .onboarding-header h2 {
-            background: linear-gradient(45deg, #00ffff, #ffffff);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            font-size: 1.5rem;
-            text-shadow: 0 0 15px rgba(0, 255, 255, 0.3);
+        
+        .energy-label {
+            color: #88ffaa;
+            font-weight: bold;
         }
-
-        .onboarding-close {
-            background: none;
-            border: none;
-            font-size: 1.5rem;
-            color: rgba(255, 255, 255, 0.7);
-            cursor: pointer;
-            transition: color 0.3s ease;
+        
+        .energy-value {
+            color: #00ff88;
+            font-weight: bold;
+            text-shadow: 0 0 5px rgba(0, 255, 136, 0.5);
         }
-
-        .onboarding-close:hover {
-            color: #00ffff;
-            text-shadow: 0 0 10px #00ffff;
+        
+        .crystal-token {
+            color: #ffaa00;
+            font-weight: bold;
+            text-shadow: 0 0 5px rgba(255, 170, 0, 0.5);
         }
+        
 
-        .onboarding-content p {
-            color: rgba(255, 255, 255, 0.8);
-            margin-bottom: 2rem;
-            line-height: 1.6;
-        }
-
-        .welcome-animation {
-            text-align: center;
-            margin-bottom: 2rem;
-        }
-
-        .welcome-sirens {
-            font-size: 3rem;
-            animation: pulse 2s ease-in-out infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% {
-                transform: scale(1);
-            }
-            50% {
-                transform: scale(1.1);
-            }
-        }
-
-        .investor-form {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-        }
-
-        .form-group {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .form-group label {
-            font-weight: 600;
-            color: rgba(255, 255, 255, 0.9);
-            margin-bottom: 0.5rem;
-        }
-
-        .form-group input,
-        .form-group select,
-        .form-group textarea {
-            padding: 0.8rem;
-            border: 1px solid rgba(78, 205, 196, 0.3);
-            border-radius: 8px;
-            background: rgba(0, 0, 0, 0.3);
-            color: white;
-            font-size: 1rem;
-            transition: all 0.3s ease;
-        }
-
-        .form-group input::placeholder,
-        .form-group textarea::placeholder {
-            color: rgba(255, 255, 255, 0.5);
-        }
-
-        .form-group input:focus,
-        .form-group select:focus,
-        .form-group textarea:focus {
-            outline: none;
-            border-color: #00ffff;
-            box-shadow: 
-                0 0 15px rgba(0, 255, 255, 0.3),
-                inset 0 0 15px rgba(0, 255, 255, 0.1);
-            background: rgba(0, 20, 40, 0.5);
-        }
-
-        .form-button {
-            padding: 1rem;
-            border: none;
-            border-radius: 8px;
-            font-size: 1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .form-button.primary {
-            background: linear-gradient(45deg, #00ffff, #ffffff);
-            color: #000000;
-            border: 2px solid #00ffff;
-            border-radius: 0;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            box-shadow: 
-                0 0 15px rgba(0, 255, 255, 0.2),
-                inset 0 0 15px rgba(0, 255, 255, 0.05);
-        }
-
-        .form-button.primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 
-                0 5px 15px rgba(0, 255, 255, 0.3),
-                0 0 25px rgba(0, 255, 255, 0.2);
-            color: #000000;
-        }
-
-        /* Additional Cyber Effects */
-        .cyber-grid {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: 
-                linear-gradient(rgba(0, 255, 255, 0.015) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(0, 255, 255, 0.015) 1px, transparent 1px);
-            background-size: 80px 80px;
-            pointer-events: none;
-            z-index: 1;
-            animation: ambientGrid 20s linear infinite;
-            opacity: 0.4;
-        }
-
-        @keyframes ambientGrid {
-            0% { 
-                transform: translate(0, 0);
-                opacity: 0.2;
-            }
-            25% { 
-                transform: translate(20px, 10px);
-                opacity: 0.4;
-            }
-            50% { 
-                transform: translate(40px, 20px);
-                opacity: 0.3;
-            }
-            75% { 
-                transform: translate(60px, 30px);
-                opacity: 0.5;
-            }
-            100% { 
-                transform: translate(80px, 40px);
-                opacity: 0.2;
-            }
-        }
-
-        /* Data Stream Effect */
-        .data-stream {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 1;
-            overflow: hidden;
-            opacity: 0.3;
-        }
-
-        .data-particle {
+        
+        #info {
             position: absolute;
-            width: 1px;
-            height: 15px;
-            background: linear-gradient(to bottom, transparent, rgba(0, 255, 255, 0.6), transparent);
-            animation: ambientDataFlow 4s linear infinite;
-        }
-
-        @keyframes ambientDataFlow {
-            0% {
-                transform: translateY(-100vh);
-                opacity: 0;
-            }
-            20% {
-                opacity: 0.6;
-            }
-            80% {
-                opacity: 0.6;
-            }
-            100% {
-                transform: translateY(100vh);
-                opacity: 0;
-            }
-        }
-
-        /* Glitch Effect for Loading */
-        .glitch {
-            animation: glitch 0.2s ease-in-out infinite alternate;
-        }
-
-        @keyframes glitch {
-            0% {
-                text-shadow: 
-                    1px 0 #00ffff,
-                    -1px 0 rgba(255, 255, 255, 0.5);
-            }
-            100% {
-                text-shadow: 
-                    -1px 0 #00ffff,
-                    1px 0 rgba(255, 255, 255, 0.5);
-            }
-        }
-        @media (max-width: 768px) {
-            .container {
-                padding: 1rem;
-            }
-
-            .hero-title {
-                font-size: 2.5rem;
-            }
-
-            .hero-subtitle {
-                font-size: 1rem;
-            }
-
-            .counter-number {
-                font-size: 2rem;
-            }
-
-            .flow-step {
-                flex-direction: column;
-                text-align: center;
-            }
-
-            .flow-arrow {
-                transform: rotate(90deg);
-            }
-
-            .onboarding-container {
-                margin: 1rem;
-                padding: 1.5rem;
-            }
-        }
-
-        /* Ambient Orbs */
-        .ambient-orb {
-            position: fixed;
-            border-radius: 50%;
-            background: radial-gradient(circle, rgba(0, 255, 255, 0.08), transparent);
-            filter: blur(3px);
-            pointer-events: none;
-            z-index: 2;
-            animation: orbFloat 25s ease-in-out infinite;
-        }
-
-        .ambient-orb:nth-child(1) {
-            width: 60px;
-            height: 60px;
-            top: 20%;
-            left: 20%;
-            animation-delay: 0s;
-        }
-
-        .ambient-orb:nth-child(2) {
-            width: 40px;
-            height: 40px;
-            top: 70%;
-            right: 30%;
-            animation-delay: 8s;
-        }
-
-        .ambient-orb:nth-child(3) {
-            width: 80px;
-            height: 80px;
-            bottom: 30%;
-            left: 60%;
-            animation-delay: 16s;
-        }
-
-        @keyframes orbFloat {
-            0%, 100% {
-                transform: translate(0, 0) scale(1);
-                opacity: 0.2;
-            }
-            33% {
-                transform: translate(40px, -40px) scale(1.3);
-                opacity: 0.5;
-            }
-            66% {
-                transform: translate(-30px, 50px) scale(0.7);
-                opacity: 0.1;
-            }
+            bottom: 20px;
+            left: 20px;
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 14px;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 10px;
+            border-radius: 5px;
         }
     </style>
 </head>
 <body>
-    <!-- Background Animation -->
-    <div class="cyber-grid"></div>
-    <div class="data-stream" id="dataStream"></div>
-    <div class="animation-container">
-        <div class="circle"></div>
-        <div class="circle"></div>
-        <div class="circle"></div>
-        <div class="circle"></div>
-        <div class="circle"></div>
-    </div>
-    
-    <!-- Ambient Orbs -->
-    <div class="ambient-orb"></div>
-    <div class="ambient-orb"></div>
-    <div class="ambient-orb"></div>
-
-    <!-- Main Content -->
-    <div class="container">
-        <div class="logo">Sirius</div>
-        
-        <h1 class="hero-title">Reinventing Banking for Everyone</h1>
-        
-        <p class="hero-subtitle">
-            Creating a new banking model with autonomous financial infrastructure. Powered by SIRENS, our crystalline cryptocurrency that converts vibrations into electrical energy in real-time.
-        </p>
-
-        <!-- Impact Counter -->
-        <div class="impact-counter">
-            <div class="counter-number" id="counterNumber">1,700,000,000</div>
-            <div class="counter-label">People ready for the banking revolution</div>
-            <div class="counter-subtitle">🇧🇯 Disrupting from Cotonou, Benin • Transforming Banking Globally 🌍</div>
-        </div>
-
-        <!-- SIRENS Flow Simulation -->
-        <div class="sirens-simulation">
-            <div class="simulation-title">⚡ Live SIRENS Flow ⚡</div>
-            
-            <div class="flow-container">
-                <!-- Token Vibration -->
-                <div class="flow-step">
-                    <div class="flow-input">
-                        <div class="flow-label">Crystalline Token Frequency</div>
-                        <div class="flow-value" id="tokenFreq">440.00 <span class="flow-unit">Hz</span></div>
-                    </div>
-                    <div class="flow-arrow">⚡</div>
-                    <div class="flow-output">
-                        <div class="flow-label">Cumulative Resonance</div>
-                        <div class="flow-value" id="cumulativeFreq">1,320 <span class="flow-unit">Hz</span></div>
-                    </div>
-                </div>
-
-                <!-- Energy Conversion -->
-                <div class="flow-step">
-                    <div class="flow-input">
-                        <div class="flow-label">Electrical Generation</div>
-                        <div class="flow-value" id="electricalOutput">0.000396 <span class="flow-unit">kWh</span></div>
-                    </div>
-                    <div class="flow-arrow">💰</div>
-                    <div class="flow-output">
-                        <div class="flow-label">Real-time Value</div>
-                        <div class="flow-value" id="realtimePrice">$0.0000594 <span class="flow-unit">USD</span></div>
-                    </div>
-                </div>
-
-                <!-- Formula Display -->
-                <div class="live-formula">
-                    <div class="formula-text">
-                        🔮 <strong>SIRENS Evolution Formula:</strong> 
-                        <span class="formula-variable" id="liveFormulaCumulative">1,320</span> Hz (Cumulative) × 
-                        <span class="formula-variable">0.0000009</span> kWh/Hz × 
-                        $<span class="formula-variable" id="liveFormulaPrice">0.150</span>/kWh = 
-                        $<span class="formula-variable" id="liveFormulaResult">0.0000594</span> USD
-                    </div>
-                </div>
+    <div id="container">
+        <div id="energy-display">
+            <div class="project-title">S I R I U S</div>
+            <div class="energy-row">
+                <span class="energy-label">CRYSTAL TOKEN FREQUENCY:</span>
+                <span class="energy-value"><span id="token-frequency">0.00</span> Hz</span>
             </div>
-        </div>
-
-        <!-- CTA Section -->
-        <div class="cta-section">
-            <h2 class="cta-title">Join the Banking Revolution</h2>
-            <p class="cta-description">
-                Pioneering a revolutionary banking model with crystalline technology. Join founding investors creating universal banking access for 1.7 billion unbanked people.
-            </p>
-            
-            <a href="mailto:jerome@siriuspay.org" class="contact-button" id="contactButton">
-                <span>📧 Contact Us</span>
-            </a>
-        </div>
-        
-        <!-- Footer -->
-        <footer class="footer">
-            <div class="footer-content">
-                <div class="founder-info">Founded by Jerome Djogbenou</div>
-                <div class="copyright">© 2025 Sirius. All rights reserved.</div>
+            <div class="energy-row">
+                <span class="energy-label">CUMULATIVE TOKEN FREQUENCY:</span>
+                <span class="energy-value"><span id="cumulative-frequency">0.00</span> Hz</span>
             </div>
-        </footer>
-    </div>
-
-    <!-- Investor Onboarding Modal -->
-    <div class="onboarding-overlay" id="onboardingOverlay">
-        <div class="onboarding-container">
-            <div class="onboarding-header">
-                <h2>🏦 Banking Revolution Access</h2>
-                <button class="onboarding-close" id="onboardingClose">&times;</button>
+            <div class="energy-row">
+                <span class="energy-label">ELECTRICITY GENERATED:</span>
+                <span class="energy-value"><span id="energy-generated">0.000</span> kWh</span>
             </div>
-            <div class="onboarding-content">
-                <div class="welcome-animation">
-                    <div class="welcome-sirens">💎</div>
-                </div>
-                <p>Pioneer the new banking model with Sirius. Join exclusive investors backing the world's first autonomous banking infrastructure powered by crystalline cryptocurrency technology.</p>
-                
-                <form class="investor-form" id="investorForm">
-                    <div class="form-group">
-                        <label for="fullName">Full Name *</label>
-                        <input type="text" id="fullName" name="fullName" required placeholder="John Smith">
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="company">Fund/Company *</label>
-                        <input type="text" id="company" name="company" required placeholder="Acme Ventures">
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="email">Email Address *</label>
-                        <input type="email" id="email" name="email" required placeholder="john@acmeventures.com">
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="investmentSize">Investment Interest</label>
-                        <select id="investmentSize" name="investmentSize">
-                            <option value="100k-500k">$100K - $500K</option>
-                            <option value="500k-1m">$500K - $1M</option>
-                            <option value="1m-5m">$1M - $5M</option>
-                            <option value="5m+">$5M+</option>
-                        </select>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="message">Message (Optional)</label>
-                        <textarea id="message" name="message" placeholder="Tell us about your investment focus and timeline..."></textarea>
-                    </div>
-                    
-                    <button type="submit" class="form-button primary">
-                        🚀 Access Banking Revolution
-                    </button>
-                </form>
+            <div class="energy-row">
+                <span class="energy-label">CURRENT VALUE:</span>
+                <span class="crystal-token">$<span id="energy-value">0.000</span> USD</span>
             </div>
         </div>
     </div>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script>
-        // SIRENS Crystalline Vibratory Token System - Live Simulation
-        class SirensFlowSimulation {
-            constructor() {
-                // SIRENS Token = Crystalline Vibratory Unit
-                this.currentTokenFreq = 440; // Current oscillation frequency (Hz)
-                this.maxFrequencyThreshold = 880; // Maximum frequency before evolution
-                this.evolutionCycles = 0; // Number of frequency evolution cycles
-                this.cumulativeFreq = 440; // Accumulated frequency from current cycle
-                this.totalAccumulatedFreq = 1320; // Total cumulative frequency across all cycles
-                this.lastEvolutionTime = Date.now(); // Track evolution timing
-                
-                // Crystalline parameters
-                this.crystallinePiezoEfficiency = 0.0000009; // kWh per Hz (crystal resonance efficiency)
-                this.resonanceAmplifier = 1.0; // Increases with evolution cycles
-                this.stabilityFactor = 0.95; // Natural oscillation stability
-                
-                // Real-world electricity pricing
-                this.baseElectricityPrice = 0.15; // USD per kWh (global average)
-                this.crystallinePremium = 1.08; // 8% premium for crystalline energy
-                
-                // Calculate initial coherent values
-                const initialElectrical = this.totalAccumulatedFreq * this.crystallinePiezoEfficiency * this.resonanceAmplifier;
-                this.electricalOutput = Math.round(initialElectrical * 1000000) / 1000000;
-                this.realtimePrice = Math.round(this.electricalOutput * this.baseElectricityPrice * this.crystallinePremium * 1000000) / 1000000;
-                
-                // Expose globally
-                window.sirensFlowSimulator = this;
-                
-                this.init();
+        // Variables globales
+        let scene, camera, renderer, nodes = [], connections = [];
+        let baseFrequency = 0.5, sphereRadius = 8;
+        let time = 0;
+        let structures = ['concentric', 'fibonacci', 'icosahedral', 'random_sphere'];
+        let currentStructure = 0;
+        let showConnections = true;
+        let structureChangeTimer = 0;
+        let lastStructureChange = 0;
+        
+        // Système de fréquences évolutives
+        let harmonicFrequencies = [1.0]; // Pool des fréquences harmoniques accumulées
+        let maxFrequency = 5.0; // Fréquence maximale avant addition
+        let evolutionRate = 0.01; // Vitesse d'évolution des fréquences
+        
+        // Système énergétique
+        let totalEnergyGenerated = 0; // kWh cumulés
+        let electricityPrice = 0.12; // USD par kWh (prix global moyen)
+        let lastEnergyUpdate = 0;
+        
+        // Couleurs pour les nœuds
+        const nodeColors = [
+            0x64b5f6, // Bleu clair
+            0x81c784, // Vert clair
+            0xffb74d, // Orange
+            0xf06292, // Rose
+            0xba68c8, // Violet
+            0x4db6ac  // Teal
+        ];
+
+        // Initialisation
+        function init() {
+            // Scène
+            scene = new THREE.Scene();
+            scene.fog = new THREE.Fog(0x0a0a2e, 10, 50);
+            
+            // Caméra
+            camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+            camera.position.set(15, 15, 15);
+            camera.lookAt(0, 0, 0);
+            
+            // Renderer
+            renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            renderer.setClearColor(0x000000, 0);
+            document.getElementById('container').appendChild(renderer.domElement);
+            
+            // Lumières
+            const ambientLight = new THREE.AmbientLight(0x404040, 0.6);
+            scene.add(ambientLight);
+            
+            const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
+            directionalLight.position.set(10, 10, 5);
+            scene.add(directionalLight);
+            
+            const pointLight = new THREE.PointLight(0x64b5f6, 0.5, 30);
+            pointLight.position.set(0, 0, 0);
+            scene.add(pointLight);
+            
+            // Contrôles souris supprimés pour autonomie complète
+            
+            // Création de la structure cristalline
+            createCrystalStructure();
+            
+            // Initialisation du système énergétique
+            lastEnergyUpdate = 0;
+            totalEnergyGenerated = 0;
+            
+            // Event listener pour le redimensionnement
+            window.addEventListener('resize', () => {
+                camera.aspect = window.innerWidth / window.innerHeight;
+                camera.updateProjectionMatrix();
+                renderer.setSize(window.innerWidth, window.innerHeight);
+            });
+            
+            // Animation
+            animate();
+        }
+        
+        function createCrystalStructure() {
+            // Nettoyage
+            clearNodes();
+            
+            switch(structures[currentStructure]) {
+                case 'concentric':
+                    createConcentricSpheres();
+                    break;
+                case 'fibonacci':
+                    createFibonacciSphere();
+                    break;
+                case 'icosahedral':
+                    createIcosahedralSphere();
+                    break;
+                case 'random_sphere':
+                    createRandomSphereStructure();
+                    break;
             }
             
-            init() {
-                this.setupElements();
-                this.startSimulation();
+            if (showConnections) {
+                createConnections();
             }
             
-            setupElements() {
-                this.elements = {
-                    tokenFreq: document.getElementById('tokenFreq'),
-                    cumulativeFreq: document.getElementById('cumulativeFreq'),
-                    electricalOutput: document.getElementById('electricalOutput'),
-                    realtimePrice: document.getElementById('realtimePrice'),
-                    liveFormulaCumulative: document.getElementById('liveFormulaCumulative'),
-                    liveFormulaPrice: document.getElementById('liveFormulaPrice'),
-                    liveFormulaResult: document.getElementById('liveFormulaResult')
-                };
-            }
-            
-            startSimulation() {
-                // Oscillation updates (much faster for dynamic feel)
-                setInterval(() => this.updateOscillation(), 100);
+            updateInfo();
+        }
+        
+        function createConcentricSpheres() {
+            const layers = 5;
+            for (let layer = 0; layer < layers; layer++) {
+                const radius = (layer + 1) * (sphereRadius / layers);
+                const nodesInLayer = Math.max(8, layer * 12);
                 
-                // Evolution progression (faster)
-                setInterval(() => this.progressEvolution(), 800);
-                
-                // Major evolution cycles (more frequent)
-                setInterval(() => this.triggerEvolution(), 4000);
-                
-                // Financial metrics updates (faster)
-                setInterval(() => this.updateMetrics(), 300);
-                
-                // Add rapid micro-updates for extra dynamism
-                setInterval(() => this.microUpdates(), 150);
-            }
-            
-            updateOscillation() {
-                const timeNow = Date.now();
-                
-                // More aggressive crystalline oscillation
-                const baseWave = Math.sin(timeNow / 600) * 8;
-                const harmonicWave = Math.sin(timeNow / 400) * 4;
-                const microVibration = Math.sin(timeNow / 150) * 2;
-                const chaosNoise = (Math.random() - 0.5) * 6;
-                const pulseWave = Math.sin(timeNow / 300) * Math.sin(timeNow / 100) * 3;
-                
-                const totalOscillation = baseWave + harmonicWave + microVibration + chaosNoise + pulseWave;
-                const displayFreq = Math.round((this.currentTokenFreq + totalOscillation) * 100) / 100;
-                
-                this.animateValue(this.elements.tokenFreq, displayFreq, 'Hz');
-            }
-            
-            microUpdates() {
-                // Add micro-fluctuations to make everything feel more alive
-                const microTimeVariation = Math.sin(Date.now() / 200) * 0.02;
-                const microVolatility = (Math.random() - 0.5) * 0.03; // Reduced volatility for coherence
-                
-                // Slightly adjust cumulative frequency display
-                const cumulativeVariation = this.totalAccumulatedFreq * (1 + microTimeVariation + microVolatility);
-                this.animateValue(this.elements.cumulativeFreq, Math.round(cumulativeVariation), 'Hz');
-                
-                // Add micro-fluctuations to electrical output that remain proportional
-                const electricalVariation = this.electricalOutput * (1 + microTimeVariation);
-                this.animateValue(this.elements.electricalOutput, Math.round(electricalVariation * 1000000) / 1000000, 'kWh');
-                
-                // Ensure real-time price follows electrical output variations
-                const priceVariation = this.realtimePrice * (1 + microTimeVariation * 1.5);
-                this.animateValue(this.elements.realtimePrice, Math.round(priceVariation * 1000000) / 1000000, 'USD', '$');
-            }
-            
-            progressEvolution() {
-                // Much faster frequency progression with more volatility
-                const progressToThreshold = this.currentTokenFreq / this.maxFrequencyThreshold;
-                const accelerationFactor = Math.pow(progressToThreshold, 1.2);
-                
-                const baseIncrease = 8 + (Math.random() * 12); // Increased base rate
-                const volatilityBoost = Math.sin(Date.now() / 500) * 5; // Add sine wave boost
-                const acceleratedIncrease = baseIncrease * (1 + accelerationFactor * 3) + volatilityBoost;
-                const finalIncrease = Math.round(acceleratedIncrease * 100) / 100;
-                
-                this.currentTokenFreq += finalIncrease;
-                this.cumulativeFreq += finalIncrease;
-                
-                // More frequent threshold checks
-                if (this.currentTokenFreq >= this.maxFrequencyThreshold) {
-                    this.prepareEvolution();
-                }
-            }
-            
-            triggerEvolution() {
-                if (this.currentTokenFreq >= this.maxFrequencyThreshold * 0.9) {
-                    this.executeEvolution();
-                }
-            }
-            
-            executeEvolution() {
-                // Major evolution event with spectacular effects
-                this.evolutionCycles++;
-                
-                // Trigger evolution visual effects
-                this.triggerEvolutionEffects();
-                
-                // Add current cycle to total accumulation
-                this.totalAccumulatedFreq += this.cumulativeFreq;
-                
-                // Calculate new base frequency with exponential growth
-                const evolutionBonus = this.evolutionCycles * 75; // Increased bonus
-                const exponentialGrowth = Math.pow(1.15, this.evolutionCycles); // Exponential scaling
-                this.currentTokenFreq = (440 + evolutionBonus) * exponentialGrowth;
-                this.maxFrequencyThreshold = this.currentTokenFreq * 1.8; // Lower threshold for faster cycles
-                this.cumulativeFreq = this.currentTokenFreq;
-                
-                // Enhance resonance amplifier dramatically
-                this.resonanceAmplifier = 1 + (this.evolutionCycles * 0.25);
-                
-                // Force immediate update of all metrics after evolution
-                this.updateMetrics();
-                
-                // Log evolution with dynamic messaging
-                const evolutionMessages = [
-                    `🔮 SIRENS Crystalline Evolution Cycle ${this.evolutionCycles}: ${Math.round(this.currentTokenFreq)} Hz - Resonance Amplified!`,
-                    `⚡ SIRENS Energy Surge Cycle ${this.evolutionCycles}: ${Math.round(this.currentTokenFreq)} Hz - Frequency Breakthrough!`,
-                    `� SIRENS Crystal Harmony Cycle ${this.evolutionCycles}: ${Math.round(this.currentTokenFreq)} Hz - Vibrational Ascension!`,
-                    `🌟 SIRENS Quantum Leap Cycle ${this.evolutionCycles}: ${Math.round(this.currentTokenFreq)} Hz - Reality Shift Detected!`
-                ];
-                console.log(evolutionMessages[this.evolutionCycles % evolutionMessages.length]);
-            }
-            
-            triggerEvolutionEffects() {
-                // Flash effect on the entire simulation container
-                const container = document.querySelector('.sirens-simulation');
-                if (container) {
-                    container.style.transition = 'all 0.3s ease';
-                    container.style.transform = 'scale(1.02)';
-                    container.style.boxShadow = '0 0 50px rgba(0, 255, 255, 0.8), inset 0 0 50px rgba(0, 255, 255, 0.2)';
+                for (let i = 0; i < nodesInLayer; i++) {
+                    // Distribution uniforme sur la sphère (méthode de Marsaglia)
+                    const u = Math.random();
+                    const v = Math.random();
+                    const theta = 2 * Math.PI * u; // angle azimuthal
+                    const phi = Math.acos(2 * v - 1); // angle polaire
                     
-                    setTimeout(() => {
-                        container.style.transform = 'scale(1)';
-                        container.style.boxShadow = '';
-                    }, 500);
-                }
-                
-                // Add glitch effect to all flow values
-                const flowValues = document.querySelectorAll('.flow-value');
-                flowValues.forEach(value => {
-                    value.classList.add('glitch');
-                    setTimeout(() => {
-                        value.classList.remove('glitch');
-                    }, 1000);
-                });
-                
-                // Pulse the simulation title
-                const title = document.querySelector('.simulation-title');
-                if (title) {
-                    title.style.animation = 'pulse 0.5s ease-in-out 3';
-                }
-            }
-            
-            updateMetrics() {
-                // More dynamic electrical output calculation
-                const baseOutput = this.totalAccumulatedFreq * this.crystallinePiezoEfficiency;
-                const resonanceBoost = Math.sin(Date.now() / 1000) * 0.3 + 1; // Oscillating boost
-                const chaosMultiplier = 1 + (Math.random() - 0.5) * 0.4; // Random chaos
-                this.electricalOutput = Math.round(baseOutput * this.resonanceAmplifier * resonanceBoost * chaosMultiplier * 1000000) / 1000000;
-                
-                // Fixed pricing calculation that follows progression
-                const basePrice = 0.15; // Base USD per kWh
-                const evolutionMultiplier = 1 + (this.evolutionCycles * 0.5); // Price increases with each evolution
-                const timeVariation = Math.sin(Date.now() / 15000) * 0.1; // ±10% oscillation
-                const marketVolatility = (Math.random() - 0.5) * 0.15; // ±7.5% random variation
-                const trendBoost = this.totalAccumulatedFreq / 1000; // Price increases with accumulated frequency
-                
-                const currentPrice = basePrice * evolutionMultiplier * (1 + timeVariation + marketVolatility) * (1 + trendBoost);
-                
-                // Calculate real-time value directly from electrical output and current price
-                this.realtimePrice = Math.round(this.electricalOutput * currentPrice * 1000000) / 1000000;
-                
-                // Ensure minimum growth - real-time value should always increase over time
-                const minimumValue = (this.totalAccumulatedFreq / 10000000) * (1 + this.evolutionCycles * 0.2);
-                if (this.realtimePrice < minimumValue) {
-                    this.realtimePrice = minimumValue;
-                }
-                
-                // Update displays with faster animation
-                this.animateValue(this.elements.cumulativeFreq, this.totalAccumulatedFreq, 'Hz');
-                this.animateValue(this.elements.electricalOutput, this.electricalOutput, 'kWh');
-                this.animateValue(this.elements.realtimePrice, this.realtimePrice, 'USD', '$');
-                
-                // Update formula
-                this.updateFormula(currentPrice);
-            }
-            
-            animateValue(element, targetValue, unit, prefix = '') {
-                if (!element) return;
-                
-                const currentText = element.textContent || '0';
-                const currentValue = parseFloat(currentText.replace(/[^\d.-]/g, '')) || 0;
-                const increment = (targetValue - currentValue) / 8; // Faster animation
-                let current = currentValue;
-                
-                const animate = () => {
-                    current += increment;
-                    if ((increment > 0 && current >= targetValue) || (increment < 0 && current <= targetValue)) {
-                        current = targetValue;
-                    }
+                    const x = radius * Math.sin(phi) * Math.cos(theta);
+                    const y = radius * Math.sin(phi) * Math.sin(theta);
+                    const z = radius * Math.cos(phi);
                     
-                    const precision = targetValue < 0.001 ? 6 : (targetValue < 1 ? 4 : 2);
-                    const displayValue = current.toFixed(precision);
-                    element.innerHTML = `${prefix}${displayValue} <span class="flow-unit">${unit}</span>`;
-                    
-                    if (current !== targetValue) {
-                        requestAnimationFrame(animate);
-                    }
-                };
-                
-                animate();
-            }
-            
-            updateFormula(currentPrice) {
-                if (this.elements.liveFormulaCumulative) {
-                    this.elements.liveFormulaCumulative.textContent = this.totalAccumulatedFreq.toLocaleString();
-                }
-                if (this.elements.liveFormulaPrice) {
-                    this.elements.liveFormulaPrice.textContent = currentPrice.toFixed(3);
-                }
-                if (this.elements.liveFormulaResult) {
-                    this.elements.liveFormulaResult.textContent = this.realtimePrice.toFixed(6);
-                }
-            }
-            
-            prepareEvolution() {
-                // Visual indicator for upcoming evolution
-                const container = document.querySelector('.sirens-simulation');
-                if (container) {
-                    container.style.boxShadow = '0 0 20px rgba(78, 205, 196, 0.5)';
-                    setTimeout(() => {
-                        container.style.boxShadow = '';
-                    }, 500);
+                    createNode(x, y, z, layer);
                 }
             }
         }
-
-        // Counter Animation
-        function animateCounter() {
-            const counter = document.getElementById('counterNumber');
-            if (!counter) return;
+        
+        function createFibonacciSphere() {
+            const numPoints = 200;
+            const goldenRatio = (1 + Math.sqrt(5)) / 2;
             
-            const target = 1700000000;
-            const duration = 3000;
-            let startTime = null;
+            for (let i = 0; i < numPoints; i++) {
+                const y = 1 - (i / (numPoints - 1)) * 2; // de -1 à 1
+                const radiusAtY = Math.sqrt(1 - y * y);
+                
+                const theta = 2 * Math.PI * i / goldenRatio;
+                
+                const x = Math.cos(theta) * radiusAtY * sphereRadius;
+                const z = Math.sin(theta) * radiusAtY * sphereRadius;
+                const yPos = y * sphereRadius;
+                
+                createNode(x, yPos, z, Math.floor(i / 40));
+            }
+        }
+        
+        function createIcosahedralSphere() {
+            // Création d'un icosaèdre géodésique
+            const t = (1 + Math.sqrt(5)) / 2; // nombre d'or
+            const scale = sphereRadius / Math.sqrt(1 + t * t);
             
-            function easeOutQuart(t) {
-                return 1 - Math.pow(1 - t, 4);
+            // 12 sommets de l'icosaèdre
+            const vertices = [
+                [-1, t, 0], [1, t, 0], [-1, -t, 0], [1, -t, 0],
+                [0, -1, t], [0, 1, t], [0, -1, -t], [0, 1, -t],
+                [t, 0, -1], [t, 0, 1], [-t, 0, -1], [-t, 0, 1]
+            ];
+            
+            // Ajouter les sommets
+            vertices.forEach((vertex, index) => {
+                createNode(
+                    vertex[0] * scale,
+                    vertex[1] * scale,
+                    vertex[2] * scale,
+                    index % 6
+                );
+            });
+            
+            // Ajouter des points intermédiaires pour densifier
+            for (let subdivision = 1; subdivision <= 3; subdivision++) {
+                const subdivisionRadius = sphereRadius * (1 - subdivision * 0.2);
+                const pointsPerLayer = 20 * subdivision;
+                
+                for (let i = 0; i < pointsPerLayer; i++) {
+                    const u = i / pointsPerLayer;
+                    const v = (i * 0.618034) % 1; // ratio doré pour distribution uniforme
+                    const theta = 2 * Math.PI * u;
+                    const phi = Math.acos(2 * v - 1);
+                    
+                    const x = subdivisionRadius * Math.sin(phi) * Math.cos(theta);
+                    const y = subdivisionRadius * Math.sin(phi) * Math.sin(theta);
+                    const z = subdivisionRadius * Math.cos(phi);
+                    
+                    createNode(x, y, z, subdivision);
+                }
+            }
+        }
+        
+        function createRandomSphereStructure() {
+            const numNodes = 150;
+            
+            for (let i = 0; i < numNodes; i++) {
+                // Distribution aléatoire dans une sphère avec densité variable
+                const u = Math.random();
+                const radius = sphereRadius * Math.pow(u, 1/3); // Distribution volumique uniforme
+                
+                const v1 = Math.random();
+                const v2 = Math.random();
+                const theta = 2 * Math.PI * v1;
+                const phi = Math.acos(2 * v2 - 1);
+                
+                const x = radius * Math.sin(phi) * Math.cos(theta);
+                const y = radius * Math.sin(phi) * Math.sin(theta);
+                const z = radius * Math.cos(phi);
+                
+                createNode(x, y, z, Math.floor(radius / (sphereRadius / 6)));
+            }
+        }
+        
+        function createNode(x, y, z, colorIndex) {
+            const geometry = new THREE.SphereGeometry(0.15, 12, 12);
+            const material = new THREE.MeshPhongMaterial({
+                color: nodeColors[colorIndex % nodeColors.length],
+                shininess: 100,
+                transparent: true,
+                opacity: 0.9
+            });
+            
+            const node = new THREE.Mesh(geometry, material);
+            node.position.set(x, y, z);
+            node.userData = {
+                originalPosition: { x, y, z },
+                phase: Math.random() * Math.PI * 2,
+                colorIndex: colorIndex % nodeColors.length,
+                // Propriétés de résonance évolutive
+                currentFrequency: baseFrequency + Math.random() * 0.5, // Fréquence individuelle
+                personalHarmonics: [], // Harmoniques personnelles accumulées
+                resonanceIntensity: 0.5 + Math.random() * 0.5, // Intensité de résonance
+                evolutionPhase: Math.random() * Math.PI * 2 // Phase d'évolution
+            };
+            
+            scene.add(node);
+            nodes.push(node);
+        }
+        
+        function createConnections() {
+            clearConnections();
+            
+            const maxDistance = sphereRadius * 0.4; // Distance adaptée à la taille de la sphère
+            
+            for (let i = 0; i < nodes.length; i++) {
+                for (let j = i + 1; j < nodes.length; j++) {
+                    const distance = nodes[i].position.distanceTo(nodes[j].position);
+                    
+                    if (distance < maxDistance) {
+                        const geometry = new THREE.BufferGeometry();
+                        const positions = new Float32Array([
+                            nodes[i].position.x, nodes[i].position.y, nodes[i].position.z,
+                            nodes[j].position.x, nodes[j].position.y, nodes[j].position.z
+                        ]);
+                        geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+                        
+                        const material = new THREE.LineBasicMaterial({
+                            color: 0x4fc3f7,
+                            transparent: true,
+                            opacity: 0.3
+                        });
+                        
+                        const line = new THREE.Line(geometry, material);
+                        line.userData = { nodeA: i, nodeB: j };
+                        scene.add(line);
+                        connections.push(line);
+                    }
+                }
+            }
+        }
+        
+        function clearNodes() {
+            nodes.forEach(node => scene.remove(node));
+            nodes = [];
+            clearConnections();
+        }
+        
+        function clearConnections() {
+            connections.forEach(connection => scene.remove(connection));
+            connections = [];
+        }
+        
+        function updateEnergyDisplay() {
+            // Calcul de la fréquence du token cristal (moyenne pondérée des harmoniques)
+            let tokenFrequency = baseFrequency;
+            let totalWeight = 1;
+            
+            harmonicFrequencies.forEach((freq, index) => {
+                const weight = 1 / (index + 1); // Poids décroissant
+                tokenFrequency += freq * weight;
+                totalWeight += weight;
+            });
+            tokenFrequency = tokenFrequency / totalWeight;
+            
+            // Calcul de la fréquence cumulée (somme de toutes les harmoniques + base)
+            let cumulativeFrequency = baseFrequency;
+            harmonicFrequencies.forEach(freq => {
+                cumulativeFrequency += freq;
+            });
+            
+            // Calcul de l'énergie générée (basé sur la fréquence et le temps écoulé)
+            const energyGenerationRate = tokenFrequency / 10; // kW
+            const deltaTime = time - lastEnergyUpdate;
+            const energyIncrement = energyGenerationRate * (deltaTime / 3600); // Conversion en kWh
+            totalEnergyGenerated += energyIncrement;
+            lastEnergyUpdate = time;
+            
+            // Calcul de la valeur en USD
+            const currentValue = totalEnergyGenerated * electricityPrice;
+            
+            // Mise à jour de l'affichage
+            document.getElementById('token-frequency').textContent = tokenFrequency.toFixed(3);
+            document.getElementById('cumulative-frequency').textContent = cumulativeFrequency.toFixed(3);
+            document.getElementById('energy-generated').textContent = totalEnergyGenerated.toFixed(6);
+            document.getElementById('energy-value').textContent = currentValue.toFixed(6);
+            
+            // Variation du prix de l'électricité pour simulation réaliste
+            electricityPrice = 0.12 + Math.sin(time * 0.001) * 0.03; // Fluctue entre 0.09 et 0.15 USD/kWh
+        }
+        
+        function updateInfo() {
+            // Fonction conservée pour compatibilité mais sans affichage
+        }
+        
+        function animate() {
+            requestAnimationFrame(animate);
+            
+            time += 0.02;
+            
+            // Évolution des fréquences harmoniques globales
+            baseFrequency += evolutionRate * 0.1;
+            if (baseFrequency > maxFrequency) {
+                // Quand la fréquence de base atteint le maximum, l'ajouter aux harmoniques
+                harmonicFrequencies.push(baseFrequency);
+                baseFrequency = 0.5; // Reset à la fréquence de base
+                
+                // Limiter le nombre d'harmoniques pour éviter la surcharge
+                if (harmonicFrequencies.length > 10) {
+                    harmonicFrequencies.shift(); // Supprimer la plus ancienne
+                }
             }
             
-            function updateCounter(timestamp) {
-                if (!startTime) startTime = timestamp;
-                const progress = (timestamp - startTime) / duration;
-                
-                if (progress < 1) {
-                    const easedProgress = easeOutQuart(progress);
-                    const current = target * easedProgress;
-                    counter.textContent = Math.floor(current).toLocaleString();
-                    requestAnimationFrame(updateCounter);
+            // Changement automatique de structure toutes les 25 secondes (plus lent pour observer l'évolution)
+            if (time - lastStructureChange > 25) {
+                currentStructure = (currentStructure + 1) % structures.length;
+                createCrystalStructure();
+                lastStructureChange = time;
+            }
+            
+            // Changement automatique de taille de sphère toutes les 40 secondes
+            const newRadius = Math.floor(time / 40) % 2 === 0 ? 8 : 6;
+            if (newRadius !== sphereRadius) {
+                sphereRadius = newRadius;
+                createCrystalStructure();
+            }
+            
+            // Basculement automatique des connexions toutes les 30 secondes
+            const shouldShowConnections = Math.floor(time / 30) % 2 === 0;
+            if (shouldShowConnections !== showConnections) {
+                showConnections = shouldShowConnections;
+                if (showConnections) {
+                    createConnections();
                 } else {
-                    counter.textContent = target.toLocaleString();
+                    clearConnections();
                 }
             }
             
-            requestAnimationFrame(updateCounter);
-        }
-
-        // Investor Onboarding
-        class InvestorOnboarding {
-            constructor() {
-                this.investorData = {};
-                this.init();
-            }
-            
-            init() {
-                this.setupEventListeners();
-            }
-            
-            setupEventListeners() {
-                const overlay = document.getElementById('onboardingOverlay');
-                const closeBtn = document.getElementById('onboardingClose');
-                const form = document.getElementById('investorForm');
+            // Animation évolutive des nœuds avec résonance harmonique
+            nodes.forEach((node, index) => {
+                const originalPos = node.userData.originalPosition;
+                const userData = node.userData;
                 
-                if (closeBtn) {
-                    closeBtn.addEventListener('click', () => {
-                        this.closeOnboarding();
-                    });
-                }
+                // Évolution de la fréquence personnelle du nœud
+                userData.currentFrequency += evolutionRate * userData.resonanceIntensity;
                 
-                if (form) {
-                    form.addEventListener('submit', (e) => {
-                        e.preventDefault();
-                        this.handleSubmission();
-                    });
-                }
-                
-                // Close on outside click
-                overlay.addEventListener('click', (e) => {
-                    if (e.target === overlay) {
-                        this.closeOnboarding();
+                // Si la fréquence personnelle atteint le maximum, l'ajouter aux harmoniques personnelles
+                if (userData.currentFrequency > maxFrequency) {
+                    userData.personalHarmonics.push(userData.currentFrequency);
+                    userData.currentFrequency = baseFrequency + Math.random() * 0.3; // Reset avec variation
+                    
+                    // Limiter les harmoniques personnelles
+                    if (userData.personalHarmonics.length > 5) {
+                        userData.personalHarmonics.shift();
                     }
+                }
+                
+                // Calcul des oscillations avec toutes les fréquences harmoniques
+                let totalOscillationX = 0;
+                let totalOscillationY = 0;
+                let totalOscillationZ = 0;
+                let totalAmplitude = 0;
+                
+                // Contribution de la fréquence personnelle
+                const personalPhase = userData.phase + userData.evolutionPhase;
+                totalOscillationX += Math.sin(time * userData.currentFrequency + personalPhase) * 0.3;
+                totalOscillationY += Math.sin(time * userData.currentFrequency * 1.2 + personalPhase + Math.PI/4) * 0.4;
+                totalOscillationZ += Math.cos(time * userData.currentFrequency * 0.8 + personalPhase) * 0.3;
+                totalAmplitude += userData.currentFrequency * 0.1;
+                
+                // Contribution des harmoniques globales
+                harmonicFrequencies.forEach((freq, harmonicIndex) => {
+                    const harmonicPhase = personalPhase + harmonicIndex * Math.PI / 4;
+                    const harmonicWeight = 1 / (harmonicIndex + 1); // Poids décroissant pour les harmoniques plus anciennes
+                    
+                    totalOscillationX += Math.sin(time * freq + harmonicPhase) * 0.2 * harmonicWeight;
+                    totalOscillationY += Math.sin(time * freq * 1.3 + harmonicPhase + Math.PI/6) * 0.3 * harmonicWeight;
+                    totalOscillationZ += Math.cos(time * freq * 0.9 + harmonicPhase) * 0.2 * harmonicWeight;
+                    totalAmplitude += freq * 0.05 * harmonicWeight;
                 });
                 
-                // Close on Escape key
-                document.addEventListener('keydown', (e) => {
-                    if (e.key === 'Escape') {
-                        this.closeOnboarding();
-                    }
+                // Contribution des harmoniques personnelles
+                userData.personalHarmonics.forEach((freq, harmonicIndex) => {
+                    const personalHarmonicPhase = personalPhase + harmonicIndex * Math.PI / 3;
+                    const personalWeight = userData.resonanceIntensity / (harmonicIndex + 1);
+                    
+                    totalOscillationX += Math.sin(time * freq + personalHarmonicPhase) * 0.25 * personalWeight;
+                    totalOscillationY += Math.sin(time * freq * 1.4 + personalHarmonicPhase + Math.PI/5) * 0.35 * personalWeight;
+                    totalOscillationZ += Math.cos(time * freq * 0.7 + personalHarmonicPhase) * 0.25 * personalWeight;
+                    totalAmplitude += freq * 0.08 * personalWeight;
                 });
-            }
+                
+                // Calcul de la position en coordonnées sphériques évolutives
+                const originalRadius = Math.sqrt(originalPos.x * originalPos.x + originalPos.y * originalPos.y + originalPos.z * originalPos.z);
+                const originalTheta = Math.atan2(originalPos.z, originalPos.x);
+                const originalPhi = Math.acos(originalPos.y / (originalRadius || 1));
+                
+                // Oscillations radiales complexes
+                const radialOscillation = totalOscillationY * Math.min(2.0, totalAmplitude);
+                const newRadius = Math.max(0.1, originalRadius + radialOscillation);
+                
+                // Oscillations angulaires complexes
+                const thetaOscillation = totalOscillationX * 0.3;
+                const phiOscillation = totalOscillationZ * 0.3;
+                
+                const newTheta = originalTheta + thetaOscillation;
+                const newPhi = Math.max(0.1, Math.min(Math.PI - 0.1, originalPhi + phiOscillation));
+                
+                // Rotation globale lente évolutive
+                const globalRotation = time * 0.03 * (1 + totalAmplitude * 0.1);
+                const finalTheta = newTheta + globalRotation;
+                
+                // Conversion vers coordonnées cartésiennes
+                const x = newRadius * Math.sin(newPhi) * Math.cos(finalTheta);
+                const y = newRadius * Math.cos(newPhi);
+                const z = newRadius * Math.sin(newPhi) * Math.sin(finalTheta);
+                
+                node.position.set(x, y, z);
+                
+                // Changement de couleur basé sur l'activité harmonique
+                const harmonicActivity = (harmonicFrequencies.length + userData.personalHarmonics.length) / 15;
+                const colorIntensity = 0.3 + 0.7 * Math.sin(time * 2 + personalPhase) * harmonicActivity;
+                const evolutionGlow = Math.min(1.0, totalAmplitude * 0.5);
+                
+                node.material.emissive.setHex(nodeColors[userData.colorIndex]);
+                node.material.emissive.multiplyScalar(colorIntensity * evolutionGlow);
+                
+                // Faire pulser la taille en fonction de l'activité harmonique
+                const scaleFactor = 1 + totalAmplitude * 0.1 * Math.sin(time * userData.currentFrequency + personalPhase);
+                node.scale.setScalar(scaleFactor);
+            });
             
-            closeOnboarding() {
-                document.getElementById('onboardingOverlay').classList.remove('active');
-                document.body.style.overflow = 'auto';
-            }
-            
-            async handleSubmission() {
-                const form = document.getElementById('investorForm');
-                const formData = new FormData(form);
-                
-                this.investorData = {
-                    timestamp: new Date().toISOString(),
-                    fullName: formData.get('fullName'),
-                    company: formData.get('company'),
-                    email: formData.get('email'),
-                    investmentSize: formData.get('investmentSize'),
-                    message: formData.get('message')
-                };
-                
-                // Validate required fields
-                if (!this.investorData.fullName || !this.investorData.company || !this.investorData.email) {
-                    alert('Please fill in all required fields.');
-                    return;
-                }
-                
-                const submitBtn = form.querySelector('.form-button.primary');
-                const originalText = submitBtn.innerHTML;
-                
-                // Show loading state
-                submitBtn.innerHTML = 'Submitting...';
-                submitBtn.disabled = true;
-                
-                try {
-                    // Simulate API call
-                    await new Promise(resolve => setTimeout(resolve, 2000));
-                    
-                    console.log('Investor data submitted:', this.investorData);
-                    
-                    alert('Thank you! We will contact you within 24 hours with detailed investment materials.');
-                    this.closeOnboarding();
-                    form.reset();
-                    
-                } catch (error) {
-                    console.error('Submission error:', error);
-                    alert('There was an error submitting your information. Please try again.');
-                } finally {
-                    submitBtn.innerHTML = originalText;
-                    submitBtn.disabled = false;
-                }
-            }
-        }
-
-        // Viewport handling
-        function handleViewportChange() {
-            const vh = window.innerHeight * 0.01;
-            document.documentElement.style.setProperty('--vh', `${vh}px`);
-        }
-
-        // Cyber Effects
-        class CyberEffects {
-            constructor() {
-                this.initDataStream();
-                this.initGlitchEffect();
-                this.initAmbientEffects();
-            }
-
-            initDataStream() {
-                const dataStream = document.getElementById('dataStream');
-                if (!dataStream) return;
-
-                // Create data particles
-                for (let i = 0; i < 8; i++) {
-                    const particle = document.createElement('div');
-                    particle.className = 'data-particle';
-                    particle.style.left = Math.random() * 100 + '%';
-                    particle.style.animationDelay = Math.random() * 4 + 's';
-                    particle.style.animationDuration = (3 + Math.random() * 2) + 's';
-                    dataStream.appendChild(particle);
-                }
-            }
-
-            initGlitchEffect() {
-                // Add glitch effect to random elements occasionally
-                setInterval(() => {
-                    const elements = document.querySelectorAll('.flow-value, .counter-number');
-                    const randomElement = elements[Math.floor(Math.random() * elements.length)];
-                    
-                    if (randomElement && Math.random() < 0.05) { // 5% chance
-                        randomElement.classList.add('glitch');
-                        setTimeout(() => {
-                            randomElement.classList.remove('glitch');
-                        }, 200);
-                    }
-                }, 3000);
-            }
-
-            initAmbientEffects() {
-                // Sync ambient color changes with background
-                this.updateAmbientColors();
-                setInterval(() => this.updateAmbientColors(), 3750); // 15s / 4 = 3.75s per phase
-            }
-
-            updateAmbientColors() {
-                const phase = Math.floor(Date.now() / 3750) % 4;
-                const orbs = document.querySelectorAll('.ambient-orb');
-                const circles = document.querySelectorAll('.circle');
-                
-                orbs.forEach((orb, index) => {
-                    switch(phase) {
-                        case 0:
-                            orb.style.background = 'radial-gradient(circle, rgba(0, 150, 255, 0.08), transparent)';
-                            break;
-                        case 1:
-                            orb.style.background = 'radial-gradient(circle, rgba(0, 255, 150, 0.08), transparent)';
-                            break;
-                        case 2:
-                            orb.style.background = 'radial-gradient(circle, rgba(150, 0, 255, 0.08), transparent)';
-                            break;
-                        case 3:
-                            orb.style.background = 'radial-gradient(circle, rgba(0, 255, 200, 0.08), transparent)';
-                            break;
+            // Mise à jour des connexions si elles existent
+            if (connections.length > 0) {
+                connections.forEach(connection => {
+                    if (connection.userData.nodeA < nodes.length && connection.userData.nodeB < nodes.length) {
+                        const nodeA = nodes[connection.userData.nodeA];
+                        const nodeB = nodes[connection.userData.nodeB];
+                        
+                        const positions = connection.geometry.attributes.position.array;
+                        positions[0] = nodeA.position.x;
+                        positions[1] = nodeA.position.y;
+                        positions[2] = nodeA.position.z;
+                        positions[3] = nodeB.position.x;
+                        positions[4] = nodeB.position.y;
+                        positions[5] = nodeB.position.z;
+                        
+                        connection.geometry.attributes.position.needsUpdate = true;
+                        
+                        // Variation de l'opacité basée sur l'activité harmonique
+                        const harmonicIntensity = harmonicFrequencies.length / 10;
+                        connection.material.opacity = 0.1 + 0.4 * Math.sin(time * 0.5) * harmonicIntensity;
                     }
                 });
             }
+            
+            // Rotation automatique de la caméra influencée par l'activité harmonique
+            const harmonicInfluence = 1 + harmonicFrequencies.length * 0.05;
+            const cameraDistance = 25 + 8 * Math.sin(time * 0.03 * harmonicInfluence);
+            camera.position.x = cameraDistance * Math.cos(time * 0.08 * harmonicInfluence);
+            camera.position.z = cameraDistance * Math.sin(time * 0.08 * harmonicInfluence);
+            camera.position.y = 10 + 8 * Math.sin(time * 0.05 * harmonicInfluence);
+            camera.lookAt(0, 0, 0);
+            
+            // Changement de couleur du background en temps réel basé sur l'évolution harmonique
+            const harmonicIntensity = harmonicFrequencies.length / 10; // Normalisation
+            const timeWave = Math.sin(time * 0.1) * 0.5 + 0.5; // Vague temporelle 0-1
+            const frequencyWave = Math.sin(baseFrequency * time * 0.05) * 0.5 + 0.5;
+            
+            // Couleurs de base quartz avec variations
+            const baseR = 240 + Math.sin(time * 0.02) * 15; // 240±15
+            const baseG = 240 + Math.cos(time * 0.03) * 20; // 240±20  
+            const baseB = 245 + Math.sin(time * 0.025) * 10; // 245±10
+            
+            // Variations harmoniques - couleurs plus prononcées quand plus d'harmoniques
+            const harmonicR = Math.sin(time * 0.05 + harmonicIntensity) * 30 * harmonicIntensity;
+            const harmonicG = Math.cos(time * 0.04 + harmonicIntensity * 2) * 40 * harmonicIntensity;
+            const harmonicB = Math.sin(time * 0.06 + harmonicIntensity * 3) * 50 * harmonicIntensity;
+            
+            // Couleurs finales avec variations fréquentielles
+            const color1R = Math.max(0, Math.min(255, baseR + harmonicR + frequencyWave * 20));
+            const color1G = Math.max(0, Math.min(255, baseG + harmonicG + timeWave * 15));
+            const color1B = Math.max(0, Math.min(255, baseB + harmonicB + frequencyWave * 25));
+            
+            const color2R = Math.max(0, Math.min(255, baseR - harmonicR * 0.5 + timeWave * 10));
+            const color2G = Math.max(0, Math.min(255, baseG - harmonicG * 0.3 + harmonicIntensity * 20));
+            const color2B = Math.max(0, Math.min(255, baseB - harmonicB * 0.7 + frequencyWave * 15));
+            
+            const color3R = Math.max(0, Math.min(255, baseR + Math.sin(time * 0.08) * 25 * harmonicIntensity));
+            const color3G = Math.max(0, Math.min(255, baseG + Math.cos(time * 0.07) * 30 * harmonicIntensity));
+            const color3B = Math.max(0, Math.min(255, baseB + Math.sin(time * 0.09) * 35 * harmonicIntensity));
+            
+            // Application du gradient évolutif
+            const gradient = `linear-gradient(${45 + Math.sin(time * 0.02) * 30}deg, 
+                rgb(${Math.floor(color1R)}, ${Math.floor(color1G)}, ${Math.floor(color1B)}), 
+                rgb(${Math.floor(color2R)}, ${Math.floor(color2G)}, ${Math.floor(color2B)}), 
+                rgb(${Math.floor(color3R)}, ${Math.floor(color3G)}, ${Math.floor(color3B)}))`;
+            
+            document.body.style.background = gradient;
+            
+            // Mise à jour de l'affichage énergétique en temps réel
+            updateEnergyDisplay();
+            
+            // Mise à jour des informations en temps réel
+            updateInfo();
+            
+            renderer.render(scene, camera);
         }
-
-        // Contact Button Handler
-        class ContactHandler {
-            constructor() {
-                this.init();
-            }
-            
-            init() {
-                this.setupEventListeners();
-            }
-            
-            setupEventListeners() {
-                const contactButton = document.getElementById('contactButton');
-                
-                if (contactButton) {
-                    contactButton.addEventListener('click', (e) => {
-                        this.handleContactClick(e);
-                    });
-                }
-            }
-            
-            handleContactClick(e) {
-                // Add visual feedback
-                const button = e.currentTarget;
-                button.style.transform = 'translateY(-2px) scale(0.98)';
-                
-                setTimeout(() => {
-                    button.style.transform = '';
-                }, 150);
-                
-                // Optional: Show a confirmation message
-                this.showContactMessage();
-            }
-            
-            showContactMessage() {
-                // Create a temporary notification
-                const notification = document.createElement('div');
-                notification.style.cssText = `
-                    position: fixed;
-                    top: 20px;
-                    right: 20px;
-                    background: linear-gradient(45deg, rgba(0, 255, 255, 0.9), rgba(0, 0, 0, 0.8));
-                    color: white;
-                    padding: 1rem 1.5rem;
-                    border: 1px solid rgba(0, 255, 255, 0.3);
-                    box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
-                    z-index: 10000;
-                    font-family: 'Courier New', monospace;
-                    font-size: 0.9rem;
-                    letter-spacing: 1px;
-                    opacity: 0;
-                    transform: translateX(100%);
-                    transition: all 0.3s ease;
-                `;
-                notification.innerHTML = '📧 Opening email client...';
-                
-                document.body.appendChild(notification);
-                
-                // Animate in
-                setTimeout(() => {
-                    notification.style.opacity = '1';
-                    notification.style.transform = 'translateX(0)';
-                }, 10);
-                
-                // Remove after 3 seconds
-                setTimeout(() => {
-                    notification.style.opacity = '0';
-                    notification.style.transform = 'translateX(100%)';
-                    setTimeout(() => {
-                        document.body.removeChild(notification);
-                    }, 300);
-                }, 3000);
-            }
-        }
-
-        // Initialize everything
-        document.addEventListener('DOMContentLoaded', () => {
-            setTimeout(() => animateCounter(), 2000);
-            setTimeout(() => new SirensFlowSimulation(), 1500);
-            new InvestorOnboarding();
-            new CyberEffects();
-            new ContactHandler();
-            handleViewportChange();
-        });
-
-        window.addEventListener('resize', handleViewportChange);
-        window.addEventListener('orientationchange', () => {
-            setTimeout(handleViewportChange, 100);
-        });
+        
+        // Démarrage
+        init();
     </script>
 </body>
 </html>
