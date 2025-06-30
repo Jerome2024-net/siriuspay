@@ -22,19 +22,22 @@
         
         #energy-display {
             position: absolute;
-            bottom: 20px;
+            bottom: 10px;
             left: 50%;
             transform: translateX(-50%);
-            background: rgba(0, 0, 0, 0.8);
+            background: rgba(0, 0, 0, 0.9);
             color: #00ff88;
-            padding: 15px 25px;
+            padding: 15px 20px;
             border-radius: 10px;
             font-family: 'Courier New', monospace;
             font-size: 14px;
             border: 2px solid rgba(0, 255, 136, 0.3);
             box-shadow: 0 0 20px rgba(0, 255, 136, 0.2);
-            min-width: 400px;
+            min-width: 300px;
+            max-width: 90vw;
+            width: auto;
             text-align: center;
+            backdrop-filter: blur(10px);
         }
         
         .project-title {
@@ -85,6 +88,132 @@
             background: rgba(0, 0, 0, 0.5);
             padding: 10px;
             border-radius: 5px;
+        }
+        
+        /* Responsive Design pour Mobile */
+        @media (max-width: 768px) {
+            #energy-display {
+                bottom: 5px;
+                padding: 10px 15px;
+                font-size: 12px;
+                min-width: 280px;
+                max-width: 95vw;
+                border-radius: 8px;
+            }
+            
+            .project-title {
+                font-size: 16px;
+                margin-bottom: 8px;
+                letter-spacing: 2px;
+            }
+            
+            .energy-row {
+                margin: 3px 0;
+                flex-direction: column;
+                text-align: center;
+                gap: 2px;
+            }
+            
+            .energy-label {
+                font-size: 11px;
+            }
+            
+            .energy-value, .crystal-token {
+                font-size: 13px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            #energy-display {
+                bottom: 3px;
+                padding: 8px 12px;
+                font-size: 11px;
+                min-width: 260px;
+                max-width: 98vw;
+            }
+            
+            .project-title {
+                font-size: 14px;
+                margin-bottom: 6px;
+                letter-spacing: 1px;
+            }
+            
+            .energy-label {
+                font-size: 10px;
+            }
+            
+            .energy-value, .crystal-token {
+                font-size: 12px;
+            }
+        }
+        
+        @media (max-width: 320px) {
+            #energy-display {
+                padding: 6px 10px;
+                font-size: 10px;
+                min-width: 240px;
+                max-width: 99vw;
+            }
+            
+            .project-title {
+                font-size: 13px;
+                margin-bottom: 5px;
+                letter-spacing: 1px;
+            }
+            
+            .energy-label {
+                font-size: 9px;
+                text-overflow: ellipsis;
+                overflow: hidden;
+                white-space: nowrap;
+            }
+            
+            .energy-value, .crystal-token {
+                font-size: 11px;
+            }
+        }
+        
+        /* Optimisation tactile */
+        @media (hover: none) and (pointer: coarse) {
+            body {
+                -webkit-touch-callout: none;
+                -webkit-user-select: none;
+                -khtml-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+                -webkit-tap-highlight-color: transparent;
+            }
+            
+            #energy-display {
+                -webkit-backdrop-filter: blur(10px);
+                backdrop-filter: blur(10px);
+            }
+        }
+        
+        /* Portrait et Landscape */
+        @media (orientation: portrait) {
+            #energy-display {
+                max-width: 90vw;
+            }
+        }
+        
+        @media (orientation: landscape) and (max-height: 500px) {
+            #energy-display {
+                bottom: 3px;
+                padding: 6px 12px;
+                font-size: 10px;
+                max-width: 85vw;
+            }
+            
+            .project-title {
+                font-size: 12px;
+                margin-bottom: 4px;
+            }
+            
+            .energy-row {
+                margin: 2px 0;
+            }
         }
     </style>
 </head>
@@ -154,10 +283,24 @@
             camera.position.set(15, 15, 15);
             camera.lookAt(0, 0, 0);
             
-            // Renderer
-            renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+            // Renderer avec optimisations mobiles
+            renderer = new THREE.WebGLRenderer({ 
+                antialias: window.devicePixelRatio <= 1, // Antialiasing seulement sur desktop
+                alpha: true,
+                powerPreference: "high-performance"
+            });
+            
+            // Ajuster la résolution selon l'appareil
+            const pixelRatio = Math.min(window.devicePixelRatio, 2); // Limiter pour les performances
+            renderer.setPixelRatio(pixelRatio);
             renderer.setSize(window.innerWidth, window.innerHeight);
             renderer.setClearColor(0x000000, 0);
+            
+            // Optimisations pour mobile
+            if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+                renderer.shadowMap.enabled = false; // Désactiver les ombres sur mobile
+                scene.fog = new THREE.Fog(0x0a0a2e, 15, 35); // Réduire la distance de fog
+            }
             document.getElementById('container').appendChild(renderer.domElement);
             
             // Lumières
@@ -181,12 +324,41 @@
             lastEnergyUpdate = 0;
             totalEnergyGenerated = 0;
             
-            // Event listener pour le redimensionnement
+            // Event listeners pour redimensionnement et orientation
             window.addEventListener('resize', () => {
                 camera.aspect = window.innerWidth / window.innerHeight;
                 camera.updateProjectionMatrix();
                 renderer.setSize(window.innerWidth, window.innerHeight);
+                
+                // Ajuster le pixel ratio sur redimensionnement
+                const pixelRatio = Math.min(window.devicePixelRatio, 2);
+                renderer.setPixelRatio(pixelRatio);
             });
+            
+            // Gestion de l'orientation mobile
+            window.addEventListener('orientationchange', () => {
+                setTimeout(() => {
+                    camera.aspect = window.innerWidth / window.innerHeight;
+                    camera.updateProjectionMatrix();
+                    renderer.setSize(window.innerWidth, window.innerHeight);
+                }, 100);
+            });
+            
+            // Empêcher le zoom sur mobile
+            document.addEventListener('touchstart', function(event) {
+                if (event.touches.length > 1) {
+                    event.preventDefault();
+                }
+            }, { passive: false });
+            
+            let lastTouchEnd = 0;
+            document.addEventListener('touchend', function(event) {
+                const now = (new Date()).getTime();
+                if (now - lastTouchEnd <= 300) {
+                    event.preventDefault();
+                }
+                lastTouchEnd = now;
+            }, false);
             
             // Animation
             animate();
@@ -219,10 +391,12 @@
         }
         
         function createConcentricSpheres() {
-            const layers = 5;
+            const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+            const layers = isMobile ? 3 : 5; // Moins de couches sur mobile
+            
             for (let layer = 0; layer < layers; layer++) {
                 const radius = (layer + 1) * (sphereRadius / layers);
-                const nodesInLayer = Math.max(8, layer * 12);
+                const nodesInLayer = Math.max(6, layer * (isMobile ? 8 : 12)); // Moins de nœuds sur mobile
                 
                 for (let i = 0; i < nodesInLayer; i++) {
                     // Distribution uniforme sur la sphère (méthode de Marsaglia)
@@ -241,7 +415,8 @@
         }
         
         function createFibonacciSphere() {
-            const numPoints = 200;
+            const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+            const numPoints = isMobile ? 120 : 200; // Moins de points sur mobile
             const goldenRatio = (1 + Math.sqrt(5)) / 2;
             
             for (let i = 0; i < numPoints; i++) {
@@ -301,7 +476,8 @@
         }
         
         function createRandomSphereStructure() {
-            const numNodes = 150;
+            const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+            const numNodes = isMobile ? 100 : 150; // Moins de nœuds sur mobile
             
             for (let i = 0; i < numNodes; i++) {
                 // Distribution aléatoire dans une sphère avec densité variable
@@ -322,10 +498,17 @@
         }
         
         function createNode(x, y, z, colorIndex) {
-            const geometry = new THREE.SphereGeometry(0.15, 12, 12);
+            // Géométrie adaptée à la plateforme
+            const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+            const geometry = new THREE.SphereGeometry(
+                isMobile ? 0.12 : 0.15, // Plus petits nœuds sur mobile
+                isMobile ? 8 : 12,      // Moins de segments sur mobile
+                isMobile ? 8 : 12
+            );
+            
             const material = new THREE.MeshPhongMaterial({
                 color: nodeColors[colorIndex % nodeColors.length],
-                shininess: 100,
+                shininess: isMobile ? 50 : 100, // Moins de brillance sur mobile
                 transparent: true,
                 opacity: 0.9
             });
