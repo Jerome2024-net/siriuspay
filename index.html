@@ -83,7 +83,7 @@
             border-radius: 6px;
             padding: 6px 10px;
             margin: 2px 0;
-            display: flex;
+            display: none; /* Masquer par défaut - affiché seulement sur mobile */
             flex-direction: column;
             align-items: center;
             text-align: center;
@@ -184,66 +184,6 @@
             to { transform: rotate(360deg); }
         }
         
-        /* Animation de scroll automatique pour mobile */
-        @keyframes mobileScroll {
-            0% { 
-                transform: translateY(0px);
-            }
-            25% { 
-                transform: translateY(-15px);
-            }
-            50% { 
-                transform: translateY(-30px);
-            }
-            75% { 
-                transform: translateY(-15px);
-            }
-            100% { 
-                transform: translateY(0px);
-            }
-        }
-        
-        /* Animation alternative pour faire défiler le contenu des métriques */
-        @keyframes contentScroll {
-            0% { 
-                transform: translateY(0);
-            }
-            16.66% { 
-                transform: translateY(0);
-            }
-            33.33% { 
-                transform: translateY(-25%);
-            }
-            50% { 
-                transform: translateY(-50%);
-            }
-            66.66% { 
-                transform: translateY(-75%);
-            }
-            83.33% { 
-                transform: translateY(-50%);
-            }
-            100% { 
-                transform: translateY(0);
-            }
-        }
-        
-        /* Animation pour faire apparaître les métriques une par une */
-        @keyframes metricFadeIn {
-            0%, 75% { 
-                opacity: 0;
-                transform: scale(0.8);
-            }
-            25%, 50% { 
-                opacity: 1;
-                transform: scale(1);
-            }
-            100% { 
-                opacity: 0;
-                transform: scale(0.8);
-            }
-        }
-        
 
         
         #info {
@@ -294,7 +234,7 @@
                 box-sizing: border-box;
                 margin: 5px;
                 max-height: 50vh;
-                overflow: hidden;
+                overflow: visible;
                 display: flex;
                 flex-direction: column;
                 gap: 2px;
@@ -311,7 +251,7 @@
                 text-align: center;
             }
             
-            /* Utiliser le design de cartes compactes sur mobile */
+            /* Utiliser le design de cartes compactes sur mobile - FIXE */
             .energy-row {
                 display: block;
                 margin: 0;
@@ -323,40 +263,21 @@
             }
             
             .metric-compact {
-                display: flex;
+                display: flex !important;
                 flex-direction: column;
                 align-items: center;
                 text-align: center;
                 padding: 4px 6px;
-                margin: 1px 0;
+                margin: 2px 0;
                 min-height: 32px;
                 background: rgba(0, 30, 60, 0.8);
                 border: 1px solid rgba(0, 255, 136, 0.5);
                 border-radius: 6px;
-                animation: metricSlideIn 12s infinite ease-in-out;
+                /* SUPPRIMER TOUTES LES ANIMATIONS */
+                animation: none;
+                opacity: 1;
+                transform: none;
             }
-            
-            /* Animation de slide pour mobile */
-            @keyframes metricSlideIn {
-                0%, 75% { 
-                    opacity: 0.3;
-                    transform: translateX(-100%);
-                }
-                25%, 50% { 
-                    opacity: 1;
-                    transform: translateX(0);
-                }
-                100% { 
-                    opacity: 0.3;
-                    transform: translateX(100%);
-                }
-            }
-            
-            /* Décalage d'animation pour chaque métrique */
-            .metric-compact:nth-child(1) { animation-delay: 0s; }
-            .metric-compact:nth-child(2) { animation-delay: 3s; }
-            .metric-compact:nth-child(3) { animation-delay: 6s; }
-            .metric-compact:nth-child(4) { animation-delay: 9s; }
             
             .energy-label {
                 font-size: 8px;
@@ -384,6 +305,7 @@
                 margin: 3px;
                 max-height: 55vh;
                 font-size: 9px;
+                overflow: visible;
             }
             
             .project-title {
@@ -393,17 +315,14 @@
             
             .metric-compact {
                 padding: 3px 5px;
-                margin: 1px 0;
+                margin: 2px 0;
                 min-height: 28px;
                 border-radius: 4px;
-                animation: metricSlideIn 16s infinite ease-in-out;
+                /* PAS D'ANIMATION */
+                animation: none;
+                opacity: 1;
+                transform: none;
             }
-            
-            /* Décalage d'animation plus lent pour 480px */
-            .metric-compact:nth-child(1) { animation-delay: 0s; }
-            .metric-compact:nth-child(2) { animation-delay: 4s; }
-            .metric-compact:nth-child(3) { animation-delay: 8s; }
-            .metric-compact:nth-child(4) { animation-delay: 12s; }
             
             .energy-label {
                 font-size: 7px;
@@ -421,6 +340,7 @@
                 margin: 2px;
                 max-height: 60vh;
                 font-size: 8px;
+                overflow: visible;
             }
             
             .project-title {
@@ -430,17 +350,14 @@
             
             .metric-compact {
                 padding: 2px 4px;
-                margin: 1px 0;
+                margin: 2px 0;
                 min-height: 24px;
                 border-radius: 3px;
-                animation: metricSlideIn 20s infinite ease-in-out;
+                /* PAS D'ANIMATION */
+                animation: none;
+                opacity: 1;
+                transform: none;
             }
-            
-            /* Décalage d'animation encore plus lent pour 360px */
-            .metric-compact:nth-child(1) { animation-delay: 0s; }
-            .metric-compact:nth-child(2) { animation-delay: 5s; }
-            .metric-compact:nth-child(3) { animation-delay: 10s; }
-            .metric-compact:nth-child(4) { animation-delay: 15s; }
             
             .energy-label {
                 font-size: 6px;
@@ -543,11 +460,17 @@
         /* Écrans desktop - afficher les cartes normales */
         @media (min-width: 769px) {
             .metric-compact {
-                display: none; /* Masquer les cartes mobiles sur desktop */
+                display: none !important; /* Masquer les cartes mobiles sur desktop */
             }
             
             .metric-card {
-                display: flex; /* Afficher les cartes normales sur desktop */
+                display: flex !important; /* Afficher les cartes normales sur desktop */
+                animation: none !important; /* Pas d'animation sur desktop */
+            }
+            
+            .energy-row {
+                display: block; /* Assurer que les rows sont visibles */
+                margin: 5px 0;
             }
         }
         
