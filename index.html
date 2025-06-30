@@ -36,38 +36,74 @@
             position: fixed;
             top: 20px;
             right: 20px;
-            background: rgba(0, 0, 0, 0.8);
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.95), rgba(20, 20, 40, 0.9));
             color: #00ff88;
-            padding: 8px 12px;
-            border-radius: 8px;
+            padding: 16px 20px;
+            border-radius: 16px;
             font-family: 'Courier New', monospace;
-            font-size: 11px;
-            border: 1px solid rgba(0, 255, 136, 0.5);
-            box-shadow: 0 0 15px rgba(0, 255, 136, 0.3);
-            width: 220px;
+            font-size: 12px;
+            border: 2px solid rgba(0, 255, 136, 0.7);
+            box-shadow: 
+                0 0 30px rgba(0, 255, 136, 0.4),
+                inset 0 0 20px rgba(0, 255, 136, 0.1);
+            width: 280px;
             text-align: left;
-            backdrop-filter: blur(3px);
+            backdrop-filter: blur(15px);
             z-index: 1000;
             display: flex !important;
             flex-direction: column;
-            opacity: 0.9 !important;
+            opacity: 0.95 !important;
             visibility: visible !important;
             animation: none !important;
+            transition: all 0.3s ease;
+        }
+        
+        #energy-display:hover {
+            transform: translateY(-2px);
+            box-shadow: 
+                0 0 40px rgba(0, 255, 136, 0.6),
+                inset 0 0 30px rgba(0, 255, 136, 0.15);
         }
         
         /* Nouveau design de cartes pour les métriques */
         .metric-card {
-            background: rgba(0, 20, 40, 0.7);
-            border: 1px solid rgba(0, 255, 136, 0.4);
-            border-radius: 4px;
-            padding: 4px 6px;
-            margin: 2px 0;
+            background: linear-gradient(135deg, rgba(0, 40, 80, 0.9), rgba(0, 60, 120, 0.8));
+            border: 2px solid rgba(0, 255, 136, 0.6);
+            border-radius: 12px;
+            padding: 12px 16px;
+            margin: 8px 0;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            backdrop-filter: blur(2px);
-            min-height: 24px;
-            font-size: 10px;
+            backdrop-filter: blur(10px);
+            min-height: 40px;
+            font-size: 11px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .metric-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 255, 136, 0.2), transparent);
+            transition: left 0.5s ease;
+        }
+        
+        .metric-card:hover::before {
+            left: 100%;
+        }
+        
+        .metric-card:hover {
+            transform: translateX(5px);
+            border-color: rgba(0, 255, 136, 0.9);
+            box-shadow: 
+                0 0 20px rgba(0, 255, 136, 0.3),
+                inset 0 0 15px rgba(0, 255, 136, 0.1);
         }
         
         .metric-card:hover {
@@ -105,13 +141,29 @@
         .metric-icon.value { background: linear-gradient(45deg, #ffff00, #88ff00); }
         
         .project-title {
-            color: rgba(255, 255, 255, 0.8);
-            font-size: 12px;
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 16px;
             font-weight: bold;
             text-align: center;
-            margin-bottom: 6px;
-            letter-spacing: 1px;
-            opacity: 0.9;
+            margin-bottom: 16px;
+            letter-spacing: 3px;
+            opacity: 1;
+            text-shadow: 
+                0 0 10px rgba(0, 255, 136, 0.8),
+                0 0 20px rgba(0, 255, 136, 0.4);
+            position: relative;
+        }
+        
+        .project-title::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #00ff88, transparent);
+            border-radius: 2px;
         }
         
         .energy-row {
@@ -129,27 +181,33 @@
         }
         
         .energy-label {
-            color: #88ffaa;
+            color: #88ffdd;
             font-weight: bold;
-            font-size: 8px;
+            font-size: 10px;
             text-transform: uppercase;
-            letter-spacing: 0.3px;
+            letter-spacing: 1px;
             display: flex;
             align-items: center;
+            position: relative;
+            z-index: 2;
         }
         
         .energy-value {
             color: #00ff88;
             font-weight: bold;
-            text-shadow: 0 0 3px rgba(0, 255, 136, 0.5);
-            font-size: 9px;
+            text-shadow: 0 0 8px rgba(0, 255, 136, 0.7);
+            font-size: 12px;
+            position: relative;
+            z-index: 2;
         }
         
         .crystal-token {
-            color: #ffaa00;
+            color: #ffcc00;
             font-weight: bold;
-            text-shadow: 0 0 3px rgba(255, 170, 0, 0.5);
-            font-size: 9px;
+            text-shadow: 0 0 8px rgba(255, 204, 0, 0.7);
+            font-size: 12px;
+            position: relative;
+            z-index: 2;
         }
         
         /* Supprimer les icônes et indicateurs pour gagner de l'espace */
@@ -429,17 +487,20 @@
             }
         }
 
-        /* Styles par défaut pour desktop - panneau compact */
+        /* Styles par défaut pour desktop - panneau élégant */
         .metric-card {
             display: flex !important;
-            background: rgba(0, 20, 40, 0.7);
-            border: 1px solid rgba(0, 255, 136, 0.4);
-            border-radius: 4px;
-            padding: 4px 6px;
-            margin: 2px 0;
-            backdrop-filter: blur(2px);
-            min-height: 24px;
-            font-size: 10px;
+            background: linear-gradient(135deg, rgba(0, 40, 80, 0.9), rgba(0, 60, 120, 0.8));
+            border: 2px solid rgba(0, 255, 136, 0.6);
+            border-radius: 12px;
+            padding: 12px 16px;
+            margin: 8px 0;
+            backdrop-filter: blur(10px);
+            min-height: 40px;
+            font-size: 11px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
             opacity: 1 !important;
             visibility: visible !important;
             animation: none !important;
@@ -449,7 +510,7 @@
             display: none !important;
         }
 
-        /* Écrans desktop - panneau compact en haut à droite */
+        /* Écrans desktop - panneau élégant en haut à droite */
         @media (min-width: 769px) {
             #energy-display {
                 position: fixed !important;
@@ -458,16 +519,16 @@
                 bottom: auto !important;
                 left: auto !important;
                 transform: none !important;
-                width: 220px !important;
-                background: rgba(0, 0, 0, 0.8) !important;
-                border: 1px solid rgba(0, 255, 136, 0.5) !important;
-                border-radius: 8px !important;
-                padding: 8px 12px !important;
-                font-size: 11px !important;
+                width: 280px !important;
+                background: linear-gradient(135deg, rgba(0, 0, 0, 0.95), rgba(20, 20, 40, 0.9)) !important;
+                border: 2px solid rgba(0, 255, 136, 0.7) !important;
+                border-radius: 16px !important;
+                padding: 16px 20px !important;
+                font-size: 12px !important;
                 z-index: 1000 !important;
-                opacity: 0.9 !important;
+                opacity: 0.95 !important;
                 animation: none !important;
-            }
+                backdrop-filter: blur(15px) !important;
             }
             
             .metric-compact {
@@ -519,25 +580,25 @@
             <div class="metrics-container">
                 <div class="energy-row">
                     <div class="metric-card">
-                        <div class="energy-label">Token Freq</div>
+                        <div class="energy-label">⚡ Token Freq</div>
                         <div class="energy-value"><span id="token-frequency">0.00</span> Hz</div>
                     </div>
                 </div>
                 <div class="energy-row">
                     <div class="metric-card">
-                        <div class="energy-label">Cumulative</div>
+                        <div class="energy-label">📊 Cumulative</div>
                         <div class="energy-value"><span id="cumulative-frequency">0.00</span> Hz</div>
                     </div>
                 </div>
                 <div class="energy-row">
                     <div class="metric-card">
-                        <div class="energy-label">Energy</div>
+                        <div class="energy-label">🔋 Energy</div>
                         <div class="energy-value"><span id="energy-generated">0.000</span> kWh</div>
                     </div>
                 </div>
                 <div class="energy-row">
                     <div class="metric-card">
-                        <div class="energy-label">Value</div>
+                        <div class="energy-label">💎 Value</div>
                         <div class="crystal-token">$<span id="energy-value">0.000</span></div>
                     </div>
                 </div>
