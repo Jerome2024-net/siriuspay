@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://jerome2024-net.github.io/siriuspay/sitemap.xml
+
+# Crawl-delay (optional)
+Crawl-delay: 1

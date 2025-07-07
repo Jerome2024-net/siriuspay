@@ -1,0 +1,1245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sirius Pay</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #fafafa;
+            color: #1d1d1f;
+            line-height: 1.6;
+            font-weight: 400;
+            overflow-x: hidden;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes fadeInRight {
+            from {
+                opacity: 0;
+                transform: translateX(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        @keyframes cardGlow {
+            0%, 100% {
+                box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            }
+            50% {
+                box-shadow: 0 25px 50px rgba(0, 122, 255, 0.2);
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+        }
+
+        @keyframes slideInNav {
+            from {
+                transform: translateY(-100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes countUp {
+            from {
+                opacity: 0;
+                transform: scale(0.5);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        /* Animation utility classes */
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .animate-on-scroll.animate {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .stagger-1 { transition-delay: 0.1s; }
+        .stagger-2 { transition-delay: 0.2s; }
+        .stagger-3 { transition-delay: 0.3s; }
+        .stagger-4 { transition-delay: 0.4s; }
+        .stagger-5 { transition-delay: 0.5s; }
+        .stagger-6 { transition-delay: 0.6s; }
+
+        /* Navigation */
+        .nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 2rem 0;
+            background: rgba(250, 250, 250, 0.8);
+            backdrop-filter: blur(20px);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            animation: slideInNav 0.8s ease-out;
+        }
+
+        .nav-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            color: #1d1d1f;
+            animation: fadeInLeft 1s ease-out 0.2s both;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 3rem;
+            list-style: none;
+        }
+
+        .nav-menu li {
+            animation: fadeInUp 0.6s ease-out both;
+        }
+
+        .nav-menu li:nth-child(1) { animation-delay: 0.3s; }
+        .nav-menu li:nth-child(2) { animation-delay: 0.4s; }
+        .nav-menu li:nth-child(3) { animation-delay: 0.5s; }
+
+        .nav-menu a {
+            color: #1d1d1f;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-menu a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 50%;
+            background: #007aff;
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+
+        .nav-menu a:hover::after {
+            width: 100%;
+        }
+
+        .nav-menu a:hover {
+            color: #007aff;
+            transform: translateY(-2px);
+        }
+
+        .nav-cta {
+            background: #1d1d1f;
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            animation: fadeInRight 1s ease-out 0.6s both;
+        }
+
+        .nav-cta:hover {
+            background: #007aff;
+            transform: translateY(-2px) scale(1.05);
+            box-shadow: 0 10px 25px rgba(0, 122, 255, 0.3);
+        }
+
+        /* Hero */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 8rem 0 4rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 50% 0%, rgba(0, 122, 255, 0.05) 0%, transparent 50%);
+            animation: pulse 4s ease-in-out infinite;
+        }
+
+        .hero-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-size: clamp(3rem, 8vw, 7rem);
+            font-weight: 700;
+            letter-spacing: -0.04em;
+            margin-bottom: 2rem;
+            line-height: 1.1;
+            animation: fadeInUp 1s ease-out 0.8s both;
+            background: linear-gradient(135deg, #1d1d1f, #007aff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            color: #6e6e73;
+            margin-bottom: 3rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            font-weight: 400;
+            animation: fadeInUp 1s ease-out 1s both;
+        }
+
+        .hero-cta {
+            background: linear-gradient(135deg, #007aff, #0056cc);
+            color: white;
+            padding: 1.25rem 3rem;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            display: inline-block;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            margin-bottom: 4rem;
+            animation: fadeInUp 1s ease-out 1.2s both;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-cta::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .hero-cta:hover::before {
+            left: 100%;
+        }
+
+        .hero-cta:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 15px 35px rgba(0, 122, 255, 0.4);
+        }
+
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 4rem;
+            margin-top: 4rem;
+        }
+
+        .stat {
+            text-align: center;
+            animation: fadeInUp 0.8s ease-out both;
+        }
+
+        .stat:nth-child(1) { animation-delay: 1.4s; }
+        .stat:nth-child(2) { animation-delay: 1.6s; }
+        .stat:nth-child(3) { animation-delay: 1.8s; }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 700;
+            color: #1d1d1f;
+            display: block;
+            letter-spacing: -0.02em;
+            animation: countUp 0.6s ease-out both;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: #6e6e73;
+            margin-top: 0.5rem;
+        }
+
+        /* Floating elements */
+        .floating-element {
+            position: absolute;
+            opacity: 0.1;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .floating-element:nth-child(1) {
+            top: 20%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .floating-element:nth-child(2) {
+            top: 60%;
+            right: 15%;
+            animation-delay: 2s;
+        }
+
+        .floating-element:nth-child(3) {
+            bottom: 30%;
+            left: 20%;
+            animation-delay: 4s;
+        }
+
+        /* Card Section */
+        .card-section {
+            padding: 8rem 0;
+            background: white;
+            position: relative;
+        }
+
+        .card-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6rem;
+            align-items: center;
+        }
+
+        .card-content h2 {
+            font-size: 3rem;
+            font-weight: 700;
+            letter-spacing: -0.03em;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+
+        .card-content p {
+            font-size: 1.2rem;
+            color: #6e6e73;
+            margin-bottom: 2rem;
+        }
+
+        .card-features {
+            list-style: none;
+        }
+
+        .card-features li {
+            padding: 0.75rem 0;
+            font-size: 1rem;
+            color: #1d1d1f;
+            position: relative;
+            padding-left: 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .card-features li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #34c759;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .card-features li:hover {
+            color: #007aff;
+            transform: translateX(5px);
+        }
+
+        .card-features li:hover::before {
+            transform: scale(1.2);
+        }
+
+        .card-visual {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            perspective: 1000px;
+        }
+
+        .card {
+            width: 350px;
+            height: 220px;
+            background: linear-gradient(135deg, #1d1d1f 0%, #3a3a3c 100%);
+            border-radius: 16px;
+            padding: 2rem;
+            color: white;
+            position: relative;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            transform: rotate(-5deg);
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            animation: cardGlow 3s ease-in-out infinite;
+        }
+
+        .card:hover {
+            transform: rotate(0deg) scale(1.05) translateY(-10px);
+            box-shadow: 0 30px 60px rgba(0, 122, 255, 0.3);
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 2rem;
+        }
+
+        .card-logo {
+            font-weight: 700;
+            font-size: 1.1rem;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        .card-type {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        .card-number {
+            font-family: 'SF Mono', Monaco, monospace;
+            font-size: 1.3rem;
+            letter-spacing: 0.1em;
+            margin-bottom: 1.5rem;
+        }
+
+        .card-info {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9rem;
+        }
+
+        /* Features */
+        .features {
+            padding: 8rem 0;
+            background: #f5f5f7;
+        }
+
+        .features-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            text-align: center;
+        }
+
+        .features h2 {
+            font-size: 3rem;
+            font-weight: 700;
+            letter-spacing: -0.03em;
+            margin-bottom: 1rem;
+        }
+
+        .features-subtitle {
+            font-size: 1.3rem;
+            color: #6e6e73;
+            margin-bottom: 4rem;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+            margin-top: 4rem;
+        }
+
+        .feature {
+            background: white;
+            padding: 3rem 2rem;
+            border-radius: 16px;
+            text-align: center;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 122, 255, 0.05), transparent);
+            transition: left 0.6s;
+        }
+
+        .feature:hover::before {
+            left: 100%;
+        }
+
+        .feature:hover {
+            transform: translateY(-12px) scale(1.02);
+            box-shadow: 0 25px 50px rgba(0, 122, 255, 0.15);
+        }
+
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #007aff, #0056cc);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .feature:hover .feature-icon {
+            transform: rotate(360deg) scale(1.1);
+        }
+
+        .feature h3 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            letter-spacing: -0.01em;
+        }
+
+        .feature p {
+            color: #6e6e73;
+            line-height: 1.6;
+        }
+
+        /* Process */
+        .process {
+            padding: 8rem 0;
+            background: white;
+        }
+
+        .process-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            text-align: center;
+        }
+
+        .process h2 {
+            font-size: 3rem;
+            font-weight: 700;
+            letter-spacing: -0.03em;
+            margin-bottom: 4rem;
+        }
+
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 3rem;
+            margin-top: 4rem;
+        }
+
+        .step {
+            text-align: center;
+            position: relative;
+        }
+
+        .step::after {
+            content: '→';
+            position: absolute;
+            top: 25px;
+            right: -1.5rem;
+            color: #007aff;
+            font-size: 1.5rem;
+            font-weight: bold;
+            opacity: 0.5;
+        }
+
+        .step:last-child::after {
+            display: none;
+        }
+
+        .step-number {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #007aff, #0056cc);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 1.2rem;
+            margin: 0 auto 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .step:hover .step-number {
+            transform: scale(1.1) rotate(360deg);
+            box-shadow: 0 10px 25px rgba(0, 122, 255, 0.3);
+        }
+
+        .step h3 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .step p {
+            color: #6e6e73;
+        }
+
+        /* CTA */
+        .cta {
+            padding: 8rem 0;
+            background: linear-gradient(135deg, #1d1d1f, #2d2d2f);
+            color: white;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 30% 70%, rgba(0, 122, 255, 0.1) 0%, transparent 50%);
+            animation: float 8s ease-in-out infinite;
+        }
+
+        .cta-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta h2 {
+            font-size: 3rem;
+            font-weight: 700;
+            letter-spacing: -0.03em;
+            margin-bottom: 1.5rem;
+        }
+
+        .cta p {
+            font-size: 1.3rem;
+            color: #a1a1a6;
+            margin-bottom: 3rem;
+        }
+
+        .cta-button {
+            background: linear-gradient(135deg, #007aff, #0056cc);
+            color: white;
+            padding: 1.25rem 3rem;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            display: inline-block;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .cta-button:hover::before {
+            left: 100%;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 20px 40px rgba(0, 122, 255, 0.4);
+        }
+
+        /* Footer */
+        .footer {
+            padding: 3rem 0;
+            background: #f5f5f7;
+            text-align: center;
+            border-top: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .footer p {
+            color: #6e6e73;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav {
+                padding: 1rem 0;
+            }
+
+            .nav-content {
+                padding: 0 1rem;
+            }
+
+            .nav-menu {
+                display: none;
+            }
+
+            .nav-cta {
+                padding: 0.5rem 1rem;
+                font-size: 0.9rem;
+            }
+
+            .hero {
+                padding: 6rem 0 2rem;
+                min-height: 80vh;
+            }
+
+            .hero-content {
+                padding: 0 1rem;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+                margin-bottom: 1.5rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1.1rem;
+                margin-bottom: 2rem;
+            }
+
+            .hero-cta {
+                padding: 1rem 2rem;
+                font-size: 1rem;
+                margin-bottom: 3rem;
+                width: 100%;
+                max-width: 300px;
+            }
+
+            .hero-stats {
+                flex-direction: column;
+                gap: 2rem;
+                margin-top: 2rem;
+            }
+
+            .stat-number {
+                font-size: 2rem;
+            }
+
+            .card-section {
+                padding: 4rem 0;
+            }
+
+            .card-container {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+                text-align: center;
+                padding: 0 1rem;
+            }
+
+            .card-content h2 {
+                font-size: 2rem;
+                margin-bottom: 1rem;
+            }
+
+            .card-content p {
+                font-size: 1rem;
+                margin-bottom: 1.5rem;
+            }
+
+            .card-features {
+                text-align: left;
+                max-width: 300px;
+                margin: 0 auto;
+            }
+
+            .card {
+                width: 280px;
+                height: 180px;
+                transform: rotate(0deg);
+                padding: 1.5rem;
+            }
+
+            .card-number {
+                font-size: 1.1rem;
+                margin-bottom: 1rem;
+            }
+
+            .features {
+                padding: 4rem 0;
+            }
+
+            .features-container {
+                padding: 0 1rem;
+            }
+
+            .features h2 {
+                font-size: 2rem;
+            }
+
+            .features-subtitle {
+                font-size: 1.1rem;
+                margin-bottom: 3rem;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+                margin-top: 2rem;
+            }
+
+            .feature {
+                padding: 2rem 1.5rem;
+            }
+
+            .feature-icon {
+                width: 50px;
+                height: 50px;
+                font-size: 1.3rem;
+            }
+
+            .process {
+                padding: 4rem 0;
+            }
+
+            .process-container {
+                padding: 0 1rem;
+            }
+
+            .process h2 {
+                font-size: 2rem;
+                margin-bottom: 3rem;
+            }
+
+            .steps {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+                margin-top: 2rem;
+            }
+
+            .step::after {
+                display: none;
+            }
+
+            .step-number {
+                width: 40px;
+                height: 40px;
+                font-size: 1rem;
+            }
+
+            .cta {
+                padding: 4rem 0;
+            }
+
+            .cta-container {
+                padding: 0 1rem;
+            }
+
+            .cta h2 {
+                font-size: 2rem;
+                margin-bottom: 1rem;
+            }
+
+            .cta p {
+                font-size: 1.1rem;
+                margin-bottom: 2rem;
+            }
+
+            .cta-button {
+                padding: 1rem 2rem;
+                font-size: 1rem;
+                width: 100%;
+                max-width: 300px;
+            }
+
+            .footer {
+                padding: 2rem 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1rem;
+            }
+
+            .card {
+                width: 260px;
+                height: 165px;
+                padding: 1.2rem;
+            }
+
+            .card-number {
+                font-size: 1rem;
+            }
+
+            .card-content h2 {
+                font-size: 1.8rem;
+            }
+
+            .features h2,
+            .process h2,
+            .cta h2 {
+                font-size: 1.8rem;
+            }
+
+            .nav-content {
+                padding: 0 0.5rem;
+            }
+
+            .hero-content,
+            .card-container,
+            .features-container,
+            .process-container,
+            .cta-container {
+                padding: 0 0.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="nav-content">
+            <div class="logo">Sirius Pay</div>
+            <ul class="nav-menu">
+                <li><a href="#features">Features</a></li>
+                <li><a href="#process">How it works</a></li>
+                <li><a href="#about">About</a></li>
+            </ul>
+            <a href="#" class="nav-cta">Get Started</a>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="hero">
+        <div class="floating-element">💳</div>
+        <div class="floating-element">⚡</div>
+        <div class="floating-element">🌍</div>
+        
+        <div class="hero-content">
+            <h1>Pay differently</h1>
+            <p class="hero-subtitle">One card. One account. One app. Everything you need to manage your modern money.</p>
+            <a href="#" class="hero-cta">Open account</a>
+            
+            <div class="hero-stats">
+                <div class="stat">
+                    <span class="stat-number" data-target="195">0</span>
+                    <div class="stat-label">Countries</div>
+                </div>
+                <div class="stat">
+                    <span class="stat-number">$0</span>
+                    <div class="stat-label">Fees</div>
+                </div>
+                <div class="stat">
+                    <span class="stat-number">Instant</span>
+                    <div class="stat-label">Creation</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Card Section -->
+    <section class="card-section">
+        <div class="card-container">
+            <div class="card-content animate-on-scroll">
+                <h2>Your card, instantly</h2>
+                <p>Create your virtual card and start paying anywhere in the world. Control everything from the app.</p>
+                <ul class="card-features">
+                    <li class="animate-on-scroll stagger-1">Instant creation</li>
+                    <li class="animate-on-scroll stagger-2">Accepted in 195 countries</li>
+                    <li class="animate-on-scroll stagger-3">Advanced controls</li>
+                    <li class="animate-on-scroll stagger-4">Real-time notifications</li>
+                    <li class="animate-on-scroll stagger-5">No hidden fees</li>
+                </ul>
+            </div>
+            <div class="card-visual animate-on-scroll">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-logo">SIRIUS PAY</div>
+                        <div class="card-type">VISA</div>
+                    </div>
+                    <div class="card-number">**** **** **** 8742</div>
+                    <div class="card-info">
+                        <div>
+                            <div>Your Name</div>
+                        </div>
+                        <div>
+                            <div>12/28</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features -->
+    <section class="features" id="features">
+        <div class="features-container">
+            <h2 class="animate-on-scroll">Built for you</h2>
+            <p class="features-subtitle animate-on-scroll">Everything you need in one app</p>
+            
+            <div class="features-grid">
+                <div class="feature animate-on-scroll stagger-1">
+                    <div class="feature-icon">💳</div>
+                    <h3>Virtual card</h3>
+                    <p>Create and manage your virtual cards instantly. Block, unblock, set limits.</p>
+                </div>
+                
+                <div class="feature animate-on-scroll stagger-2">
+                    <div class="feature-icon">💸</div>
+                    <h3>Fast transfers</h3>
+                    <p>Send money to your loved ones in seconds. Anywhere in Africa and worldwide.</p>
+                </div>
+                
+                <div class="feature animate-on-scroll stagger-3">
+                    <div class="feature-icon">📊</div>
+                    <h3>Smart tracking</h3>
+                    <p>Analyze your spending, auto-categorize, receive personalized insights.</p>
+                </div>
+                
+                <div class="feature animate-on-scroll stagger-4">
+                    <div class="feature-icon">🔒</div>
+                    <h3>Maximum security</h3>
+                    <p>Biometric authentication, instant notifications, advanced banking protection.</p>
+                </div>
+                
+                <div class="feature animate-on-scroll stagger-5">
+                    <div class="feature-icon">🌍</div>
+                    <h3>Borderless</h3>
+                    <p>Pay worldwide at the best exchange rates, no hidden fees.</p>
+                </div>
+                
+                <div class="feature animate-on-scroll stagger-6">
+                    <div class="feature-icon">⚡</div>
+                    <h3>Instant</h3>
+                    <p>Real-time transactions, immediate notifications, seamless experience.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Process -->
+    <section class="process" id="process">
+        <div class="process-container">
+            <h2 class="animate-on-scroll">Simple as hello</h2>
+            
+            <div class="steps">
+                <div class="step animate-on-scroll stagger-1">
+                    <div class="step-number">1</div>
+                    <h3>Download</h3>
+                    <p>Install the app and create your account in minutes</p>
+                </div>
+                
+                <div class="step animate-on-scroll stagger-2">
+                    <div class="step-number">2</div>
+                    <h3>Top up</h3>
+                    <p>Add money via bank transfer or mobile money</p>
+                </div>
+                
+                <div class="step animate-on-scroll stagger-3">
+                    <div class="step-number">3</div>
+                    <h3>Pay</h3>
+                    <p>Use your card anywhere in the world</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta">
+        <div class="cta-container">
+            <h2 class="animate-on-scroll">Ready to start?</h2>
+            <p class="animate-on-scroll">Join thousands of users who chose Sirius Pay</p>
+            <a href="#" class="cta-button animate-on-scroll">Open free account</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>&copy; 2025 Sirius Pay. Modern fintech for Africa.</p>
+    </footer>
+
+    <script>
+        // Intersection Observer for scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate');
+                }
+            });
+        }, observerOptions);
+
+        // Observe all elements with animate-on-scroll class
+        document.querySelectorAll('.animate-on-scroll').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Counter animation for stats
+        function animateCounter(element, target, duration = 2000) {
+            let start = 0;
+            const increment = target / (duration / 16);
+            
+            function updateCounter() {
+                start += increment;
+                if (start < target) {
+                    element.textContent = Math.ceil(start);
+                    requestAnimationFrame(updateCounter);
+                } else {
+                    element.textContent = target;
+                }
+            }
+            
+            updateCounter();
+        }
+
+        // Trigger counter animation when stats come into view
+        const statsObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const target = entry.target.dataset.target;
+                    if (target) {
+                        animateCounter(entry.target, parseInt(target));
+                    }
+                    statsObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        document.querySelectorAll('[data-target]').forEach(el => {
+            statsObserver.observe(el);
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Add scroll-based nav background
+        let lastScrollTop = 0;
+        window.addEventListener('scroll', () => {
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            const nav = document.querySelector('.nav');
+            
+            if (scrollTop > 100) {
+                nav.style.background = 'rgba(250, 250, 250, 0.95)';
+                nav.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.1)';
+            } else {
+                nav.style.background = 'rgba(250, 250, 250, 0.8)';
+                nav.style.boxShadow = 'none';
+            }
+            
+            lastScrollTop = scrollTop;
+        });
+
+        // Enhanced hover effects for interactive elements
+        document.querySelectorAll('.feature, .step, .card').forEach(element => {
+            element.addEventListener('mouseenter', function() {
+                this.style.transform = this.style.transform || '';
+                if (!this.style.transform.includes('scale')) {
+                    this.style.transform += ' scale(1.02)';
+                }
+            });
+            
+            element.addEventListener('mouseleave', function() {
+                this.style.transform = this.style.transform.replace(' scale(1.02)', '');
+            });
+        });
+
+        // Parallax effect for floating elements
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const parallax = scrolled * 0.5;
+            
+            document.querySelectorAll('.floating-element').forEach((element, index) => {
+                const speed = (index + 1) * 0.3;
+                element.style.transform = `translateY(${parallax * speed}px)`;
+            });
+        });
+    </script>
+</body>
+</html>
