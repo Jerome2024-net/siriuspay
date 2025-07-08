@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sirius Pay</title>
+    <title>Sirius Pay - AI-Powered Financial Intelligence</title>
     <style>
         * {
             margin: 0;
@@ -13,101 +13,111 @@
 
         body {
             font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: #fafafa;
-            color: #1d1d1f;
+            background: linear-gradient(135deg, #f7f6f4, #ebe9e5, #f2f1ee);
+            color: #2a2a2a;
             line-height: 1.6;
             font-weight: 400;
             overflow-x: hidden;
         }
 
-        /* Animations */
+        /* AI-inspired animations */
+        @keyframes aiPulse {
+            0%, 100% { opacity: 0.3; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.05); }
+        }
+
+        @keyframes dataFlow {
+            0% { transform: translateX(-100%); opacity: 0; }
+            50% { opacity: 1; }
+            100% { transform: translateX(100%); opacity: 0; }
+        }
+
+        @keyframes brainWave {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            33% { transform: translateY(-10px) rotate(1deg); }
+            66% { transform: translateY(5px) rotate(-1deg); }
+        }
+
+        @keyframes levelUp {
+            0% { transform: scale(1) rotateY(0deg); }
+            50% { transform: scale(1.1) rotateY(180deg); }
+            100% { transform: scale(1) rotateY(360deg); }
+        }
+
+        @keyframes neuronsConnect {
+            0% { stroke-dashoffset: 1000; }
+            100% { stroke-dashoffset: 0; }
+        }
+
         @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes fadeInLeft {
-            from {
-                opacity: 0;
-                transform: translateX(-30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
-
-        @keyframes fadeInRight {
-            from {
-                opacity: 0;
-                transform: translateX(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
-
-        @keyframes float {
-            0%, 100% {
-                transform: translateY(0px);
-            }
-            50% {
-                transform: translateY(-10px);
-            }
-        }
-
-        @keyframes cardGlow {
-            0%, 100% {
-                box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-            }
-            50% {
-                box-shadow: 0 25px 50px rgba(0, 122, 255, 0.2);
-            }
-        }
-
-        @keyframes pulse {
-            0%, 100% {
-                transform: scale(1);
-            }
-            50% {
-                transform: scale(1.05);
-            }
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         @keyframes slideInNav {
-            from {
-                transform: translateY(-100%);
-                opacity: 0;
-            }
-            to {
-                transform: translateY(0);
-                opacity: 1;
-            }
+            from { transform: translateY(-100%); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
         }
 
-        @keyframes countUp {
-            from {
-                opacity: 0;
-                transform: scale(0.5);
-            }
-            to {
-                opacity: 1;
-                transform: scale(1);
-            }
+        @keyframes matrixRain {
+            0% { transform: translateY(-100vh); }
+            100% { transform: translateY(100vh); }
         }
+
+        @keyframes slideInFromRight {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        @keyframes slideOutToRight {
+            from { transform: translateX(0); opacity: 1; }
+            to { transform: translateX(100%); opacity: 0; }
+        }
+
+        /* Neural network background */
+        .neural-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.1;
+        }
+
+        .neural-bg svg {
+            width: 100%;
+            height: 100%;
+        }
+
+        .neuron-path {
+            stroke: #00f5ff;
+            stroke-width: 1;
+            fill: none;
+            stroke-dasharray: 5,5;
+            animation: neuronsConnect 3s ease-in-out infinite;
+        }
+
+        /* Matrix-like data streams */
+        .data-stream {
+            position: absolute;
+            color: #00f5ff;
+            font-family: 'SF Mono', monospace;
+            font-size: 12px;
+            opacity: 0.3;
+            animation: matrixRain 8s linear infinite;
+        }
+
+        .data-stream:nth-child(1) { left: 10%; animation-delay: 0s; }
+        .data-stream:nth-child(2) { left: 30%; animation-delay: 2s; }
+        .data-stream:nth-child(3) { left: 60%; animation-delay: 4s; }
+        .data-stream:nth-child(4) { left: 80%; animation-delay: 6s; }
 
         /* Animation utility classes */
         .animate-on-scroll {
             opacity: 0;
             transform: translateY(30px);
-            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .animate-on-scroll.animate {
@@ -127,47 +137,46 @@
             position: fixed;
             top: 0;
             width: 100%;
-            padding: 2rem 0;
-            background: rgba(250, 250, 250, 0.8);
+            padding: 1rem 0;
+            background: rgba(247, 246, 244, 0.95);
             backdrop-filter: blur(20px);
             z-index: 1000;
-            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            border-bottom: 1px solid rgba(0, 245, 255, 0.2);
             animation: slideInNav 0.8s ease-out;
         }
 
         .nav-content {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 0 2rem;
+            padding: 0 1rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
 
         .logo {
-            font-size: 1.5rem;
+            font-size: 1.3rem;
             font-weight: 700;
             letter-spacing: -0.02em;
-            color: #1d1d1f;
-            animation: fadeInLeft 1s ease-out 0.2s both;
+            color: #2a2a2a;
+            position: relative;
         }
 
+        .logo::after {
+            content: '🧠';
+            margin-left: 8px;
+            animation: aiPulse 2s ease-in-out infinite;
+        }
+
+        /* Mobile Menu */
         .nav-menu {
             display: flex;
             gap: 3rem;
             list-style: none;
         }
 
-        .nav-menu li {
-            animation: fadeInUp 0.6s ease-out both;
-        }
-
-        .nav-menu li:nth-child(1) { animation-delay: 0.3s; }
-        .nav-menu li:nth-child(2) { animation-delay: 0.4s; }
-        .nav-menu li:nth-child(3) { animation-delay: 0.5s; }
-
         .nav-menu a {
-            color: #1d1d1f;
+            color: #2a2a2a;
             text-decoration: none;
             font-weight: 500;
             font-size: 0.95rem;
@@ -182,7 +191,7 @@
             height: 2px;
             bottom: -5px;
             left: 50%;
-            background: #007aff;
+            background: linear-gradient(90deg, #00f5ff, #0080ff);
             transition: all 0.3s ease;
             transform: translateX(-50%);
         }
@@ -192,26 +201,133 @@
         }
 
         .nav-menu a:hover {
-            color: #007aff;
+            color: #00f5ff;
             transform: translateY(-2px);
         }
 
         .nav-cta {
-            background: #1d1d1f;
-            color: white;
+            background: linear-gradient(135deg, #00f5ff, #0080ff);
+            color: #0a0a0a;
             padding: 0.75rem 1.5rem;
-            border-radius: 8px;
+            border-radius: 25px;
             text-decoration: none;
-            font-weight: 500;
-            font-size: 0.95rem;
+            font-weight: 600;
+            font-size: 0.9rem;
             transition: all 0.3s ease;
-            animation: fadeInRight 1s ease-out 0.6s both;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-cta::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.5s;
+        }
+
+        .nav-cta:hover::before {
+            left: 100%;
         }
 
         .nav-cta:hover {
-            background: #007aff;
             transform: translateY(-2px) scale(1.05);
-            box-shadow: 0 10px 25px rgba(0, 122, 255, 0.3);
+            box-shadow: 0 10px 25px rgba(0, 245, 255, 0.3);
+        }
+
+        /* Mobile Menu Toggle */
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            padding: 0.5rem;
+            border: none;
+            background: transparent;
+            z-index: 1001;
+        }
+
+        .menu-toggle span {
+            width: 25px;
+            height: 3px;
+            background: #2a2a2a;
+            margin: 3px 0;
+            transition: 0.3s;
+            border-radius: 2px;
+        }
+
+        .menu-toggle.active span:nth-child(1) {
+            transform: rotate(-45deg) translate(-5px, 6px);
+        }
+
+        .menu-toggle.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .menu-toggle.active span:nth-child(3) {
+            transform: rotate(45deg) translate(-5px, -6px);
+        }
+
+        /* Mobile Menu Overlay */
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 100%;
+            height: 100vh;
+            background: rgba(247, 246, 244, 0.98);
+            backdrop-filter: blur(20px);
+            z-index: 999;
+            transition: right 0.3s ease;
+            padding: 80px 2rem 2rem;
+        }
+
+        .mobile-menu.active {
+            right: 0;
+        }
+
+        .mobile-menu-items {
+            list-style: none;
+            text-align: center;
+        }
+
+        .mobile-menu-items li {
+            margin: 2rem 0;
+        }
+
+        .mobile-menu-items a {
+            color: #2a2a2a;
+            text-decoration: none;
+            font-size: 1.5rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            display: block;
+            padding: 1rem;
+        }
+
+        .mobile-menu-items a:hover {
+            color: #00f5ff;
+            transform: scale(1.1);
+        }
+
+        .mobile-cta {
+            background: linear-gradient(135deg, #00f5ff, #0080ff);
+            color: #0a0a0a;
+            padding: 1rem 2rem;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            display: inline-block;
+            margin-top: 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .mobile-cta:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 25px rgba(0, 245, 255, 0.3);
         }
 
         /* Hero */
@@ -219,7 +335,7 @@
             min-height: 100vh;
             display: flex;
             align-items: center;
-            padding: 8rem 0 4rem;
+            padding: 6rem 0 4rem;
             position: relative;
             overflow: hidden;
         }
@@ -231,37 +347,48 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: radial-gradient(circle at 50% 0%, rgba(0, 122, 255, 0.05) 0%, transparent 50%);
-            animation: pulse 4s ease-in-out infinite;
+            background: radial-gradient(circle at 50% 50%, rgba(0, 245, 255, 0.1) 0%, transparent 70%);
+            animation: aiPulse 6s ease-in-out infinite;
         }
 
         .hero-content {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 0 2rem;
+            padding: 0 1rem;
             text-align: center;
             position: relative;
             z-index: 1;
         }
 
+        .ai-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, rgba(0, 245, 255, 0.2), rgba(0, 128, 255, 0.2));
+            border: 1px solid rgba(0, 245, 255, 0.3);
+            padding: 0.5rem 1.5rem;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            margin-bottom: 2rem;
+            animation: fadeInUp 1s ease-out 0.5s both;
+        }
+
         .hero h1 {
-            font-size: clamp(3rem, 8vw, 7rem);
+            font-size: clamp(2.5rem, 8vw, 7rem);
             font-weight: 700;
             letter-spacing: -0.04em;
             margin-bottom: 2rem;
             line-height: 1.1;
             animation: fadeInUp 1s ease-out 0.8s both;
-            background: linear-gradient(135deg, #1d1d1f, #007aff);
+            background: linear-gradient(135deg, #2a2a2a, #00f5ff, #0080ff);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
 
         .hero-subtitle {
-            font-size: 1.5rem;
-            color: #6e6e73;
+            font-size: clamp(1.1rem, 4vw, 1.5rem);
+            color: #6a6a6a;
             margin-bottom: 3rem;
-            max-width: 600px;
+            max-width: 700px;
             margin-left: auto;
             margin-right: auto;
             font-weight: 400;
@@ -269,13 +396,13 @@
         }
 
         .hero-cta {
-            background: linear-gradient(135deg, #007aff, #0056cc);
-            color: white;
+            background: linear-gradient(135deg, #00f5ff, #0080ff);
+            color: #0a0a0a;
             padding: 1.25rem 3rem;
-            border-radius: 12px;
+            border-radius: 25px;
             text-decoration: none;
             font-weight: 600;
-            font-size: 1.1rem;
+            font-size: clamp(1rem, 3vw, 1.1rem);
             display: inline-block;
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             margin-bottom: 4rem;
@@ -291,7 +418,7 @@
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
             transition: left 0.5s;
         }
 
@@ -301,19 +428,22 @@
 
         .hero-cta:hover {
             transform: translateY(-3px) scale(1.05);
-            box-shadow: 0 15px 35px rgba(0, 122, 255, 0.4);
+            box-shadow: 0 15px 35px rgba(0, 245, 255, 0.4);
         }
 
         .hero-stats {
             display: flex;
             justify-content: center;
-            gap: 4rem;
+            gap: 2rem;
             margin-top: 4rem;
+            flex-wrap: wrap;
         }
 
         .stat {
             text-align: center;
             animation: fadeInUp 0.8s ease-out both;
+            position: relative;
+            min-width: 120px;
         }
 
         .stat:nth-child(1) { animation-delay: 1.4s; }
@@ -321,430 +451,557 @@
         .stat:nth-child(3) { animation-delay: 1.8s; }
 
         .stat-number {
-            font-size: 3rem;
+            font-size: clamp(2rem, 6vw, 3rem);
             font-weight: 700;
-            color: #1d1d1f;
+            color: #2a2a2a;
             display: block;
             letter-spacing: -0.02em;
-            animation: countUp 0.6s ease-out both;
+            background: linear-gradient(135deg, #00f5ff, #2a2a2a);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
         .stat-label {
-            font-size: 0.9rem;
-            color: #6e6e73;
+            font-size: 0.8rem;
+            color: #6a6a6a;
             margin-top: 0.5rem;
         }
 
-        /* Floating elements */
-        .floating-element {
-            position: absolute;
-            opacity: 0.1;
-            animation: float 6s ease-in-out infinite;
-        }
-
-        .floating-element:nth-child(1) {
-            top: 20%;
-            left: 10%;
-            animation-delay: 0s;
-        }
-
-        .floating-element:nth-child(2) {
-            top: 60%;
-            right: 15%;
-            animation-delay: 2s;
-        }
-
-        .floating-element:nth-child(3) {
-            bottom: 30%;
-            left: 20%;
-            animation-delay: 4s;
-        }
-
-        /* Card Section */
-        .card-section {
-            padding: 8rem 0;
-            background: white;
+        /* AI Pass Section */
+        .ai-pass-section {
+            padding: 6rem 0;
+            background: linear-gradient(135deg, #f2f1ee, #ebe9e5);
             position: relative;
         }
 
-        .card-container {
+        .ai-pass-container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 0 2rem;
+            padding: 0 1rem;
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 6rem;
+            grid-template-columns: 1fr;
+            gap: 4rem;
             align-items: center;
         }
 
-        .card-content h2 {
-            font-size: 3rem;
+        .ai-pass-content h2 {
+            font-size: clamp(2rem, 7vw, 3rem);
             font-weight: 700;
             letter-spacing: -0.03em;
             margin-bottom: 1.5rem;
             line-height: 1.2;
+            background: linear-gradient(135deg, #2a2a2a, #00f5ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-align: center;
         }
 
-        .card-content p {
-            font-size: 1.2rem;
-            color: #6e6e73;
+        .ai-pass-content p {
+            font-size: clamp(1rem, 3vw, 1.2rem);
+            color: #6a6a6a;
             margin-bottom: 2rem;
+            text-align: center;
         }
 
-        .card-features {
+        .ai-features {
             list-style: none;
+            max-width: 600px;
+            margin: 0 auto;
         }
 
-        .card-features li {
-            padding: 0.75rem 0;
-            font-size: 1rem;
-            color: #1d1d1f;
+        .ai-features li {
+            padding: 1rem 0;
+            font-size: clamp(0.9rem, 2.5vw, 1rem);
+            color: #2a2a2a;
             position: relative;
-            padding-left: 2rem;
+            padding-left: 3rem;
             transition: all 0.3s ease;
         }
 
-        .card-features li::before {
-            content: '✓';
+        .ai-features li::before {
+            content: '🧠';
             position: absolute;
             left: 0;
-            color: #34c759;
-            font-weight: 600;
-            transition: all 0.3s ease;
+            font-size: 1.2rem;
+            animation: aiPulse 2s ease-in-out infinite;
         }
 
-        .card-features li:hover {
-            color: #007aff;
-            transform: translateX(5px);
+        .ai-features li:hover {
+            color: #00f5ff;
+            transform: translateX(10px);
         }
 
-        .card-features li:hover::before {
-            transform: scale(1.2);
-        }
-
-        .card-visual {
+        .ai-pass-visual {
             display: flex;
             justify-content: center;
             align-items: center;
             perspective: 1000px;
         }
 
-        .card {
-            width: 350px;
-            height: 220px;
-            background: linear-gradient(135deg, #1d1d1f 0%, #3a3a3c 100%);
-            border-radius: 16px;
-            padding: 2rem;
+        .smart-pass {
+            width: min(350px, 90vw);
+            height: min(220px, 55vw);
+            background: linear-gradient(135deg, #2a2a2a 0%, #3a3a3a 50%, #2a2a2a 100%);
+            border: 2px solid rgba(0, 245, 255, 0.3);
+            border-radius: 20px;
+            padding: 1.5rem;
             color: white;
             position: relative;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-            transform: rotate(-5deg);
+            box-shadow: 
+                0 20px 40px rgba(0, 0, 0, 0.15),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            transform: rotate(0deg);
             transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-            animation: cardGlow 3s ease-in-out infinite;
-        }
-
-        .card:hover {
-            transform: rotate(0deg) scale(1.05) translateY(-10px);
-            box-shadow: 0 30px 60px rgba(0, 122, 255, 0.3);
-        }
-
-        .card-header {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 2rem;
-        }
-
-        .card-logo {
-            font-weight: 700;
-            font-size: 1.1rem;
-            animation: pulse 2s ease-in-out infinite;
-        }
-
-        .card-type {
-            font-size: 0.9rem;
-            opacity: 0.8;
-        }
-
-        .card-number {
-            font-family: 'SF Mono', Monaco, monospace;
-            font-size: 1.3rem;
-            letter-spacing: 0.1em;
-            margin-bottom: 1.5rem;
-        }
-
-        .card-info {
-            display: flex;
-            justify-content: space-between;
-            font-size: 0.9rem;
-        }
-
-        /* Features */
-        .features {
-            padding: 8rem 0;
-            background: #f5f5f7;
-        }
-
-        .features-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
-            text-align: center;
-        }
-
-        .features h2 {
-            font-size: 3rem;
-            font-weight: 700;
-            letter-spacing: -0.03em;
-            margin-bottom: 1rem;
-        }
-
-        .features-subtitle {
-            font-size: 1.3rem;
-            color: #6e6e73;
-            margin-bottom: 4rem;
-        }
-
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 3rem;
-            margin-top: 4rem;
-        }
-
-        .feature {
-            background: white;
-            padding: 3rem 2rem;
-            border-radius: 16px;
-            text-align: center;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            border: 1px solid rgba(0, 0, 0, 0.05);
-            position: relative;
             overflow: hidden;
         }
 
-        .feature::before {
+        .smart-pass::before {
             content: '';
             position: absolute;
             top: 0;
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(0, 122, 255, 0.05), transparent);
-            transition: left 0.6s;
+            background: linear-gradient(90deg, transparent, rgba(0, 245, 255, 0.1), transparent);
+            animation: dataFlow 3s ease-in-out infinite;
         }
 
-        .feature:hover::before {
-            left: 100%;
+        .smart-pass:hover {
+            transform: rotate(0deg) scale(1.05) translateY(-10px);
+            box-shadow: 
+                0 30px 60px rgba(0, 245, 255, 0.2),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2);
+            border-color: rgba(0, 245, 255, 0.6);
         }
 
-        .feature:hover {
-            transform: translateY(-12px) scale(1.02);
-            box-shadow: 0 25px 50px rgba(0, 122, 255, 0.15);
-        }
-
-        .feature-icon {
-            width: 60px;
-            height: 60px;
-            background: linear-gradient(135deg, #007aff, #0056cc);
-            border-radius: 50%;
+        .pass-header {
             display: flex;
+            justify-content: space-between;
             align-items: center;
-            justify-content: center;
-            margin: 0 auto 1.5rem;
-            font-size: 1.5rem;
-            transition: all 0.3s ease;
+            margin-bottom: 1.5rem;
         }
 
-        .feature:hover .feature-icon {
-            transform: rotate(360deg) scale(1.1);
+        .pass-logo {
+            font-weight: 700;
+            font-size: clamp(0.9rem, 2.5vw, 1.1rem);
+            color: #00f5ff;
         }
 
-        .feature h3 {
-            font-size: 1.3rem;
+        .ai-indicator {
+            background: linear-gradient(135deg, #00f5ff, #0080ff);
+            color: #0a0a0a;
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: clamp(0.7rem, 2vw, 0.8rem);
             font-weight: 600;
+            animation: aiPulse 2s ease-in-out infinite;
+        }
+
+        .pass-level {
+            font-family: 'SF Mono', Monaco, monospace;
+            font-size: clamp(0.8rem, 2.2vw, 1.1rem);
+            color: #00f5ff;
             margin-bottom: 1rem;
-            letter-spacing: -0.01em;
         }
 
-        .feature p {
-            color: #6e6e73;
-            line-height: 1.6;
+        .intelligence-bar {
+            width: 100%;
+            height: 6px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 3px;
+            overflow: hidden;
+            margin-bottom: 1.5rem;
         }
 
-        /* Process */
-        .process {
-            padding: 8rem 0;
-            background: white;
+        .intelligence-progress {
+            height: 100%;
+            background: linear-gradient(90deg, #00f5ff, #0080ff);
+            width: 75%;
+            border-radius: 3px;
+            animation: dataFlow 2s ease-in-out infinite;
         }
 
-        .process-container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 0 2rem;
+        .pass-stats {
+            display: flex;
+            justify-content: space-between;
+            font-size: clamp(0.7rem, 2vw, 0.9rem);
+        }
+
+        .pass-stat {
             text-align: center;
         }
 
-        .process h2 {
-            font-size: 3rem;
+        .pass-stat-value {
+            color: #00f5ff;
+            font-weight: 600;
+            display: block;
+        }
+
+        .pass-stat-label {
+            color: #a0a0a0;
+            font-size: clamp(0.6rem, 1.8vw, 0.8rem);
+        }
+
+        /* Learning Section */
+        .learning-section {
+            padding: 6rem 0;
+            background: linear-gradient(135deg, #ebe9e5, #f7f6f4);
+        }
+
+        .learning-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+            text-align: center;
+        }
+
+        .learning-container h2 {
+            font-size: clamp(2rem, 7vw, 3rem);
             font-weight: 700;
             letter-spacing: -0.03em;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #2a2a2a, #00f5ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .learning-subtitle {
+            font-size: clamp(1rem, 3vw, 1.3rem);
+            color: #6a6a6a;
             margin-bottom: 4rem;
         }
 
-        .steps {
+        .learning-phases {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 3rem;
+            grid-template-columns: 1fr;
+            gap: 2rem;
             margin-top: 4rem;
         }
 
-        .step {
+        .learning-phase {
+            background: linear-gradient(135deg, #f7f6f4, #f2f1ee);
+            border: 1px solid rgba(0, 245, 255, 0.2);
+            padding: 2rem 1.5rem;
+            border-radius: 20px;
             text-align: center;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
         }
 
-        .step::after {
-            content: '→';
+        .learning-phase::before {
+            content: '';
             position: absolute;
-            top: 25px;
-            right: -1.5rem;
-            color: #007aff;
-            font-size: 1.5rem;
-            font-weight: bold;
-            opacity: 0.5;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 245, 255, 0.05), transparent);
+            transition: left 0.6s;
         }
 
-        .step:last-child::after {
-            display: none;
+        .learning-phase:hover::before {
+            left: 100%;
         }
 
-        .step-number {
-            width: 50px;
-            height: 50px;
-            background: linear-gradient(135deg, #007aff, #0056cc);
-            color: white;
+        .learning-phase:hover {
+            transform: translateY(-12px) scale(1.02);
+            box-shadow: 0 25px 50px rgba(0, 245, 255, 0.15);
+            border-color: rgba(0, 245, 255, 0.4);
+        }
+
+        .phase-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #00f5ff, #0080ff);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-weight: 600;
-            font-size: 1.2rem;
             margin: 0 auto 1.5rem;
+            font-size: 1.5rem;
             transition: all 0.3s ease;
+            animation: brainWave 4s ease-in-out infinite;
         }
 
-        .step:hover .step-number {
-            transform: scale(1.1) rotate(360deg);
-            box-shadow: 0 10px 25px rgba(0, 122, 255, 0.3);
+        .learning-phase:hover .phase-icon {
+            animation: levelUp 0.6s ease-in-out;
         }
 
-        .step h3 {
-            font-size: 1.2rem;
+        .learning-phase h3 {
+            font-size: clamp(1.1rem, 3vw, 1.4rem);
             font-weight: 600;
             margin-bottom: 1rem;
+            color: #2a2a2a;
         }
 
-        .step p {
-            color: #6e6e73;
+        .learning-phase p {
+            color: #6a6a6a;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+            font-size: clamp(0.9rem, 2.5vw, 1rem);
         }
 
-        /* CTA */
-        .cta {
-            padding: 8rem 0;
-            background: linear-gradient(135deg, #1d1d1f, #2d2d2f);
-            color: white;
+        .phase-level {
+            background: rgba(0, 245, 255, 0.1);
+            color: #00f5ff;
+            padding: 0.5rem 1rem;
+            border-radius: 15px;
+            font-size: clamp(0.8rem, 2vw, 0.9rem);
+            font-weight: 600;
+            display: inline-block;
+        }
+
+        /* Evolution Section */
+        .evolution-section {
+            padding: 6rem 0;
+            background: linear-gradient(135deg, #f2f1ee, #ebe9e5);
+        }
+
+        .evolution-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 1rem;
+            text-align: center;
+        }
+
+        .evolution-container h2 {
+            font-size: clamp(2rem, 7vw, 3rem);
+            font-weight: 700;
+            letter-spacing: -0.03em;
+            margin-bottom: 4rem;
+            background: linear-gradient(135deg, #2a2a2a, #00f5ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .evolution-timeline {
+            position: relative;
+            margin: 4rem 0;
+        }
+
+        .evolution-timeline::before {
+            content: '';
+            position: absolute;
+            left: 2rem;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(180deg, #00f5ff, #0080ff);
+        }
+
+        .evolution-step {
+            display: flex;
+            align-items: flex-start;
+            margin: 3rem 0;
+            position: relative;
+        }
+
+        .evolution-content {
+            flex: 1;
+            padding: 2rem;
+            background: linear-gradient(135deg, #f7f6f4, #f2f1ee);
+            border: 1px solid rgba(0, 245, 255, 0.2);
+            border-radius: 15px;
+            margin-left: 1rem;
+            transition: all 0.3s ease;
+            text-align: left;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        .evolution-content:hover {
+            border-color: rgba(0, 245, 255, 0.4);
+            transform: scale(1.02);
+        }
+
+        .evolution-content h3 {
+            font-size: clamp(1.1rem, 3vw, 1.3rem);
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: #2a2a2a;
+        }
+
+        .evolution-content p {
+            color: #6a6a6a;
+            line-height: 1.6;
+            font-size: clamp(0.9rem, 2.5vw, 1rem);
+        }
+
+        /* Super App CTA */
+        .super-app-cta {
+            padding: 6rem 0;
+            background: linear-gradient(135deg, #ebe9e5, #f2f1ee);
+            color: #2a2a2a;
             text-align: center;
             position: relative;
             overflow: hidden;
         }
 
-        .cta::before {
+        .super-app-cta::before {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
             right: 0;
             bottom: 0;
-            background: radial-gradient(circle at 30% 70%, rgba(0, 122, 255, 0.1) 0%, transparent 50%);
-            animation: float 8s ease-in-out infinite;
+            background: radial-gradient(circle at 70% 30%, rgba(0, 245, 255, 0.1) 0%, transparent 50%);
+            animation: aiPulse 8s ease-in-out infinite;
         }
 
-        .cta-container {
+        .super-app-container {
             max-width: 800px;
             margin: 0 auto;
-            padding: 0 2rem;
+            padding: 0 1rem;
             position: relative;
             z-index: 1;
         }
 
-        .cta h2 {
-            font-size: 3rem;
+        .super-app-container h2 {
+            font-size: clamp(2.5rem, 8vw, 3.5rem);
             font-weight: 700;
             letter-spacing: -0.03em;
             margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, #2a2a2a, #00f5ff, #0080ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
-        .cta p {
-            font-size: 1.3rem;
-            color: #a1a1a6;
+        .super-app-container p {
+            font-size: clamp(1rem, 3vw, 1.3rem);
+            color: #6a6a6a;
             margin-bottom: 3rem;
         }
 
-        .cta-button {
-            background: linear-gradient(135deg, #007aff, #0056cc);
-            color: white;
-            padding: 1.25rem 3rem;
-            border-radius: 12px;
+        .super-app-button {
+            background: linear-gradient(135deg, #00f5ff, #0080ff);
+            color: #0a0a0a;
+            padding: 1.5rem 2.5rem;
+            border-radius: 25px;
             text-decoration: none;
             font-weight: 600;
-            font-size: 1.1rem;
+            font-size: clamp(1rem, 3vw, 1.2rem);
             display: inline-block;
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             position: relative;
             overflow: hidden;
         }
 
-        .cta-button::before {
+        .super-app-button::before {
             content: '';
             position: absolute;
             top: 0;
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
             transition: left 0.5s;
         }
 
-        .cta-button:hover::before {
+        .super-app-button:hover::before {
             left: 100%;
         }
 
-        .cta-button:hover {
+        .super-app-button:hover {
             transform: translateY(-3px) scale(1.05);
-            box-shadow: 0 20px 40px rgba(0, 122, 255, 0.4);
+            box-shadow: 0 20px 40px rgba(0, 245, 255, 0.4);
         }
 
         /* Footer */
         .footer {
             padding: 3rem 0;
-            background: #f5f5f7;
+            background: #f2f1ee;
             text-align: center;
-            border-top: 1px solid rgba(0, 0, 0, 0.05);
+            border-top: 1px solid rgba(0, 245, 255, 0.2);
         }
 
         .footer p {
-            color: #6e6e73;
-            font-size: 0.9rem;
+            color: #6a6a6a;
+            font-size: clamp(0.8rem, 2vw, 0.9rem);
+            padding: 0 1rem;
         }
 
-        /* Responsive */
-        @media (max-width: 768px) {
-            .nav {
-                padding: 1rem 0;
+        /* Responsive Media Queries */
+        @media (min-width: 768px) {
+            .nav-content {
+                padding: 0 2rem;
             }
 
-            .nav-content {
-                padding: 0 1rem;
+            .hero-content, .ai-pass-container, .learning-container, 
+            .evolution-container, .super-app-container {
+                padding: 0 2rem;
+            }
+
+            .ai-pass-container {
+                grid-template-columns: 1fr 1fr;
+                gap: 6rem;
+            }
+
+            .ai-pass-content {
+                text-align: left;
+            }
+
+            .ai-pass-content h2 {
+                text-align: left;
+            }
+
+            .ai-pass-content p {
+                text-align: left;
+            }
+
+            .hero-stats {
+                gap: 4rem;
+            }
+
+            .learning-phases {
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+                gap: 3rem;
+            }
+
+            .evolution-timeline::before {
+                left: 2rem;
+                transform: none;
+            }
+
+            .evolution-step:nth-child(even) {
+                flex-direction: row;
+            }
+
+            .evolution-step:nth-child(even) .evolution-content {
+                margin-left: 1rem;
+                margin-right: 0;
+                text-align: left;
+            }
+
+            .evolution-content {
+                margin-left: 1rem;
+            }
+
+            .nav {
+                padding: 2rem 0;
+            }
+
+            .logo {
+                font-size: 1.5rem;
+            }
+
+            .nav-cta {
+                font-size: 0.95rem;
+            }
+
+            .smart-pass {
+                transform: rotate(-5deg);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: flex;
             }
 
             .nav-menu {
@@ -752,290 +1009,193 @@
             }
 
             .nav-cta {
-                padding: 0.5rem 1rem;
-                font-size: 0.9rem;
-            }
-
-            .hero {
-                padding: 6rem 0 2rem;
-                min-height: 80vh;
-            }
-
-            .hero-content {
-                padding: 0 1rem;
-            }
-
-            .hero h1 {
-                font-size: 2.5rem;
-                margin-bottom: 1.5rem;
-            }
-
-            .hero-subtitle {
-                font-size: 1.1rem;
-                margin-bottom: 2rem;
-            }
-
-            .hero-cta {
-                padding: 1rem 2rem;
-                font-size: 1rem;
-                margin-bottom: 3rem;
-                width: 100%;
-                max-width: 300px;
-            }
-
-            .hero-stats {
-                flex-direction: column;
-                gap: 2rem;
-                margin-top: 2rem;
-            }
-
-            .stat-number {
-                font-size: 2rem;
-            }
-
-            .card-section {
-                padding: 4rem 0;
-            }
-
-            .card-container {
-                grid-template-columns: 1fr;
-                gap: 3rem;
-                text-align: center;
-                padding: 0 1rem;
-            }
-
-            .card-content h2 {
-                font-size: 2rem;
-                margin-bottom: 1rem;
-            }
-
-            .card-content p {
-                font-size: 1rem;
-                margin-bottom: 1.5rem;
-            }
-
-            .card-features {
-                text-align: left;
-                max-width: 300px;
-                margin: 0 auto;
-            }
-
-            .card {
-                width: 280px;
-                height: 180px;
-                transform: rotate(0deg);
-                padding: 1.5rem;
-            }
-
-            .card-number {
-                font-size: 1.1rem;
-                margin-bottom: 1rem;
-            }
-
-            .features {
-                padding: 4rem 0;
-            }
-
-            .features-container {
-                padding: 0 1rem;
-            }
-
-            .features h2 {
-                font-size: 2rem;
-            }
-
-            .features-subtitle {
-                font-size: 1.1rem;
-                margin-bottom: 3rem;
-            }
-
-            .features-grid {
-                grid-template-columns: 1fr;
-                gap: 2rem;
-                margin-top: 2rem;
-            }
-
-            .feature {
-                padding: 2rem 1.5rem;
-            }
-
-            .feature-icon {
-                width: 50px;
-                height: 50px;
-                font-size: 1.3rem;
-            }
-
-            .process {
-                padding: 4rem 0;
-            }
-
-            .process-container {
-                padding: 0 1rem;
-            }
-
-            .process h2 {
-                font-size: 2rem;
-                margin-bottom: 3rem;
-            }
-
-            .steps {
-                grid-template-columns: 1fr;
-                gap: 2rem;
-                margin-top: 2rem;
-            }
-
-            .step::after {
                 display: none;
             }
 
-            .step-number {
-                width: 40px;
-                height: 40px;
-                font-size: 1rem;
+            .hero {
+                padding: 5rem 0 3rem;
             }
 
-            .cta {
+            .data-stream {
+                font-size: 10px;
+            }
+
+            .data-stream:nth-child(3),
+            .data-stream:nth-child(4) {
+                display: none;
+            }
+
+            .evolution-timeline::before {
+                display: none;
+            }
+
+            .evolution-step {
+                flex-direction: column;
+            }
+
+            .evolution-step:nth-child(even) {
+                flex-direction: column;
+            }
+
+            .evolution-content {
+                margin-left: 0;
+                margin-right: 0;
+                text-align: center;
+            }
+
+            .evolution-step:nth-child(even) .evolution-content {
+                margin-left: 0;
+                margin-right: 0;
+                text-align: center;
+            }
+
+            .ai-pass-section,
+            .learning-section,
+            .evolution-section,
+            .super-app-cta {
                 padding: 4rem 0;
-            }
-
-            .cta-container {
-                padding: 0 1rem;
-            }
-
-            .cta h2 {
-                font-size: 2rem;
-                margin-bottom: 1rem;
-            }
-
-            .cta p {
-                font-size: 1.1rem;
-                margin-bottom: 2rem;
-            }
-
-            .cta-button {
-                padding: 1rem 2rem;
-                font-size: 1rem;
-                width: 100%;
-                max-width: 300px;
-            }
-
-            .footer {
-                padding: 2rem 1rem;
             }
         }
 
         @media (max-width: 480px) {
-            .hero h1 {
-                font-size: 2rem;
-            }
-
-            .hero-subtitle {
-                font-size: 1rem;
-            }
-
-            .card {
-                width: 260px;
-                height: 165px;
+            .smart-pass {
                 padding: 1.2rem;
             }
 
-            .card-number {
-                font-size: 1rem;
+            .hero-stats {
+                gap: 1.5rem;
             }
 
-            .card-content h2 {
-                font-size: 1.8rem;
+            .stat {
+                min-width: 100px;
             }
+        }
 
-            .features h2,
-            .process h2,
-            .cta h2 {
-                font-size: 1.8rem;
+        /* Touch improvements for mobile */
+        @media (hover: none) {
+            .learning-phase:hover,
+            .evolution-content:hover,
+            .smart-pass:hover {
+                transform: none;
             }
-
-            .nav-content {
-                padding: 0 0.5rem;
-            }
-
-            .hero-content,
-            .card-container,
-            .features-container,
-            .process-container,
-            .cta-container {
-                padding: 0 0.5rem;
+            
+            .ai-features li:hover {
+                transform: none;
             }
         }
     </style>
 </head>
 <body>
+    <!-- Neural Network Background -->
+    <div class="neural-bg">
+        <svg>
+            <path class="neuron-path" d="M0,100 Q150,50 300,100 T600,100" />
+            <path class="neuron-path" d="M0,200 Q200,150 400,200 T800,200" />
+            <path class="neuron-path" d="M0,300 Q100,250 200,300 T400,300" />
+        </svg>
+    </div>
+
+    <!-- Data Streams -->
+    <div class="data-stream">01001000 01100101 01101100 01101100 01101111</div>
+    <div class="data-stream">AI_LEARNING_PATTERN_DETECTED</div>
+    <div class="data-stream">NEURAL_NETWORK_OPTIMIZING</div>
+    <div class="data-stream">USER_BEHAVIOR_ANALYSIS_COMPLETE</div>
+
     <!-- Navigation -->
     <nav class="nav">
         <div class="nav-content">
             <div class="logo">Sirius Pay</div>
+            
+            <!-- Desktop Menu -->
             <ul class="nav-menu">
-                <li><a href="#features">Features</a></li>
-                <li><a href="#process">How it works</a></li>
-                <li><a href="#about">About</a></li>
+                <li><a href="#ai-intelligence">Intelligence</a></li>
+                <li><a href="#learning">Learning</a></li>
+                <li><a href="#evolution">Evolution</a></li>
             </ul>
-            <a href="#" class="nav-cta">Get Started</a>
+            <a href="#" class="nav-cta">Early Access</a>
+
+            <!-- Mobile Menu Toggle -->
+            <button class="menu-toggle" id="menu-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
         </div>
     </nav>
 
+    <!-- Mobile Menu Overlay -->
+    <div class="mobile-menu" id="mobile-menu">
+        <ul class="mobile-menu-items">
+            <li><a href="#ai-intelligence" onclick="toggleMobileMenu()">Intelligence</a></li>
+            <li><a href="#learning" onclick="toggleMobileMenu()">Learning</a></li>
+            <li><a href="#evolution" onclick="toggleMobileMenu()">Evolution</a></li>
+            <li><a href="#" class="mobile-cta" onclick="toggleMobileMenu()">Early Access</a></li>
+        </ul>
+    </div>
+
     <!-- Hero -->
     <section class="hero">
-        <div class="floating-element">💳</div>
-        <div class="floating-element">⚡</div>
-        <div class="floating-element">🌍</div>
-        
         <div class="hero-content">
-            <h1>Pay differently</h1>
-            <p class="hero-subtitle">One card. One account. One app. Everything you need to manage your modern money.</p>
-            <a href="#" class="hero-cta">Open account</a>
+            <div class="ai-badge">🚀 Coming Soon</div>
+            <h1>The Future of Money is Intelligent</h1>
+            <p class="hero-subtitle">
+                Sirius Pay isn't just a financial app. It's your personal AI assistant that learns, evolves, and unlocks services tailored to your unique lifestyle.
+            </p>
+            <a href="#" class="hero-cta">Join the Waitlist</a>
             
             <div class="hero-stats">
                 <div class="stat">
-                    <span class="stat-number" data-target="195">0</span>
-                    <div class="stat-label">Countries</div>
+                    <span class="stat-number" data-target="100">0</span>
+                    <div class="stat-label">% AI Learning</div>
                 </div>
                 <div class="stat">
-                    <span class="stat-number">$0</span>
-                    <div class="stat-label">Fees</div>
+                    <span class="stat-number">∞</span>
+                    <div class="stat-label">Evolving Services</div>
                 </div>
                 <div class="stat">
-                    <span class="stat-number">Instant</span>
-                    <div class="stat-label">Creation</div>
+                    <span class="stat-number">24/7</span>
+                    <div class="stat-label">Active Intelligence</div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Card Section -->
-    <section class="card-section">
-        <div class="card-container">
-            <div class="card-content animate-on-scroll">
-                <h2>Your card, instantly</h2>
-                <p>Create your virtual card and start paying anywhere in the world. Control everything from the app.</p>
-                <ul class="card-features">
-                    <li class="animate-on-scroll stagger-1">Instant creation</li>
-                    <li class="animate-on-scroll stagger-2">Accepted in 195 countries</li>
-                    <li class="animate-on-scroll stagger-3">Advanced controls</li>
-                    <li class="animate-on-scroll stagger-4">Real-time notifications</li>
-                    <li class="animate-on-scroll stagger-5">No hidden fees</li>
+    <!-- AI Pass Section -->
+    <section class="ai-pass-section" id="ai-intelligence">
+        <div class="ai-pass-container">
+            <div class="ai-pass-content animate-on-scroll">
+                <h2>Your Intelligent Pass</h2>
+                <p>More than just a virtual card, your Sirius Pass is a financial brain that understands you and adapts to your needs in real-time.</p>
+                <ul class="ai-features">
+                    <li class="animate-on-scroll stagger-1">Advanced behavioral analysis</li>
+                    <li class="animate-on-scroll stagger-2">Intelligent automatic recharge</li>
+                    <li class="animate-on-scroll stagger-3">Voice and predictive commands</li>
+                    <li class="animate-on-scroll stagger-4">Enhanced biometric security</li>
+                    <li class="animate-on-scroll stagger-5">AI budget optimization</li>
                 </ul>
             </div>
-            <div class="card-visual animate-on-scroll">
-                <div class="card">
-                    <div class="card-header">
-                        <div class="card-logo">SIRIUS PAY</div>
-                        <div class="card-type"></div>
+            <div class="ai-pass-visual animate-on-scroll">
+                <div class="smart-pass">
+                    <div class="pass-header">
+                        <div class="pass-logo">SIRIUS PAY</div>
+                        <div class="ai-indicator">AI ACTIVE</div>
                     </div>
-                    <div class="card-number">**** **** **** ****</div>
-                    <div class="card-info">
-                        <div>
-                            <div>Coming Soon</div>
+                    <div class="pass-level">INTELLIGENCE LEVEL: EXPERT</div>
+                    <div class="intelligence-bar">
+                        <div class="intelligence-progress"></div>
+                    </div>
+                    <div class="pass-stats">
+                        <div class="pass-stat">
+                            <span class="pass-stat-value">127</span>
+                            <div class="pass-stat-label">Patterns</div>
                         </div>
-                        <div>
-                            <div>2025</div>
+                        <div class="pass-stat">
+                            <span class="pass-stat-value">98%</span>
+                            <div class="pass-stat-label">Accuracy</div>
+                        </div>
+                        <div class="pass-stat">
+                            <span class="pass-stat-value">15</span>
+                            <div class="pass-stat-label">Services</div>
                         </div>
                     </div>
                 </div>
@@ -1043,94 +1203,122 @@
         </div>
     </section>
 
-    <!-- Features -->
-    <section class="features" id="features">
-        <div class="features-container">
-            <h2 class="animate-on-scroll">Built for you</h2>
-            <p class="features-subtitle animate-on-scroll">Everything you need in one app</p>
+    <!-- Learning Section -->
+    <section class="learning-section" id="learning">
+        <div class="learning-container">
+            <h2 class="animate-on-scroll">AI that grows with you</h2>
+            <p class="learning-subtitle animate-on-scroll">Every transaction, every choice enriches your AI profile for increasingly personalized services</p>
             
-            <div class="features-grid">
-                <div class="feature animate-on-scroll stagger-1">
-                    <div class="feature-icon">💳</div>
-                    <h3>Virtual card</h3>
-                    <p>Create and manage your virtual cards instantly. Block, unblock, set limits.</p>
+            <div class="learning-phases">
+                <div class="learning-phase animate-on-scroll stagger-1">
+                    <div class="phase-icon">🌱</div>
+                    <h3>Discovery Phase</h3>
+                    <p>AI analyzes your first habits: spending, schedules, frequencies. It begins to understand your lifestyle.</p>
+                    <div class="phase-level">Level 1-3</div>
                 </div>
                 
-                <div class="feature animate-on-scroll stagger-2">
-                    <div class="feature-icon">💸</div>
-                    <h3>Fast transfers</h3>
-                    <p>Send money to your loved ones in seconds. Anywhere in Africa and worldwide.</p>
+                <div class="learning-phase animate-on-scroll stagger-2">
+                    <div class="phase-icon">🧠</div>
+                    <h3>Adaptation Phase</h3>
+                    <p>Intelligent predictions, personalized suggestions, and automatic optimizations activate progressively.</p>
+                    <div class="phase-level">Level 4-7</div>
                 </div>
                 
-                <div class="feature animate-on-scroll stagger-3">
-                    <div class="feature-icon">📊</div>
-                    <h3>Smart tracking</h3>
-                    <p>Analyze your spending, auto-categorize, receive personalized insights.</p>
-                </div>
-                
-                <div class="feature animate-on-scroll stagger-4">
-                    <div class="feature-icon">🔒</div>
-                    <h3>Maximum security</h3>
-                    <p>Biometric authentication, instant notifications, advanced banking protection.</p>
-                </div>
-                
-                <div class="feature animate-on-scroll stagger-5">
-                    <div class="feature-icon">🌍</div>
-                    <h3>Borderless</h3>
-                    <p>Pay worldwide at the best exchange rates, no hidden fees.</p>
-                </div>
-                
-                <div class="feature animate-on-scroll stagger-6">
-                    <div class="feature-icon">⚡</div>
-                    <h3>Instant</h3>
-                    <p>Real-time transactions, immediate notifications, seamless experience.</p>
+                <div class="learning-phase animate-on-scroll stagger-3">
+                    <div class="phase-icon">🚀</div>
+                    <h3>Expertise Phase</h3>
+                    <p>Your AI becomes your personal financial advisor, unlocking advanced custom services.</p>
+                    <div class="phase-level">Level 8+</div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Process -->
-    <section class="process" id="process">
-        <div class="process-container">
-            <h2 class="animate-on-scroll">Simple as hello</h2>
+    <!-- Evolution Section -->
+    <section class="evolution-section" id="evolution">
+        <div class="evolution-container">
+            <h2 class="animate-on-scroll">Services that evolve with your intelligence</h2>
             
-            <div class="steps">
-                <div class="step animate-on-scroll stagger-1">
-                    <div class="step-number">1</div>
-                    <h3>Download</h3>
-                    <p>Install the app and create your account in minutes</p>
+            <div class="evolution-timeline">
+                <div class="evolution-step animate-on-scroll">
+                    <div class="evolution-content">
+                        <h3>Intelligent Payments & Transfers</h3>
+                        <p>AI optimizes your payments, detects the best deals, and automates your recurring transfers with increasing precision.</p>
+                    </div>
                 </div>
                 
-                <div class="step animate-on-scroll stagger-2">
-                    <div class="step-number">2</div>
-                    <h3>Top up</h3>
-                    <p>Add money via bank transfer or mobile money</p>
+                <div class="evolution-step animate-on-scroll">
+                    <div class="evolution-content">
+                        <h3>Predictive Investment & Savings</h3>
+                        <p>Unlock personalized investment advice, intelligent automatic savings, and targeted financial opportunities.</p>
+                    </div>
                 </div>
                 
-                <div class="step animate-on-scroll stagger-3">
-                    <div class="step-number">3</div>
-                    <h3>Pay</h3>
-                    <p>Use your card anywhere in the world</p>
+                <div class="evolution-step animate-on-scroll">
+                    <div class="evolution-content">
+                        <h3>Advanced Services Ecosystem</h3>
+                        <p>Adaptive insurance, instant loans, merchant services, lifestyle and travel - all orchestrated by your personal AI.</p>
+                    </div>
+                </div>
+                
+                <div class="evolution-step animate-on-scroll">
+                    <div class="evolution-content">
+                        <h3>Complete Super App</h3>
+                        <p>Your Sirius Pay becomes your digital life hub: finance, shopping, travel, health, entertainment - one AI, a thousand services.</p>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- CTA -->
-    <section class="cta">
-        <div class="cta-container">
-            <h2 class="animate-on-scroll">Ready to start?</h2>
-            <p class="animate-on-scroll">Join thousands of users who chose Sirius Pay</p>
-            <a href="#" class="cta-button animate-on-scroll">Open free account</a>
+    <!-- Super App CTA -->
+    <section class="super-app-cta">
+        <div class="super-app-container">
+            <h2 class="animate-on-scroll">Be among the first</h2>
+            <p class="animate-on-scroll">Sign up to be notified of the launch and get priority access to Sirius Pay.</p>
+            <a href="#" class="super-app-button animate-on-scroll">Get Launch Notification</a>
         </div>
     </section>
 
     <!-- Footer -->
     <footer class="footer">
-        <p>&copy; 2025 Sirius Pay. Modern fintech for Africa.</p>
+        <p>&copy; 2025 Sirius Pay - SUPER APP. MADE IN AFRICA.</p>
     </footer>
 
     <script>
+        // Mobile menu toggle
+        function toggleMobileMenu() {
+            const menuToggle = document.getElementById('menu-toggle');
+            const mobileMenu = document.getElementById('mobile-menu');
+            
+            menuToggle.classList.toggle('active');
+            mobileMenu.classList.toggle('active');
+            
+            // Prevent body scroll when menu is open
+            if (mobileMenu.classList.contains('active')) {
+                document.body.style.overflow = 'hidden';
+            } else {
+                document.body.style.overflow = '';
+            }
+        }
+
+        // Event listeners for mobile menu
+        document.getElementById('menu-toggle').addEventListener('click', toggleMobileMenu);
+
+        // Close mobile menu when clicking outside
+        document.getElementById('mobile-menu').addEventListener('click', function(e) {
+            if (e.target === this) {
+                toggleMobileMenu();
+            }
+        });
+
+        // Close mobile menu on escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && document.getElementById('mobile-menu').classList.contains('active')) {
+                toggleMobileMenu();
+            }
+        });
+
         // Intersection Observer for scroll animations
         const observerOptions = {
             threshold: 0.1,
@@ -1145,13 +1333,12 @@
             });
         }, observerOptions);
 
-        // Observe all elements with animate-on-scroll class
         document.querySelectorAll('.animate-on-scroll').forEach(el => {
             observer.observe(el);
         });
 
-        // Counter animation for stats
-        function animateCounter(element, target, duration = 2000) {
+        // AI Counter animation
+        function animateAICounter(element, target, duration = 3000) {
             let start = 0;
             const increment = target / (duration / 16);
             
@@ -1168,13 +1355,13 @@
             updateCounter();
         }
 
-        // Trigger counter animation when stats come into view
+        // Trigger AI counter when stats come into view
         const statsObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     const target = entry.target.dataset.target;
                     if (target) {
-                        animateCounter(entry.target, parseInt(target));
+                        animateAICounter(entry.target, parseInt(target));
                     }
                     statsObserver.unobserve(entry.target);
                 }
@@ -1185,7 +1372,48 @@
             statsObserver.observe(el);
         });
 
-        // Smooth scrolling for navigation links
+        // Enhanced AI-themed interactions for non-touch devices
+        if (window.matchMedia("(hover: hover)").matches) {
+            document.querySelectorAll('.learning-phase, .evolution-content, .smart-pass').forEach(element => {
+                element.addEventListener('mouseenter', function() {
+                    this.style.borderColor = 'rgba(0, 245, 255, 0.6)';
+                });
+                
+                element.addEventListener('mouseleave', function() {
+                    this.style.borderColor = 'rgba(0, 245, 255, 0.2)';
+                });
+            });
+        }
+
+        // Dynamic neural network animation
+        const neuronPaths = document.querySelectorAll('.neuron-path');
+
+        function animateNeuralPaths() {
+            neuronPaths.forEach((path, index) => {
+                setTimeout(() => {
+                    path.style.strokeDashoffset = '0';
+                    setTimeout(() => {
+                        path.style.strokeDashoffset = '1000';
+                    }, 2000);
+                }, index * 500);
+            });
+        }
+
+        setInterval(animateNeuralPaths, 5000);
+
+        // AI learning simulation
+        function simulateAILearning() {
+            const progressBar = document.querySelector('.intelligence-progress');
+            if (progressBar) {
+                const currentWidth = parseInt(progressBar.style.width) || 75;
+                const newWidth = Math.min(currentWidth + Math.random() * 2, 100);
+                progressBar.style.width = newWidth + '%';
+            }
+        }
+
+        setInterval(simulateAILearning, 3000);
+
+        // Smooth scrolling
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
@@ -1199,47 +1427,75 @@
             });
         });
 
-        // Add scroll-based nav background
-        let lastScrollTop = 0;
+        // Dynamic navigation background
         window.addEventListener('scroll', () => {
-            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            const scrollTop = window.pageYOffset;
             const nav = document.querySelector('.nav');
             
             if (scrollTop > 100) {
-                nav.style.background = 'rgba(250, 250, 250, 0.95)';
-                nav.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.1)';
+                nav.style.background = 'rgba(247, 246, 244, 0.98)';
+                nav.style.boxShadow = '0 2px 20px rgba(0, 245, 255, 0.1)';
             } else {
-                nav.style.background = 'rgba(250, 250, 250, 0.8)';
+                nav.style.background = 'rgba(247, 246, 244, 0.95)';
                 nav.style.boxShadow = 'none';
             }
-            
-            lastScrollTop = scrollTop;
         });
 
-        // Enhanced hover effects for interactive elements
-        document.querySelectorAll('.feature, .step, .card').forEach(element => {
-            element.addEventListener('mouseenter', function() {
-                this.style.transform = this.style.transform || '';
-                if (!this.style.transform.includes('scale')) {
-                    this.style.transform += ' scale(1.02)';
-                }
-            });
+        // Random data stream generation
+        function generateDataStream() {
+            const streams = [
+                'NEURAL_PATTERN_ANALYSIS_COMPLETE',
+                'USER_BEHAVIOR_OPTIMIZED',
+                'AI_LEARNING_ENHANCED',
+                'PREDICTIVE_MODEL_UPDATED',
+                'FINANCIAL_INTELLIGENCE_ACTIVE'
+            ];
             
-            element.addEventListener('mouseleave', function() {
-                this.style.transform = this.style.transform.replace(' scale(1.02)', '');
+            const dataStreams = document.querySelectorAll('.data-stream');
+            dataStreams.forEach((stream, index) => {
+                setTimeout(() => {
+                    stream.textContent = streams[Math.floor(Math.random() * streams.length)];
+                }, index * 2000);
             });
-        });
+        }
 
-        // Parallax effect for floating elements
-        window.addEventListener('scroll', () => {
-            const scrolled = window.pageYOffset;
-            const parallax = scrolled * 0.5;
+        setInterval(generateDataStream, 8000);
+
+        // Optimize animations for mobile performance
+        function optimizeForMobile() {
+            const isMobile = window.innerWidth <= 768;
+            const dataStreams = document.querySelectorAll('.data-stream');
             
-            document.querySelectorAll('.floating-element').forEach((element, index) => {
-                const speed = (index + 1) * 0.3;
-                element.style.transform = `translateY(${parallax * speed}px)`;
+            if (isMobile) {
+                // Reduce animations on mobile
+                dataStreams.forEach((stream, index) => {
+                    if (index > 1) stream.style.display = 'none';
+                });
+            } else {
+                dataStreams.forEach(stream => {
+                    stream.style.display = 'block';
+                });
+            }
+        }
+
+        // Run on load and resize
+        optimizeForMobile();
+        window.addEventListener('resize', optimizeForMobile);
+
+        // Touch feedback for mobile
+        if ('ontouchstart' in window) {
+            document.querySelectorAll('.hero-cta, .super-app-button, .nav-cta, .mobile-cta').forEach(button => {
+                button.addEventListener('touchstart', function() {
+                    this.style.transform = 'scale(0.95)';
+                });
+                
+                button.addEventListener('touchend', function() {
+                    setTimeout(() => {
+                        this.style.transform = '';
+                    }, 150);
+                });
             });
-        });
+        }
     </script>
 </body>
 </html>
